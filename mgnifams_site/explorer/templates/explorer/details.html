@@ -1,0 +1,19 @@
+<!-- explorer/templates/explorer/details.html -->
+
+<style>
+    .protein-sequence {
+        white-space: pre-wrap;  /* Allow wrapping for <pre> content */
+        word-wrap: break-word; /* Older browsers fallback */
+    }
+</style>
+
+<button onclick="location.href='{% url 'index' %}'">Back to Home</button>
+
+<h1>Details for ID: {{ id }}</h1>
+<p>Cluster Size: {{ cluster_size }}</p>
+{% if sequence %}
+    <h2>Protein Sequence:</h2>
+    <pre class="protein-sequence">{{ sequence }}</pre>
+{% else %}
+    <p>No sequence found for the given ID.</p>
+{% endif %}
