@@ -1,13 +1,6 @@
-<!-- explorer/templates/explorer/index.html -->
-
-<h1>MGnifams</h1>
-
-<div>
-    Starting from MGnify90 cluster representatives (~700M sequences)
-    we kept unannotated ones (400,529,518) and clustered them with linclust
-    from mmseqs into 237,207,063 protein families with 80% identity and 30% coverage.
-    This site presents the 78,494 families that contain at least 100 protein members each.
-</div>
+{% extends "explorer/base.html" %}
+{% load static %}
+{% block content %}
 
 <p>Number of <b>cluster representatives:</b> {{ num_representatives }}</p>
 <p>Number of <b>annotations:</b> {{ num_annotations }}</p>
@@ -35,3 +28,4 @@
 
 <p>Click <a href="{% url 'cluster_reps' %}">here </a>to see all available cluster rep names</p>
 <p>Click <a href="{% url 'unannotated_ids' %}">here </a>to see all unannotated IDs</p>
+{% endblock content %}

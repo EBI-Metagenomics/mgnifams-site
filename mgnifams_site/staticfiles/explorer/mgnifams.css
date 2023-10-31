@@ -1,0 +1,44 @@
+nightingale-manager {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.vf-hero .vf-hero__content {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.grid-column {
+    grid-auto-flow: column;
+}
+
+.full-width {
+    margin-top: 50px;
+}
+
+.centered {
+    justify-items: center;
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.prefix_input_container {
+    position: relative;
+    display: block;
+    width: 100%;
+    border: 2px solid #707372 !important;
+    font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.421;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}

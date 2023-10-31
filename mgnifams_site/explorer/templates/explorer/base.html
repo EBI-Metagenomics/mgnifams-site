@@ -1,19 +1,117 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explorer App</title>
+    {% block head %}
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="description"
+                  content="MGnifams: Metagenomic derived protein families." />
+            <meta name="keywords"
+                  content="MGnify, MGnifams, Metagenomics, Protein, Domains, Structures" />
+            <title>
+                {% block title %}
+                    MGnifams
+                {% endblock title %}
+            </title>
+            <link rel="shortcut icon"
+                  type="image/x-icon"
+                  href="{% static "explorer/favicon.ico" %}" />
+            <link rel="stylesheet" href="{% static "explorer/mgnifams.css" %}">
+            <link rel="stylesheet"
+                  href="//assets.emblstatic.net/vf/v2.5.7/css/styles.css" />
+            <link rel="stylesheet"
+                  href="//ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.3/fonts.css"
+                  type="text/css"
+                  media="all" />
+            <link rel="stylesheet"
+                  href="https://assets.emblstatic.net/vf/v2/assets/ebi-header-footer/ebi-header-footer.css"
+                  type="text/css"
+                  media="all" />            
+            <script defer="defer"
+                    src="//ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.4/js/script.js"></script>
+            <link rel="import"
+                  href="https://www.embl.org/api/v1/pattern.html?filter-content-type=article&filter-id=6682&pattern=node-body&source=contenthub"
+                  data-target="self"
+                  data-embl-js-content-hub-loader>
+            <script src="https://assets.emblstatic.net/vf/v2.5.7/scripts/scripts.js"></script>
+            <!-- sortable tables -->
+            <link rel="stylesheet"
+                  type="text/css"
+                  href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script type="text/javascript"
+                    src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+        {% endblock head %}
 </head>
-<body>
-
-<!-- Common header with back to home link -->
-<header>
-    <a href="{% url 'index' %}">Back to Home</a>
-</header>
-
-<!-- Content placeholder -->
-{% block content %}{% endblock %}
-
+<body class="vf-body | vf-stack vf-stack--200">
+    {% include "base/header.html" %}
+    <section style="--vf-hero--bg-image: url('{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% static "explorer/banner.jpg" %}'); margin-top: 0" class="vf-hero vf-hero--400 | vf-u-fullbleed">
+        <div class="vf-hero__content | vf-box | vf-stack vf-stack--400">
+            {% if request.resolver_match.url_name in "home" %}<p class="vf-hero__kicker">MGnifams</p>{% endif %}
+            <h1 class="vf-hero__heading">MGnifams</h1>
+            {% if request.path in "/" %}
+                <p class="vf-hero__subheading">Metagenomics derived protein families.</p>
+            {% endif %}
+            <p class="vf-hero__text">
+                Starting from MGnify90 cluster representatives (~700M sequences) we kept unannotated ones (400,529,518) 
+                and clustered them with linclust from mmseqs into 237,207,063 protein families with 80% identity and 30% coverage. 
+                This site presents the 78,494 families that contain at least 100 protein members each.
+            </p>
+        </div>
+    </section>
+    <nav class="vf-navigation vf-navigation--main | vf-cluster">
+        <ul class="vf-navigation__list | vf-list | vf-cluster__inner">
+            <li class="vf-navigation__item">
+                <a href="{% url "index" %}"
+                   class="vf-navigation__link">Home</a>
+            </li>
+            <li class="vf-navigation__item">
+                <a href="http://proteins.mgnify.org/"
+                   target="_blank"
+                   class="vf-navigation__link">
+                    <i class="icon icon-common icon-external-link-alt"></i>
+                    Protein Landing Page
+                </a>
+            </li>
+            <li class="vf-navigation__item">
+                <a href="https://www.ebi.ac.uk/metagenomics"
+                   target="_blank"
+                   class="vf-navigation__link">
+                    <i class="icon icon-common icon-external-link-alt"></i>
+                    MGnify
+                </a>
+            </li>
+            <li class="vf-navigation__item">
+                <a href="https://www.ebi.ac.uk/metagenomics/sequence-search/search/phmmer"
+                   target="_blank"
+                   class="vf-navigation__link">
+                    <i class="icon icon-common icon-external-link-alt"></i>
+                    Sequence Search
+                </a>
+            </li>
+            <li class="vf-navigation__item">
+                <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/"
+                   target="_blank"
+                   class="vf-navigation__link">
+                    <i class="icon icon-common icon-external-link-alt"></i>
+                    Protein Database Release
+                </a>
+            </li>
+            <li class="vf-navigation__item">
+                <a href="https://docs.mgnify.org/src/docs.html"
+                   target="_blank"
+                   class="vf-navigation__link">
+                    <i class="icon icon-common icon-external-link-alt"></i>
+                    Documentation
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <hr class="vr-divider | vf-u-margin__bottom--600">
+    {% block content %}
+    {% endblock content %}
+    <!-- Footer -->
+    {% include "base/footer.html" %}
 </body>
 </html>
