@@ -39,7 +39,9 @@
     <tbody>
         {% for annotation in annotations %}
         <tr>
-            <td>{{ annotation.domain }}</td>
+            <td>
+                <a href="{{ annotation.link }}" target="_blank">{{ annotation.domain }}</a>
+            </td>
             <td>{{ annotation.database }}</td>
             <td>{{ annotation.description }}</td>
             <td>{{ annotation.start }}</td>

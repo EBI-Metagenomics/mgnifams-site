@@ -88,7 +88,8 @@ def details(request):
             for line in f:
                 parts = line.strip().split('\t')
                 if parts[0] == id:
-                    domain_name = parts[1].split('|')[2]
+                    domain_parts = parts[1].split('|')
+                    domain_name = domain_parts[1] + "|" + domain_parts[2]
                     annotations.append({
                         'domain': domain_name,
                         'database': 'Uniprot SwissProt',
@@ -96,7 +97,8 @@ def details(request):
                         'start': parts[6],
                         'end': parts[7],
                         'evalue': parts[10],
-                        'bit_score': parts[11]
+                        'bit_score': parts[11],
+                        'link': f'https://swissmodel.expasy.org/repository/uniprot/{domain_parts[1]}'
                     })
 
     # Parse reps.*.tsv files
@@ -105,6 +107,21 @@ def details(request):
             for line in f:
                 parts = line.strip().split('\t')
                 if parts[0] == id:
+                    base_url = 'https://www.ebi.ac.uk/interpro/entry/'
+                    url_db = {
+                        'Gene3D': 'cathgene3d',
+                        'ProSiteProfiles': 'profile',
+                        'SUPERFAMILY': 'ssf',
+                        'PANTHER': 'panther',
+                        'NCBIfam': 'ncbifam',
+                        'CDD': 'cdd',
+                        'Hamap': 'hamap',
+                        'AntiFam': 'antifam',
+                        'Pfam': 'pfam'
+                    }
+                    suffix = url_db.get(parts[3], '')
+                    link = f"{base_url}{suffix}/{parts[4]}"
+
                     annotations.append({
                         'domain': parts[4],
                         'database': parts[3],
@@ -112,7 +129,8 @@ def details(request):
                         'start': parts[6],
                         'end': parts[7],
                         'evalue': parts[8],
-                        'bit_score': '-'
+                        'bit_score': '-',
+                        'link': link
                     })
 
     
