@@ -1,10 +1,12 @@
 <!-- explorer/templates/explorer/cluster_reps.html -->
 
-<button onclick="location.href='{% url 'index' %}'">Back to Home</button>
+{% extends "explorer/base.html" %}
 
+{% block content %}
 <h1>Available Cluster Rep Names</h1>
 <ul>
     {% for rep_name in rep_names %}
         <li>{{ rep_name }}</li>
     {% endfor %}
 </ul>
+{% endblock %}

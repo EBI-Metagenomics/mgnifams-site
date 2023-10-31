@@ -1,5 +1,10 @@
 <!-- explorer/templates/explorer/details.html -->
 
+{% extends "explorer/base.html" %}
+
+{% block content %}
+{% load custom_filters %}
+
 <style>
     .protein-sequence {
         white-space: pre-wrap;  /* Allow wrapping for <pre> content */
@@ -7,13 +12,45 @@
     }
 </style>
 
-<button onclick="location.href='{% url 'index' %}'">Back to Home</button>
-
-<h1>Details for ID: {{ id }}</h1>
-<p>Cluster Size: {{ cluster_size }}</p>
+<h1>{{ id|format_id }}</h1>
+<h2>Family Size: <a href="{% url 'family_members' id %}">{{ family_size }}</a></h2>
 {% if sequence %}
     <h2>Protein Sequence:</h2>
     <pre class="protein-sequence">{{ sequence }}</pre>
+    <p><b>Length:</b> {{ sequence_length }}</p>
 {% else %}
     <p>No sequence found for the given ID.</p>
 {% endif %}
+
+{% if annotations %}
+<h2>Annotations:</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Domain</th>
+            <th>Database</th>
+            <th>Description</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Evalue</th>
+            <th>Bit Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for annotation in annotations %}
+        <tr>
+            <td>{{ annotation.domain }}</td>
+            <td>{{ annotation.database }}</td>
+            <td>{{ annotation.description }}</td>
+            <td>{{ annotation.start }}</td>
+            <td>{{ annotation.end }}</td>
+            <td>{{ annotation.evalue }}</td>
+            <td>{{ annotation.bit_score }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+    <p>Unannotated family representative.</p>
+{% endif %}
+{% endblock %}

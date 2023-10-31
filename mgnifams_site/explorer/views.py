@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
 from Bio import SeqIO
+import glob
 
 def count_lines_in_file(filepath):
     with open(filepath, 'r') as f:
@@ -40,7 +41,7 @@ def id_exists(check_id, filepath):
     with open(filepath, 'r') as f:
         return check_id in f.read().splitlines()
 
-def get_cluster_size(target_id, filepath):
+def get_family_size(target_id, filepath):
     with open(filepath, 'r') as f:
         count = 0
         for line in f:
@@ -54,8 +55,11 @@ def get_cluster_size(target_id, filepath):
 def get_sequence_from_fasta(target_id, filepath):
     for record in SeqIO.parse(filepath, "fasta"):
         if record.id == target_id:
-            return str(record.seq)
-    return None
+            sequence = str(record.seq)
+            length = len(sequence)
+            return sequence, length
+    return None, None
+
 
 def details(request):
     id = request.GET.get('id', None)
@@ -70,16 +74,54 @@ def details(request):
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
 
-    # Get the cluster size
-    cluster_size = get_cluster_size(id, cluster_filepath)
+    # Get the family size
+    family_size = get_family_size(id, cluster_filepath)
 
     # Fetch the sequence from the FASTA file
-    sequence = get_sequence_from_fasta(id, fasta_filepath)
+    sequence, sequence_length = get_sequence_from_fasta(id, os.path.join(base_dir, 'reps.fa'))
 
+    annotations = []
+
+    # Parse mg*.txt files
+    for file in glob.glob(os.path.join(base_dir, 'mg*.txt')):
+        with open(file, 'r') as f:
+            for line in f:
+                parts = line.strip().split('\t')
+                if parts[0] == id:
+                    domain_name = parts[1].split('|')[2]
+                    annotations.append({
+                        'domain': domain_name,
+                        'database': 'Uniprot SwissProt',
+                        'description': '-',
+                        'start': parts[6],
+                        'end': parts[7],
+                        'evalue': parts[10],
+                        'bit_score': parts[11]
+                    })
+
+    # Parse reps.*.tsv files
+    for file in glob.glob(os.path.join(base_dir, 'reps.*.tsv')):
+        with open(file, 'r') as f:
+            for line in f:
+                parts = line.strip().split('\t')
+                if parts[0] == id:
+                    annotations.append({
+                        'domain': parts[4],
+                        'database': parts[3],
+                        'description': parts[5],
+                        'start': parts[6],
+                        'end': parts[7],
+                        'evalue': parts[8],
+                        'bit_score': '-'
+                    })
+
+    
     return render(request, 'explorer/details.html', {
         'id': id, 
-        'cluster_size': cluster_size,
-        'sequence': sequence
+        'family_size': family_size,
+        'sequence': sequence,
+        'sequence_length': sequence_length,
+        'annotations': annotations
     })
 
 def cluster_reps(request):
@@ -90,3 +132,28 @@ def cluster_reps(request):
         rep_names = f.readlines()
 
     return render(request, 'explorer/cluster_reps.html', {'rep_names': rep_names})
+
+def unannotated_ids(request):
+    base_dir = "../data/"
+
+    # Read the IDs from the file
+    with open(os.path.join(base_dir, 'unannotated_ids.txt'), 'r') as f:
+        ids = f.readlines()
+
+    return render(request, 'explorer/unannotated_ids.html', {'ids': ids})
+
+def family_members(request, protein_id):
+    base_dir = "../data/"
+    members = []
+
+    with open(os.path.join(base_dir, 'filtered_clusters.tsv'), 'r') as f:
+        for line in f:
+            parts = line.strip().split('\t')
+            if parts[0] == protein_id:
+                members.append(parts[1])
+
+    member_count = len(members)
+    return render(request,
+        'explorer/family_members.html',
+        {'members': members, 'protein_id': protein_id, 'member_count': member_count}
+    )

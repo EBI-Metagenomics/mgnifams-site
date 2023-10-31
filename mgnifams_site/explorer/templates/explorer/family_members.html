@@ -1,0 +1,11 @@
+{% extends "explorer/base.html" %}
+
+{% block content %}
+<h1>Family Members for Protein ID: {{ protein_id }}</h1>
+<p>Total number of family members: {{ member_count }}</p>  <!-- Display the member count here -->
+<ul>
+    {% for member in members %}
+        <li>{{ member }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
