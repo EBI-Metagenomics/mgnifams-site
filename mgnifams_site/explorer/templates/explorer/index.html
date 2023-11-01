@@ -2,30 +2,34 @@
 {% load static %}
 {% block content %}
 
-<p>Number of <b>cluster representatives:</b> {{ num_representatives }}</p>
-<p>Number of <b>annotations:</b> {{ num_annotations }}</p>
-<p>Number of <b>unannotated families:</b> {{ num_unannotated }}</p>
+<section class="vf-content | vf-stack vf-stack--600">
+    <p>Number of <b>cluster representatives:</b> {{ num_representatives }}</p>
+    <p>Number of <b>annotations:</b> {{ num_annotations }}</p>
+    <p>Number of <b>unannotated families:</b> {{ num_unannotated }}</p>
 
-<form method="get" action="/details/">
-    <label for="id">Enter ID:</label>
-    <input type="text" id="id" name="id" required>
-    <input type="submit" value="Go to Details">
-    <button type="button" onclick="populateExample()">Example</button>
-</form>
+    <form 
+        method="get" action="/details/"
+        class="vf-form vf-form--search vf-form--search--mini">
+        <label for="id" class="vf-form__label">Enter MGnify protein ID:</label>
+        <input type="text" id="id" name="id" class="vf-form__input plp-input" required>
+        <input type="submit" value="Go to Details" class="vf-button vf-button--primary">
+        <button type="button" onclick="populateExample()" class="vf-button">Example</button>
+    </form>
 
-<!-- Display error messages -->
-{% if messages %}
-    {% for message in messages %}
-        <p style="color: red;">{{ message }}</p>
-    {% endfor %}
-{% endif %}
+    <!-- Display error messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <p>Click <a href="{% url 'cluster_reps' %}">here </a>to see all available cluster rep names</p>
+    <p>Click <a href="{% url 'unannotated_ids' %}">here </a>to see all unannotated IDs</p>
+</section>
 
 <script>
     function populateExample() {
         document.getElementById("id").value = "{{ first_id }}";
     }
 </script>
-
-<p>Click <a href="{% url 'cluster_reps' %}">here </a>to see all available cluster rep names</p>
-<p>Click <a href="{% url 'unannotated_ids' %}">here </a>to see all unannotated IDs</p>
 {% endblock content %}

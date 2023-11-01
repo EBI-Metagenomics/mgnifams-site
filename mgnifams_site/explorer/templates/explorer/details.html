@@ -1,58 +1,115 @@
 <!-- explorer/templates/explorer/details.html -->
 
 {% extends "explorer/base.html" %}
-
+{% load static %}
 {% block content %}
 {% load custom_filters %}
 
-<style>
-    .protein-sequence {
-        white-space: pre-wrap;  /* Allow wrapping for <pre> content */
-        word-wrap: break-word; /* Older browsers fallback */
+<script src="{% static 'explorer/details.js' %}"></script>
+<script type="importmap">
+{
+    "imports": {
+        "@nightingale-elements/": "https://cdn.jsdelivr.net/npm/@nightingale-elements/"
     }
-</style>
-
-<h1>{{ id|format_id }}</h1>
-<h2>Family Size: <a href="{% url 'family_members' id %}">{{ family_size }}</a></h2>
-{% if sequence %}
-    <h2>Protein Sequence:</h2>
-    <pre class="protein-sequence">{{ sequence }}</pre>
-    <p><b>Length:</b> {{ sequence_length }}</p>
-{% else %}
-    <p>No sequence found for the given ID.</p>
-{% endif %}
-
-{% if annotations %}
-<h2>Annotations:</h2>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Domain</th>
-            <th>Database</th>
-            <th>Description</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Evalue</th>
-            <th>Bit Score</th>
-        </tr>
-    </thead>
-    <tbody>
+}
+</script>
+<script type="module">
+    import "@nightingale-elements/nightingale-sequence@latest";
+    import "@nightingale-elements/nightingale-track@latest";
+    import "@nightingale-elements/nightingale-manager@latest";
+    import "@nightingale-elements/nightingale-navigation@latest";
+    // Define the tracks data structure for Nightingale 
+    let myDataObject = [
         {% for annotation in annotations %}
-        <tr>
-            <td>
-                <a href="{{ annotation.link }}" target="_blank">{{ annotation.domain }}</a>
-            </td>
-            <td>{{ annotation.database }}</td>
-            <td>{{ annotation.description }}</td>
-            <td>{{ annotation.start }}</td>
-            <td>{{ annotation.end }}</td>
-            <td>{{ annotation.evalue }}</td>
-            <td>{{ annotation.bit_score }}</td>
-        </tr>
+        {
+            "accession": "{{ annotation.domain }}",
+            "start": {{ annotation.start }},
+            "end": {{ annotation.end }},
+            "color": stringToHexColor("{{ annotation.domain }}"),
+                "locations": [{
+                    "fragments": [{
+                    "start": {{ annotation.start }},
+                    "end": {{ annotation.end }}
+                }]
+            }]
+        },
         {% endfor %}
-    </tbody>
-</table>
-{% else %}
-    <p>Unannotated family representative.</p>
-{% endif %}
+    ];
+
+    const track = document.querySelector("#my_track_id");
+
+    track.data = myDataObject;
+</script>
+
+<section class="vf-content | vf-stack vf-stack--600">
+    <h2> Protein: {{ id|format_id }} </h2>
+    <h3> Sequence Length: {{ sequence_length }} </h3>
+    <h3> Family Size: <a href="{% url 'family_members' id %}"> {{ family_size }} </a></h3>
+    <h3> Go to: <a href="http://proteins.mgnify.org/{{ id|format_id }}" target="_blank"> structure </a></h3>
+    <h3 class="vf-card__heading">Annotations</h3>
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            {% if annotations %}
+            <table id="pfams-table"
+                class="vf-table pfams-table .vf-u-margin__bottom--400">
+                <thead class="vf-table__header">
+                    <tr class="vf-table__row">
+                        <th class="vf-table__heading" scope="col">Domain</th>
+                        <th class="vf-table__heading" scope="col">Database</th>
+                        <th class="vf-table__heading" scope="col">Description</th>
+                        <th class="vf-table__heading" scope="col">Colour</th>
+                        <th class="vf-table__heading" scope="col">Start</th>
+                        <th class="vf-table__heading" scope="col">End</th>
+                        <th class="vf-table__heading" scope="col">Evalue</th>
+                        <th class="vf-table__heading" scope="col">Bit Score</th>
+                    </tr>
+                </thead>
+                <tbody class="vf-table__body">
+                    {% for annotation in annotations %}
+                        <tr class="vf-table__row pfam-item" data-proteinpfam="{{ annotation.domain }}">
+                            <td class="vf-table__cell">
+                                <a href="{{ annotation.link }}" target="_blank">{{ annotation.domain }}</a>
+                            </td>
+                            <td class="vf-table__cell">{{ annotation.database }}</td>
+                            <td class="vf-table__cell">{{ annotation.description }}</td>
+                            <td class="vf-table__cell"></td>
+                            <td class="vf-table__cell">{{ annotation.start }}</td>
+                            <td class="vf-table__cell">{{ annotation.end }}</td>
+                            <td class="vf-table__cell">{{ annotation.evalue|floatformat:"-g" }}</td>
+                            <td class="vf-table__cell">{{ annotation.bit_score }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr class="vf-table__heading">
+                            <td class="vf-table__cell" colspan="8">Unannotated family representative.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>Unannotated family representative.</p>
+            {% endif %}
+            <nightingale-manager id="my_nightingale_manager">
+            <nightingale-navigation id="my_navigation" height="40" length="{{ sequence_length }}" margin-color="white" highlight-color="#FF000066" show-highlight>
+            </nightingale-navigation>
+            <nightingale-sequence sequence="{{ sequence }}" id="my-nightingale-sequence-id" height="40" length="{{ sequence_length }}" display-start="1" display-end="50" highlight-color="#FF000066">
+            </nightingale-sequence>
+            <nightingale-track id="my_track_id" height="100" length="{{ sequence_length }}" display-start="1" display-end="50" layout="non-overlapping" highlight-color="#FF000066">
+            </nightingale-track>
+            </nightingale-manager>
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Sequence</h3>
+            <div id="protein_sequence">
+                <p class="vf-card__text">{{ sequence }}</p>
+            </div>
+        </div>
+        <div class="right-align">
+            <button id="copy_button" class="vf-button vf-button--primary vf-button--sm">Copy</button>
+        </div>
+    </article>
+
+</section>
 {% endblock %}
