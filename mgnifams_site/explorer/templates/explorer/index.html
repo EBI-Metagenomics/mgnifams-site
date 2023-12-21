@@ -3,14 +3,12 @@
 {% block content %}
 
 <section class="vf-content | vf-stack vf-stack--600">
-    <p>Number of <b>cluster representatives:</b> {{ num_representatives }}</p>
-    <p>Number of <b>annotations:</b> {{ num_annotations }}</p>
-    <p>Number of <b>unannotated families:</b> {{ num_unannotated }}</p>
+    <p>Number of <b>protein families:</b> {{ num_mgnifams }}</p>
 
     <form 
         method="get" action="/details/"
         class="vf-form vf-form--search vf-form--search--mini">
-        <label for="id" class="vf-form__label">Enter MGnify protein ID:</label>
+        <label for="id" class="vf-form__label">Enter MGnifam ID:</label>
         <input type="text" id="id" name="id" class="vf-form__input plp-input" required>
         <input type="submit" value="Go to Details" class="vf-button vf-button--primary">
         <button type="button" onclick="populateExample()" class="vf-button">Example</button>
@@ -23,8 +21,8 @@
         {% endfor %}
     {% endif %}
 
-    <p>Click <a href="{% url 'cluster_reps' %}">here </a>to see all available cluster rep names</p>
-    <p>Click <a href="{% url 'unannotated_ids' %}">here </a>to see all unannotated IDs</p>
+    <p>Click <a href="{% url 'mgnifam_names' %}">here</a> to see all available <b>family names</b></p>
+
 </section>
 
 <script>

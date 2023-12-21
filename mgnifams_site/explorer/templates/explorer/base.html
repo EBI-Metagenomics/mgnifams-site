@@ -42,6 +42,9 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script type="text/javascript"
                     src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+            <link rel="stylesheet"
+                type="text/css"
+                href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-3.1.0.css">
         {% endblock head %}
 </head>
 <body class="vf-body | vf-stack vf-stack--200">
@@ -54,9 +57,11 @@
                 <p class="vf-hero__subheading">Metagenomics derived protein families.</p>
             {% endif %}
             <p class="vf-hero__text">
-                Starting from MGnify90 cluster representatives (~700M sequences) we kept unannotated ones (400,529,518) 
-                and clustered them with linclust from mmseqs into 237,207,063 protein families with 80% identity and 30% coverage. 
-                This site presents the 78,494 families that contain at least 100 protein members each.
+                Starting from MGnify90 cluster representatives (~700M sequences) we sliced pfam annotated parts
+                and kept unannotated sequence with at least 50 amino acids (~548M).
+                We clustered them with linclust (50% identity and 90% coverage) from mmseqs
+                into 465M initial clusters and initiated our protein family generation algorithm.
+                The MGnifams resource currently hosts 99 generated protein families.
             </p>
         </div>
     </section>

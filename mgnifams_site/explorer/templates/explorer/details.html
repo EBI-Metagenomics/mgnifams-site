@@ -6,110 +6,28 @@
 {% load custom_filters %}
 
 <script src="{% static 'explorer/details.js' %}"></script>
-<script type="importmap">
-{
-    "imports": {
-        "@nightingale-elements/": "https://cdn.jsdelivr.net/npm/@nightingale-elements/"
-    }
-}
-</script>
-<script type="module">
-    import "@nightingale-elements/nightingale-sequence@latest";
-    import "@nightingale-elements/nightingale-track@latest";
-    import "@nightingale-elements/nightingale-manager@latest";
-    import "@nightingale-elements/nightingale-navigation@latest";
-    // Define the tracks data structure for Nightingale 
-    let myDataObject = [
-        {% for annotation in annotations %}
-        {
-            "accession": "{{ annotation.domain }}",
-            "start": {{ annotation.start }},
-            "end": {{ annotation.end }},
-            "color": stringToHexColor("{{ annotation.domain }}"),
-                "locations": [{
-                    "fragments": [{
-                    "start": {{ annotation.start }},
-                    "end": {{ annotation.end }}
-                }]
-            }]
-        },
-        {% endfor %}
-    ];
-
-    const track = document.querySelector("#my_track_id");
-
-    track.data = myDataObject;
-</script>
 
 <section class="vf-content | vf-stack vf-stack--600">
-    <h2> Protein: {{ id|format_id }} </h2>
-    <h3> Sequence Length: {{ sequence_length }} </h3>
-    <h3> Family Size: <a href="{% url 'family_members' id %}"> {{ family_size }} </a></h3>
-    <h3> Go to: <a href="http://proteins.mgnify.org/{{ id|format_id }}" target="_blank"> structure </a></h3>
-    <h3 class="vf-card__heading">Annotations</h3>
-    <article class="vf-card vf-card--brand vf-card--bordered">
-        <div class="vf-card__content | vf-stack vf-stack--400">
-            {% if annotations %}
-            <table id="pfams-table"
-                class="vf-table pfams-table .vf-u-margin__bottom--400">
-                <thead class="vf-table__header">
-                    <tr class="vf-table__row">
-                        <th class="vf-table__heading" scope="col">Domain</th>
-                        <th class="vf-table__heading" scope="col">Database</th>
-                        <th class="vf-table__heading" scope="col">Description</th>
-                        <th class="vf-table__heading" scope="col">Colour</th>
-                        <th class="vf-table__heading" scope="col">Start</th>
-                        <th class="vf-table__heading" scope="col">End</th>
-                        <th class="vf-table__heading" scope="col">Evalue</th>
-                        <th class="vf-table__heading" scope="col">Bit Score</th>
-                    </tr>
-                </thead>
-                <tbody class="vf-table__body">
-                    {% for annotation in annotations %}
-                        <tr class="vf-table__row pfam-item" data-proteinpfam="{{ annotation.domain }}">
-                            <td class="vf-table__cell">
-                                <a href="{{ annotation.link }}" target="_blank">{{ annotation.domain }}</a>
-                            </td>
-                            <td class="vf-table__cell">{{ annotation.database }}</td>
-                            <td class="vf-table__cell">{{ annotation.description }}</td>
-                            <td class="vf-table__cell"></td>
-                            <td class="vf-table__cell">{{ annotation.start }}</td>
-                            <td class="vf-table__cell">{{ annotation.end }}</td>
-                            <td class="vf-table__cell">{{ annotation.evalue|floatformat:"-g" }}</td>
-                            <td class="vf-table__cell">{{ annotation.bit_score }}</td>
-                        </tr>
-                    {% empty %}
-                        <tr class="vf-table__heading">
-                            <td class="vf-table__cell" colspan="8">Unannotated family representative.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-                <p>Unannotated family representative.</p>
-            {% endif %}
-            <nightingale-manager id="my_nightingale_manager">
-            <nightingale-navigation id="my_navigation" height="40" length="{{ sequence_length }}" margin-color="white" highlight-color="#FF000066" show-highlight>
-            </nightingale-navigation>
-            <nightingale-sequence sequence="{{ sequence }}" id="my-nightingale-sequence-id" height="40" length="{{ sequence_length }}" display-start="1" display-end="50" highlight-color="#FF000066">
-            </nightingale-sequence>
-            <nightingale-track id="my_track_id" height="100" length="{{ sequence_length }}" display-start="1" display-end="50" layout="non-overlapping" highlight-color="#FF000066">
-            </nightingale-track>
-            </nightingale-manager>
-        </div>
-    </article>
+    <h2> MGnifam: {{ id|format_id }} </h2>
+    <h3> Family size: {{ id|family_size }} </h3>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
-        <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Sequence</h3>
-            <div id="protein_sequence">
-                <p class="vf-card__text">{{ sequence }}</p>
-            </div>
-        </div>
-        <div class="right-align">
-            <button id="copy_button" class="vf-button vf-button--primary vf-button--sm">Copy</button>
-        </div>
-    </article>
+    {% comment %} <pdbe-molstar
+        custom-data-url="{% static "cif/"|add:cif_path %}"
+        custom-data-format="cif"
+        alphafold-view="true"
+        bg-color-r="255"
+        bg-color-g="255"
+        bg-color-b="255"
+        sequence-panel="true"
+        landscape="true"
+    >
+    </pdbe-molstar> {% endcomment %}
 
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
+
 {% endblock %}
