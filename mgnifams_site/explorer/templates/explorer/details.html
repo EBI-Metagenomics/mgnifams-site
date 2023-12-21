@@ -10,19 +10,51 @@
 <section class="vf-content | vf-stack vf-stack--600">
     <h2> MGnifam: {{ id|format_id }} </h2>
     <h3> Family size: {{ id|family_size }} </h3>
+</section>
+<section class="vf-content | vf-stack vf-stack--600">
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-grid vf-grid__col-4 | vf-card__content">
+            <div class="vf-grid__col--span-1">
+                <h3>ESM Atlas 3D structure</h3>
+                <p>
+                    Predicted 3D protein structure through the Meta AI ESMFold model.
+                    ESMFold uses the representations from a large language model (ESM2)
+                    to generate an accurate structure prediction from the sequence of a protein.
+                </p>
+                <p>
+                    For more information visit:
+                    <ul class="vf-list">
+                        <li class="vf-list__item">
+                            <a href="https://esmatlas.com/" target="_blank" class="vf-link ext">ESM Metagenomic Atlas</a>
+                        </li>
+                        <li class="vf-list__item">
+                            <a href="https://www.science.org/doi/full/10.1126/science.ade2574"
+                               target="_blank"
+                               class="vf-link ext">
+                                Evolutionary-scale prediction of atomic-level protein structure with a language model
+                            </a>
+                        </li>
+                    </ul>
+                </p>
+            </div>
+            <div class="vf-grid__col--span-3">
+                <div id="pdb_viewer">
+                    <pdbe-molstar
+                        custom-data-url="{% static "cif/"|add:cif_path %}"
+                        custom-data-format="cif"
+                        alphafold-view="true"
+                        bg-color-r="255"
+                        bg-color-g="255"
+                        bg-color-b="255"
+                        sequence-panel="true"
+                        landscape="true"
+                    >
+                </div>
+            </div>
+        </div>
+    </article>
 
-    {% comment %} <pdbe-molstar
-        custom-data-url="{% static "cif/"|add:cif_path %}"
-        custom-data-format="cif"
-        alphafold-view="true"
-        bg-color-r="255"
-        bg-color-g="255"
-        bg-color-b="255"
-        sequence-panel="true"
-        landscape="true"
-    >
-    </pdbe-molstar> {% endcomment %}
-
+</pdbe-molstar>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
