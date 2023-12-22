@@ -8,8 +8,10 @@
 <script src="{% static 'explorer/details.js' %}"></script>
 
 <section class="vf-content | vf-stack vf-stack--600">
-    <h2> MGnifam: {{ id|format_id }} </h2>
-    <h3> Family size: {{ id|family_size }} </h3>
+    <h2> MGnifam: {{ family_id }} </h2>
+    <h3> Family size: {{ family_size }} </h3>
+    <h3> Protein representative: <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a></h3>
+    <h4> Mask: {{ mask }} </h4>
 </section>
 <section class="vf-content | vf-stack vf-stack--600">
     <article class="vf-card vf-card--brand vf-card--bordered">
