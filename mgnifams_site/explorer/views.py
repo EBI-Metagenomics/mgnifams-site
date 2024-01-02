@@ -72,12 +72,44 @@ def details(request):
     elif (len(protein_parts) == 5):
         mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
 
+    # Check if the family is annotated or unannotated by HHblits
+    unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
+    with open(unannotated_filepath, 'r') as file:
+        unannotated_content = file.read()
+    is_annotated = not (family_id + '_') in unannotated_content
+    if is_annotated:
+        hits_directory = os.path.join(base_dir, 'hh/hits/')
+        hits_files = glob.glob(os.path.join(hits_directory, family_id + '_*'))
+
+        if hits_files:
+            with open(hits_files[0], 'r') as file:
+                hits_data = []
+                for line in file:
+                    name = line[4:34].strip()
+                    pfam_id = name.split(';')[0].strip().split('.')[0]
+                    
+                    hit = {
+                        'rank': line[0:3].strip(),
+                        'name': name,
+                        'pfam_id': pfam_id,
+                        'e_value': line[41:48].strip(),
+                        'query_hmm': line[75:83].strip(),
+                        'template_hmm': line[84:99].strip(),
+                    }
+                    hits_data.append(hit)
+        else:
+            hits_data = []
+
+    else:
+        hits_data = []
+
     return render(request, 'explorer/details.html', {
         'family_id': family_id,
         'family_size': family_size,
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
-        'mask': mask
+        'mask': mask,
+        'hits_data': hits_data
     })
 
 def mgnifam_names(request):

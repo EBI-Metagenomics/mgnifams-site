@@ -12,8 +12,7 @@
     <h3> Family size: {{ family_size }} </h3>
     <h3> Protein representative: <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a></h3>
     <h4> Mask: {{ mask }} </h4>
-</section>
-<section class="vf-content | vf-stack vf-stack--600">
+
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-grid vf-grid__col-4 | vf-card__content">
             <div class="vf-grid__col--span-1">
@@ -51,12 +50,48 @@
                         sequence-panel="true"
                         landscape="true"
                     >
+                    </pdbe-molstar>
                 </div>
             </div>
         </div>
     </article>
 
-</pdbe-molstar>
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Pfam model hits</h3>
+            <table id="pfams-table"
+                       class="vf-table pfams-table .vf-u-margin__bottom--400">
+                <thead class="vf-table__header">
+                    <tr class="vf-table__row">
+                        <th class="vf-table__heading" scope="col">No</th>
+                        <th class="vf-table__heading" scope="col">Pfam hit</th>
+                        <th class="vf-table__heading" scope="col">E-value</th>
+                        <th class="vf-table__heading" scope="col">Query HMM</th>
+                        <th class="vf-table__heading" scope="col">Template HMM</th>
+                    </tr>
+                </thead>
+                <tbody class="vf-table__body">
+                    {% for hit in hits_data %}
+                        <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam_id }}">
+                            <td class="vf-table__cell">{{ hit.rank }}</td>
+                            <td class="vf-table__cell">
+                                <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam_id }}"
+                                   target="_blank">{{ hit.name }}</a>
+                            </td>
+                            <td class="vf-table__cell">{{ hit.e_value }}</td>
+                            <td class="vf-table__cell">{{ hit.query_hmm }}</td>
+                            <td class="vf-table__cell">{{ hit.template_hmm }}</td>                            
+                        </tr>
+                    {% empty %}
+                        <tr class="vf-table__heading">
+                            <td class="vf-table__cell" colspan="5">No Pfam hits</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
