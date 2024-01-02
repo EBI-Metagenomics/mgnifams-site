@@ -60,7 +60,7 @@
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Pfam model hits</h3>
             <table id="pfams-table"
-                       class="vf-table pfams-table .vf-u-margin__bottom--400">
+                       class="vf-table .vf-u-margin__bottom--400">
                 <thead class="vf-table__header">
                     <tr class="vf-table__row">
                         <th class="vf-table__heading" scope="col">No</th>
@@ -84,7 +84,7 @@
                         </tr>
                     {% empty %}
                         <tr class="vf-table__heading">
-                            <td class="vf-table__cell" colspan="5">No Pfam hits</td>
+                            <td class="vf-table__cell" colspan="5">No Pfam hits found</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -92,11 +92,57 @@
         </div>
     </article>
 
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Structural Annotations</h3>
+            <table id="structural-annotations-table" class="vf-table .vf-u-margin__bottom--400">
+                <thead class="vf-table__header">
+                    <tr class="vf-table__row">
+                        <th class="vf-table__heading" scope="col">Target Structure</th>
+                        <th class="vf-table__heading" scope="col">Aligned Length</th>
+                        <th class="vf-table__heading" scope="col">Query Start</th>
+                        <th class="vf-table__heading" scope="col">Query End</th>
+                        <th class="vf-table__heading" scope="col">Target Start</th>
+                        <th class="vf-table__heading" scope="col">Target End</th>
+                        <th class="vf-table__heading" scope="col">E-value</th>
+                    </tr>
+                </thead>
+                <tbody class="vf-table__body">
+                    {% for annotation in structural_annotations %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">{{ annotation.target_structure_identifier }}</td>
+                            <td class="vf-table__cell">{{ annotation.aligned_length }}</td>
+                            <td class="vf-table__cell">{{ annotation.query_start }}</td>
+                            <td class="vf-table__cell">{{ annotation.query_end }}</td>
+                            <td class="vf-table__cell">{{ annotation.target_start }}</td>
+                            <td class="vf-table__cell">{{ annotation.target_end }}</td>
+                            <td class="vf-table__cell">{{ annotation.e_value|floatformat:"-g" }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell" colspan="7">No structural annotations found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
+
+<script>
+    $(document).ready( function () {
+        if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
+            $('#pfams-table').DataTable();
+        }
+        if ($('#structural-annotations-table:contains("No structural annotations found")').length === 0) {
+            $('#structural-annotations-table').DataTable();
+        }
+    } );
+</script>
 
 {% endblock %}

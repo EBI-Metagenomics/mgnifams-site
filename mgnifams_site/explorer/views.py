@@ -72,7 +72,7 @@ def details(request):
     elif (len(protein_parts) == 5):
         mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
 
-    # Check if the family is annotated or unannotated by HHblits
+    # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
     with open(unannotated_filepath, 'r') as file:
         unannotated_content = file.read()
@@ -103,13 +103,43 @@ def details(request):
     else:
         hits_data = []
 
+    # Structural annotation / Foldseek
+    foldseek_annotated_filepath = os.path.join(base_dir, 'foldseek/annotated.txt')
+    structure_found = False
+    structural_annotations = []
+    with open(foldseek_annotated_filepath, 'r') as file:
+        for line in file:
+            if line.startswith(family_id + '_'):
+                structure_found = True
+                foldseek_folder = os.path.join(base_dir, 'foldseek/')
+                for filepath in glob.glob(foldseek_folder + '*'):
+                    filename = os.path.basename(filepath)
+                    if filename.startswith(('alphafold_', 'esm_', 'pdb_')):
+                        with open(filepath, 'r') as f:
+                            for file_line in f:
+                                parts = file_line.strip().split('\t')
+                                first_part = parts[0].split('-')[0].split('_')[0]
+                                if first_part == family_id:
+                                    annotation = {
+                                        'target_structure_identifier': parts[1],
+                                        'aligned_length': int(parts[3]),
+                                        'query_start': int(parts[6]),
+                                        'query_end': int(parts[7]),
+                                        'target_start': int(parts[8]),
+                                        'target_end': int(parts[9]),
+                                        'e_value': float(parts[10])
+                                    }
+                                    structural_annotations.append(annotation)
+                break
+
     return render(request, 'explorer/details.html', {
         'family_id': family_id,
         'family_size': family_size,
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
         'mask': mask,
-        'hits_data': hits_data
+        'hits_data': hits_data,
+        'structural_annotations': structural_annotations
     })
 
 def mgnifam_names(request):

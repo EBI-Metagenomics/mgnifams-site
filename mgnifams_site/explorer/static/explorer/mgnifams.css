@@ -49,6 +49,56 @@ nightingale-manager {
     height: 600px;
 }
 
-#pfams-table {
-    width: 100%;
+.dataTables_filter input {
+    font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    font-size: 19px;
+    color: #1a1c1a;
+    font-weight: 400;
+    line-height: 1.421;
+    border: 2px solid #707372 !important;
+    border-radius: 0 !important;
+}
+
+.dataTables_length {
+    padding-top: 4px;
+    font-size: 19px;
+    color: #1a1c1a;
+}
+
+.dataTables_length select {
+    font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
+    font-size: 19px;
+    color: #1a1c1a;
+    font-weight: 400;
+    line-height: 1.421;
+    border: 2px solid #707372 !important;
+    border-radius: 0 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: white !important;
+    border: none !important;
+    background-color: #707372 !important;
+    background-image: none !important;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.current,
+.dataTables_wrapper .dataTables_paginate a.paginate_button.current:hover {
+    color: white !important;
+    border: none !important;
+    background-color: #707372 !important;
+    background-image: none !important;
+}
+
+.dataTables_filter input:focus,
+.dataTables_filter input:hover {
+    border-color: #54585a !important;
+    -webkit-box-shadow: 0 0 0 0.0625rem #54585a !important;
+    box-shadow: 0 0 0 0.0625rem #54585a !important;
+    color: #000000 !important;
+    outline: 0 !important;
 }
