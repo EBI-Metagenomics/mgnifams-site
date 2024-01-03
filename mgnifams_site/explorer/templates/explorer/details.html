@@ -58,6 +58,13 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Multiple Sequence Alignment</h3>
+            <div id="msa-div"></div>
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Pfam model hits</h3>
             <table id="pfams-table"
                        class="vf-table .vf-u-margin__bottom--400">
@@ -129,11 +136,52 @@
     </article>
 </section>
 
+{% comment %} PDB viewer {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
 
+{% comment %} MSA Viewer {% endcomment %}
+<link rel="stylesheet" href="">
+<script src="{% static "explorer/msa.min.js" %}"></script>
+<script>
+
+    var rootDiv = document.getElementById("msa-div")
+
+    var opts = {
+    el: rootDiv,
+        importURL: "{{ seed_msa_filepath }}",  menu: {
+        menuFontsize: "14px",
+        menuItemFontsize: "14px",
+        menuItemLineHeight: "14px",
+        menuMarginLeft: "3px",
+        menuPadding: "3px 4px 3px 4px",
+    },
+    bootstrapMenu: true,
+    vis: {
+        seqlogo: false,
+        conserv: false,
+        overviewbox: false,
+        gapHeader: false,
+
+        labelId: true,
+        labelName: true,
+        labelPartition: false,
+        labelCheckbox: false
+    },
+    colorscheme: {
+        scheme: "clustal2", // name of your color scheme
+        colorBackground: true, // otherwise only the text will be colored
+        showLowerCase: true, // used to hide and show lowercase chars in the overviewbox
+        opacity: 0.6 //opacity for the residues
+    }
+    };
+    var m = new msa.msa(opts);
+    m.render();
+</script>
+
+{% comment %} Datatables {% endcomment %}
 <script>
     $(document).ready( function () {
         if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {

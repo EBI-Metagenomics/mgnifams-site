@@ -38,6 +38,18 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
+def get_seed_msa_file_path(family_id, base_dir=""):
+    seed_msa_dir = os.path.join(base_dir, 'families/seed_msa/')
+    search_pattern = os.path.join(seed_msa_dir, family_id + '_*')
+
+    for filepath in glob.glob(search_pattern):
+        filename = os.path.basename(filepath)
+        parts = filename.split('_')
+        if parts[0] == family_id:
+            return filepath
+
+    return None
+
 def details(request):
     id = request.GET.get('id', None)
     base_dir = "../data/"
@@ -71,6 +83,9 @@ def details(request):
         mask = f"{protein_parts[1]}-{protein_parts[2]}"
     elif (len(protein_parts) == 5):
         mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
+
+    # Seed MSA viewer
+    seed_msa_filepath = get_seed_msa_file_path(family_id, "./")
 
     # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
@@ -138,6 +153,7 @@ def details(request):
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
         'mask': mask,
+        'seed_msa_filepath': seed_msa_filepath,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })
