@@ -38,7 +38,7 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
-def get_seed_msa_file_path(family_id, base_dir=""):
+def get_seed_msa_file_path(family_id, base_dir="../data/"):
     seed_msa_dir = os.path.join(base_dir, 'families/seed_msa/')
     search_pattern = os.path.join(seed_msa_dir, family_id + '_*')
 
@@ -46,7 +46,8 @@ def get_seed_msa_file_path(family_id, base_dir=""):
         filename = os.path.basename(filepath)
         parts = filename.split('_')
         if parts[0] == family_id:
-            return filepath
+            # Return the relative path from the base directory
+            return os.path.relpath(filepath, base_dir)
 
     return None
 
@@ -85,7 +86,8 @@ def details(request):
         mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
 
     # Seed MSA viewer
-    seed_msa_filepath = get_seed_msa_file_path(family_id, "./")
+    seed_msa_filepath = get_seed_msa_file_path(family_id, base_dir)
+    print(seed_msa_filepath)
 
     # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
