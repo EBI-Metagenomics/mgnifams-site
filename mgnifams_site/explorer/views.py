@@ -4,6 +4,8 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from Bio import SeqIO
 import glob
+import requests
+import json
 
 def count_lines_in_file(filepath):
     with open(filepath, 'r') as f:
@@ -38,9 +40,9 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
-def get_seed_msa_file_path(family_id, base_dir="../data/"):
-    seed_msa_dir = os.path.join(base_dir, 'families/seed_msa/')
-    search_pattern = os.path.join(seed_msa_dir, family_id + '_*')
+def get_filepath(family_id, sub_dir, base_dir="../data/"):
+    dir = os.path.join(base_dir, sub_dir)
+    search_pattern = os.path.join(dir, family_id + '_*')
 
     for filepath in glob.glob(search_pattern):
         filename = os.path.basename(filepath)
@@ -49,6 +51,27 @@ def get_seed_msa_file_path(family_id, base_dir="../data/"):
             # Return the relative path from the base directory
             return os.path.relpath(filepath, base_dir)
 
+    return None
+
+def call_skylign_api(base_dir, file_path):
+    url = "http://skylign.org"
+    headers = {'Accept': 'application/json'}
+    hmm_filepath = os.path.join(base_dir, file_path)
+    files = {'file': open(hmm_filepath, 'rb')}
+    data = {'processing': 'hmm'}
+
+    response = requests.post(url, headers=headers, files=files, data=data)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+
+def fetch_skylign_logo_json(uuid):
+    url = f'http://skylign.org/logo/{uuid}'
+    headers = {'Accept': 'application/json'}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        return json.dumps(response.json())
     return None
 
 def details(request):
@@ -86,8 +109,15 @@ def details(request):
         mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
 
     # Seed MSA viewer
-    seed_msa_filepath = get_seed_msa_file_path(family_id, base_dir)
-    print(seed_msa_filepath)
+    seed_msa_filepath = get_filepath(family_id, "families/seed_msa/", base_dir)
+   
+    # HMM viewer
+    hmm_filepath = get_filepath(family_id, "families/hmm/", base_dir)
+    response_data = call_skylign_api(base_dir, hmm_filepath)
+    uuid = ""
+    if response_data and 'uuid' in response_data:
+        uuid = response_data['uuid']
+    hmm_logo_json = fetch_skylign_logo_json(uuid)
 
     # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
@@ -156,6 +186,7 @@ def details(request):
         'protein_rep': protein_rep,
         'mask': mask,
         'seed_msa_filepath': seed_msa_filepath,
+        'hmm_logo_json': hmm_logo_json,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })

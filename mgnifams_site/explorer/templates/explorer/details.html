@@ -65,6 +65,14 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">HMM Viewer</h3>
+            <div id="logo" class="logo"></div>
+            <div id="col_info" class="col_info"></div>
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Pfam model hits</h3>
             <table id="pfams-table"
                        class="vf-table .vf-u-margin__bottom--400">
@@ -143,8 +151,8 @@
 <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
 
 {% comment %} MSA Viewer {% endcomment %}
-<link rel="stylesheet" href="{% static "explorer/msa.min.css" %}">
-<script src="{% static "explorer/msa.min.js" %}"></script>
+<link rel="stylesheet" href="{% static "explorer/msa/msa.min.css" %}">
+<script src="{% static "explorer/msa/msa.min.js" %}"></script>
 <script>
 
     var rootDiv = document.getElementById("msa-div")
@@ -179,6 +187,19 @@
     };
     var m = new msa.msa(opts);
     m.render();
+</script>
+
+{% comment %} HMM Viewer {% endcomment %}
+<link rel="stylesheet" href="{% static "explorer/hmm/hmm_logo.min.css" %}">
+<script src="{% static "explorer/jquery-3.7.1.min.js" %}"></script>
+<script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
+<script>
+    $(document).ready(function () {
+        let hmmLogoJson = JSON.parse('{{ hmm_logo_json | safe }}');
+        let logoDiv = document.getElementById('logo');
+        logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
+        $('#logo').hmm_logo({column_info: "#col_info"});
+    });
 </script>
 
 {% comment %} Datatables {% endcomment %}
