@@ -74,6 +74,22 @@ def fetch_skylign_logo_json(uuid):
         return json.dumps(response.json())
     return None
 
+def generate_structure_link(part):
+    if part.startswith('MGYP'):
+        # Remove '.pdb.gz' extension and format link for MGYP
+        id = part.replace('.pdb.gz', '')
+        return f'<a href="http://proteins.mgnify.org/{id}">{id}</a>'
+    elif part.startswith('AF'):
+        # Split with '-' and keep the second part for AlphaFold
+        af_id = part.split('-')[1]
+        return f'<a href="https://alphafold.ebi.ac.uk/entry/{af_id}">{af_id}</a>'
+    elif '.cif.gz' in part:
+        # Split with '.' and keep the first part for RCSB PDB
+        pdb_id = part.split('.')[0]
+        return f'<a href="https://www.rcsb.org/structure/{pdb_id}">{pdb_id}</a>'
+    else:
+        return part
+
 def details(request):
     id = request.GET.get('id', None)
     base_dir = "../data/"
@@ -152,12 +168,10 @@ def details(request):
 
     # Structural annotation / Foldseek
     foldseek_annotated_filepath = os.path.join(base_dir, 'foldseek/annotated.txt')
-    structure_found = False
     structural_annotations = []
     with open(foldseek_annotated_filepath, 'r') as file:
         for line in file:
             if line.startswith(family_id + '_'):
-                structure_found = True
                 foldseek_folder = os.path.join(base_dir, 'foldseek/')
                 for filepath in glob.glob(foldseek_folder + '*'):
                     filename = os.path.basename(filepath)
@@ -166,9 +180,10 @@ def details(request):
                             for file_line in f:
                                 parts = file_line.strip().split('\t')
                                 first_part = parts[0].split('-')[0].split('_')[0]
+                                target_structure_identifier = generate_structure_link(parts[1])
                                 if first_part == family_id:
                                     annotation = {
-                                        'target_structure_identifier': parts[1],
+                                        'target_structure_identifier': target_structure_identifier,
                                         'aligned_length': int(parts[3]),
                                         'query_start': int(parts[6]),
                                         'query_end': int(parts[7]),

@@ -125,7 +125,7 @@
                 <tbody class="vf-table__body">
                     {% for annotation in structural_annotations %}
                         <tr class="vf-table__row">
-                            <td class="vf-table__cell">{{ annotation.target_structure_identifier }}</td>
+                            <td class="vf-table__cell">{{ annotation.target_structure_identifier | safe }}</td>
                             <td class="vf-table__cell">{{ annotation.aligned_length }}</td>
                             <td class="vf-table__cell">{{ annotation.query_start }}</td>
                             <td class="vf-table__cell">{{ annotation.query_end }}</td>
@@ -191,7 +191,6 @@
 
 {% comment %} HMM Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/hmm/hmm_logo.min.css" %}">
-<script src="{% static "explorer/jquery-3.7.1.min.js" %}"></script>
 <script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
 <script>
     $(document).ready(function () {
@@ -209,7 +208,9 @@
             $('#pfams-table').DataTable();
         }
         if ($('#structural-annotations-table:contains("No structural annotations found")').length === 0) {
-            $('#structural-annotations-table').DataTable();
+            $('#structural-annotations-table').DataTable({
+                "order": [[6, 'asc']]
+            });
         }
     } );
 </script>
