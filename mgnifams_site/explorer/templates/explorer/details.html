@@ -158,34 +158,34 @@
     var rootDiv = document.getElementById("msa-div")
 
     var opts = {
-    el: rootDiv,
-        importURL: "../static/{{ seed_msa_filepath }}",  menu: {
-        menuFontsize: "14px",
-        menuItemFontsize: "14px",
-        menuItemLineHeight: "14px",
-        menuMarginLeft: "3px",
-        menuPadding: "3px 4px 3px 4px",
-    },
-    bootstrapMenu: true,
-    vis: {
-        seqlogo: false,
-        conserv: false,
-        overviewbox: false,
-        gapHeader: false,
-
-        labelId: true,
-        labelName: true,
-        labelPartition: false,
-        labelCheckbox: false
-    },
-    colorscheme: {
-        scheme: "clustal2", // name of your color scheme
-        colorBackground: true, // otherwise only the text will be colored
-        showLowerCase: true, // used to hide and show lowercase chars in the overviewbox
-        opacity: 0.6 //opacity for the residues
-    }
+        el: rootDiv,
+            importURL: "../static/{{ seed_msa_filepath }}",  menu: {
+            menuFontsize: "14px",
+            menuItemFontsize: "14px",
+            menuItemLineHeight: "14px",
+            menuMarginLeft: "3px",
+            menuPadding: "3px 4px 3px 4px",
+        },
+        bootstrapMenu: true,
+        vis: {
+            seqlogo: false,
+            conserv: false,
+            overviewbox: false,
+            gapHeader: false,
+            labelId: true,
+            labelName: true,
+            labelPartition: false,
+            labelCheckbox: false
+        },
+        colorscheme: {
+            scheme: "clustal2", // name of your color scheme
+            colorBackground: true, // otherwise only the text will be colored
+            showLowerCase: true, // used to hide and show lowercase chars in the overviewbox
+            opacity: 0.6 //opacity for the residues
+        }
     };
     var m = new msa.msa(opts);
+    // m.g.on("residue:click", function(data){ console.log(data) }); // get the column number data.rowPos
     m.render();
 </script>
 
