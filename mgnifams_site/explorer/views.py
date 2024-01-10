@@ -192,6 +192,9 @@ def details(request):
                                         'e_value': float(parts[10])
                                     }
                                     structural_annotations.append(annotation)
+                        structural_annotations.sort(key=lambda x: x['e_value'])
+                        for i, annotation in enumerate(structural_annotations, start=1):
+                            annotation['rank'] = i
                 break
 
     return render(request, 'explorer/details.html', {
