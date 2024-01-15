@@ -9,7 +9,15 @@
 
 <section class="vf-content | vf-stack vf-stack--600">
     <h2> MGnifam: {{ family_id }} </h2>
-    <h3> Family size: {{ family_size }} </h3>
+    <h3 style="display: inline-block; margin-right: 10px;"> Family size: {{ family_size }} </h3>
+    <button id="show-members-btn" style="display: inline-block; vertical-align: super; padding: 2px; font-size: 14px;" class="vf-button">Toggle</button>
+    <div id="family-members-div" style="display:none; background-color: #e0ffe0; padding: 10px; margin-top: 0;">
+        <span style="font-size: 0.8em;">
+            {% for link in family_members_links %}
+                {{ link|safe }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </span>
+    </div>
     <h3> Protein representative: <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a></h3>
     <h4> Mask: {{ mask }} </h4>
 
@@ -145,6 +153,14 @@
         </div>
     </article>
 </section>
+
+{% comment %} Family members {% endcomment %}
+<script>
+    document.getElementById('show-members-btn').addEventListener('click', function() {
+        var div = document.getElementById('family-members-div');
+        div.style.display = div.style.display === 'none' ? 'block' : 'none';
+    });
+</script>
 
 {% comment %} PDB viewer {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>

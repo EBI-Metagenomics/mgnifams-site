@@ -6,6 +6,7 @@ from Bio import SeqIO
 import glob
 import requests
 import json
+import subprocess
 
 def count_lines_in_file(filepath):
     with open(filepath, 'r') as f:
@@ -52,6 +53,31 @@ def get_filepath(family_id, sub_dir, base_dir="../data/"):
             return os.path.relpath(filepath, base_dir)
 
     return None
+
+def format_protein_link(protein_id):
+    """
+    Formats the protein ID into a clickable link.
+    Example inputs: '149902623', '149902623_1_116', '149902623/30_116', '149902623_1_116/30_116'
+    Output: HTML link element
+    """
+    number_of_underscores = protein_id.count('_')
+    if (number_of_underscores == 0):
+        formatted_name = format_protein_name(protein_id)
+        link_text = formatted_name
+    elif (number_of_underscores == 1):
+        formatted_name = format_protein_name(protein_id.split('/')[0])
+        link_text = protein_id
+    elif (number_of_underscores == 2):
+        formatted_name = format_protein_name(protein_id.split('_')[0])
+        link_text = protein_id.replace("_", "/", 1)
+    elif (number_of_underscores == 3):
+        formatted_name = format_protein_name(protein_id.split('_')[0])
+        start = int(protein_id.split('_')[1])
+        mask = protein_id.split('/')[1].split('_')
+        link_text = f"{formatted_name}/{start + int(mask[0]) - 1}_{start + int(mask[1]) - 1}"
+
+    link_url = f"http://proteins.mgnify.org/{formatted_name}"
+    return f'<a href="{link_url}">{link_text}</a>'
 
 def call_skylign_api(base_dir, file_path):
     url = "http://skylign.org"
@@ -123,6 +149,20 @@ def details(request):
         mask = f"{protein_parts[1]}-{protein_parts[2]}"
     elif (len(protein_parts) == 5):
         mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
+
+    # Family members
+    family_members_links = []
+    target_family = 'mgnifam' + family_id.replace('mgnfam', '') 
+    try:
+        result = subprocess.run(['grep', f'^{target_family}\t', os.path.join(base_dir, 'families/updated_refined_families.tsv')], capture_output=True, text=True)
+        if result.returncode == 0:
+            lines = result.stdout.splitlines()
+            print(len(lines))
+            for line in lines:
+                protein_id = line.split('\t')[1]
+                family_members_links.append(format_protein_link(protein_id))
+    except Exception as e:
+        print(f"Error running grep: {e}")
 
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/", base_dir)
@@ -200,6 +240,7 @@ def details(request):
     return render(request, 'explorer/details.html', {
         'family_id': family_id,
         'family_size': family_size,
+        'family_members_links': family_members_links,
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
         'mask': mask,
