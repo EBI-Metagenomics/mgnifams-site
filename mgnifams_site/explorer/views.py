@@ -168,7 +168,7 @@ def details(request):
 
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/", base_dir)
-   
+    
     # HMM viewer
     hmm_filepath = get_filepath(family_id, "families/hmm/", base_dir)
     response_data = call_skylign_api(base_dir, hmm_filepath)

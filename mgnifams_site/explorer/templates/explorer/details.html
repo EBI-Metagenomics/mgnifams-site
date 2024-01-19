@@ -74,6 +74,12 @@
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">HMM Viewer</h3>
+            <div>
+                <p>
+                    Stack height is the information content (aka relative entropy) of the position,
+                    and letters divide that height according to their estimated probability.
+                </p>
+            </div>
             <div id="logo" class="logo"></div>
             <div id="col_info" class="col_info"></div>
         </div>
@@ -215,7 +221,14 @@
         let hmmLogoJson = JSON.parse('{{ hmm_logo_json | safe }}');
         let logoDiv = document.getElementById('logo');
         logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
-        $('#logo').hmm_logo({column_info: "#col_info"});
+        $('#logo').hmm_logo({height_toggle: true, column_info: "#col_info"});
+        // switch to maximum observed scale
+        let radioInput = document.querySelector('input[name="scale"][value="obs"]');
+        radioInput.click();
+        // hide Coordinates fieldset options
+        let logoSettingsDiv = document.querySelector('.logo_settings');
+        let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
+        fieldsets[2].style.display = 'none';
     });
 </script>
 
