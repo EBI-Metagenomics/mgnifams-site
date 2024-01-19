@@ -41,6 +41,33 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
+def format_protein_link(protein_id):
+    """
+    Formats the protein ID into a clickable link.
+    Example inputs: '149902623', '149902623_1_116', '149902623/30_116', '149902623_1_116/30_116'
+    Output: HTML link element
+    """
+    number_of_underscores = protein_id.count('_')
+    if (number_of_underscores == 0):
+        formatted_name = format_protein_name(protein_id)
+        link_text = formatted_name
+    elif (number_of_underscores == 1):
+        parts = protein_id.split('/')
+        formatted_name = format_protein_name(parts[0])
+        link_text = f"{formatted_name}/{parts[1]}"
+    elif (number_of_underscores == 2):
+        parts = protein_id.split('_')
+        formatted_name = format_protein_name(parts[0])
+        link_text = f"{formatted_name}/{parts[1]}_{parts[2]}"
+    elif (number_of_underscores == 3):
+        formatted_name = format_protein_name(protein_id.split('_')[0])
+        start = int(protein_id.split('_')[1])
+        mask = protein_id.split('/')[1].split('_')
+        link_text = f"{formatted_name}/{start + int(mask[0]) - 1}_{start + int(mask[1]) - 1}"
+
+    link_url = f"http://proteins.mgnify.org/{formatted_name}"
+    return f'<a href="{link_url}">{link_text}</a>'
+
 def get_filepath(family_id, sub_dir, base_dir="../data/"):
     dir = os.path.join(base_dir, sub_dir)
     search_pattern = os.path.join(dir, family_id + '_*')
@@ -53,31 +80,6 @@ def get_filepath(family_id, sub_dir, base_dir="../data/"):
             return os.path.relpath(filepath, base_dir)
 
     return None
-
-def format_protein_link(protein_id):
-    """
-    Formats the protein ID into a clickable link.
-    Example inputs: '149902623', '149902623_1_116', '149902623/30_116', '149902623_1_116/30_116'
-    Output: HTML link element
-    """
-    number_of_underscores = protein_id.count('_')
-    if (number_of_underscores == 0):
-        formatted_name = format_protein_name(protein_id)
-        link_text = formatted_name
-    elif (number_of_underscores == 1):
-        formatted_name = format_protein_name(protein_id.split('/')[0])
-        link_text = protein_id
-    elif (number_of_underscores == 2):
-        formatted_name = format_protein_name(protein_id.split('_')[0])
-        link_text = protein_id.replace("_", "/", 1)
-    elif (number_of_underscores == 3):
-        formatted_name = format_protein_name(protein_id.split('_')[0])
-        start = int(protein_id.split('_')[1])
-        mask = protein_id.split('/')[1].split('_')
-        link_text = f"{formatted_name}/{start + int(mask[0]) - 1}_{start + int(mask[1]) - 1}"
-
-    link_url = f"http://proteins.mgnify.org/{formatted_name}"
-    return f'<a href="{link_url}">{link_text}</a>'
 
 def call_skylign_api(base_dir, file_path):
     url = "http://skylign.org"
