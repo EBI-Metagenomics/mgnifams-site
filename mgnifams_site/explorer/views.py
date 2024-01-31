@@ -8,13 +8,14 @@ import requests
 import json
 import subprocess
 
+# Global init
+base_dir = "../data_old/" # "../data/"
+
 def count_lines_in_file(filepath):
     with open(filepath, 'r') as f:
         return sum(1 for _ in f)
 
 def index(request):
-    base_dir = "../data/"
-
     # Calculate statistics
     num_mgnifams = count_lines_in_file(os.path.join(base_dir, 'mgnifam_names.txt'))
 
@@ -68,7 +69,7 @@ def format_protein_link(protein_id):
     link_url = f"http://proteins.mgnify.org/{formatted_name}"
     return f'<a href="{link_url}">{link_text}</a>'
 
-def get_filepath(family_id, sub_dir, base_dir="../data/"):
+def get_filepath(family_id, sub_dir):
     dir = os.path.join(base_dir, sub_dir)
     search_pattern = os.path.join(dir, family_id + '_*')
 
@@ -120,7 +121,6 @@ def generate_structure_link(part):
 
 def details(request):
     id = request.GET.get('id', None)
-    base_dir = "../data/"
     id_filepath = os.path.join(base_dir, 'mgnifam_names.txt')
 
     # Validate if ID exists in mgnifam_names.txt
@@ -167,10 +167,10 @@ def details(request):
         print(f"Error running grep: {e}")
 
     # Seed MSA viewer
-    seed_msa_filepath = get_filepath(family_id, "families/seed_msa/", base_dir)
+    seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
     
     # HMM viewer
-    hmm_filepath = get_filepath(family_id, "families/hmm/", base_dir)
+    hmm_filepath = get_filepath(family_id, "families/hmm/")
     response_data = call_skylign_api(base_dir, hmm_filepath)
     uuid = ""
     if response_data and 'uuid' in response_data:
@@ -253,8 +253,6 @@ def details(request):
     })
 
 def mgnifam_names(request):
-    base_dir = "../data/"
-
     # Read the cluster rep names from the file
     with open(os.path.join(base_dir, 'mgnifam_names.txt'), 'r') as f:
         mgnifam_names = f.readlines()
