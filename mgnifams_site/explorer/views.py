@@ -82,6 +82,16 @@ def get_filepath(family_id, sub_dir):
 
     return None
 
+def read_rf_file(family_id):
+    rf_folder = os.path.join(base_dir, 'families', 'rf')
+    for filename in os.listdir(rf_folder):
+        parts = filename.split('_')
+        if parts[0] == family_id:
+            with open(os.path.join(rf_folder, filename), 'r') as file:
+                rf = file.read()
+            return rf
+    return None
+
 def call_skylign_api(base_dir, file_path):
     url = "http://skylign.org"
     headers = {'Accept': 'application/json'}
@@ -159,7 +169,6 @@ def details(request):
         result = subprocess.run(['grep', f'^{target_family}\t', os.path.join(base_dir, 'families/updated_refined_families.tsv')], capture_output=True, text=True)
         if result.returncode == 0:
             lines = result.stdout.splitlines()
-            print(len(lines))
             for line in lines:
                 protein_id = line.split('\t')[1]
                 family_members_links.append(format_protein_link(protein_id))
@@ -168,6 +177,7 @@ def details(request):
 
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
+    rf = read_rf_file(family_id)
     
     # HMM viewer
     hmm_filepath = get_filepath(family_id, "families/hmm/")
@@ -247,6 +257,7 @@ def details(request):
         'protein_rep': protein_rep,
         'region': region,
         'seed_msa_filepath': seed_msa_filepath,
+        'rf': rf,
         'hmm_logo_json': hmm_logo_json,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations

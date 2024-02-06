@@ -219,7 +219,41 @@
         }
     };
     var m = new msa.msa(opts);
-    // m.g.on("residue:click", function(data){ console.log(data) }); // get the column number data.rowPos
+
+    const findClosestX = (sequence, position) => {
+        let hmm_pos = 0;
+
+        for (let i = 0; i < sequence.length; i++) {
+            if (sequence[i] === 'x') {
+                hmm_pos = hmm_pos + 1;
+                if (i >= position) break;
+            }
+        }
+
+        return hmm_pos;
+    };
+
+    const click_hmm = (hmm_pos) => {
+        const inputCol = document.querySelector('.logo_position');
+        inputCol.focus();
+        inputCol.value = null;
+        inputCol.value = hmm_pos;
+        const event = new KeyboardEvent('keypress', {
+            key: 'Enter',
+            code: 'Enter',
+            keyCode: 13,
+            which: 13,
+            bubbles: true
+        });
+        inputCol.dispatchEvent(event);
+        const inputColButton = document.querySelector('.button.logo_change');
+        inputColButton.click();
+    };
+
+    m.g.on("residue:click", function(data){
+        hmm_pos = findClosestX("{{ rf }}", data.rowPos)
+        click_hmm(hmm_pos);
+    });
     m.render();
 </script>
 
