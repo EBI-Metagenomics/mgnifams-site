@@ -261,6 +261,13 @@
 <link rel="stylesheet" href="{% static "explorer/hmm/hmm_logo.min.css" %}">
 <script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
 <script>
+    const extract_hmm_column = (p_text) => {
+        var parts = p_text.split(':');
+        var numberPart = parts[parts.length - 1];
+        var col = parseInt(numberPart);
+        return col;
+    };
+
     $(document).ready(function () {
         let hmmLogoJson = JSON.parse('{{ hmm_logo_json | safe }}');
         let logoDiv = document.getElementById('logo');
@@ -273,6 +280,17 @@
         let logoSettingsDiv = document.querySelector('.logo_settings');
         let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
         fieldsets[2].style.display = 'none';
+
+        // link event to msa
+        let firstCanvasLogo = document.querySelector('.canvas_logo');
+        firstCanvasLogo.addEventListener('click', () => {
+            setTimeout(() => {
+                let divElement = document.getElementById('col_info');
+                let pElement = divElement.querySelector('p:first-of-type');
+                let clicked_col = extract_hmm_column(pElement.textContent);
+                console.log(clicked_col);
+            }, "1");
+        });
     });
 </script>
 
