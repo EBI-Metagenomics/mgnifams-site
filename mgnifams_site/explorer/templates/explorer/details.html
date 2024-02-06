@@ -19,7 +19,7 @@
         </span>
     </div>
     <h3> Protein representative: <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a></h3>
-    <h4> Mask: {{ mask }} </h4>
+    <h4> Region: {{ region }} </h4>
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-grid vf-grid__col-4 | vf-card__content">
@@ -87,7 +87,12 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Pfam model hits</h3>
+            <h3 class="vf-card__heading">Profile-profile comparison hits</h3>
+            <div>
+                <p>
+                    This MGnifam HMM profile was searched against the profile Pfam database (ver. 35.0) with HHblits from HH-suite.
+                </p>
+            </div>
             <table id="pfams-table"
                        class="vf-table .vf-u-margin__bottom--400">
                 <thead class="vf-table__header">
@@ -123,7 +128,12 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Structural Annotations</h3>
+            <h3 class="vf-card__heading">Structural comparisons</h3>
+            <div>
+                <p>
+                    This MGnifam 3D structure was searched against the Alphafold/UniProt, PDB and ESMAtlas30 databases with foldseek.
+                </p>
+            </div>
             <table id="structural-annotations-table" class="vf-table .vf-u-margin__bottom--400">
                 <thead class="vf-table__header">
                     <tr class="vf-table__row">

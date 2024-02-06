@@ -55,16 +55,16 @@ def format_protein_link(protein_id):
     elif (number_of_underscores == 1):
         parts = protein_id.split('/')
         formatted_name = format_protein_name(parts[0])
-        link_text = f"{formatted_name}/{parts[1]}"
+        link_text = f"{formatted_name}/{parts[1].replace('_', '-')}"
     elif (number_of_underscores == 2):
         parts = protein_id.split('_')
         formatted_name = format_protein_name(parts[0])
-        link_text = f"{formatted_name}/{parts[1]}_{parts[2]}"
+        link_text = f"{formatted_name}/{parts[1]}-{parts[2]}"
     elif (number_of_underscores == 3):
         formatted_name = format_protein_name(protein_id.split('_')[0])
         start = int(protein_id.split('_')[1])
-        mask = protein_id.split('/')[1].split('_')
-        link_text = f"{formatted_name}/{start + int(mask[0]) - 1}_{start + int(mask[1]) - 1}"
+        region = protein_id.split('/')[1].split('_')
+        link_text = f"{formatted_name}/{start + int(region[0]) - 1}-{start + int(region[1]) - 1}"
 
     link_url = f"http://proteins.mgnify.org/{formatted_name}"
     return f'<a href="{link_url}">{link_text}</a>'
@@ -146,11 +146,11 @@ def details(request):
     protein_parts = first_split_second_part.split('_')
     protein_rep = format_protein_name(protein_parts[0])
     if (len(protein_parts) == 1):
-        mask = "whole MGYP protein"
+        region = "whole MGYP protein"
     elif (len(protein_parts) == 3):
-        mask = f"{protein_parts[1]}-{protein_parts[2]}"
+        region = f"{protein_parts[1]}-{protein_parts[2]}"
     elif (len(protein_parts) == 5):
-        mask = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
+        region = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
 
     # Family members
     family_members_links = []
@@ -245,7 +245,7 @@ def details(request):
         'family_members_links': family_members_links,
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
-        'mask': mask,
+        'region': region,
         'seed_msa_filepath': seed_msa_filepath,
         'hmm_logo_json': hmm_logo_json,
         'hits_data': hits_data,
