@@ -9,7 +9,7 @@ import json
 import subprocess
 
 # Global init
-base_dir = "../data_old/" # "../data/"
+base_dir = "../data/" # "../data/" "../data_old/"
 
 def count_lines_in_file(filepath):
     with open(filepath, 'r') as f:
