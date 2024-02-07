@@ -1,5 +1,5 @@
-HMMER3/f [3.4 | Aug 2023]
-NAME  seed_msa
+HMMER3/f [3.3 | Nov 2019]
+NAME  mgnfam23_33258
 LENG  43
 ALPH  amino
 RF    no
@@ -7,7 +7,7 @@ MM    no
 CONS  yes
 CS    no
 MAP   yes
-DATE  Tue Jan 30 18:52:34 2024
+DATE  Wed Feb  7 12:00:57 2024
 NSEQ  993
 EFFN  44.300594
 CKSUM 4018790250

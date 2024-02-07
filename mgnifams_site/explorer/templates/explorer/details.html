@@ -220,7 +220,7 @@
     };
     var m = new msa.msa(opts);
 
-    const findClosestX = (sequence, position) => {
+    const translate_to_hmm_pos = (sequence, position) => {
         let hmm_pos = 0;
 
         for (let i = 0; i < sequence.length; i++) {
@@ -251,7 +251,7 @@
     };
 
     m.g.on("residue:click", function(data){
-        hmm_pos = findClosestX("{{ rf }}", data.rowPos)
+        hmm_pos = translate_to_hmm_pos("{{ rf }}", data.rowPos)
         click_hmm(hmm_pos);
     });
     m.render();
@@ -268,6 +268,18 @@
         return col;
     };
 
+    const translate_to_msa_pos = (sequence, hmm_position) => {
+        let x_counter = 0;
+        let msa_pos;
+        for ( msa_pos = 0; msa_pos < sequence.length; msa_pos++) {
+            if (sequence[msa_pos] === 'x') {
+                x_counter = x_counter + 1;
+                if (x_counter == hmm_position) break;
+            }
+        }
+        return msa_pos;
+    };
+
     $(document).ready(function () {
         let hmmLogoJson = JSON.parse('{{ hmm_logo_json | safe }}');
         let logoDiv = document.getElementById('logo');
@@ -282,13 +294,15 @@
         fieldsets[2].style.display = 'none';
 
         // link event to msa
-        let firstCanvasLogo = document.querySelector('.canvas_logo');
+        const firstCanvasLogo = document.querySelector('.canvas_logo');
         firstCanvasLogo.addEventListener('click', () => {
             setTimeout(() => {
                 let divElement = document.getElementById('col_info');
                 let pElement = divElement.querySelector('p:first-of-type');
                 let clicked_col = extract_hmm_column(pElement.textContent);
-                console.log(clicked_col);
+                let msa_pos = translate_to_msa_pos("{{ rf }}", clicked_col);
+                let elements = document.getElementsByClassName('msa-col-header');
+                elements[msa_pos].click();
             }, "1");
         });
     });

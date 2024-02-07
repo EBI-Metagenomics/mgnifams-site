@@ -22,24 +22,28 @@ def process_alignment(ms_file, output_folder, basename):
         output_file.write(combined_sequence)
 
 # Example usage
-input_folder_path = 'data/families/seed_msa'
-tmp_hmm_path = 'tmp.hmm'
-tmp_ms_msa_path = 'tmp.ms'
-output_folder_path = 'rf'
-if not os.path.exists(output_folder_path):
-    os.makedirs(output_folder_path)
-output_hmm_path = os.path.join(output_folder_path, tmp_hmm_path)
-output_ms_path = os.path.join(output_folder_path, tmp_ms_msa_path)
+input_folder_path = 'data/families/seed_msa_backup'
+output_ms_folder_path = 'seed_msa_sto'
+output_rf_folder_path = 'rf'
+output_hmm_folder_path = 'hmm'
+if not os.path.exists(output_ms_folder_path):
+    os.makedirs(output_ms_folder_path)
+if not os.path.exists(output_rf_folder_path):
+    os.makedirs(output_rf_folder_path)
+if not os.path.exists(output_hmm_folder_path):
+    os.makedirs(output_hmm_folder_path)
 
 # Run hmmbuild for each MSA file in the input folder
 for filename in os.listdir(input_folder_path):
     input_file_path = os.path.join(input_folder_path, filename)
     basename, _ = os.path.splitext(os.path.basename(input_file_path))
-    
+    output_hmm_path = os.path.join(output_hmm_folder_path, f'{basename}.hmm')
+    output_ms_path = os.path.join(output_ms_folder_path, f'{basename}.fa')
+
     # Check if the path is a file
     if os.path.isfile(input_file_path):
         # Run hmmbuild to create HMM file
         run_hmmbuild(input_file_path, output_hmm_path, ["-O", output_ms_path])
-
+        run_hmmbuild(output_ms_path, output_hmm_path, ["--hand", output_ms_path])
         # Process the HMM file with process_alignment
-        process_alignment(output_ms_path, output_folder_path, basename)
+        process_alignment(output_ms_path, output_rf_folder_path, basename)
