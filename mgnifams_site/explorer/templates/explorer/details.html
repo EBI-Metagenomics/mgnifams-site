@@ -280,6 +280,35 @@
         return msa_pos;
     };
 
+    const link_hmm_to_msa = () => {
+        // need a dummy init p in the col_info div to tie the event
+        const hiddenParagraph = document.createElement('p');
+        hiddenParagraph.textContent = 'Hidden paragraph content';
+        hiddenParagraph.style.display = 'none';
+        const divElement = document.getElementById('col_info');
+        divElement.appendChild(hiddenParagraph);
+        // create the observer
+        const observer = new MutationObserver(function(mutationsList, observer) {
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(node => {
+                        if (node.tagName === 'P') {
+                            const divElement = document.getElementById('col_info');
+                            const pElement = divElement.querySelector('p:first-of-type');
+                            let clicked_col = extract_hmm_column(pElement.textContent);
+                            let msa_pos = translate_to_msa_pos("{{ rf }}", clicked_col);
+                            let elements = document.getElementsByClassName('msa-col-header');
+                            elements[msa_pos].click();
+                        }
+                    });
+                }
+            }
+        });
+        // Configure and start observing for changes in child nodes
+        const config = { childList: true, subtree: true };
+        observer.observe(divElement, config);
+    };
+
     $(document).ready(function () {
         let hmmLogoJson = JSON.parse('{{ hmm_logo_json | safe }}');
         let logoDiv = document.getElementById('logo');
@@ -294,17 +323,7 @@
         fieldsets[2].style.display = 'none';
 
         // link event to msa
-        const firstCanvasLogo = document.querySelector('.canvas_logo');
-        firstCanvasLogo.addEventListener('click', () => {
-            setTimeout(() => {
-                let divElement = document.getElementById('col_info');
-                let pElement = divElement.querySelector('p:first-of-type');
-                let clicked_col = extract_hmm_column(pElement.textContent);
-                let msa_pos = translate_to_msa_pos("{{ rf }}", clicked_col);
-                let elements = document.getElementsByClassName('msa-col-header');
-                elements[msa_pos].click();
-            }, "1");
-        });
+        link_hmm_to_msa();
     });
 </script>
 
