@@ -78,6 +78,7 @@
                 <p>
                     Stack height is the information content (aka relative entropy) of the position,
                     and letters divide that height according to their estimated probability.
+                    Click on a stack to highlight the relative column on the seed MSA viewer above.
                 </p>
             </div>
             <div id="logo" class="logo"></div>
@@ -233,7 +234,7 @@
         return hmm_pos;
     };
 
-    const click_hmm = (hmm_pos) => {
+    {% comment %} const click_hmm = (hmm_pos) => {
         const inputCol = document.querySelector('.logo_position');
         inputCol.focus();
         inputCol.value = null;
@@ -253,7 +254,7 @@
     m.g.on("residue:click", function(data){
         hmm_pos = translate_to_hmm_pos("{{ rf }}", data.rowPos)
         click_hmm(hmm_pos);
-    });
+    }); {% endcomment %}
     m.render();
 </script>
 
