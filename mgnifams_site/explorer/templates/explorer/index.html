@@ -3,7 +3,7 @@
 {% block content %}
 
 <section class="vf-content | vf-stack vf-stack--600">
-    <p>Number of <b>protein families:</b> {{ num_mgnifams }}</p>
+    <p>Number of currently hosted <b>protein families:</b> {{ num_mgnifams }}</p>
 
     <form 
         method="get" action="/details/"
@@ -21,7 +21,7 @@
         {% endfor %}
     {% endif %}
 
-    <p>Click <a href="{% url 'mgnifam_names' %}">here</a> to see all available <b>family names</b></p>
+    <p>Click <a href="{% url 'mgnifam_names' %}">here</a> to see all available <b>family IDs</b>.</p>
 
 </section>
 

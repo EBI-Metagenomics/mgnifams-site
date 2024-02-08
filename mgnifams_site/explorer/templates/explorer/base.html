@@ -53,15 +53,8 @@
         <div class="vf-hero__content | vf-box | vf-stack vf-stack--400">
             {% if request.resolver_match.url_name in "home" %}<p class="vf-hero__kicker">MGnifams</p>{% endif %}
             <h1 class="vf-hero__heading">MGnifams</h1>
-            {% if request.path in "/" %}
-                <p class="vf-hero__subheading">Metagenomics derived protein families.</p>
-            {% endif %}
             <p class="vf-hero__text">
-                Starting from MGnify90 cluster representatives (~700M sequences) we sliced pfam annotated parts
-                and kept unannotated sequence with at least 50 amino acids (~548M).
-                We clustered them with linclust (50% identity and 90% coverage) from mmseqs
-                into 465M initial clusters and initiated our protein family generation algorithm.
-                The MGnifams resource currently hosts 99 generated protein families.
+                A metagenomics-derived protein families resource.
             </p>
         </div>
     </section>

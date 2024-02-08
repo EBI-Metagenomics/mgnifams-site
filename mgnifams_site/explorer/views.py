@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
 from Bio import SeqIO
+import re
 import glob
 import requests
 import json
@@ -33,6 +34,11 @@ def index(request):
 def id_exists(check_id, filepath):
     with open(filepath, 'r') as f:
         return check_id in f.read().splitlines()
+
+def translate_mgyf_to_file_id(mgyf):
+    id = re.sub(r'^MGYF0+', '', mgyf)
+    file_id = 'mgnfam' + id
+    return file_id              
 
 def format_protein_name(raw_name):
     """
@@ -130,15 +136,16 @@ def generate_structure_link(part):
         return part
 
 def details(request):
-    id = request.GET.get('id', None)
+    mgyf = request.GET.get('id', None)
     id_filepath = os.path.join(base_dir, 'mgnifam_names.txt')
 
     # Validate if ID exists in mgnifam_names.txt
-    if not id_exists(id, id_filepath):
+    if not id_exists(mgyf, id_filepath):
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
     # Construct the path for the cif file
     cif_directory = os.path.join(base_dir, 'cif/')
+    id = translate_mgyf_to_file_id(mgyf)
     cif_files = glob.glob(os.path.join(cif_directory, id + '_*'))
     # Extract only the filename from the first matching cif file
     cif_filename = os.path.basename(cif_files[0]) if cif_files else None
@@ -156,11 +163,11 @@ def details(request):
     protein_parts = first_split_second_part.split('_')
     protein_rep = format_protein_name(protein_parts[0])
     if (len(protein_parts) == 1):
-        region = "whole MGYP protein"
+        region = ""
     elif (len(protein_parts) == 3):
-        region = f"{protein_parts[1]}-{protein_parts[2]}"
+        region = f"/{protein_parts[1]}-{protein_parts[2]}"
     elif (len(protein_parts) == 5):
-        region = f"{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
+        region = f"/{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
 
     # Family members
     family_members_links = []
@@ -250,7 +257,7 @@ def details(request):
                 break
 
     return render(request, 'explorer/details.html', {
-        'family_id': family_id,
+        'mgyf': mgyf,
         'family_size': family_size,
         'family_members_links': family_members_links,
         'cif_path': cif_filename,  
