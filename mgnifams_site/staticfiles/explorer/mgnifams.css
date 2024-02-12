@@ -1,3 +1,7 @@
+h4 {
+    margin: 2px !important;
+}
+
 nightingale-manager {
     display: flex !important;
     flex-direction: column !important;
@@ -113,6 +117,7 @@ nightingale-manager {
 #family-members-div {
     display:none;
     background-color: #e0ffe0;
+    border: 1px solid gray;
     padding: 10px;
     margin-top: 10px;
     max-height: 300px;
