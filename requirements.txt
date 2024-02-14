@@ -1,0 +1,4 @@
+biopython==1.83
+requests==2.31.0
+django==4.2.3
+gunicorn==21.2.0
