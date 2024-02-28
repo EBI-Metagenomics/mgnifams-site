@@ -16,8 +16,8 @@
             <table class="vf-table | vf-u-width__100">
                 <tbody class="vf-table__body">
                     <tr class="vf-table__row">
-                        <td class="vf-table__cell">Total number of recruited sequences</td>
-                        <td class="vf-table__cell">{{ family_size }} <button id="show-members-btn" class="vf-button">Toggle</button></td>
+                        <td class="vf-table__cell">Total number of sequences in the family</td>
+                        <td class="vf-table__cell">{{ family_size }} <button id="show-members-btn" class="vf-button">Show</button></td>
                     </tr>
                     <tr class="vf-table__row">
                         <td class="vf-table__cell">Family representative sequence</td>
@@ -26,7 +26,7 @@
                         </td>
                     </tr>
                     <tr class="vf-table__row">
-                        <td class="vf-table__cell">Profile hits</td>
+                        <td class="vf-table__cell">Profile-profile matches</td>
                         <td class="vf-table__cell">
                             {% if hits_data %}
                                 <i class="icon icon-common icon-check-square"></i>
@@ -125,42 +125,40 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Profile-profile hits</h3>
+            <h3 class="vf-card__heading">Profile-profile matches</h3>
             <div>
                 <p>
                     This MGnifam HMM profile was searched against the profile Pfam database (ver. 35.0) with HHblits from HH-suite.
                 </p>
             </div>
-            <table id="pfams-table"
-                       class="vf-table .vf-u-margin__bottom--400">
-                <thead class="vf-table__header">
-                    <tr class="vf-table__row">
-                        <th class="vf-table__heading" scope="col">Rank</th>
-                        <th class="vf-table__heading" scope="col">Pfam hit</th>
-                        <th class="vf-table__heading" scope="col">MGnifam HMM</th>
-                        <th class="vf-table__heading" scope="col">Pfam HMM</th>
-                        <th class="vf-table__heading" scope="col">E-value</th>
-                    </tr>
-                </thead>
-                <tbody class="vf-table__body">
-                    {% for hit in hits_data %}
-                        <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam_id }}">
-                            <td class="vf-table__cell">{{ hit.rank }}</td>
-                            <td class="vf-table__cell">
-                                <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam_id }}"
-                                   target="_blank">{{ hit.name }}</a>
-                            </td>
-                            <td class="vf-table__cell">{{ hit.query_hmm }}</td>
-                            <td class="vf-table__cell">{{ hit.template_hmm }}</td>
-                            <td class="vf-table__cell">{{ hit.e_value }}</td>                            
+            {% if hits_data %}
+                <table id="pfams-table" class="vf-table .vf-u-margin__bottom--400">
+                    <thead class="vf-table__header">
+                        <tr class="vf-table__row">
+                            <th class="vf-table__heading" scope="col">Rank</th>
+                            <th class="vf-table__heading" scope="col">Pfam hit</th>
+                            <th class="vf-table__heading" scope="col">MGnifam HMM</th>
+                            <th class="vf-table__heading" scope="col">Pfam HMM</th>
+                            <th class="vf-table__heading" scope="col">E-value</th>
                         </tr>
-                    {% empty %}
-                        <tr class="vf-table__heading">
-                            <td class="vf-table__cell" colspan="5">No Pfam hits found</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="vf-table__body">
+                        {% for hit in hits_data %}
+                            <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam_id }}">
+                                <td class="vf-table__cell">{{ hit.rank }}</td>
+                                <td class="vf-table__cell">
+                                    <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam_id }}" target="_blank">{{ hit.name }}</a>
+                                </td>
+                                <td class="vf-table__cell">{{ hit.query_hmm }}</td>
+                                <td class="vf-table__cell">{{ hit.template_hmm }}</td>
+                                <td class="vf-table__cell">{{ hit.e_value }}</td>                            
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No Pfam hits found</p>
+            {% endif %}
         </div>
     </article>
 
@@ -172,38 +170,38 @@
                     This MGnifam 3D structure was searched against the Alphafold/UniProt, PDB and ESMAtlas30 databases with foldseek.
                 </p>
             </div>
-            <table id="structural-annotations-table" class="vf-table .vf-u-margin__bottom--400">
-                <thead class="vf-table__header">
-                    <tr class="vf-table__row">
-                        <th class="vf-table__heading" scope="col">Rank</th>
-                        <th class="vf-table__heading" scope="col">Target Structure</th>
-                        <th class="vf-table__heading" scope="col">Aligned Length</th>
-                        <th class="vf-table__heading" scope="col">Query Start</th>
-                        <th class="vf-table__heading" scope="col">Query End</th>
-                        <th class="vf-table__heading" scope="col">Target Start</th>
-                        <th class="vf-table__heading" scope="col">Target End</th>
-                        <th class="vf-table__heading" scope="col">E-value</th>
-                    </tr>
-                </thead>
-                <tbody class="vf-table__body">
-                    {% for annotation in structural_annotations %}
+            {% if structural_annotations %}
+                <table id="structural-annotations-table" class="vf-table .vf-u-margin__bottom--400">
+                    <thead class="vf-table__header">
                         <tr class="vf-table__row">
-                            <td class="vf-table__cell">{{ annotation.rank }}</td>
-                            <td class="vf-table__cell">{{ annotation.target_structure_identifier | safe }}</td>
-                            <td class="vf-table__cell">{{ annotation.aligned_length }}</td>
-                            <td class="vf-table__cell">{{ annotation.query_start }}</td>
-                            <td class="vf-table__cell">{{ annotation.query_end }}</td>
-                            <td class="vf-table__cell">{{ annotation.target_start }}</td>
-                            <td class="vf-table__cell">{{ annotation.target_end }}</td>
-                            <td class="vf-table__cell">{{ annotation.e_value|floatformat:"-g" }}</td>
+                            <th class="vf-table__heading" scope="col">Rank</th>
+                            <th class="vf-table__heading" scope="col">Target Structure</th>
+                            <th class="vf-table__heading" scope="col">Aligned Length</th>
+                            <th class="vf-table__heading" scope="col">Query Start</th>
+                            <th class="vf-table__heading" scope="col">Query End</th>
+                            <th class="vf-table__heading" scope="col">Target Start</th>
+                            <th class="vf-table__heading" scope="col">Target End</th>
+                            <th class="vf-table__heading" scope="col">E-value</th>
                         </tr>
-                    {% empty %}
-                        <tr class="vf-table__row">
-                            <td class="vf-table__cell" colspan="7">No structural annotations found</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="vf-table__body">
+                        {% for annotation in structural_annotations %}
+                            <tr class="vf-table__row">
+                                <td class="vf-table__cell">{{ annotation.rank }}</td>
+                                <td class="vf-table__cell">{{ annotation.target_structure_identifier | safe }}</td>
+                                <td class="vf-table__cell">{{ annotation.aligned_length }}</td>
+                                <td class="vf-table__cell">{{ annotation.query_start }}</td>
+                                <td class="vf-table__cell">{{ annotation.query_end }}</td>
+                                <td class="vf-table__cell">{{ annotation.target_start }}</td>
+                                <td class="vf-table__cell">{{ annotation.target_end }}</td>
+                                <td class="vf-table__cell">{{ annotation.e_value|floatformat:"-g" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No structural annotations found</p>
+            {% endif %}
         </div>
     </article>
 </section>
@@ -213,6 +211,7 @@
     document.getElementById('show-members-btn').addEventListener('click', function() {
         var div = document.getElementById('family-members-div');
         div.style.display = div.style.display === 'none' ? 'block' : 'none';
+        this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
     });
 </script>
 
