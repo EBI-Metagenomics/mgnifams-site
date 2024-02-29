@@ -29,6 +29,19 @@
     text-overflow: clip;
     /*margin:auto; */
     text-align: left;
+    width: 225px !important;
+}
+
+.biojs_msa_labels span:first-child {
+    width: 35px !important;
+}
+
+.biojs_msa_labels span:nth-child(2) {
+    width: 190px !important;
+}
+
+.biojs_msa_headers > div:first-child > span:first-child {
+    width: 35px !important;
 }
 
 .biojs_msa_header {
@@ -48,8 +61,13 @@
     height: 100%;
 }
 
+.biojs_msa_labelblock {
+    width: 120px !important;
+    overflow-x: auto !important;
+    padding-bottom: 10px;
+}
+
 .biojs_msa_labelblock::-webkit-scrollbar, .biojs_msa_rheader::-webkit-scrollbar{
-    // FIX scrollbars on Mac
     -webkit-appearance: none;
     width: 7px;
     height: 7px;
