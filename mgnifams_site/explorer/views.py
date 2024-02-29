@@ -184,6 +184,7 @@ def details(request):
 
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
+    full_msa_filepath = get_filepath(family_id, "families/msa/")
     rf = read_rf_file(family_id)
     
     # HMM viewer
@@ -264,7 +265,9 @@ def details(request):
         'protein_rep': protein_rep,
         'region': region,
         'seed_msa_filepath': seed_msa_filepath,
+        'full_msa_filepath': full_msa_filepath,
         'rf': rf,
+        'hmm_filepath': hmm_filepath,
         'hmm_logo_json': hmm_logo_json,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
