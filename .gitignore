@@ -1,5 +1,7 @@
 data/families/msa
 data_old
+tmp/
+bin/db_config.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
