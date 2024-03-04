@@ -78,7 +78,6 @@ root:Environmental:Terrestrial:Soil:Contaminated,Contaminated,root:Environmental
 root:Environmental:Aquatic:Freshwater:Lentic:Sediment,Sediment,root:Environmental:Aquatic:Freshwater:Lentic,1
 root:Environmental:Terrestrial:Soil:Permafrost,Permafrost,root:Environmental:Terrestrial:Soil,1
 root,root,,0
-root,root,,0
 root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
 root:Host-associated:Mammals,Mammals,root:Host-associated,0
 root:Host-associated,Host-associated,root,0

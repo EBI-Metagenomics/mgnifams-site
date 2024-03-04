@@ -123,4 +123,5 @@ nightingale-manager {
     max-height: 300px;
     overflow-y: auto;
     text-align: justify;
+    font-size: 13px;
 }

@@ -113,7 +113,6 @@ root:Engineered:Solid waste:Composting:Bioreactor,Bioreactor,root:Engineered:Sol
 root:Host-associated:Birds,Birds,root:Host-associated,1
 root:Environmental:Aquatic:Marine:Oceanic:Sediment,Sediment,root:Environmental:Aquatic:Marine:Oceanic,1
 root,root,,0
-root,root,,0
 root:Environmental:Aquatic:Marine:Intertidal zone,Intertidal zone,root:Environmental:Aquatic:Marine,0
 root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0

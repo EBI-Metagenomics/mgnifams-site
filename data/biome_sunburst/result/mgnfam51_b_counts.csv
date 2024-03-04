@@ -18,7 +18,6 @@ root:Host-associated:Mammals:Digestive system:Midgut,Midgut,root:Host-associated
 root:Engineered:Wastewater:Activated Sludge,Activated Sludge,root:Engineered:Wastewater,1
 root:Host-associated:Birds:Digestive system:Ceca,Ceca,root:Host-associated:Birds:Digestive system,1
 root,root,,0
-root,root,,0
 root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
 root:Engineered:Bioremediation,Bioremediation,root:Engineered,0

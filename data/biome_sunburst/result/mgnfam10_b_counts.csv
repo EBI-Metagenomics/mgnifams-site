@@ -89,7 +89,6 @@ root:Environmental:Aquatic:Marine:Hydrothermal vents:Diffuse flow,Diffuse flow,r
 root:Environmental:Terrestrial:Soil:Sand,Sand,root:Environmental:Terrestrial:Soil,1
 root:Environmental:Aquatic:Lentic:Brackish,Brackish,root:Environmental:Aquatic:Lentic,1
 root,root,,0
-root,root,,0
 root:Environmental:Terrestrial,Terrestrial,root:Environmental,0
 root:Environmental,Environmental,root,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0

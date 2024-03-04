@@ -1,0 +1,86 @@
+ids,labels,parents,counts
+root:Host-associated:Human:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Human:Digestive system:Large intestine,1092
+root:Host-associated:Human:Digestive system,Digestive system,root:Host-associated:Human,973
+root:Host-associated:Mammals:Digestive system:Foregut:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Foregut,255
+root:Engineered:Wastewater:Water and sludge,Water and sludge,root:Engineered:Wastewater,177
+root:Host-associated:Human:Digestive system:Oral:Saliva,Saliva,root:Host-associated:Human:Digestive system:Oral,176
+root:Mixed,Mixed,root,154
+root:Host-associated:Human,Human,root:Host-associated,148
+root:Host-associated:Human:Digestive system:Large intestine,Large intestine,root:Host-associated:Human:Digestive system,104
+root:Host-associated:Human:Digestive system:Large intestine:Sigmoid colon,Sigmoid colon,root:Host-associated:Human:Digestive system:Large intestine,100
+root:Host-associated:Mammals:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Mammals:Digestive system:Large intestine,68
+root:Host-associated:Mammals:Digestive system,Digestive system,root:Host-associated:Mammals,43
+root:Engineered:Wastewater:Activated Sludge,Activated Sludge,root:Engineered:Wastewater,43
+root:Engineered:Bioreactor,Bioreactor,root:Engineered,39
+root:Host-associated:Mammals:Digestive system:Fecal,Fecal,root:Host-associated:Mammals:Digestive system,39
+root:Host-associated:Birds:Digestive system:Digestive tube,Digestive tube,root:Host-associated:Birds:Digestive system,35
+root:Host-associated:Human:Digestive system:Oral,Oral,root:Host-associated:Human:Digestive system,34
+root:Engineered:Bioremediation:Terephthalate:Wastewater,Wastewater,root:Engineered:Bioremediation:Terephthalate,32
+root:Engineered:Wastewater,Wastewater,root:Engineered,29
+root:Host-associated:Mammals,Mammals,root:Host-associated,21
+root:Host-associated:Mammals:Digestive system:Midgut,Midgut,root:Host-associated:Mammals:Digestive system,20
+root:Environmental:Aquatic:Marine:Oceanic,Oceanic,root:Environmental:Aquatic:Marine,18
+root:Engineered:Food production:Dairy products,Dairy products,root:Engineered:Food production,14
+root:Host-associated:Human:Skin,Skin,root:Host-associated:Human,14
+root:Engineered:Food production:Fermented beverages,Fermented beverages,root:Engineered:Food production,13
+root:Environmental:Aquatic:Freshwater:Sediment,Sediment,root:Environmental:Aquatic:Freshwater,12
+root:Environmental:Terrestrial:Soil:Permafrost,Permafrost,root:Environmental:Terrestrial:Soil,12
+root:Environmental:Aquatic:Freshwater:Lentic,Lentic,root:Environmental:Aquatic:Freshwater,12
+root:Host-associated:Birds:Digestive system:Digestive tube:Cecum,Cecum,root:Host-associated:Birds:Digestive system:Digestive tube,11
+root:Environmental:Aquatic:Freshwater:Lotic:Sediment,Sediment,root:Environmental:Aquatic:Freshwater:Lotic,9
+root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal:Activated sludge,Activated sludge,root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal,8
+root:Host-associated:Mammals:Digestive system:Stomach:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Stomach,8
+root:Environmental:Aquatic,Aquatic,root:Environmental,7
+root:Environmental:Aquatic:Freshwater,Freshwater,root:Environmental:Aquatic,7
+root:Host-associated:Mammals:Respiratory system,Respiratory system,root:Host-associated:Mammals,5
+root:Environmental:Aquatic:Marine,Marine,root:Environmental:Aquatic,5
+root:Host-associated:Mammals:Digestive system:Large intestine:Cecum,Cecum,root:Host-associated:Mammals:Digestive system:Large intestine,5
+root:Host-associated:Plants:Rhizosphere,Rhizosphere,root:Host-associated:Plants,4
+root:Environmental:Aquatic:Freshwater:Lotic,Lotic,root:Environmental:Aquatic:Freshwater,4
+root:Environmental:Aquatic:Thermal springs:Hot (42-90C),Hot (42-90C),root:Environmental:Aquatic:Thermal springs,3
+root:Host-associated:Birds,Birds,root:Host-associated,3
+root:Host-associated:Birds:Digestive system,Digestive system,root:Host-associated:Birds,3
+root:Engineered:Biogas plant:Wet fermentation,Wet fermentation,root:Engineered:Biogas plant,3
+root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,3
+root:Host-associated:Plants,Plants,root:Host-associated,3
+root:Engineered:Wastewater:Industrial wastewater,Industrial wastewater,root:Engineered:Wastewater,2
+root:Environmental:Aquatic:Freshwater:Lake,Lake,root:Environmental:Aquatic:Freshwater,2
+root:Host-associated:Birds:Digestive system:Ceca,Ceca,root:Host-associated:Birds:Digestive system,2
+root:Engineered:Biogas plant,Biogas plant,root:Engineered,2
+root:Environmental:Terrestrial:Soil,Soil,root:Environmental:Terrestrial,2
+root:Environmental:Aquatic:Marine:Sediment,Sediment,root:Environmental:Aquatic:Marine,2
+root:Host-associated:Mammals:Gastrointestinal tract:Intestine:Fecal,Fecal,root:Host-associated:Mammals:Gastrointestinal tract:Intestine,2
+root:Host-associated:Human:Digestive system:Oral:Subgingival plaque,Subgingival plaque,root:Host-associated:Human:Digestive system:Oral,2
+root:Host-associated:Human:Skin:Naris,Naris,root:Host-associated:Human:Skin,2
+root:Environmental:Aquatic:Estuary:Sediment,Sediment,root:Environmental:Aquatic:Estuary,2
+root:Host-associated:Plants:Root,Root,root:Host-associated:Plants,2
+root:Engineered:Food production:Fermented vegetables,Fermented vegetables,root:Engineered:Food production,2
+root:Environmental:Aquatic:Thermal springs:Sediment,Sediment,root:Environmental:Aquatic:Thermal springs,1
+root:Engineered,Engineered,root,1
+root:Environmental:Aquatic:Thermal springs:Near-boiling (>90C),Near-boiling (>90C),root:Environmental:Aquatic:Thermal springs,1
+root:Engineered:Built environment,Built environment,root:Engineered,1
+root:Host-associated:Plants:Phylloplane,Phylloplane,root:Host-associated:Plants,1
+root:Environmental:Aquatic:Freshwater:Ice:Glacier,Glacier,root:Environmental:Aquatic:Freshwater:Ice,1
+root:Environmental:Aquatic:Marine:Oceanic:Oil-contaminated,Oil-contaminated,root:Environmental:Aquatic:Marine:Oceanic,1
+root:Environmental:Aquatic:Freshwater:Lentic:Sediment,Sediment,root:Environmental:Aquatic:Freshwater:Lentic,1
+root:Host-associated:Arthropoda:Digestive system:Hindgut,Hindgut,root:Host-associated:Arthropoda:Digestive system,1
+root:Environmental:Aquatic:Freshwater:Groundwater,Groundwater,root:Environmental:Aquatic:Freshwater,1
+root:Environmental:Aquatic:Aquaculture,Aquaculture,root:Environmental:Aquatic,1
+root,root,,0
+root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
+root:Host-associated,Host-associated,root,0
+root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
+root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
+root:Engineered:Food production,Food production,root:Engineered,0
+root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal,Biological phosphorus removal,root:Engineered:Wastewater:Nutrient removal,0
+root:Engineered:Wastewater:Nutrient removal,Nutrient removal,root:Engineered:Wastewater,0
+root:Host-associated:Mammals:Digestive system:Stomach,Stomach,root:Host-associated:Mammals:Digestive system,0
+root:Environmental,Environmental,root,0
+root:Environmental:Aquatic:Thermal springs,Thermal springs,root:Environmental:Aquatic,0
+root:Environmental:Terrestrial,Terrestrial,root:Environmental,0
+root:Host-associated:Mammals:Gastrointestinal tract:Intestine,Intestine,root:Host-associated:Mammals:Gastrointestinal tract,0
+root:Host-associated:Mammals:Gastrointestinal tract,Gastrointestinal tract,root:Host-associated:Mammals,0
+root:Environmental:Aquatic:Estuary,Estuary,root:Environmental:Aquatic,0
+root:Environmental:Aquatic:Freshwater:Ice,Ice,root:Environmental:Aquatic:Freshwater,0
+root:Host-associated:Arthropoda:Digestive system,Digestive system,root:Host-associated:Arthropoda,0
+root:Host-associated:Arthropoda,Arthropoda,root:Host-associated,0

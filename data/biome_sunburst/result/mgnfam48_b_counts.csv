@@ -116,7 +116,6 @@ root:Engineered:Solid waste:Composting:Bioreactor,Bioreactor,root:Engineered:Sol
 root:Host-associated:Birds,Birds,root:Host-associated,1
 root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline,Alkaline,root:Environmental:Aquatic:Non-marine Saline and Alkaline,1
 root,root,,0
-root,root,,0
 root:Environmental:Aquatic:Marine:Intertidal zone,Intertidal zone,root:Environmental:Aquatic:Marine,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
 root:Engineered:Bioremediation,Bioremediation,root:Engineered,0

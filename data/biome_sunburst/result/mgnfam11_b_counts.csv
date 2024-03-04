@@ -18,7 +18,6 @@ root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,ro
 root:Host-associated:Mammals:Digestive system,Digestive system,root:Host-associated:Mammals,0
 root:Host-associated:Mammals,Mammals,root:Host-associated,0
 root:Host-associated,Host-associated,root,0
-root,root,,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
 root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
 root:Engineered,Engineered,root,0

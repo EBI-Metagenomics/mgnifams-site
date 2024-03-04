@@ -9,46 +9,53 @@
 
 <section class="vf-content | vf-stack vf-stack--600">
     <h2> Protein Family: {{ mgyf }} </h2>
-
-    <article class="vf-card vf-card--brand vf-card--bordered">
-        <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Overview</h3>
-            <table class="vf-table | vf-u-width__100">
-                <tbody class="vf-table__body">
-                    <tr class="vf-table__row">
-                        <td class="vf-table__cell">Total number of sequences in the family</td>
-                        <td class="vf-table__cell">{{ family_size }} <button id="show-members-btn" class="vf-button">Show</button></td>
-                    </tr>
-                    <tr class="vf-table__row">
-                        <td class="vf-table__cell">Family representative sequence</td>
-                        <td class="vf-table__cell">
-                            <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>{{ region }}
-                        </td>
-                    </tr>
-                    <tr class="vf-table__row">
-                        <td class="vf-table__cell">Profile-profile matches</td>
-                        <td class="vf-table__cell">
-                            {% if hits_data %}
-                                <i class="icon icon-common icon-check-square"></i>
-                            {% else %}
-                                <i class="icon icon-common icon-close"></i>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr class="vf-table__row">
-                        <td class="vf-table__cell">Structure hits</td>
-                        <td class="vf-table__cell">
-                            {% if structural_annotations %}
-                                <i class="icon icon-common icon-check-square"></i>
-                            {% else %}
-                                <i class="icon icon-common icon-close"></i>
-                            {% endif %}
-                        </td>
-                    </tr> 
-                </tbody>
-            </table>
-        </div>
-    </article>
+    <div class="vf-grid vf-grid__col-3">
+        <article class="vf-card vf-card--brand vf-card--bordered">
+            <div class="vf-card__content | vf-stack vf-stack--600">
+                <h3 class="vf-card__heading">Overview</h3>
+                <table class="vf-table | vf-u-width__100">
+                    <tbody class="vf-table__body">
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">Total number of sequences in the family</td>
+                            <td class="vf-table__cell">{{ family_size }} <button id="show-members-btn" class="vf-button">Show</button></td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">Family representative sequence</td>
+                            <td class="vf-table__cell">
+                                <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>{{ region }}
+                            </td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">Profile-profile matches</td>
+                            <td class="vf-table__cell">
+                                {% if hits_data %}
+                                    <i class="icon icon-common icon-check-square"></i>
+                                {% else %}
+                                    <i class="icon icon-common icon-close"></i>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">Structure hits</td>
+                            <td class="vf-table__cell">
+                                {% if structural_annotations %}
+                                    <i class="icon icon-common icon-check-square"></i>
+                                {% else %}
+                                    <i class="icon icon-common icon-close"></i>
+                                {% endif %}
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        <article class="vf-card vf-card--brand vf-card--bordered vf-grid__col--span-2">
+            <div class="vf-card__content | vf-stack vf-stack--600 ">
+                <h3 class="vf-card__heading">Biomes distribution</h3>
+                <div id="sunburst-div"></div>
+            </div>
+        </article>
+    </div>
 
     <div id="family-members-div" style="display: none;">
         <span style="font-size: 0.8em;">
@@ -216,6 +223,36 @@
         div.style.display = div.style.display === 'none' ? 'block' : 'none';
         this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
     });
+</script>
+
+{% comment %} Biomes distribution {% endcomment %}
+<script src='https://cdn.plot.ly/plotly-2.29.1.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+<script>
+
+    d3.csv("../static/{{ biomes_filepath }}", function(err, rows){
+        function unpack(rows, key) {
+            return rows.map(function(row) { return row[key]; });
+        }
+
+        var data = [
+            {
+                type: "sunburst",
+                ids: unpack(rows, 'ids'),
+                labels: unpack(rows, 'labels'),
+                parents:unpack(rows, 'parents'),
+                values:unpack(rows, 'counts')
+            }
+        ];
+
+        var layout = {
+            margin: {l: 0, r: 0, b: 0, t:0},
+            extendsunburstcolorway: true
+        };
+
+        Plotly.newPlot('sunburst-div', data, layout, {showSendToCloud: true});
+    })
+
 </script>
 
 {% comment %} PDB viewer {% endcomment %}

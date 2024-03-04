@@ -122,7 +122,6 @@ root:Host-associated:Human:Digestive system:Oral:Subgingival plaque,Subgingival 
 root:Host-associated:Algae,Algae,root:Host-associated,1
 root:Host-associated:Mammals:Digestive system:Large intestine:Cecum,Cecum,root:Host-associated:Mammals:Digestive system:Large intestine,1
 root,root,,0
-root,root,,0
 root:Environmental:Terrestrial,Terrestrial,root:Environmental,0
 root:Environmental,Environmental,root,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0

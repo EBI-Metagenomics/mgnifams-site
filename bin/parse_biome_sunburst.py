@@ -32,6 +32,7 @@ def get_label(biome_path):
 def append_parents(parent_names, biome_names, out_file):
     if ('root' not in biome_names):
         out_file.write("root,root,,0\n")
+        biome_names.append("root")
     for parent_name in parent_names:
         while parent_name not in biome_names and parent_name != '':
             biome_names.append(parent_name)
@@ -47,6 +48,7 @@ def query_sequence_explorer_biome(cursor, counts_dir, out_dir):
         df = pd.read_csv(file_path)
         biome_names = []
         parent_names = []
+        file_name = file_name.replace("mgnifam", "mgnfam")
         with open(os.path.join(out_dir, file_name), 'w') as out_file:
             out_file.write("ids,labels,parents,counts\n")
             for index, row in df.iterrows():

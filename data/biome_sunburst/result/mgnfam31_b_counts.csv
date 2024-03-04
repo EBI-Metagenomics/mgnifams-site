@@ -90,7 +90,6 @@ root:Environmental:Aquatic:Freshwater:Lentic:Sediment,Sediment,root:Environmenta
 root:Environmental:Aquatic:Marine:Oceanic:Aphotic zone,Aphotic zone,root:Environmental:Aquatic:Marine:Oceanic,1
 root:Host-associated:Plants:Rhizoplane:Endophytes,Endophytes,root:Host-associated:Plants:Rhizoplane,1
 root,root,,0
-root,root,,0
 root:Environmental:Aquatic:Marine:Intertidal zone,Intertidal zone,root:Environmental:Aquatic:Marine,0
 root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0

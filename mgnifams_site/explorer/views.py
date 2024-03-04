@@ -78,7 +78,7 @@ def format_protein_link(protein_id):
 def get_filepath(family_id, sub_dir):
     dir = os.path.join(base_dir, sub_dir)
     search_pattern = os.path.join(dir, family_id + '_*')
-
+    
     for filepath in glob.glob(search_pattern):
         filename = os.path.basename(filepath)
         parts = filename.split('_')
@@ -182,6 +182,9 @@ def details(request):
     except Exception as e:
         print(f"Error running grep: {e}")
 
+    # Biomes distribution file path
+    biomes_filepath = get_filepath(family_id, "biome_sunburst/result/")
+
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
     full_msa_filepath = get_filepath(family_id, "families/msa/")
@@ -264,6 +267,7 @@ def details(request):
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
         'region': region,
+        'biomes_filepath': biomes_filepath,
         'seed_msa_filepath': seed_msa_filepath,
         'full_msa_filepath': full_msa_filepath,
         'rf': rf,

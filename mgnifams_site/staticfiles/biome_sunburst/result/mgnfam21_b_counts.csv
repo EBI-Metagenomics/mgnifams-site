@@ -1,0 +1,61 @@
+ids,labels,parents,counts
+root:Host-associated:Human:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Human:Digestive system:Large intestine,4489
+root:Host-associated:Human:Digestive system,Digestive system,root:Host-associated:Human,1091
+root:Host-associated:Human:Digestive system:Large intestine,Large intestine,root:Host-associated:Human:Digestive system,687
+root:Host-associated:Mammals:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Mammals:Digestive system:Large intestine,250
+root:Host-associated:Human:Digestive system:Large intestine:Sigmoid colon,Sigmoid colon,root:Host-associated:Human:Digestive system:Large intestine,168
+root:Host-associated:Birds:Digestive system:Digestive tube:Cecum,Cecum,root:Host-associated:Birds:Digestive system:Digestive tube,104
+root:Host-associated:Human,Human,root:Host-associated,63
+root:Host-associated:Mammals:Digestive system:Fecal,Fecal,root:Host-associated:Mammals:Digestive system,57
+root:Mixed,Mixed,root,52
+root:Host-associated:Birds:Digestive system:Digestive tube,Digestive tube,root:Host-associated:Birds:Digestive system,37
+root:Engineered:Bioremediation:Terephthalate:Wastewater,Wastewater,root:Engineered:Bioremediation:Terephthalate,27
+root:Host-associated:Birds:Digestive system:Ceca,Ceca,root:Host-associated:Birds:Digestive system,14
+root:Engineered:Wastewater:Water and sludge,Water and sludge,root:Engineered:Wastewater,10
+root:Host-associated:Mammals:Digestive system,Digestive system,root:Host-associated:Mammals,10
+root:Engineered:Wastewater,Wastewater,root:Engineered,5
+root:Host-associated:Mammals:Digestive system:Foregut:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Foregut,5
+root:Engineered:Food production:Fermented beverages,Fermented beverages,root:Engineered:Food production,4
+root:Environmental:Aquatic:Marine,Marine,root:Environmental:Aquatic,3
+root:Host-associated:Birds,Birds,root:Host-associated,3
+root:Host-associated:Mammals:Digestive system:Large intestine:Cecum,Cecum,root:Host-associated:Mammals:Digestive system:Large intestine,2
+root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,2
+root:Environmental:Aquatic:Freshwater:Groundwater,Groundwater,root:Environmental:Aquatic:Freshwater,2
+root:Engineered:Solid waste:Composting,Composting,root:Engineered:Solid waste,2
+root:Environmental:Aquatic:Freshwater,Freshwater,root:Environmental:Aquatic,2
+root:Host-associated:Human:Digestive system:Oral:Saliva,Saliva,root:Host-associated:Human:Digestive system:Oral,2
+root:Host-associated:Plants:Rhizosphere,Rhizosphere,root:Host-associated:Plants,1
+root:Host-associated:Mammals:Gastrointestinal tract:Intestine:Fecal,Fecal,root:Host-associated:Mammals:Gastrointestinal tract:Intestine,1
+root:Host-associated:Arthropoda:Digestive system:Hindgut,Hindgut,root:Host-associated:Arthropoda:Digestive system,1
+root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal:Activated sludge,Activated sludge,root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal,1
+root:Engineered:Wastewater:Activated Sludge,Activated Sludge,root:Engineered:Wastewater,1
+root:Host-associated:Mammals:Digestive system:Stomach:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Stomach,1
+root:Host-associated:Human:Skin,Skin,root:Host-associated:Human,1
+root:Engineered:Biogas plant:Wet fermentation,Wet fermentation,root:Engineered:Biogas plant,1
+root:Host-associated:Mammals:Respiratory system,Respiratory system,root:Host-associated:Mammals,1
+root:Environmental:Terrestrial:Soil,Soil,root:Environmental:Terrestrial,1
+root:Host-associated:Insecta:Digestive system,Digestive system,root:Host-associated:Insecta,1
+root,root,,0
+root:Host-associated,Host-associated,root,0
+root:Host-associated:Birds:Digestive system,Digestive system,root:Host-associated:Birds,0
+root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
+root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
+root:Engineered,Engineered,root,0
+root:Host-associated:Mammals,Mammals,root:Host-associated,0
+root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
+root:Engineered:Food production,Food production,root:Engineered,0
+root:Environmental:Aquatic,Aquatic,root:Environmental,0
+root:Environmental,Environmental,root,0
+root:Engineered:Solid waste,Solid waste,root:Engineered,0
+root:Host-associated:Human:Digestive system:Oral,Oral,root:Host-associated:Human:Digestive system,0
+root:Host-associated:Plants,Plants,root:Host-associated,0
+root:Host-associated:Mammals:Gastrointestinal tract:Intestine,Intestine,root:Host-associated:Mammals:Gastrointestinal tract,0
+root:Host-associated:Mammals:Gastrointestinal tract,Gastrointestinal tract,root:Host-associated:Mammals,0
+root:Host-associated:Arthropoda:Digestive system,Digestive system,root:Host-associated:Arthropoda,0
+root:Host-associated:Arthropoda,Arthropoda,root:Host-associated,0
+root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal,Biological phosphorus removal,root:Engineered:Wastewater:Nutrient removal,0
+root:Engineered:Wastewater:Nutrient removal,Nutrient removal,root:Engineered:Wastewater,0
+root:Host-associated:Mammals:Digestive system:Stomach,Stomach,root:Host-associated:Mammals:Digestive system,0
+root:Engineered:Biogas plant,Biogas plant,root:Engineered,0
+root:Environmental:Terrestrial,Terrestrial,root:Environmental,0
+root:Host-associated:Insecta,Insecta,root:Host-associated,0

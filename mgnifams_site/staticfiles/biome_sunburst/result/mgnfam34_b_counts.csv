@@ -1,0 +1,43 @@
+ids,labels,parents,counts
+root:Host-associated:Human:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Human:Digestive system:Large intestine,3864
+root:Host-associated:Human:Digestive system,Digestive system,root:Host-associated:Human,1387
+root:Host-associated:Human:Digestive system:Large intestine,Large intestine,root:Host-associated:Human:Digestive system,503
+root:Host-associated:Mammals:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Mammals:Digestive system:Large intestine,186
+root:Host-associated:Human:Digestive system:Large intestine:Sigmoid colon,Sigmoid colon,root:Host-associated:Human:Digestive system:Large intestine,164
+root:Host-associated:Human,Human,root:Host-associated,70
+root:Host-associated:Birds,Birds,root:Host-associated,65
+root:Host-associated:Birds:Digestive system:Digestive tube,Digestive tube,root:Host-associated:Birds:Digestive system,56
+root:Host-associated:Mammals:Digestive system:Fecal,Fecal,root:Host-associated:Mammals:Digestive system,55
+root:Mixed,Mixed,root,48
+root:Engineered:Bioremediation:Terephthalate:Wastewater,Wastewater,root:Engineered:Bioremediation:Terephthalate,44
+root:Engineered:Wastewater:Water and sludge,Water and sludge,root:Engineered:Wastewater,35
+root:Host-associated:Mammals:Digestive system,Digestive system,root:Host-associated:Mammals,23
+root:Host-associated:Birds:Digestive system:Digestive tube:Cecum,Cecum,root:Host-associated:Birds:Digestive system:Digestive tube,12
+root:Engineered:Wastewater,Wastewater,root:Engineered,9
+root:Engineered:Bioreactor,Bioreactor,root:Engineered,7
+root:Host-associated:Arthropoda:Digestive system:Hindgut,Hindgut,root:Host-associated:Arthropoda:Digestive system,2
+root:Host-associated:Mammals:Respiratory system,Respiratory system,root:Host-associated:Mammals,2
+root:Environmental:Aquatic:Freshwater:Groundwater,Groundwater,root:Environmental:Aquatic:Freshwater,2
+root:Engineered:Wastewater:Activated Sludge,Activated Sludge,root:Engineered:Wastewater,2
+root:Host-associated:Mammals:Digestive system:Foregut:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Foregut,1
+root:Engineered:Food production:Fermented beverages,Fermented beverages,root:Engineered:Food production,1
+root:Engineered:Solid waste:Composting,Composting,root:Engineered:Solid waste,1
+root:Environmental:Aquatic:Freshwater,Freshwater,root:Environmental:Aquatic,1
+root:Engineered:Biogas plant,Biogas plant,root:Engineered,1
+root:Host-associated:Mammals:Digestive system:Midgut,Midgut,root:Host-associated:Mammals:Digestive system,1
+root:Host-associated:Birds:Digestive system:Ceca,Ceca,root:Host-associated:Birds:Digestive system,1
+root,root,,0
+root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,0
+root:Host-associated,Host-associated,root,0
+root:Host-associated:Birds:Digestive system,Digestive system,root:Host-associated:Birds,0
+root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
+root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
+root:Engineered,Engineered,root,0
+root:Host-associated:Mammals,Mammals,root:Host-associated,0
+root:Host-associated:Arthropoda:Digestive system,Digestive system,root:Host-associated:Arthropoda,0
+root:Host-associated:Arthropoda,Arthropoda,root:Host-associated,0
+root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
+root:Engineered:Food production,Food production,root:Engineered,0
+root:Engineered:Solid waste,Solid waste,root:Engineered,0
+root:Environmental:Aquatic,Aquatic,root:Environmental,0
+root:Environmental,Environmental,root,0

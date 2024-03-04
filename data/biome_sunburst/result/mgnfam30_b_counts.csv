@@ -68,7 +68,6 @@ root:Environmental:Aquatic:Freshwater:Groundwater,Groundwater,root:Environmental
 root:Environmental:Aquatic:Aquaculture,Aquaculture,root:Environmental:Aquatic,1
 root,root,,0
 root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
-root,root,,0
 root:Host-associated,Host-associated,root,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
 root:Engineered:Bioremediation,Bioremediation,root:Engineered,0

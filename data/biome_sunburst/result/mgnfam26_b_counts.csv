@@ -132,7 +132,6 @@ root:Host-associated:Algae,Algae,root:Host-associated,1
 root:Host-associated:Mollusca,Mollusca,root:Host-associated,1
 root:Environmental:Terrestrial:Soil:Sand:Oil-contaminated,Oil-contaminated,root:Environmental:Terrestrial:Soil:Sand,1
 root,root,,0
-root,root,,0
 root:Environmental:Terrestrial,Terrestrial,root:Environmental,0
 root:Environmental,Environmental,root,0
 root:Environmental:Aquatic:Marine:Intertidal zone,Intertidal zone,root:Environmental:Aquatic:Marine,0

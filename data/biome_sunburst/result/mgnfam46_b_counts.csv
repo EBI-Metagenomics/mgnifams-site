@@ -28,7 +28,6 @@ root:Host-associated:Mammals:Respiratory system,Respiratory system,root:Host-ass
 root:Engineered:Food production:Fermented beverages,Fermented beverages,root:Engineered:Food production,1
 root:Environmental:Aquatic:Marine:Coastal,Coastal,root:Environmental:Aquatic:Marine,1
 root,root,,0
-root,root,,0
 root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
 root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,0
 root:Host-associated:Mammals,Mammals,root:Host-associated,0

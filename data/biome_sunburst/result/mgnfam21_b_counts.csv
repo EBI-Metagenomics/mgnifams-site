@@ -37,7 +37,6 @@ root:Environmental:Terrestrial:Soil,Soil,root:Environmental:Terrestrial,1
 root:Host-associated:Insecta:Digestive system,Digestive system,root:Host-associated:Insecta,1
 root,root,,0
 root:Host-associated,Host-associated,root,0
-root,root,,0
 root:Host-associated:Birds:Digestive system,Digestive system,root:Host-associated:Birds,0
 root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
 root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
