@@ -1,0 +1,46 @@
+ids,labels,parents,counts
+root:Host-associated:Human:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Human:Digestive system:Large intestine,658
+root:Host-associated:Human:Digestive system,Digestive system,root:Host-associated:Human,233
+root:Host-associated:Human:Digestive system:Large intestine,Large intestine,root:Host-associated:Human:Digestive system,190
+root:Mixed,Mixed,root,176
+root:Host-associated:Mammals:Digestive system:Foregut:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Foregut,60
+root:Host-associated:Mammals:Digestive system:Fecal,Fecal,root:Host-associated:Mammals:Digestive system,47
+root:Host-associated:Mammals:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Mammals:Digestive system:Large intestine,42
+root:Host-associated:Mammals:Digestive system,Digestive system,root:Host-associated:Mammals,30
+root:Engineered:Bioremediation:Terephthalate:Wastewater,Wastewater,root:Engineered:Bioremediation:Terephthalate,25
+root:Host-associated:Human:Digestive system:Oral:Saliva,Saliva,root:Host-associated:Human:Digestive system:Oral,24
+root:Host-associated:Human:Digestive system:Large intestine:Sigmoid colon,Sigmoid colon,root:Host-associated:Human:Digestive system:Large intestine,23
+root:Host-associated:Mammals:Digestive system:Stomach:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Stomach,15
+root:Host-associated:Birds:Digestive system:Digestive tube:Cecum,Cecum,root:Host-associated:Birds:Digestive system:Digestive tube,10
+root:Host-associated:Birds:Digestive system,Digestive system,root:Host-associated:Birds,10
+root:Engineered:Wastewater,Wastewater,root:Engineered,8
+root:Engineered:Wastewater:Water and sludge,Water and sludge,root:Engineered:Wastewater,7
+root:Host-associated:Human,Human,root:Host-associated,7
+root:Host-associated:Human:Digestive system:Oral,Oral,root:Host-associated:Human:Digestive system,3
+root:Engineered:Wastewater:Industrial wastewater,Industrial wastewater,root:Engineered:Wastewater,3
+root:Engineered:Solid waste:Composting,Composting,root:Engineered:Solid waste,2
+root:Host-associated:Mammals:Digestive system:Large intestine:Cecum,Cecum,root:Host-associated:Mammals:Digestive system:Large intestine,2
+root:Environmental:Aquatic:Freshwater,Freshwater,root:Environmental:Aquatic,2
+root:Host-associated:Human:Skin,Skin,root:Host-associated:Human,1
+root:Engineered:Food production:Fermented vegetables,Fermented vegetables,root:Engineered:Food production,1
+root:Environmental:Aquatic:Freshwater:Groundwater,Groundwater,root:Environmental:Aquatic:Freshwater,1
+root:Host-associated:Mammals:Respiratory system,Respiratory system,root:Host-associated:Mammals,1
+root:Engineered:Food production:Fermented beverages,Fermented beverages,root:Engineered:Food production,1
+root:Environmental:Aquatic:Marine:Coastal,Coastal,root:Environmental:Aquatic:Marine,1
+root,root,,0
+root,root,,0
+root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
+root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,0
+root:Host-associated:Mammals,Mammals,root:Host-associated,0
+root:Host-associated,Host-associated,root,0
+root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
+root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
+root:Engineered,Engineered,root,0
+root:Host-associated:Mammals:Digestive system:Stomach,Stomach,root:Host-associated:Mammals:Digestive system,0
+root:Host-associated:Birds:Digestive system:Digestive tube,Digestive tube,root:Host-associated:Birds:Digestive system,0
+root:Host-associated:Birds,Birds,root:Host-associated,0
+root:Engineered:Solid waste,Solid waste,root:Engineered,0
+root:Environmental:Aquatic,Aquatic,root:Environmental,0
+root:Environmental,Environmental,root,0
+root:Engineered:Food production,Food production,root:Engineered,0
+root:Environmental:Aquatic:Marine,Marine,root:Environmental:Aquatic,0

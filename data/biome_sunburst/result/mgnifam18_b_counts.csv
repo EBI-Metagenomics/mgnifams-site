@@ -1,0 +1,138 @@
+ids,labels,parents,counts
+root:Host-associated:Human:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Human:Digestive system:Large intestine,2031
+root:Host-associated:Human:Digestive system,Digestive system,root:Host-associated:Human,513
+root:Mixed,Mixed,root,486
+root:Environmental:Terrestrial:Soil,Soil,root:Environmental:Terrestrial,373
+root:Engineered:Bioreactor,Bioreactor,root:Engineered,310
+root:Host-associated:Human:Digestive system:Large intestine,Large intestine,root:Host-associated:Human:Digestive system,294
+root:Host-associated:Mammals:Digestive system:Large intestine:Fecal,Fecal,root:Host-associated:Mammals:Digestive system:Large intestine,170
+root:Environmental:Aquatic:Marine,Marine,root:Environmental:Aquatic,169
+root:Host-associated:Plants:Rhizosphere,Rhizosphere,root:Host-associated:Plants,161
+root:Engineered:Wastewater:Activated Sludge,Activated Sludge,root:Engineered:Wastewater,158
+root:Host-associated:Human:Skin,Skin,root:Host-associated:Human,81
+root:Host-associated:Mammals:Digestive system:Fecal,Fecal,root:Host-associated:Mammals:Digestive system,78
+root:Engineered:Wastewater:Water and sludge,Water and sludge,root:Engineered:Wastewater,78
+root:Engineered:Wastewater,Wastewater,root:Engineered,67
+root:Host-associated:Human:Digestive system:Large intestine:Sigmoid colon,Sigmoid colon,root:Host-associated:Human:Digestive system:Large intestine,65
+root:Environmental:Aquatic:Marine:Oceanic,Oceanic,root:Environmental:Aquatic:Marine,62
+root:Engineered:Bioremediation:Terephthalate:Wastewater,Wastewater,root:Engineered:Bioremediation:Terephthalate,60
+root:Host-associated:Birds:Digestive system:Digestive tube,Digestive tube,root:Host-associated:Birds:Digestive system,59
+root:Engineered:Food production:Fermented beverages,Fermented beverages,root:Engineered:Food production,53
+root:Environmental:Aquatic:Freshwater,Freshwater,root:Environmental:Aquatic,52
+root:Environmental:Aquatic:Freshwater:Sediment,Sediment,root:Environmental:Aquatic:Freshwater,48
+root:Environmental:Aquatic:Freshwater:Ice:Glacier,Glacier,root:Environmental:Aquatic:Freshwater:Ice,44
+root:Host-associated:Mammals:Digestive system:Foregut:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Foregut,44
+root:Environmental:Aquatic:Thermal springs:Hot (42-90C),Hot (42-90C),root:Environmental:Aquatic:Thermal springs,43
+root:Host-associated:Human,Human,root:Host-associated,38
+root:Environmental:Aquatic:Freshwater:Groundwater,Groundwater,root:Environmental:Aquatic:Freshwater,35
+root:Host-associated:Mammals:Digestive system:Stomach:Rumen,Rumen,root:Host-associated:Mammals:Digestive system:Stomach,34
+root:Engineered:Solid waste:Composting,Composting,root:Engineered:Solid waste,33
+root:Environmental:Aquatic:Estuary:Sediment,Sediment,root:Environmental:Aquatic:Estuary,33
+root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline:Microbial mats,Microbial mats,root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline,32
+root:Environmental:Aquatic:Freshwater:Lake,Lake,root:Environmental:Aquatic:Freshwater,31
+root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal:Activated sludge,Activated sludge,root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal,28
+root:Host-associated:Birds,Birds,root:Host-associated,26
+root:Host-associated:Mammals:Digestive system,Digestive system,root:Host-associated:Mammals,23
+root:Engineered:Biogas plant:Wet fermentation,Wet fermentation,root:Engineered:Biogas plant,23
+root:Engineered:Biogas plant,Biogas plant,root:Engineered,21
+root:Environmental:Aquatic:Freshwater:Lentic,Lentic,root:Environmental:Aquatic:Freshwater,19
+root:Environmental:Terrestrial:Soil:Grasslands,Grasslands,root:Environmental:Terrestrial:Soil,17
+root:Environmental:Terrestrial:Soil:Contaminated,Contaminated,root:Environmental:Terrestrial:Soil,17
+root:Host-associated:Algae:Red algae,Red algae,root:Host-associated:Algae,17
+root:Engineered:Wastewater:Industrial wastewater,Industrial wastewater,root:Engineered:Wastewater,17
+root:Environmental:Aquatic:Aquaculture,Aquaculture,root:Environmental:Aquatic,15
+root:Environmental:Aquatic:Freshwater:Pond:Sediment,Sediment,root:Environmental:Aquatic:Freshwater:Pond,14
+root:Engineered:Built environment,Built environment,root:Engineered,13
+root:Environmental:Aquatic:Freshwater:Lotic:Sediment,Sediment,root:Environmental:Aquatic:Freshwater:Lotic,13
+root:Host-associated:Plants:Rhizoplane:Endophytes,Endophytes,root:Host-associated:Plants:Rhizoplane,13
+root:Host-associated:Plants,Plants,root:Host-associated,10
+root:Environmental:Aquatic:Marine:Intertidal zone:Estuary,Estuary,root:Environmental:Aquatic:Marine:Intertidal zone,10
+root:Environmental:Aquatic,Aquatic,root:Environmental,9
+root:Engineered:Food production:Dairy products,Dairy products,root:Engineered:Food production,8
+root:Environmental:Aquatic:Freshwater:Drinking water:Delivery networks,Delivery networks,root:Environmental:Aquatic:Freshwater:Drinking water,8
+root:Host-associated:Mammals:Respiratory system,Respiratory system,root:Host-associated:Mammals,8
+root:Environmental:Aquatic:Estuary,Estuary,root:Environmental:Aquatic,8
+root:Host-associated:Birds:Digestive system:Digestive tube:Cecum,Cecum,root:Host-associated:Birds:Digestive system:Digestive tube,8
+root:Environmental:Aquatic:Marine:Sediment,Sediment,root:Environmental:Aquatic:Marine,7
+root:Host-associated:Mammals:Digestive system:Large intestine,Large intestine,root:Host-associated:Mammals:Digestive system,7
+root:Host-associated:Plants:Root,Root,root:Host-associated:Plants,6
+root:Host-associated:Mammals:Digestive system:Large intestine:Cecum,Cecum,root:Host-associated:Mammals:Digestive system:Large intestine,6
+root:Engineered:Lab enrichment:Defined media,Defined media,root:Engineered:Lab enrichment,6
+root:Host-associated:Plants:Phylloplane,Phylloplane,root:Host-associated:Plants,6
+root:Environmental:Aquatic:Freshwater:Lentic:Sediment,Sediment,root:Environmental:Aquatic:Freshwater:Lentic,5
+root:Engineered:Modeled:Simulated communities (microbial mixture),Simulated communities (microbial mixture),root:Engineered:Modeled,5
+root:Host-associated:Human:Digestive system:Oral,Oral,root:Host-associated:Human:Digestive system,5
+root:Environmental:Terrestrial:Soil:Permafrost,Permafrost,root:Environmental:Terrestrial:Soil,5
+root:Engineered:Bioreactor:Continuous culture:Marine sediment inoculum:Wadden Sea-Germany,Wadden Sea-Germany,root:Engineered:Bioreactor:Continuous culture:Marine sediment inoculum,4
+root:Host-associated:Plants:Rhizosphere:Soil,Soil,root:Host-associated:Plants:Rhizosphere,4
+root:Environmental:Aquatic:Marine:Intertidal zone:Salt marsh,Salt marsh,root:Environmental:Aquatic:Marine:Intertidal zone,4
+root:Environmental:Terrestrial:Soil:Forest soil,Forest soil,root:Environmental:Terrestrial:Soil,4
+root:Environmental:Aquatic:Freshwater:Groundwater:Biofilm,Biofilm,root:Environmental:Aquatic:Freshwater:Groundwater,3
+root:Host-associated:Mammals:Gastrointestinal tract:Intestine:Fecal,Fecal,root:Host-associated:Mammals:Gastrointestinal tract:Intestine,3
+root:Environmental:Terrestrial:Soil:Oil-contaminated,Oil-contaminated,root:Environmental:Terrestrial:Soil,3
+root:Environmental:Aquatic:Thermal springs:Near-boiling (>90C),Near-boiling (>90C),root:Environmental:Aquatic:Thermal springs,3
+root:Environmental:Aquatic:Non-marine Saline and Alkaline:Saline,Saline,root:Environmental:Aquatic:Non-marine Saline and Alkaline,3
+root:Environmental:Aquatic:Marine:Intertidal zone:Sediment,Sediment,root:Environmental:Aquatic:Marine:Intertidal zone,3
+root:Engineered:Food production:Fermented vegetables,Fermented vegetables,root:Engineered:Food production,3
+root:Environmental:Aquatic:Non-marine Saline and Alkaline,Non-marine Saline and Alkaline,root:Environmental:Aquatic,2
+root:Environmental:Aquatic:Marine:Oceanic:Oil-contaminated,Oil-contaminated,root:Environmental:Aquatic:Marine:Oceanic,2
+root:Environmental:Aquatic:Marine:Brackish,Brackish,root:Environmental:Aquatic:Marine,2
+root:Engineered:Food production,Food production,root:Engineered,2
+root:Environmental:Aquatic:Freshwater:Pond,Pond,root:Environmental:Aquatic:Freshwater,2
+root:Engineered:Bioremediation:Hydrocarbon,Hydrocarbon,root:Engineered:Bioremediation,2
+root:Host-associated:Arthropoda:Digestive system:Hindgut,Hindgut,root:Host-associated:Arthropoda:Digestive system,2
+root:Environmental:Terrestrial:Soil:Sand:Oil-contaminated,Oil-contaminated,root:Environmental:Terrestrial:Soil:Sand,2
+root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline:Sediment,Sediment,root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline,2
+root:Host-associated:Insecta:Digestive system,Digestive system,root:Host-associated:Insecta,1
+root:Host-associated:Arthropoda:Digestive system:Gut,Gut,root:Host-associated:Arthropoda:Digestive system,1
+root:Environmental:Aquatic:Marine:Coastal,Coastal,root:Environmental:Aquatic:Marine,1
+root:Environmental:Aquatic:Marine:Hydrothermal vents:Sediment,Sediment,root:Environmental:Aquatic:Marine:Hydrothermal vents,1
+root:Environmental:Aquatic:Freshwater:Lotic:Low land river systems,Low land river systems,root:Environmental:Aquatic:Freshwater:Lotic,1
+root:Host-associated:Birds:Digestive system:Ceca,Ceca,root:Host-associated:Birds:Digestive system,1
+root,root,,1
+root:Environmental:Aquatic:Thermal springs:Sediment,Sediment,root:Environmental:Aquatic:Thermal springs,1
+root:Engineered,Engineered,root,1
+root:Host-associated:Invertebrates:Cnidaria:Coral,Coral,root:Host-associated:Invertebrates:Cnidaria,1
+root:Host-associated:Mammals:Digestive system:Midgut,Midgut,root:Host-associated:Mammals:Digestive system,1
+root:Environmental:Aquatic:Marine:Intertidal zone:Oil-contaminated,Oil-contaminated,root:Environmental:Aquatic:Marine:Intertidal zone,1
+root:Host-associated:Birds:Digestive system,Digestive system,root:Host-associated:Birds,1
+root:Environmental:Aquatic:Marine:Coastal:Sediment,Sediment,root:Environmental:Aquatic:Marine:Coastal,1
+root:Engineered:Lab enrichment:Defined media:Marine media,Marine media,root:Engineered:Lab enrichment:Defined media,1
+root:Engineered:Solid waste:Landfill,Landfill,root:Engineered:Solid waste,1
+root:Environmental:Aquatic:Sediment,Sediment,root:Environmental:Aquatic,1
+root:Environmental:Aquatic:Marine:Oceanic:Aphotic zone,Aphotic zone,root:Environmental:Aquatic:Marine:Oceanic,1
+root:Host-associated:Birds:Digestive system:Crop:Lumen,Lumen,root:Host-associated:Birds:Digestive system:Crop,1
+root:Host-associated:Mammals,Mammals,root:Host-associated,1
+root:Environmental:Aquatic:Marine:Intertidal zone:Coral reef,Coral reef,root:Environmental:Aquatic:Marine:Intertidal zone,1
+root:Environmental:Terrestrial,Terrestrial,root:Environmental,0
+root:Environmental,Environmental,root,0
+root:Engineered:Bioremediation:Terephthalate,Terephthalate,root:Engineered:Bioremediation,0
+root:Engineered:Bioremediation,Bioremediation,root:Engineered,0
+root:Environmental:Aquatic:Freshwater:Ice,Ice,root:Environmental:Aquatic:Freshwater,0
+root:Host-associated:Mammals:Digestive system:Foregut,Foregut,root:Host-associated:Mammals:Digestive system,0
+root:Environmental:Aquatic:Thermal springs,Thermal springs,root:Environmental:Aquatic,0
+root:Host-associated,Host-associated,root,0
+root:Host-associated:Mammals:Digestive system:Stomach,Stomach,root:Host-associated:Mammals:Digestive system,0
+root:Engineered:Solid waste,Solid waste,root:Engineered,0
+root:Engineered:Wastewater:Nutrient removal:Biological phosphorus removal,Biological phosphorus removal,root:Engineered:Wastewater:Nutrient removal,0
+root:Engineered:Wastewater:Nutrient removal,Nutrient removal,root:Engineered:Wastewater,0
+root:Host-associated:Algae,Algae,root:Host-associated,0
+root:Environmental:Aquatic:Freshwater:Lotic,Lotic,root:Environmental:Aquatic:Freshwater,0
+root:Host-associated:Plants:Rhizoplane,Rhizoplane,root:Host-associated:Plants,0
+root:Environmental:Aquatic:Marine:Intertidal zone,Intertidal zone,root:Environmental:Aquatic:Marine,0
+root:Environmental:Aquatic:Freshwater:Drinking water,Drinking water,root:Environmental:Aquatic:Freshwater,0
+root:Engineered:Lab enrichment,Lab enrichment,root:Engineered,0
+root:Engineered:Modeled,Modeled,root:Engineered,0
+root:Engineered:Bioreactor:Continuous culture:Marine sediment inoculum,Marine sediment inoculum,root:Engineered:Bioreactor:Continuous culture,0
+root:Engineered:Bioreactor:Continuous culture,Continuous culture,root:Engineered:Bioreactor,0
+root:Host-associated:Mammals:Gastrointestinal tract:Intestine,Intestine,root:Host-associated:Mammals:Gastrointestinal tract,0
+root:Host-associated:Mammals:Gastrointestinal tract,Gastrointestinal tract,root:Host-associated:Mammals,0
+root:Host-associated:Arthropoda:Digestive system,Digestive system,root:Host-associated:Arthropoda,0
+root:Host-associated:Arthropoda,Arthropoda,root:Host-associated,0
+root:Environmental:Terrestrial:Soil:Sand,Sand,root:Environmental:Terrestrial:Soil,0
+root:Environmental:Aquatic:Non-marine Saline and Alkaline:Alkaline,Alkaline,root:Environmental:Aquatic:Non-marine Saline and Alkaline,0
+root:Host-associated:Insecta,Insecta,root:Host-associated,0
+root:Environmental:Aquatic:Marine:Hydrothermal vents,Hydrothermal vents,root:Environmental:Aquatic:Marine,0
+root:Host-associated:Invertebrates:Cnidaria,Cnidaria,root:Host-associated:Invertebrates,0
+root:Host-associated:Invertebrates,Invertebrates,root:Host-associated,0
+root:Host-associated:Birds:Digestive system:Crop,Crop,root:Host-associated:Birds:Digestive system,0
