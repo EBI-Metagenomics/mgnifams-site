@@ -10,7 +10,7 @@ def read_config(filename='bin/db_config.ini'):
     config.read(filename)
     return dict(config.items('database'))
 
-def execute_query(cursor, b_value, out_dir):
+def execute_query(cursor, b_value):
     sql_query = f"SELECT name FROM sequence_explorer_biome WHERE id = {b_value}"
     cursor.execute(sql_query)
     result = cursor.fetchall()
@@ -53,7 +53,7 @@ def query_sequence_explorer_biome(cursor, counts_dir, out_dir):
             out_file.write("ids,labels,parents,counts\n")
             for index, row in df.iterrows():
                 b_value = row['b_value']
-                result = execute_query(cursor, b_value, out_dir)
+                result = execute_query(cursor, b_value)
                 biome_name = result[0][0]
                 parent_name = get_parent(biome_name)
                 label = get_label(biome_name)
