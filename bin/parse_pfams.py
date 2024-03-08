@@ -4,6 +4,7 @@ import psycopg2
 import csv
 import pandas as pd
 import os
+import ast
 
 def read_config(filename='bin/db_config.ini'):
     config = configparser.ConfigParser()
@@ -48,6 +49,28 @@ def get_edgelist_family_subset(clusters_df, family_name):
     return subset_clusters_df
 
 def construct_domain_architecture(mgyp, pfams, matched_rows):
+    pfams = ast.literal_eval(pfams)
+    fam_names = []
+    start_points = []
+
+    for pfam in pfams:
+        fam_names.append(pfam[0])
+        start_points.append(pfam[3])
+
+    for index, row in matched_rows.iterrows():
+        fam_names.append(row['family_name'])
+        start_points.append(int(row['mgnifams_start']))
+
+        # Sort both arrays based on start_points
+        sorted_data = sorted(zip(start_points, fam_names))
+        start_points, fam_names = zip(*sorted_data)
+
+        # Print the sorted arrays
+        print("Family Names:", fam_names)
+        print("Start Points:", start_points)
+
+        # TODO rest for matched_rows with more than one row
+        exit()
 
     return domain_architecture
 
@@ -55,7 +78,13 @@ def append_to_domain_architecture(family_domain_architectures, domain_architectu
 
     return family_domain_architectures
 
-def query_sequence_explorer_pfam(cursor, edge_list_file, read_dir, out_dir): # TODO
+def get_color_from_name(): #TODO
+    pass
+
+def write_out_json(): #TODO
+    pass
+
+def query_sequence_explorer_pfam(cursor, edge_list_file, read_dir, out_dir):
     clusters_df = pd.read_csv(edge_list_file, delimiter='\t', header=None, names=['family_name', 'protein_name'])
 
     files = os.listdir(read_dir)
