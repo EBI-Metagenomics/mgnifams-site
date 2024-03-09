@@ -135,6 +135,19 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Domain Architecture</h3>
+            <div>
+                <p>
+                    The top 10 domain architectures (mgnifams and pfams) of the underlying family sequences sorted from the most to the least prevalent.
+                    The number on the left describe how many times each architecture was found.
+                </p>
+            </div>
+            <div id="architecturesContainer"></div>
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Profile-profile matches</h3>
             <div>
                 <p>
@@ -402,6 +415,48 @@
         // link event to msa
         link_hmm_to_msa();
     });
+</script>
+
+{% comment %} Domain Architecture {% endcomment %}
+<script>
+    const renderArchitecture = (jsonData) => {
+        const architecturesContainer = document.getElementById('architecturesContainer');
+
+        // Loop through each architecture container
+        jsonData.architecture_containers.slice(0, 10).forEach(container => {
+            const containerDiv = document.createElement('div');
+            containerDiv.classList.add('architecture-div');
+            const architectureTextPara = document.createElement('span');
+            architectureTextPara.textContent = `${container.architecture_text}`;
+            architectureTextPara.classList.add('descr-span');
+            containerDiv.appendChild(architectureTextPara);
+
+            // Loop through each domain in the container
+            container.domains.forEach(domain => {
+                const domainSpan = document.createElement('span');
+                domainSpan.textContent = domain.name;
+                domainSpan.classList.add('domain-span');
+                domainSpan.style.backgroundColor = domain.color;
+                containerDiv.appendChild(domainSpan);
+            });
+
+            architecturesContainer.appendChild(containerDiv);
+        });
+    };
+
+    fetch("../static/{{ domains_json }}")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            renderArchitecture(data);
+        })
+        .catch(error => {
+            console.error('Error fetching domain architecture JSON:', error);
+        });
 </script>
 
 {% comment %} Datatables {% endcomment %}

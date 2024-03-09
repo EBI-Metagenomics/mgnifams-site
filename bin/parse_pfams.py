@@ -5,6 +5,7 @@ import csv
 import pandas as pd
 import os
 import ast
+import json
 
 def read_config(filename='bin/db_config.ini'):
     config = configparser.ConfigParser()
@@ -52,7 +53,6 @@ def construct_domain_architecture(mgyp, pfams, matched_rows):
     pfams = ast.literal_eval(pfams)
     fam_names = []
     start_points = []
-
     for pfam in pfams:
         fam_names.append(pfam[0])
         start_points.append(pfam[3])
@@ -61,40 +61,57 @@ def construct_domain_architecture(mgyp, pfams, matched_rows):
         fam_names.append(row['family_name'])
         start_points.append(int(row['mgnifams_start']))
 
-        # Sort both arrays based on start_points
-        sorted_data = sorted(zip(start_points, fam_names))
-        start_points, fam_names = zip(*sorted_data)
+    # Sort both arrays based on start_points
+    sorted_data = sorted(zip(start_points, fam_names))
+    start_points, fam_names = zip(*sorted_data)
 
-        # Print the sorted arrays
-        print("Family Names:", fam_names)
-        print("Start Points:", start_points)
-
-        # TODO rest for matched_rows with more than one row
-        exit()
+    domain_architecture = '\t'.join(map(str, fam_names))
 
     return domain_architecture
 
-def append_to_domain_architecture(family_domain_architectures, domain_architecture):
+def string_to_hex_color(s):
+    hash_val = 0
+    for char in s:
+        hash_val = ord(char) + ((hash_val << 5) - hash_val)
+    
+    color = '#'
+    for i in range(3):
+        value = (hash_val >> (i * 8)) & 0xFF
+        color += ('00' + format(value, 'x'))[-2:]
 
-    return family_domain_architectures
+    return color
 
-def get_color_from_name(): #TODO
-    pass
+def write_out_json(element_counts, output_filename):
+    architecture_containers = []
+    for architecture_text, count in element_counts.items():
+        domains = []
+        for domain in architecture_text.split('\t'):
+            domains.append({"name": domain, "color": string_to_hex_color(domain)})
+        architecture_containers.append({"architecture_text": str(count), "domains": domains})
 
-def write_out_json(): #TODO
-    pass
+    output_json = {"architecture_containers": architecture_containers}
+
+    # Convert to JSON string
+    with open(output_filename, 'w') as f:
+        json.dump(output_json, f, indent=4)
 
 def query_sequence_explorer_pfam(cursor, edge_list_file, read_dir, out_dir):
     clusters_df = pd.read_csv(edge_list_file, delimiter='\t', header=None, names=['family_name', 'protein_name'])
 
     files = os.listdir(read_dir)
     for file_name in files:
+        print(file_name)
         family_name = file_name.split("_")[0]
         subset_clusters_df = get_edgelist_family_subset(clusters_df, family_name)
         file_path = os.path.join(read_dir, file_name)
-        family_domain_architectures = pd.DataFrame(columns=['count', 'domain_architecture'])
+        family_domain_architectures = []
+        counter = 0
         with open(file_path, 'r') as file:
             for line in file:
+                if counter % 1000 == 0:
+                    print(counter)
+                # if counter == 10:
+                #     break
                 parts = line.strip().split('\t')
                 if len(parts) == 2:
                     mgyp = parts[0]
@@ -102,33 +119,13 @@ def query_sequence_explorer_pfam(cursor, edge_list_file, read_dir, out_dir):
                     if not matched_rows.empty:
                         pfams = parts[1]
                         domain_architecture = construct_domain_architecture(mgyp, pfams, matched_rows)
-                        exit()
-                        family_domain_architectures = append_to_domain_architecture(family_domain_architectures, domain_architecture)
-                        
-        # pfam_names = []
-        # file_name = file_name.replace("mgnifam", "mgnfam")
-        # print(file_name)
-        # for index, row in df.iterrows():
-        #     column1_value = row[0]
-        #     print(column1_value)
-        #     column2_value = row[1]
-        #     print(column2_value)
+                        family_domain_architectures.append(domain_architecture)
+                counter += 1
 
-        exit()
-
-        # with open(os.path.join(out_dir, file_name), 'w') as out_file:
-        #     out_file.write("ids,labels,parents,counts\n")
-        #     for index, row in df.iterrows():
-        #         b_value = row['b_value']
-        #         result = execute_query(cursor, b_value)
-        #         biome_name = result[0][0]
-        #         parent_name = get_parent(biome_name)
-        #         label = get_label(biome_name)
-        #         biome_names.append(biome_name)
-        #         parent_names.append(parent_name)
-        #         out_file.write(f"{biome_name},{label},{parent_name},{row['count']}\n")
-            
-        #     append_parents(parent_names, biome_names, out_file)
+        element_counts = pd.Series(family_domain_architectures).value_counts()
+        family_name = family_name.replace("mgnifam", "mgnfam")
+        output_filename = os.path.join(out_dir, f"{family_name}_domains.json")
+        write_out_json(element_counts, output_filename)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Query a PostgreSQL database and parse pfam ids into domain architecture format.")

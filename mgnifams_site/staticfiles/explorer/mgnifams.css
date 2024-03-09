@@ -125,3 +125,15 @@ nightingale-manager {
     text-align: justify;
     font-size: 13px;
 }
+
+.architecture-div {
+    margin-bottom: 5px;
+}
+.domain-span {
+    border: 1px solid black;
+    border-radius: 25px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+}

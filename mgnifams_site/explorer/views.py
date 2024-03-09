@@ -184,6 +184,8 @@ def details(request):
 
     # Biomes distribution file path
     biomes_filepath = get_filepath(family_id, "biome_sunburst/result/")
+    # Domain architecture file path
+    domains_json = get_filepath(family_id, "pfams/result/")
 
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
@@ -268,6 +270,7 @@ def details(request):
         'protein_rep': protein_rep,
         'region': region,
         'biomes_filepath': biomes_filepath,
+        'domains_json': domains_json,
         'seed_msa_filepath': seed_msa_filepath,
         'full_msa_filepath': full_msa_filepath,
         'rf': rf,

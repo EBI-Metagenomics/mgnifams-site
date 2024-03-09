@@ -1,0 +1,688 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "1486",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                }
+            ]
+        },
+        {
+            "architecture_text": "69",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                }
+            ]
+        },
+        {
+            "architecture_text": "8",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                }
+            ]
+        },
+        {
+            "architecture_text": "5",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2",
+            "domains": [
+                {
+                    "name": "PF07499",
+                    "color": "#b7f223"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2",
+            "domains": [
+                {
+                    "name": "PF01330",
+                    "color": "#f93321"
+                },
+                {
+                    "name": "PF14520",
+                    "color": "#faaf30"
+                },
+                {
+                    "name": "PF07499",
+                    "color": "#b7f223"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF00575",
+                    "color": "#9dc720"
+                },
+                {
+                    "name": "PF00575",
+                    "color": "#9dc720"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF17910",
+                    "color": "#fc1b32"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "PF02824",
+                    "color": "#02bb21"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF00925",
+                    "color": "#06d620"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF12848",
+                    "color": "#c5d22f"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF13347",
+                    "color": "#5e3430"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF13173",
+                    "color": "#352d30"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF13619",
+                    "color": "#463f30"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF00583",
+                    "color": "#bac720"
+                },
+                {
+                    "name": "PF13673",
+                    "color": "#fa3f30"
+                },
+                {
+                    "name": "PF13508",
+                    "color": "#653b30"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF01048",
+                    "color": "#dd2821"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14520",
+                    "color": "#faaf30"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF00664",
+                    "color": "#3ecb20"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF00677",
+                    "color": "#60cb20"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF01225",
+                    "color": "#1e3021"
+                },
+                {
+                    "name": "PF08245",
+                    "color": "#f55e24"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF01420",
+                    "color": "#9b3721"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF01119",
+                    "color": "#422c21"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF02803",
+                    "color": "#c3ba21"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF13734",
+                    "color": "#404330"
+                },
+                {
+                    "name": "PF01640",
+                    "color": "#5b3f21"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "PF00521",
+                    "color": "#fec620"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF02559",
+                    "color": "#21b021"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "PF02687",
+                    "color": "#3db421"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF09269",
+                    "color": "#96d324"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "PF00215",
+                    "color": "#a0bb20"
+                },
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF07517",
+                    "color": "#7ef523"
+                },
+                {
+                    "name": "PF01043",
+                    "color": "#d82821"
+                },
+                {
+                    "name": "PF07516",
+                    "color": "#7df523"
+                },
+                {
+                    "name": "PF02810",
+                    "color": "#dfba21"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF16325",
+                    "color": "#3b9131"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF00206",
+                    "color": "#82bb20"
+                },
+                {
+                    "name": "PF14698",
+                    "color": "#9cb430"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF01458",
+                    "color": "#003821"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF14349",
+                    "color": "#bfa830"
+                },
+                {
+                    "name": "PF02548",
+                    "color": "#01b021"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF00892",
+                    "color": "#1bd320"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF04760",
+                    "color": "#77a022"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF01964",
+                    "color": "#e04a21"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF00575",
+                    "color": "#9dc720"
+                },
+                {
+                    "name": "PF00575",
+                    "color": "#9dc720"
+                },
+                {
+                    "name": "PF00575",
+                    "color": "#9dc720"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1",
+            "domains": [
+                {
+                    "name": "mgnifam46",
+                    "color": "#5fb5a1"
+                },
+                {
+                    "name": "PF02653",
+                    "color": "#dcb321"
+                }
+            ]
+        }
+    ]
+}
