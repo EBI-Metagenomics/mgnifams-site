@@ -185,7 +185,7 @@ def details(request):
     # Biomes distribution file path
     biomes_filepath = get_filepath(family_id, "biome_sunburst/result/")
     # Domain architecture file path
-    domains_json = get_filepath(family_id, "pfams/result/")
+    domains_json = get_filepath(family_id, "pfams/translated/")
 
     # Seed MSA viewer
     seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")

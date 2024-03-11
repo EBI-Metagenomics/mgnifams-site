@@ -7,7 +7,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-6 DNA Methylase",
@@ -24,7 +24,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "SNF2-related domain",
@@ -36,7 +36,7 @@
                     "name": "Type III restriction enzyme, res subunit",
                     "color": "#ff4317",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04851/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -53,7 +53,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -70,7 +70,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "SNF2-related domain",
@@ -82,7 +82,7 @@
                     "name": "Type III restriction enzyme, res subunit",
                     "color": "#ff4317",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04851/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -93,7 +93,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-6 DNA Methylase",
@@ -116,13 +116,13 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Type III restriction enzyme, res subunit",
                     "color": "#ff4317",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04851/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -133,7 +133,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-6 DNA Methylase",
@@ -145,7 +145,7 @@
                     "name": "Type III restriction enzyme, res subunit",
                     "color": "#ff4317",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04851/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helicase conserved C-terminal domain",
@@ -162,7 +162,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helicase conserved C-terminal domain",
@@ -179,13 +179,13 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Type III restriction enzyme, res subunit",
                     "color": "#ff4317",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04851/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helicase conserved C-terminal domain",
@@ -202,7 +202,7 @@
                     "name": "mgnifam3",
                     "color": "#b6812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000003",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-6 DNA Methylase",
@@ -214,7 +214,7 @@
                     "name": "Type III restriction enzyme, res subunit",
                     "color": "#ff4317",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04851/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

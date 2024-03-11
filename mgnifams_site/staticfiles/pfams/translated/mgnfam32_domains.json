@@ -7,13 +7,13 @@
                     "name": "ParB/Sulfiredoxin domain",
                     "color": "#a4ada9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02195/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -24,7 +24,7 @@
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HTH domain found in ParB protein",
@@ -41,13 +41,13 @@
                     "name": "ParB/Sulfiredoxin domain",
                     "color": "#a4ada9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02195/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HTH domain found in ParB protein",
@@ -64,19 +64,19 @@
                     "name": "ParB/Sulfiredoxin domain",
                     "color": "#a4ada9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02195/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ParB/Sulfiredoxin domain",
                     "color": "#a4ada9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02195/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -87,19 +87,19 @@
                     "name": "ParB/Sulfiredoxin domain",
                     "color": "#a4ada9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02195/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF3850)",
                     "color": "#d772c6",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12961/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -110,13 +110,13 @@
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MT-A70 ",
                     "color": "#ec682f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05063/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -127,13 +127,13 @@
                     "name": "ParB/Sulfiredoxin domain",
                     "color": "#a4ada9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02195/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "DNA methylase",
@@ -150,13 +150,13 @@
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF3850)",
                     "color": "#d772c6",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12961/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -167,7 +167,7 @@
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "DNA methylase",
@@ -184,7 +184,7 @@
                     "name": "mgnifam32",
                     "color": "#3cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000032",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "DNA N-6-adenine-methyltransferase (Dam)",

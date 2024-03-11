@@ -7,7 +7,7 @@
                     "name": "Glutamine amidotransferases class-II",
                     "color": "#12bb2c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glutamate synthase central domain",
@@ -25,13 +25,13 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GXGXG motif",
                     "color": "#b466b8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -48,13 +48,13 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GXGXG motif",
                     "color": "#b466b8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -71,7 +71,7 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -82,13 +82,13 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GXGXG motif",
                     "color": "#b466b8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -111,13 +111,13 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GXGXG motif",
                     "color": "#b466b8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -140,7 +140,7 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -151,7 +151,7 @@
                     "name": "Glutamine amidotransferases class-II",
                     "color": "#12bb2c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glutamate synthase central domain",
@@ -169,7 +169,7 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -192,13 +192,13 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GXGXG motif",
                     "color": "#b466b8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -209,7 +209,7 @@
                     "name": "Glutamine amidotransferases class-II",
                     "color": "#12bb2c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glutamate synthase central domain",
@@ -233,13 +233,13 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GXGXG motif",
                     "color": "#b466b8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -262,7 +262,7 @@
                     "name": "mgnifam43",
                     "color": "#5cb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000043",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

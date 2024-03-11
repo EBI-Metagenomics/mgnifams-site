@@ -7,13 +7,13 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -30,7 +30,7 @@
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -47,13 +47,13 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -64,19 +64,19 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -93,13 +93,13 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -111,7 +111,7 @@
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -128,13 +128,13 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -151,13 +151,13 @@
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -174,7 +174,7 @@
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -186,7 +186,7 @@
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -197,13 +197,13 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -215,7 +215,7 @@
                     "name": "ATPase of the ABC class",
                     "color": "#ac8033",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09818/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -226,13 +226,13 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam49",
                     "color": "#62b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000049",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",
@@ -244,7 +244,7 @@
                     "name": "ABC transporter transmembrane region",
                     "color": "#a1913b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00664/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ABC transporter",

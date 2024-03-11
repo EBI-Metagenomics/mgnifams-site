@@ -37,7 +37,7 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -54,7 +54,7 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -83,7 +83,7 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -118,7 +118,7 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -170,7 +170,7 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "BNR/Asp-box repeat",
@@ -222,7 +222,7 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -256,13 +256,13 @@
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13859/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "BNR repeat-like domain",
                     "color": "#15a1fe",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

@@ -13,19 +13,19 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Lon protease (S16) C-terminal proteolytic domain",
@@ -37,7 +37,7 @@
                     "name": "Subunit ChlI of Mg-chelatase",
                     "color": "#e89b78",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13541/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -48,19 +48,19 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -77,7 +77,7 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -94,19 +94,19 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -123,19 +123,19 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Lon protease (S16) C-terminal proteolytic domain",
@@ -152,13 +152,13 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -175,25 +175,25 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "PrkA AAA domain",
                     "color": "#eb93b7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08298/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Lon protease (S16) C-terminal proteolytic domain",
@@ -205,7 +205,7 @@
                     "name": "Subunit ChlI of Mg-chelatase",
                     "color": "#e89b78",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13541/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -216,25 +216,25 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "PrkA AAA domain",
                     "color": "#eb93b7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08298/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -245,19 +245,19 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Lon protease (S16) C-terminal proteolytic domain",
@@ -269,7 +269,7 @@
                     "name": "Subunit ChlI of Mg-chelatase",
                     "color": "#e89b78",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13541/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -286,25 +286,25 @@
                     "name": "mgnifam52",
                     "color": "#7ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000052",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "PrkA AAA domain",
                     "color": "#eb93b7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08298/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

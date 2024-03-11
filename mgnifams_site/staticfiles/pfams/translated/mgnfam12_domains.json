@@ -7,7 +7,7 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -30,7 +30,7 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -81,7 +81,7 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -104,13 +104,13 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "D-ala D-ala ligase C-terminus",
                     "color": "#aabcc0",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATP-grasp domain",
@@ -139,13 +139,13 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "D-ala D-ala ligase C-terminus",
                     "color": "#aabcc0",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -168,13 +168,13 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATP-grasp in the biosynthetic pathway with Ter operon",
                     "color": "#9a7692",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF15632/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -197,7 +197,7 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATP-grasp domain",
@@ -209,7 +209,7 @@
                     "name": "D-ala D-ala ligase C-terminus",
                     "color": "#aabcc0",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -232,7 +232,7 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam12",
@@ -250,7 +250,7 @@
                     "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
                     "color": "#21be35",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

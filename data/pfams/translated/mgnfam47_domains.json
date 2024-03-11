@@ -7,7 +7,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FtsX-like permease family",
@@ -24,7 +24,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FtsX-like permease family",
@@ -53,7 +53,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FtsX-like permease family",
@@ -76,7 +76,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -93,7 +93,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FtsX-like permease family",
@@ -116,7 +116,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FtsX-like permease family",
@@ -128,7 +128,7 @@
                     "name": "Binding-protein-dependent transport system inner membrane component",
                     "color": "#41ad0e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00528/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -139,7 +139,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Cys/Met metabolism PLP-dependent enzyme",
@@ -156,7 +156,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FtsX-like permease family",
@@ -179,7 +179,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "C4-type zinc ribbon domain",
@@ -196,7 +196,7 @@
                     "name": "mgnifam47",
                     "color": "#60b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glycosyl transferase family, a/b domain",

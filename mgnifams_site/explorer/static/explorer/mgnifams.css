@@ -128,12 +128,21 @@ nightingale-manager {
 
 .architecture-div {
     margin-bottom: 5px;
+    line-height: 30px;
+}
+.descr-span {
+    display: inline-block;
+    width: 60px;
+    font-weight: bold;
 }
 .domain-span {
     border: 1px solid black;
     border-radius: 25px;
     margin-left: 2px;
     margin-right: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 3px;
+}
+.domain-span a {
+    text-decoration: none !important;
+    color: inherit !important;
 }

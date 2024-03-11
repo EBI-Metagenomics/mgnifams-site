@@ -13,13 +13,13 @@
                     "name": "Galactose-1-phosphate uridyl transferase, C-terminal domain",
                     "color": "#8db82f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02744/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -30,13 +30,13 @@
                     "name": "Galactose-1-phosphate uridyl transferase, C-terminal domain",
                     "color": "#8db82f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02744/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -59,13 +59,13 @@
                     "name": "Galactose-1-phosphate uridyl transferase, C-terminal domain",
                     "color": "#8db82f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02744/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -82,7 +82,7 @@
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -93,7 +93,7 @@
                     "name": "Glycosyltransferase family 28 N-terminal domain",
                     "color": "#cd5f75",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03033/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glycosyltransferase family 28 C-terminal domain",
@@ -105,7 +105,7 @@
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -122,7 +122,7 @@
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -133,13 +133,13 @@
                     "name": "Galactokinase galactose-binding signature",
                     "color": "#a36f8a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10509/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GHMP kinases N terminal domain",
                     "color": "#4a9fca",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00288/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GHMP kinases C terminal ",
@@ -157,13 +157,13 @@
                     "name": "Galactose-1-phosphate uridyl transferase, C-terminal domain",
                     "color": "#8db82f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02744/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -180,7 +180,7 @@
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -197,7 +197,7 @@
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -208,19 +208,19 @@
                     "name": "Galactokinase galactose-binding signature",
                     "color": "#a36f8a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10509/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "GHMP kinases N terminal domain",
                     "color": "#4a9fca",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00288/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam45",
                     "color": "#5eb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000045",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

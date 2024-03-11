@@ -7,13 +7,13 @@
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA+ lid domain",
@@ -36,19 +36,19 @@
                     "name": "FtsH Extracellular",
                     "color": "#9dbb09",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06480/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA+ lid domain",
@@ -71,13 +71,13 @@
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -88,25 +88,25 @@
                     "name": "FtsH Extracellular",
                     "color": "#9dbb09",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06480/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA+ lid domain",
@@ -129,19 +129,19 @@
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA+ lid domain",
@@ -164,19 +164,19 @@
                     "name": "FtsH Extracellular",
                     "color": "#9dbb09",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06480/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -187,13 +187,13 @@
                     "name": "FtsH Extracellular",
                     "color": "#9dbb09",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06480/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -204,19 +204,19 @@
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -227,13 +227,13 @@
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA+ lid domain",
@@ -250,19 +250,19 @@
                     "name": "mgnifam19",
                     "color": "#05b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000019",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA domain (dynein-related subfamily)",
                     "color": "#ab7fb9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07728/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATPase family associated with various cellular activities (AAA)",
                     "color": "#2cd03e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00004/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "AAA+ lid domain",

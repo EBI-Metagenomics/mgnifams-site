@@ -19,13 +19,13 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "phosphoenolpyruvate-dependent sugar phosphotransferase system, EIIA 1",
                     "color": "#34cf6a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00358/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -42,13 +42,13 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "phosphoenolpyruvate-dependent sugar phosphotransferase system, EIIA 1",
                     "color": "#34cf6a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00358/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -65,7 +65,7 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -88,7 +88,7 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -99,13 +99,13 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "phosphoenolpyruvate-dependent sugar phosphotransferase system, EIIA 1",
                     "color": "#34cf6a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00358/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -128,7 +128,7 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "haloacid dehalogenase-like hydrolase",
@@ -157,7 +157,7 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "phosphotransferase system, EIIB",
@@ -180,7 +180,7 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "phosphotransferase system, EIIB",
@@ -209,13 +209,13 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -226,7 +226,7 @@
                     "name": "mgnifam27",
                     "color": "#22b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000027",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "phosphotransferase system, EIIB",

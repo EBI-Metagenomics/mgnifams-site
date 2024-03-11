@@ -7,7 +7,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -30,7 +30,7 @@
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "50S ribosome-binding GTPase",
@@ -42,7 +42,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -65,7 +65,7 @@
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ras family",
@@ -83,7 +83,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -112,7 +112,7 @@
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ras family",
@@ -130,7 +130,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -147,13 +147,13 @@
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -164,13 +164,13 @@
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -199,7 +199,7 @@
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "50S ribosome-binding GTPase",
@@ -211,7 +211,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -234,13 +234,13 @@
                     "name": "ADP-ribosylation factor family",
                     "color": "#e8b31c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00025/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ras family",
@@ -258,7 +258,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -287,13 +287,13 @@
                     "name": "ADP-ribosylation factor family",
                     "color": "#e8b31c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00025/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ras family",
@@ -311,7 +311,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",
@@ -334,13 +334,13 @@
                     "name": "ADP-ribosylation factor family",
                     "color": "#e8b31c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00025/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Elongation factor Tu GTP binding domain",
                     "color": "#96842f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "50S ribosome-binding GTPase",
@@ -352,7 +352,7 @@
                     "name": "mgnifam5",
                     "color": "#b8812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000005",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Translation-initiation factor 2",

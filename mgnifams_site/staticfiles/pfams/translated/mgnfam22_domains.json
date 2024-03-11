@@ -19,7 +19,7 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -36,7 +36,7 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -65,13 +65,13 @@
                     "name": "Cation transport ATPase (P-type)",
                     "color": "#4fb466",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13246/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Cation transporting ATPase, C-terminus",
@@ -88,7 +88,7 @@
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "E1-E2 ATPase",
@@ -106,7 +106,7 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -117,7 +117,7 @@
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "E1-E2 ATPase",
@@ -135,13 +135,13 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -152,7 +152,7 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Cation transporting ATPase, C-terminus",
@@ -175,7 +175,7 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Cation transporting ATPase, C-terminus",
@@ -204,7 +204,7 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -227,13 +227,13 @@
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -256,13 +256,13 @@
                     "name": "Cation transport ATPase (P-type)",
                     "color": "#4fb466",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13246/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam22",
                     "color": "#1db5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Cation transporting ATPase, C-terminus",

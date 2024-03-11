@@ -13,13 +13,13 @@
                     "name": "KH domain",
                     "color": "#e7601c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HD domain",
@@ -42,13 +42,13 @@
                     "name": "KH domain",
                     "color": "#e7601c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -59,7 +59,7 @@
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HD domain",
@@ -76,13 +76,13 @@
                     "name": "KH domain",
                     "color": "#e7601c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HD domain",
@@ -99,7 +99,7 @@
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HDOD domain",
@@ -122,13 +122,13 @@
                     "name": "KH domain",
                     "color": "#e7601c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -145,13 +145,13 @@
                     "name": "KH domain",
                     "color": "#e7601c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HDOD domain",
@@ -180,7 +180,7 @@
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HD domain",
@@ -197,13 +197,13 @@
                     "name": "KH domain",
                     "color": "#e7601c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "HDOD domain",
@@ -232,7 +232,7 @@
                     "name": "mgnifam9",
                     "color": "#bc812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

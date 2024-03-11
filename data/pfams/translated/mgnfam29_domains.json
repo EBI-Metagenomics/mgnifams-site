@@ -13,7 +13,7 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -36,25 +36,25 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4316)",
@@ -77,19 +77,19 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Large polyvalent protein-associated domain 16",
@@ -107,7 +107,7 @@
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4316)",
@@ -136,25 +136,25 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Large polyvalent protein associated domain 26",
@@ -183,25 +183,25 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4316)",
@@ -230,25 +230,25 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4316)",
@@ -277,19 +277,19 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -318,25 +318,25 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4316)",
@@ -359,19 +359,19 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -394,25 +394,25 @@
                     "name": "mgnifam29",
                     "color": "#24b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000029",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "N-terminal domain of anti-restriction factor ArdC",
                     "color": "#d425f9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08401/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IrrE N-terminal-like domain",
                     "color": "#3fb3ec",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF06114/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "YodL-like",
                     "color": "#e651b9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14191/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

@@ -19,7 +19,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -48,7 +48,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -59,7 +59,7 @@
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "E1-E2 ATPase",
@@ -83,7 +83,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -100,7 +100,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -111,13 +111,13 @@
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "E1-E2 ATPase",
@@ -141,7 +141,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -152,7 +152,7 @@
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "E1-E2 ATPase",
@@ -176,13 +176,13 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -211,7 +211,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -246,7 +246,7 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -269,13 +269,13 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -286,13 +286,13 @@
                     "name": "mgnifam42",
                     "color": "#5bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000042",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Heavy-metal-associated domain",
                     "color": "#b284bd",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

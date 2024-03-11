@@ -13,7 +13,7 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Recombinase zinc beta ribbon domain",
@@ -25,7 +25,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4368)",
@@ -42,7 +42,7 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Recombinase zinc beta ribbon domain",
@@ -54,7 +54,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4368)",
@@ -71,7 +71,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4368)",
@@ -94,7 +94,7 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Recombinase zinc beta ribbon domain",
@@ -106,7 +106,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -117,7 +117,7 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Recombinase zinc beta ribbon domain",
@@ -129,7 +129,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -146,7 +146,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4368)",
@@ -169,7 +169,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -192,7 +192,7 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Recombinase zinc beta ribbon domain",
@@ -204,7 +204,7 @@
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4368)",
@@ -227,13 +227,13 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -244,13 +244,13 @@
                     "name": "Recombinase",
                     "color": "#da8b91",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam2",
                     "color": "#b5812e",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000002",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

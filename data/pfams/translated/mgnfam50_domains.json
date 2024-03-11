@@ -7,7 +7,7 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -24,7 +24,7 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -47,13 +47,13 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Major Facilitator Superfamily",
                     "color": "#a49534",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07690/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -70,13 +70,13 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Major Facilitator Superfamily",
                     "color": "#a49534",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07690/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -99,13 +99,13 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Major Facilitator Superfamily",
                     "color": "#a49534",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07690/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -116,7 +116,7 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -128,7 +128,7 @@
                     "name": "Major Facilitator Superfamily",
                     "color": "#a49534",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07690/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -139,7 +139,7 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -168,7 +168,7 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -180,7 +180,7 @@
                     "name": "Major Facilitator Superfamily",
                     "color": "#a49534",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07690/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",
@@ -197,13 +197,13 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ACT domain",
                     "color": "#32bc2c",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13710/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Small subunit of acetolactate synthase",
@@ -220,13 +220,13 @@
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam50",
                     "color": "#78b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000050",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "POT family",

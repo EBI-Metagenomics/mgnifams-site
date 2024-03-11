@@ -7,13 +7,13 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -24,19 +24,19 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -47,7 +47,7 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "alpha/beta hydrolase fold",
@@ -59,7 +59,7 @@
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -76,13 +76,13 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -93,7 +93,7 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Prolyl oligopeptidase family",
@@ -105,7 +105,7 @@
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -116,19 +116,19 @@
                     "name": "DJ-1/PfpI family",
                     "color": "#50c01a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01965/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -139,19 +139,19 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Carboxylesterase family",
                     "color": "#7a9a15",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00135/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -162,13 +162,13 @@
                     "name": "Lyase",
                     "color": "#a67567",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00206/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -179,25 +179,25 @@
                     "name": "BD-FAE",
                     "color": "#df9a73",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF20434/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glycerophosphoryl diester phosphodiesterase family",
                     "color": "#99a3da",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03009/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function",
                     "color": "#db48de",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF16387/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -208,7 +208,7 @@
                     "name": "mgnifam30",
                     "color": "#3ab5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000030",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Pyridoxal-dependent decarboxylase, C-terminal sheet domain",

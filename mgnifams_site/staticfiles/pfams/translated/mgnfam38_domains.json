@@ -19,13 +19,13 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -36,13 +36,13 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -59,13 +59,13 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -82,13 +82,13 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -105,7 +105,7 @@
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -128,7 +128,7 @@
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -139,19 +139,19 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -174,13 +174,13 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -197,13 +197,13 @@
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -214,19 +214,19 @@
                     "name": "Bacterial extracellular solute-binding protein",
                     "color": "#a0bf5e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13531/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Glutamine synthetase C-terminal domain",
                     "color": "#b6820e",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18318/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam38",
                     "color": "#42b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000038",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

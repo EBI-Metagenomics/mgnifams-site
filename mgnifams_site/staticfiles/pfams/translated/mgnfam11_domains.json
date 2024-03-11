@@ -95,7 +95,7 @@
                     "name": "SHIRT domain",
                     "color": "#4eaa65",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18655/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -130,7 +130,7 @@
                     "name": "BspA type Leucine rich repeat region (6 copies)",
                     "color": "#00cac1",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13306/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -228,7 +228,7 @@
                     "name": "SHIRT domain",
                     "color": "#4eaa65",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18655/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "S-layer homology domain",

@@ -7,7 +7,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Motility related/secretion protein",
@@ -30,7 +30,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Motility related/secretion protein",
@@ -47,13 +47,13 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Motility related/secretion protein",
@@ -76,7 +76,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Motility related/secretion protein",
@@ -111,7 +111,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -122,7 +122,7 @@
                     "name": "RuvA N terminal domain",
                     "color": "#a467c0",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01330/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helix-hairpin-helix domain",
@@ -140,7 +140,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Motility related/secretion protein",
@@ -163,19 +163,19 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "S1 RNA binding domain",
                     "color": "#dca7fb",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00575/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "S1 RNA binding domain",
                     "color": "#dca7fb",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00575/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -186,7 +186,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "FeoB cytosolic helical domain",
@@ -203,13 +203,13 @@
                     "name": "TGS domain",
                     "color": "#a4b0d0",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02824/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -220,7 +220,7 @@
                     "name": "mgnifam46",
                     "color": "#5fb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000046",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Motility related/secretion protein",
@@ -232,7 +232,7 @@
                     "name": "GTP cyclohydrolase II",
                     "color": "#7cbb18",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00925/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

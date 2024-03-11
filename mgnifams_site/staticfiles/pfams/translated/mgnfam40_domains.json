@@ -7,13 +7,13 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin family",
@@ -25,7 +25,7 @@
                     "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
                     "color": "#58bca9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -36,13 +36,13 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -53,13 +53,13 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin family",
@@ -76,19 +76,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin bait region domain",
                     "color": "#848da8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07703/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin family",
@@ -100,7 +100,7 @@
                     "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
                     "color": "#58bca9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -111,19 +111,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin bait region domain",
                     "color": "#848da8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07703/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin family",
@@ -140,19 +140,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin family",
@@ -164,7 +164,7 @@
                     "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
                     "color": "#58bca9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -175,19 +175,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Macroglobulin domain MG3",
                     "color": "#7da11f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17791/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -198,19 +198,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin bait region domain",
                     "color": "#848da8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07703/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin family",
@@ -222,13 +222,13 @@
                     "name": "A-macroglobulin TED domain",
                     "color": "#7dca4f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07678/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
                     "color": "#58bca9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -239,19 +239,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Alpha-2-macroglobulin bait region domain",
                     "color": "#848da8",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07703/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -262,19 +262,19 @@
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam40",
                     "color": "#59b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000040",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "MG2 domain",
                     "color": "#0cd0c7",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

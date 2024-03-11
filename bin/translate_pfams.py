@@ -70,7 +70,7 @@ def decide_font_color(hex_color):
     luminosity = calculate_luminosity(rgb)
     
     # Decide font color based on luminosity
-    if luminosity > 0.5:
+    if luminosity > 0.2:
         return 'black'
     else:
         return 'white'

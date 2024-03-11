@@ -13,19 +13,19 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -42,13 +42,13 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -65,7 +65,7 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -76,13 +76,13 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -93,19 +93,19 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -122,13 +122,13 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helix-turn-helix domain of resolvase",
@@ -140,7 +140,7 @@
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -157,25 +157,25 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Homeodomain-like domain",
                     "color": "#3489f1",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13384/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -192,13 +192,13 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helix-turn-helix domain of resolvase",
@@ -221,19 +221,19 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Homeodomain-like domain",
                     "color": "#3489f1",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13384/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -244,13 +244,13 @@
                     "name": "mgnifam18",
                     "color": "#04b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000018",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Transposase",
                     "color": "#27b44b",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01610/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Helix-turn-helix domain of resolvase",

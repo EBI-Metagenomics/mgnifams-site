@@ -7,7 +7,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4450)",
@@ -24,7 +24,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4450)",
@@ -47,7 +47,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4450)",
@@ -65,7 +65,7 @@
                     "name": "Glycosyl-hydrolase family 116, catalytic region",
                     "color": "#9c83cb",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04685/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -76,7 +76,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4450)",
@@ -88,7 +88,7 @@
                     "name": "Glycosyl-hydrolase family 116, catalytic region",
                     "color": "#9c83cb",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04685/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Bacterial alpha-L-rhamnosidase 6 hairpin glycosidase domain",
@@ -105,7 +105,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4450)",
@@ -117,7 +117,7 @@
                     "name": "Glycosyl-hydrolase family 116, catalytic region",
                     "color": "#9c83cb",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04685/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -128,7 +128,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "NAD(P)-binding Rossmann-like domain",
@@ -145,7 +145,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "3-5 exonuclease",
@@ -162,7 +162,7 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Domain of unknown function (DUF4450)",
@@ -185,13 +185,13 @@
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "tRNA synthetases class I (R)",
                     "color": "#dc37aa",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00750/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -202,25 +202,25 @@
                     "name": "Acetyltransferase (GNAT) family",
                     "color": "#81c678",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00583/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Acetyltransferase (GNAT) domain",
                     "color": "#e13fd4",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13673/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Acetyltransferase (GNAT) domain",
                     "color": "#e13fd4",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13508/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam25",
                     "color": "#20b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000025",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

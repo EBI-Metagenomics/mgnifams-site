@@ -7,19 +7,19 @@
                     "name": "impB/mucB/samB family",
                     "color": "#b296a9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00817/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -30,13 +30,13 @@
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -47,7 +47,7 @@
                     "name": "impB/mucB/samB family",
                     "color": "#b296a9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00817/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "IMS family HHH motif",
@@ -59,13 +59,13 @@
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -82,13 +82,13 @@
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -99,13 +99,13 @@
                     "name": "impB/mucB/samB family",
                     "color": "#b296a9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00817/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -122,19 +122,19 @@
                     "name": "impB/mucB/samB family",
                     "color": "#b296a9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00817/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -151,13 +151,13 @@
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -168,13 +168,13 @@
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Histidine kinase-, DNA gyrase B-, and HSP90-like ATPase",
                     "color": "#63d34f",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02518/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -185,25 +185,25 @@
                     "name": "DUF1016 N-terminal domain",
                     "color": "#e242a9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17761/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "impB/mucB/samB family",
                     "color": "#b296a9",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00817/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -214,19 +214,19 @@
                     "name": "S-adenosylmethionine synthetase, N-terminal domain",
                     "color": "#ce6bf6",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00438/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "impB/mucB/samB family C-terminal domain",
                     "color": "#70936a",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11799/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam20",
                     "color": "#1bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000020",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

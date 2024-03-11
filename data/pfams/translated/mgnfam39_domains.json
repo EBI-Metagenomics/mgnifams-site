@@ -7,13 +7,13 @@
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -25,7 +25,7 @@
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -36,7 +36,7 @@
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -48,7 +48,7 @@
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -59,13 +59,13 @@
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -76,7 +76,7 @@
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -93,13 +93,13 @@
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -116,19 +116,19 @@
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -140,7 +140,7 @@
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -151,13 +151,13 @@
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -169,13 +169,13 @@
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -186,7 +186,7 @@
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -198,13 +198,13 @@
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -215,19 +215,19 @@
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "ATP cone domain",
                     "color": "#3ea7e5",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF03477/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, all-alpha domain",
@@ -244,13 +244,13 @@
                     "name": "mgnifam39",
                     "color": "#43b5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000039",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "Ribonucleotide reductase, barrel domain",
                     "color": "#d859e2",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02867/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }

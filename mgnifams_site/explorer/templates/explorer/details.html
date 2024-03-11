@@ -434,9 +434,15 @@
             // Loop through each domain in the container
             container.domains.forEach(domain => {
                 const domainSpan = document.createElement('span');
-                domainSpan.textContent = domain.name;
+                const domainLink = document.createElement('a');
+                domainLink.textContent = domain.name;
+                domainLink.href = domain.link;
+                domainLink.setAttribute('target', '_blank');
+                domainLink.classList.add('domain-link');
                 domainSpan.classList.add('domain-span');
                 domainSpan.style.backgroundColor = domain.color;
+                domainSpan.style.color = domain.font_color;
+                domainSpan.appendChild(domainLink);
                 containerDiv.appendChild(domainSpan);
             });
 

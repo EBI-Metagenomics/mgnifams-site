@@ -7,7 +7,7 @@
                     "name": "Polysaccharide biosynthesis/export protein",
                     "color": "#65c418",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02563/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "SLBB domain",
@@ -43,7 +43,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -54,7 +54,7 @@
                     "name": "Polysaccharide biosynthesis/export protein",
                     "color": "#65c418",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02563/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "SLBB domain",
@@ -96,7 +96,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -119,7 +119,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -136,7 +136,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -147,7 +147,7 @@
                     "name": "Polysaccharide biosynthesis/export protein",
                     "color": "#65c418",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02563/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "SLBB domain",
@@ -177,7 +177,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -212,7 +212,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -241,7 +241,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -282,7 +282,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -293,7 +293,7 @@
                     "name": "Polysaccharide biosynthesis/export protein",
                     "color": "#65c418",
                     "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02563/domain_architecture/",
-                    "font_color": "white"
+                    "font_color": "black"
                 },
                 {
                     "name": "SLBB domain",
@@ -317,7 +317,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         },
@@ -364,7 +364,7 @@
                     "name": "mgnifam31",
                     "color": "#3bb5a1",
                     "link": "http://127.0.0.1:8000/details/?id=MGYF0000000031",
-                    "font_color": "white"
+                    "font_color": "black"
                 }
             ]
         }
