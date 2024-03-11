@@ -1,0 +1,366 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "884",
+            "domains": [
+                {
+                    "name": "Biotin carboxylase, N-terminal domain",
+                    "color": "#bba5a8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00289/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "158",
+            "domains": [
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "109",
+            "domains": [
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "54",
+            "domains": [
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "38",
+            "domains": [
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "25",
+            "domains": [
+                {
+                    "name": "Biotin carboxylase, N-terminal domain",
+                    "color": "#bba5a8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00289/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "25",
+            "domains": [
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "22",
+            "domains": [
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "21",
+            "domains": [
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "13",
+            "domains": [
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02222/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ATP-grasp domain",
+                    "color": "#211581",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Carbamoyl-phosphate synthase L chain, ATP binding domain",
+                    "color": "#21be35",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02786/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "D-ala D-ala ligase C-terminus",
+                    "color": "#aabcc0",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07478/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Biotin carboxylase C-terminal domain",
+                    "color": "#387b30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02785/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam37",
+                    "color": "#41b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000037",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

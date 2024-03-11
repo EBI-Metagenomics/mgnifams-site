@@ -1,0 +1,288 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "1066",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1011",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Fibronectin type III domain",
+                    "color": "#0a294c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00041/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "321",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "SHIRT domain",
+                    "color": "#4eaa65",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18655/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "155",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "BspA type Leucine rich repeat region (6 copies)",
+                    "color": "#00cac1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13306/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "153",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "74",
+            "domains": [
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "74",
+            "domains": [
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Fibronectin type III domain",
+                    "color": "#0a294c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00041/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "70",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "SHIRT domain",
+                    "color": "#4eaa65",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18655/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "S-layer homology domain",
+                    "color": "#3dee8a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00395/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "S-layer homology domain",
+                    "color": "#3dee8a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00395/domain_architecture/",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "57",
+            "domains": [
+                {
+                    "name": "Family of unknown function (DUF6273)",
+                    "color": "#9f35e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19789/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "50",
+            "domains": [
+                {
+                    "name": "mgnifam11",
+                    "color": "#fdb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000011",
+                    "font_color": "black"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "IgA Peptidase M64",
+                    "color": "#cd490d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF09471/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

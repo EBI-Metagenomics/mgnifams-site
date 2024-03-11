@@ -1,0 +1,240 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "34064",
+            "domains": [
+                {
+                    "name": "RNase Y N-terminal region",
+                    "color": "#a91e83",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "KH domain",
+                    "color": "#e7601c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "6634",
+            "domains": [
+                {
+                    "name": "RNase Y N-terminal region",
+                    "color": "#a91e83",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "KH domain",
+                    "color": "#e7601c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "5882",
+            "domains": [
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4977",
+            "domains": [
+                {
+                    "name": "KH domain",
+                    "color": "#e7601c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2178",
+            "domains": [
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HDOD domain",
+                    "color": "#f3bb7d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08668/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1797",
+            "domains": [
+                {
+                    "name": "KH domain",
+                    "color": "#e7601c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1196",
+            "domains": [
+                {
+                    "name": "RNase Y N-terminal region",
+                    "color": "#a91e83",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "KH domain",
+                    "color": "#e7601c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HDOD domain",
+                    "color": "#f3bb7d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08668/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "542",
+            "domains": [
+                {
+                    "name": "RNase Y N-terminal region",
+                    "color": "#a91e83",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "463",
+            "domains": [
+                {
+                    "name": "KH domain",
+                    "color": "#e7601c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00013/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                },
+                {
+                    "name": "HDOD domain",
+                    "color": "#f3bb7d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08668/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "HD domain",
+                    "color": "#6860ca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01966/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "240",
+            "domains": [
+                {
+                    "name": "RNase Y N-terminal region",
+                    "color": "#a91e83",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam9",
+                    "color": "#bc812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000009",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

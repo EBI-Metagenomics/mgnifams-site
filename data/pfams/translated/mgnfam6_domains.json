@@ -1,0 +1,276 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "5667",
+            "domains": [
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2880",
+            "domains": [
+                {
+                    "name": "Chain length determinant protein",
+                    "color": "#5d2d77",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02706/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "NUBPL iron-transfer P-loop NTPase",
+                    "color": "#0f9bb4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10609/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2872",
+            "domains": [
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2853",
+            "domains": [
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2492",
+            "domains": [
+                {
+                    "name": "Chain length determinant protein",
+                    "color": "#5d2d77",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02706/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2487",
+            "domains": [
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "NUBPL iron-transfer P-loop NTPase",
+                    "color": "#0f9bb4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10609/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2269",
+            "domains": [
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1796",
+            "domains": [
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1582",
+            "domains": [
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "NUBPL iron-transfer P-loop NTPase",
+                    "color": "#0f9bb4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10609/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "CobQ/CobB/MinD/ParA nucleotide binding domain",
+                    "color": "#1d6f78",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01656/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1543",
+            "domains": [
+                {
+                    "name": "G-rich domain on putative tyrosine kinase",
+                    "color": "#cdb3e8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13807/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam6",
+                    "color": "#b9812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000006",
+                    "font_color": "white"
+                },
+                {
+                    "name": "AAA domain",
+                    "color": "#a389ed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13614/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

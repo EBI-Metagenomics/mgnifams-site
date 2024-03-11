@@ -12,12 +12,6 @@ def read_config(filename='bin/db_config.ini'):
     config.read(filename)
     return dict(config.items('database'))
 
-def execute_query(cursor, pfam_id):
-    sql_query = f"SELECT name FROM sequence_explorer_pfam WHERE id = {pfam_id}"
-    cursor.execute(sql_query)
-    result = cursor.fetchall()
-    return(result)
-
 def extract_mgyp(protein_name):
     parts = protein_name.split('/')
     if len(parts) > 1:
@@ -95,7 +89,7 @@ def write_out_json(element_counts, output_filename):
     with open(output_filename, 'w') as f:
         json.dump(output_json, f, indent=4)
 
-def query_sequence_explorer_pfam(cursor, edge_list_file, read_dir, out_dir):
+def construct_pfams_json(cursor, edge_list_file, read_dir, out_dir):
     clusters_df = pd.read_csv(edge_list_file, delimiter='\t', header=None, names=['family_name', 'protein_name'])
 
     files = os.listdir(read_dir)
@@ -142,7 +136,7 @@ if __name__ == "__main__":
     conn = psycopg2.connect(**db_params)
     cursor = conn.cursor()
     
-    query_sequence_explorer_pfam(cursor, args.edge_list_file, args.read_dir, args.out_dir)
+    construct_pfams_json(cursor, args.edge_list_file, args.read_dir, args.out_dir)
 
     cursor.close()
     conn.close()

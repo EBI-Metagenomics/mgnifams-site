@@ -1,0 +1,276 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "40689",
+            "domains": [
+                {
+                    "name": "E1-E2 ATPase",
+                    "color": "#c85175",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00122/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "39256",
+            "domains": [
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "20851",
+            "domains": [
+                {
+                    "name": "Cation transporter/ATPase, N-terminus",
+                    "color": "#3fec19",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00690/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "E1-E2 ATPase",
+                    "color": "#c85175",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00122/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cation transport ATPase (P-type)",
+                    "color": "#4fb466",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13246/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cation transporting ATPase, C-terminus",
+                    "color": "#5c591a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00689/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "15358",
+            "domains": [
+                {
+                    "name": "Heavy-metal-associated domain",
+                    "color": "#b284bd",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "E1-E2 ATPase",
+                    "color": "#c85175",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00122/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "13333",
+            "domains": [
+                {
+                    "name": "Heavy-metal-associated domain",
+                    "color": "#b284bd",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "E1-E2 ATPase",
+                    "color": "#c85175",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00122/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Heavy-metal-associated domain",
+                    "color": "#b284bd",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "11780",
+            "domains": [
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cation transporting ATPase, C-terminus",
+                    "color": "#5c591a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00689/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "10894",
+            "domains": [
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cation transporting ATPase, C-terminus",
+                    "color": "#5c591a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00689/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "9865",
+            "domains": [
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08282/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4072",
+            "domains": [
+                {
+                    "name": "E1-E2 ATPase",
+                    "color": "#c85175",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00122/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Heavy-metal-associated domain",
+                    "color": "#b284bd",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00403/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3993",
+            "domains": [
+                {
+                    "name": "E1-E2 ATPase",
+                    "color": "#c85175",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00122/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00702/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cation transport ATPase (P-type)",
+                    "color": "#4fb466",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13246/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam22",
+                    "color": "#1db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000022",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cation transporting ATPase, C-terminus",
+                    "color": "#5c591a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00689/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

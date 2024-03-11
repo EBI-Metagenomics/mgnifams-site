@@ -1,0 +1,480 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "598",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "509",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "320",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "186",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "70",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Choline-binding repeat",
+                    "color": "#c595a5",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19127/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "68",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "66",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "47",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Divergent InlB B-repeat domain",
+                    "color": "#37b876",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF18998/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Choline-binding repeat",
+                    "color": "#c595a5",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF19127/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "28",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "28",
+            "domains": [
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam51",
+                    "color": "#79b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000051",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Clostridial hydrophobic W",
+                    "color": "#3af44e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07538/domain_architecture/",
+                    "font_color": "black"
+                }
+            ]
+        }
+    ]
+}

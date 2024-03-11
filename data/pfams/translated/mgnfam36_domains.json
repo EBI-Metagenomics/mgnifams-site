@@ -1,0 +1,252 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "3083",
+            "domains": [
+                {
+                    "name": "Resolvase, N terminal domain",
+                    "color": "#c8c7b1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00239/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Recombinase",
+                    "color": "#da8b91",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Recombinase zinc beta ribbon domain",
+                    "color": "#546ba6",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13408/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "205",
+            "domains": [
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "153",
+            "domains": [
+                {
+                    "name": "Recombinase",
+                    "color": "#da8b91",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Recombinase zinc beta ribbon domain",
+                    "color": "#546ba6",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13408/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "23",
+            "domains": [
+                {
+                    "name": "Recombinase zinc beta ribbon domain",
+                    "color": "#546ba6",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13408/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4",
+            "domains": [
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposon-encoded protein TnpW",
+                    "color": "#32c15a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14202/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4",
+            "domains": [
+                {
+                    "name": "D-galactarate dehydratase / Altronate hydrolase, C terminus",
+                    "color": "#e80bf4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04295/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3",
+            "domains": [
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposon-encoded protein TnpW",
+                    "color": "#32c15a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14202/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3",
+            "domains": [
+                {
+                    "name": "Resolvase, N terminal domain",
+                    "color": "#c8c7b1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00239/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "Recombinase",
+                    "color": "#da8b91",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3",
+            "domains": [
+                {
+                    "name": "Accessory gene regulator B",
+                    "color": "#c62801",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04647/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Recombinase",
+                    "color": "#da8b91",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07508/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Recombinase zinc beta ribbon domain",
+                    "color": "#546ba6",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13408/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2",
+            "domains": [
+                {
+                    "name": "His Kinase A (phospho-acceptor) domain",
+                    "color": "#924f82",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00512/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Domain of unknown function (DUF4368)",
+                    "color": "#3649d2",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF14287/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam36",
+                    "color": "#40b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000036",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

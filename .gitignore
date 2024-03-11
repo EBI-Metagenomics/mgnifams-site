@@ -2,7 +2,7 @@ msa/
 data_old
 tmp/
 bin/db_config.ini
-mgnifams_site/staticfiles/pfams/result
+**/pfams/result
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

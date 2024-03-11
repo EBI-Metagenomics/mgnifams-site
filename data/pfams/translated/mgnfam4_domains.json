@@ -1,0 +1,252 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "15455",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "8339",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphoenolpyruvate-dependent sugar phosphotransferase system, EIIA 1",
+                    "color": "#34cf6a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00358/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4795",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3174",
+            "domains": [
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1198",
+            "domains": [
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphoenolpyruvate-dependent sugar phosphotransferase system, EIIA 1",
+                    "color": "#34cf6a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00358/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "556",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "haloacid dehalogenase-like hydrolase",
+                    "color": "#548505",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08282/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "286",
+            "domains": [
+                {
+                    "name": "phosphoenolpyruvate-dependent sugar phosphotransferase system, EIIA 1",
+                    "color": "#34cf6a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00358/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "173",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "65",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                },
+                {
+                    "name": "phosphotransferase system, EIIB",
+                    "color": "#b356a7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00367/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "34",
+            "domains": [
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Phosphotransferase system, EIIC ",
+                    "color": "#0c843b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02378/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam4",
+                    "color": "#b7812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000004",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

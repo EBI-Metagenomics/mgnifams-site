@@ -1,0 +1,330 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "17298",
+            "domains": [
+                {
+                    "name": "RNA polymerase beta subunit",
+                    "color": "#140b15",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04563/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 2",
+                    "color": "#3820e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04561/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 2",
+                    "color": "#3820e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04561/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 7",
+                    "color": "#3d20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04560/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "8605",
+            "domains": [
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "7983",
+            "domains": [
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "7422",
+            "domains": [
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "7158",
+            "domains": [
+                {
+                    "name": "RNA polymerase beta subunit",
+                    "color": "#140b15",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04563/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 2",
+                    "color": "#3820e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04561/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 7",
+                    "color": "#3d20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04560/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "6635",
+            "domains": [
+                {
+                    "name": "RNA polymerase beta subunit",
+                    "color": "#140b15",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04563/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 2",
+                    "color": "#3820e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04561/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 2",
+                    "color": "#3820e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04561/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "6122",
+            "domains": [
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3999",
+            "domains": [
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3945",
+            "domains": [
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 7",
+                    "color": "#3d20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04560/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3798",
+            "domains": [
+                {
+                    "name": "RNA polymerase Rpb2, domain 2",
+                    "color": "#3820e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04561/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 3",
+                    "color": "#3920e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04565/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase beta subunit external 1 domain",
+                    "color": "#3c9699",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF10385/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam1",
+                    "color": "#b4812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000001",
+                    "font_color": "white"
+                },
+                {
+                    "name": "RNA polymerase Rpb2, domain 6",
+                    "color": "#3c20e9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00562/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

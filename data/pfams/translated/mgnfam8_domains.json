@@ -1,0 +1,324 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "4031",
+            "domains": [
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3319",
+            "domains": [
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2275",
+            "domains": [
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1547",
+            "domains": [
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1521",
+            "domains": [
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Y_Y_Y domain",
+                    "color": "#372f92",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07495/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "His Kinase A (phospho-acceptor) domain",
+                    "color": "#924f82",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00512/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Histidine kinase-, DNA gyrase B-, and HSP90-like ATPase",
+                    "color": "#63d34f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02518/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Response regulator receiver domain",
+                    "color": "#f7a40f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Helix-turn-helix domain",
+                    "color": "#471e89",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12833/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial regulatory helix-turn-helix proteins, AraC family",
+                    "color": "#e93c26",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00165/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1350",
+            "domains": [
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1199",
+            "domains": [
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1090",
+            "domains": [
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Y_Y_Y domain",
+                    "color": "#372f92",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07495/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "905",
+            "domains": [
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Two component regulator propeller",
+                    "color": "#99486b",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07494/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "898",
+            "domains": [
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam8",
+                    "color": "#bb812e",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000008",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Y_Y_Y domain",
+                    "color": "#372f92",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07495/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "His Kinase A (phospho-acceptor) domain",
+                    "color": "#924f82",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00512/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Histidine kinase-, DNA gyrase B-, and HSP90-like ATPase",
+                    "color": "#63d34f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02518/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Response regulator receiver domain",
+                    "color": "#f7a40f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00072/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Helix-turn-helix domain",
+                    "color": "#471e89",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF12833/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial regulatory helix-turn-helix proteins, AraC family",
+                    "color": "#e93c26",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00165/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

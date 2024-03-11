@@ -1,0 +1,276 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "19983",
+            "domains": [
+                {
+                    "name": "Glutamine amidotransferases class-II",
+                    "color": "#12bb2c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "GXGXG motif",
+                    "color": "#b466b8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "12435",
+            "domains": [
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "9925",
+            "domains": [
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "7318",
+            "domains": [
+                {
+                    "name": "Glutamine amidotransferases class-II",
+                    "color": "#12bb2c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4754",
+            "domains": [
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "GXGXG motif",
+                    "color": "#b466b8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2880",
+            "domains": [
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2123",
+            "domains": [
+                {
+                    "name": "Glutamine amidotransferases class-II",
+                    "color": "#12bb2c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "628",
+            "domains": [
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "GXGXG motif",
+                    "color": "#b466b8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "173",
+            "domains": [
+                {
+                    "name": "Glutamine amidotransferases class-II",
+                    "color": "#12bb2c",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00310/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FMN-dependent dehydrogenase",
+                    "color": "#2b0eb6",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01070/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "GXGXG motif",
+                    "color": "#b466b8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "57",
+            "domains": [
+                {
+                    "name": "Glutamate synthase central domain",
+                    "color": "#3a28a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF04898/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam16",
+                    "color": "#02b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000016",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Conserved region in glutamate synthase",
+                    "color": "#0d70a1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01645/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FMN-dependent dehydrogenase",
+                    "color": "#2b0eb6",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01070/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "GXGXG motif",
+                    "color": "#b466b8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01493/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

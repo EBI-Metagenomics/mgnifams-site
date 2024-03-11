@@ -1,0 +1,240 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "10498",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13751/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "10401",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1160",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "617",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13751/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "87",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13751/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "66",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13751/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "20",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "19",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13751/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "17",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13751/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase DDE domain",
+                    "color": "#1833de",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01609/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "5",
+            "domains": [
+                {
+                    "name": "mgnifam44",
+                    "color": "#5db5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000044",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Transposase domain (DUF772)",
+                    "color": "#2759ba",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05598/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ABC transporter",
+                    "color": "#b83245",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00005/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

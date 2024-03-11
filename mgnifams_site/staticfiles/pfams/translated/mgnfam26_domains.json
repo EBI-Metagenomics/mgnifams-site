@@ -1,0 +1,276 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "19025",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, PEP-binding domain",
+                    "color": "#c1a79a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02896/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "11312",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, PEP-binding domain",
+                    "color": "#c1a79a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02896/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "6022",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "5538",
+            "domains": [
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, PEP-binding domain",
+                    "color": "#c1a79a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02896/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4996",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4338",
+            "domains": [
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3439",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2939",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "2687",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, PEP-binding domain",
+                    "color": "#c1a79a",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02896/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "579",
+            "domains": [
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Pyruvate phosphate dikinase, AMP/ATP-binding domain",
+                    "color": "#700e0f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01326/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam26",
+                    "color": "#21b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000026",
+                    "font_color": "white"
+                },
+                {
+                    "name": "PEP-utilising enzyme, mobile domain",
+                    "color": "#121614",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00391/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

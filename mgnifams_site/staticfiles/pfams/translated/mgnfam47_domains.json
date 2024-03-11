@@ -1,0 +1,210 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "16500",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "4313",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "97",
+            "domains": [
+                {
+                    "name": "ABC transporter",
+                    "color": "#b83245",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00005/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "77",
+            "domains": [
+                {
+                    "name": "ABC transporter",
+                    "color": "#b83245",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00005/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "30",
+            "domains": [
+                {
+                    "name": "ABC transporter",
+                    "color": "#b83245",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00005/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "16",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Binding-protein-dependent transport system inner membrane component",
+                    "color": "#41ad0e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00528/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "12",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Cys/Met metabolism PLP-dependent enzyme",
+                    "color": "#9b066f",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01053/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "9",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "FtsX-like permease family",
+                    "color": "#375eed",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02687/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "ABC transporter",
+                    "color": "#b83245",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00005/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "9",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "C4-type zinc ribbon domain",
+                    "color": "#7cea30",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02591/domain_architecture/",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "8",
+            "domains": [
+                {
+                    "name": "mgnifam47",
+                    "color": "#60b5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000047",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Glycosyl transferase family, a/b domain",
+                    "color": "#9a420d",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00591/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

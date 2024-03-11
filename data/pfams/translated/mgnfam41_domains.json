@@ -1,0 +1,294 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "3785",
+            "domains": [
+                {
+                    "name": "MG2 domain",
+                    "color": "#0cd0c7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3312",
+            "domains": [
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "3122",
+            "domains": [
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1104",
+            "domains": [
+                {
+                    "name": "MG2 domain",
+                    "color": "#0cd0c7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "998",
+            "domains": [
+                {
+                    "name": "Bacterial alpha-2-macroglobulin MG3 domain",
+                    "color": "#5e38a4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF11974/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "MG2 domain",
+                    "color": "#0cd0c7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG5 domain",
+                    "color": "#3c965e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17972/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial macroglobulin domain 6",
+                    "color": "#83b712",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17962/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin bait region domain",
+                    "color": "#848da8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07703/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "996",
+            "domains": [
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "905",
+            "domains": [
+                {
+                    "name": "MG2 domain",
+                    "color": "#0cd0c7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "657",
+            "domains": [
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "534",
+            "domains": [
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "340",
+            "domains": [
+                {
+                    "name": "MG2 domain",
+                    "color": "#0cd0c7",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF01835/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin bait region domain",
+                    "color": "#848da8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF07703/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Alpha-2-macroglobulin family",
+                    "color": "#6e046e",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF00207/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "mgnifam41",
+                    "color": "#5ab5a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000041",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial Alpha-2-macroglobulin MG10 domain",
+                    "color": "#58bca9",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17973/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,270 @@
+{
+    "architecture_containers": [
+        {
+            "architecture_text": "1737",
+            "domains": [
+                {
+                    "name": "Alpha-L-rhamnosidase N-terminal domain",
+                    "color": "#6140cd",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08531/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase concanavalin-like domain",
+                    "color": "#b21ae8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05592/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase 6 hairpin glycosidase domain",
+                    "color": "#7517c4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17389/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "1372",
+            "domains": [
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "565",
+            "domains": [
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase 6 hairpin glycosidase domain",
+                    "color": "#7517c4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17389/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "151",
+            "domains": [
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase concanavalin-like domain",
+                    "color": "#b21ae8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05592/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase 6 hairpin glycosidase domain",
+                    "color": "#7517c4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17389/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "94",
+            "domains": [
+                {
+                    "name": "Alpha-L-rhamnosidase N-terminal domain",
+                    "color": "#6140cd",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF08531/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase concanavalin-like domain",
+                    "color": "#b21ae8",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF05592/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase 6 hairpin glycosidase domain",
+                    "color": "#7517c4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17389/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "37",
+            "domains": [
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "BNR/Asp-box repeat",
+                    "color": "#0874e1",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF02012/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "37",
+            "domains": [
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase 6 hairpin glycosidase domain",
+                    "color": "#7517c4",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17389/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "25",
+            "domains": [
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        },
+        {
+            "architecture_text": "18",
+            "domains": [
+                {
+                    "name": "Bacterial alpha-L-rhamnosidase C-terminal domain",
+                    "color": "#ffeaca",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF17390/domain_architecture/",
+                    "font_color": "black"
+                },
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                }
+            ]
+        },
+        {
+            "architecture_text": "15",
+            "domains": [
+                {
+                    "name": "mgnifam10",
+                    "color": "#fcb4a1",
+                    "link": "http://127.0.0.1:8000/details/?id=MGYF0000000010",
+                    "font_color": "black"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13859/domain_architecture/",
+                    "font_color": "white"
+                },
+                {
+                    "name": "BNR repeat-like domain",
+                    "color": "#15a1fe",
+                    "link": "https://www.ebi.ac.uk/interpro/entry/pfam/PF13088/domain_architecture/",
+                    "font_color": "white"
+                }
+            ]
+        }
+    ]
+}
