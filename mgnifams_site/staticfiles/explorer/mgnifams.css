@@ -142,7 +142,20 @@ nightingale-manager {
     margin-right: 2px;
     padding: 3px;
 }
+.domain-span:hover {
+    border: 1px solid red;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+}
 .domain-span a {
     text-decoration: none !important;
     color: inherit !important;
+}
+.tooltip {
+    position: absolute;
+    background-color: #fff;
+    border-style: dotted;
+    color: #000;
+    padding: 5px;
+    display: none;
+    z-index: 2;
 }
