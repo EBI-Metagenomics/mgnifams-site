@@ -1,16 +1,9 @@
 import argparse
-import configparser
-import psycopg2
 import csv
 import pandas as pd
 import os
 import ast
 import json
-
-def read_config(filename='bin/db_config.ini'):
-    config = configparser.ConfigParser()
-    config.read(filename)
-    return dict(config.items('database'))
 
 def extract_mgyp(protein_name):
     parts = protein_name.split('/')
@@ -89,7 +82,7 @@ def write_out_json(element_counts, output_filename):
     with open(output_filename, 'w') as f:
         json.dump(output_json, f, indent=4)
 
-def construct_pfams_json(cursor, edge_list_file, read_dir, out_dir):
+def construct_pfams_json(edge_list_file, read_dir, out_dir):
     clusters_df = pd.read_csv(edge_list_file, delimiter='\t', header=None, names=['family_name', 'protein_name'])
 
     files = os.listdir(read_dir)
@@ -123,20 +116,12 @@ def construct_pfams_json(cursor, edge_list_file, read_dir, out_dir):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Query a PostgreSQL database and parse pfam ids into domain architecture format.")
-    parser.add_argument("config_file", help="Path to the configuration file for the database secrets")
     parser.add_argument("edge_list_file", help="Path to the edge list file with two columns")
     parser.add_argument("read_dir", help="Path to the folder with pfam ids per family and sequence")
     parser.add_argument("out_dir", help="Path to the results directory")
-    # python3 bin/parse_pfams.py bin/db_config.ini data/families/updated_refined_families.tsv data/pfams/tmp/ data/pfams/result/
+    # python3 bin/parse_pfams.py data/families/updated_refined_families.tsv data/pfams/tmp/ data/pfams/result/
     args = parser.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
 
-    db_params = read_config(args.config_file)
-    conn = psycopg2.connect(**db_params)
-    cursor = conn.cursor()
-    
-    construct_pfams_json(cursor, args.edge_list_file, args.read_dir, args.out_dir)
-
-    cursor.close()
-    conn.close()
+    construct_pfams_json(args.edge_list_file, args.read_dir, args.out_dir)
