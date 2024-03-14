@@ -1,5 +1,5 @@
 msa/
-data_old
+data/
 tmp/
 bin/db_config.ini
 **/pfams/result
