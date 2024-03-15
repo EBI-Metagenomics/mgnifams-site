@@ -76,11 +76,11 @@ def decide_font_color(hex_color):
         return 'white'
 
 def construct_name(mgnifam_id):
-    name = mgnifam_id.replace('mgnifam', 'MGYF')
+    name = mgnifam_id.replace('khalifam', 'KHLF')
     number_str = name[4:]
     number = int(number_str)
     formatted_number = '{:010d}'.format(number)
-    final_name = 'MGYF' + formatted_number
+    final_name = 'KHLF' + formatted_number
     
     return final_name
 

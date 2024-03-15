@@ -11,7 +11,7 @@
                   content="MGnify, MGnifams, Metagenomics, Protein, Domains, Structures" />
             <title>
                 {% block title %}
-                    MGnifams
+                    Khalifams
                 {% endblock title %}
             </title>
             <link rel="shortcut icon"
@@ -51,10 +51,10 @@
     {% include "base/header.html" %}
     <section style="--vf-hero--bg-image: url('{{ request.scheme }}://{{ request.META.HTTP_HOST }}{% static "explorer/banner.jpg" %}'); margin-top: 0" class="vf-hero vf-hero--400 | vf-u-fullbleed">
         <div class="vf-hero__content | vf-box | vf-stack vf-stack--400">
-            {% if request.resolver_match.url_name in "home" %}<p class="vf-hero__kicker">MGnifams</p>{% endif %}
-            <h1 class="vf-hero__heading">MGnifams</h1>
+            {% if request.resolver_match.url_name in "home" %}<p class="vf-hero__kicker">Khalifams</p>{% endif %}
+            <h1 class="vf-hero__heading">Khalifams</h1>
             <p class="vf-hero__text">
-                A metagenomics-derived protein families resource.
+                A metagenomics-derived protein families resource for anti-defence mechanism proteins.
             </p>
         </div>
     </section>

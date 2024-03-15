@@ -1,0 +1,12 @@
+<!-- explorer/templates/explorer/khalifam_names.html -->
+
+{% extends "explorer/base.html" %}
+
+{% block content %}
+<h1>Available Khalifams</h1>
+<ul>
+    {% for khalifam_name in khalifam_names %}
+        <li>{{ khalifam_name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

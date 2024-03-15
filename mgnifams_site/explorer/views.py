@@ -18,10 +18,10 @@ def count_lines_in_file(filepath):
 
 def index(request):
     # Calculate statistics
-    num_mgnifams = count_lines_in_file(os.path.join(base_dir, 'mgnifam_names.txt'))
+    num_mgnifams = count_lines_in_file(os.path.join(base_dir, 'khalifam_names.txt'))
 
-    # Get the first ID from mgnifam_names.txt
-    with open(os.path.join(base_dir, 'mgnifam_names.txt'), 'r') as f:
+    # Get the first ID from khalifam_names.txt
+    with open(os.path.join(base_dir, 'khalifam_names.txt'), 'r') as f:
         first_id = f.readline().strip()
 
     context = {
@@ -36,8 +36,8 @@ def id_exists(check_id, filepath):
         return check_id in f.read().splitlines()
 
 def translate_mgyf_to_file_id(mgyf):
-    id = re.sub(r'^MGYF0+', '', mgyf)
-    file_id = 'mgnfam' + id
+    id = re.sub(r'^KHLF0+', '', mgyf)
+    file_id = 'khalifam' + id
     return file_id              
 
 def format_protein_name(raw_name):
@@ -137,9 +137,9 @@ def generate_structure_link(part):
 
 def details(request):
     mgyf = request.GET.get('id', None)
-    id_filepath = os.path.join(base_dir, 'mgnifam_names.txt')
+    id_filepath = os.path.join(base_dir, 'khalifam_names.txt')
 
-    # Validate if ID exists in mgnifam_names.txt
+    # Validate if ID exists in khalifam_names.txt
     if not id_exists(mgyf, id_filepath):
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
@@ -171,7 +171,7 @@ def details(request):
 
     # Family members
     family_members_links = []
-    target_family = 'mgnifam' + family_id.replace('mgnfam', '') 
+    target_family = 'mgnifam' + family_id.replace('khalifam', '') 
     try:
         result = subprocess.run(['grep', f'^{target_family}\t', os.path.join(base_dir, 'families/updated_refined_families.tsv')], capture_output=True, text=True)
         if result.returncode == 0:
@@ -280,9 +280,9 @@ def details(request):
         'structural_annotations': structural_annotations
     })
 
-def mgnifam_names(request):
+def khalifam_names(request):
     # Read the cluster rep names from the file
-    with open(os.path.join(base_dir, 'mgnifam_names.txt'), 'r') as f:
-        mgnifam_names = f.readlines()
+    with open(os.path.join(base_dir, 'khalifam_names.txt'), 'r') as f:
+        khalifam_names = f.readlines()
 
-    return render(request, 'explorer/mgnifam_names.html', {'mgnifam_names': mgnifam_names})
+    return render(request, 'explorer/khalifam_names.html', {'khalifam_names': khalifam_names})
