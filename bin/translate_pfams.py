@@ -98,9 +98,11 @@ def translate_pfams(cursor, read_dir, out_dir):
                         domain['name'] = execute_pfam_translation_query(cursor, domain['name'])[0][0]
                         domain['color'] = string_to_hex_color(domain['name'])
                     else:
+                        domain['name'] = domain['name'].replace("mgnifam", "khalifam")
                         domain['link'] = f'http://127.0.0.1:8000/details/?id={construct_name(domain["name"])}' # TODO change base url
                     domain['font_color'] = decide_font_color(domain['color'])
 
+            file_name = file_name.replace("mgnfam", "khalifam")
             output_filename = os.path.join(out_dir, file_name)
             write_out_json(top_10_architecture_containers, output_filename)
 

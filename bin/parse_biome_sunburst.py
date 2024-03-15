@@ -48,7 +48,7 @@ def query_sequence_explorer_biome(cursor, counts_dir, out_dir):
         df = pd.read_csv(file_path)
         biome_names = []
         parent_names = []
-        file_name = file_name.replace("mgnifam", "mgnfam")
+        file_name = file_name.replace("mgnifam", "khalifam")
         with open(os.path.join(out_dir, file_name), 'w') as out_file:
             out_file.write("ids,labels,parents,counts\n")
             for index, row in df.iterrows():
