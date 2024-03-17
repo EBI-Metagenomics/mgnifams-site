@@ -52,7 +52,7 @@ def is_above_family_id(fam_name, above_family_id):
     fam_id = fam_name.replace("mgnifam", "")
     fam_id = float(fam_id)
 
-    if fam_id > above_family_id:
+    if fam_id > int(above_family_id):
         return True
     else:
         return False
