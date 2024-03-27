@@ -162,12 +162,20 @@ def details(request):
     family_size = first_split_first_part.split('_')[1]
     protein_parts = first_split_second_part.split('_')
     protein_rep = format_protein_name(protein_parts[0])
+    region_start = ""
+    region_end = ""
     if (len(protein_parts) == 1):
         region = ""
     elif (len(protein_parts) == 3):
-        region = f"/{protein_parts[1]}-{protein_parts[2]}"
+        region_start = int(protein_parts[1])
+        region_end = int(protein_parts[2])
+        region = f"/{region_start}-{region_end}"
+        
     elif (len(protein_parts) == 5):
-        region = f"/{int(protein_parts[1]) + int(protein_parts[3]) - 1}-{int(protein_parts[1]) + int(protein_parts[4]) - 1}"
+        region_start = int(protein_parts[1]) + int(protein_parts[3]) - 1
+        region_end = int(protein_parts[1]) + int(protein_parts[4]) - 1
+        region = f"/{region_start}-{region_end}"
+        
 
     # Family members
     family_members_links = []
@@ -269,6 +277,8 @@ def details(request):
         'cif_path': cif_filename,  
         'protein_rep': protein_rep,
         'region': region,
+        'region_start': region_start,
+        'region_end': region_end,
         'biomes_filepath': biomes_filepath,
         'domains_json': domains_json,
         'seed_msa_filepath': seed_msa_filepath,

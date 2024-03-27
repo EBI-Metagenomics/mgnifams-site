@@ -24,7 +24,11 @@
                         <tr class="vf-table__row">
                             <td class="vf-table__cell">Family representative sequence</td>
                             <td class="vf-table__cell">
-                                <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>{{ region }}
+                                {% if region_start != "" and region_end != "" %}
+                                    <a href="http://proteins.mgnify.org/{{ protein_rep }}/?s={{ region_start }}&e={{ region_end }}" target="_blank">{{ protein_rep }}{{ region }}</a>
+                                {% else %}
+                                    <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}{{ region }}</a>
+                                {% endif %}
                             </td>
                         </tr>
                         <tr class="vf-table__row">
