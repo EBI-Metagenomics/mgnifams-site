@@ -54,6 +54,8 @@ def format_protein_link(protein_id):
     Example inputs: '149902623', '149902623_1_116', '149902623/30_116', '149902623_1_116/30_116'
     Output: HTML link element
     """
+    region_start = ""
+    region_end = ""
     number_of_underscores = protein_id.count('_')
     if (number_of_underscores == 0):
         formatted_name = format_protein_name(protein_id)
@@ -62,17 +64,27 @@ def format_protein_link(protein_id):
         parts = protein_id.split('/')
         formatted_name = format_protein_name(parts[0])
         link_text = f"{formatted_name}/{parts[1].replace('_', '-')}"
+        region_parts = parts[1].split("_")
+        region_start = int(region_parts[0])
+        region_end = int(region_parts[1])
     elif (number_of_underscores == 2):
         parts = protein_id.split('_')
         formatted_name = format_protein_name(parts[0])
         link_text = f"{formatted_name}/{parts[1]}-{parts[2]}"
+        region_start = int(parts[1])
+        region_end = int(parts[2])
     elif (number_of_underscores == 3):
         formatted_name = format_protein_name(protein_id.split('_')[0])
         start = int(protein_id.split('_')[1])
         region = protein_id.split('/')[1].split('_')
-        link_text = f"{formatted_name}/{start + int(region[0]) - 1}-{start + int(region[1]) - 1}"
+        region_start = start + int(region[0]) - 1
+        region_end = start + int(region[1]) - 1
+        link_text = f"{formatted_name}/{region_start}-{region_end}"
 
     link_url = f"http://proteins.mgnify.org/{formatted_name}"
+    if region_start != "":
+        link_url += f"/?s={region_start}&e={region_end}"
+
     return f'<a href="{link_url}">{link_text}</a>'
 
 def get_filepath(family_id, sub_dir):
