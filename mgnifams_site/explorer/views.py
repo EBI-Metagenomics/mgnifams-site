@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
 from Bio import SeqIO
+from explorer.models import Mgnifam, MgnifamProteins, MgnifamPfams, MgnifamFolds
 import re
 import glob
 import requests
@@ -39,6 +40,10 @@ def translate_mgyf_to_file_id(mgyf):
     id = re.sub(r'^MGYF0+', '', mgyf)
     file_id = 'mgnfam' + id
     return file_id              
+
+def translate_mgyf_to_int_id(mgyf):
+    id = re.sub(r'^MGYF0+', '', mgyf)
+    return int(id)              
 
 def format_protein_name(raw_name):
     """
@@ -147,7 +152,64 @@ def generate_structure_link(part):
     else:
         return part
 
+# def details(request):
+#     mgyf_id = request.GET.get('id', None)
+
+#     # Fetch Mgnifam object from the database
+#     try:
+#         mgnifam = Mgnifam.objects.get(id=mgyf_id)
+#     except Mgnifam.DoesNotExist:
+#         messages.error(request, 'Invalid ID entered. Please check and try again.')
+#         return redirect('index')
+
+#     # Extract data from the Mgnifam object
+#     family_size = mgnifam.family_size
+#     protein_rep = mgnifam.protein_rep
+#     region = mgnifam.rep_region
+#     converged = mgnifam.converged
+#     cif_file = mgnifam.cif_file
+#     seed_msa_file = mgnifam.seed_msa_file
+#     msa_file = mgnifam.msa_file
+#     hmm_file = mgnifam.hmm_file
+#     biomes_file = mgnifam.biomes_file
+#     domain_architecture_file = mgnifam.domain_architecture_file
+
+#     # Fetch related MgnifamProteins objects
+#     mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam_id=mgnifam)
+
+#     # Fetch related MgnifamPfams objects
+#     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam_id=mgnifam)
+
+#     # Fetch related MgnifamFolds objects
+#     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam_id=mgnifam)
+
 def details(request):
+    mgyf_id = request.GET.get('id', None)
+    mgyf_id = translate_mgyf_to_int_id(mgyf_id)
+
+    try:
+        mgnifam = Mgnifam.objects.get(id=mgyf_id)
+    except Mgnifam.DoesNotExist:
+        messages.error(request, 'Invalid ID entered. Please check and try again.')
+        return redirect('index')
+
+    family_size = mgnifam.family_size
+    protein_rep = format_protein_name(str(mgnifam.protein_rep))
+    region = mgnifam.rep_region
+    region_start = ""
+    region_end = ""
+    if (region != "-"):
+        region_parts = region.split("-")
+        region_start = region_parts[0]
+        region_end   = region_parts[1]
+        region = f"/{region}"
+    else:
+        region = ""
+        
+    # converged = mgnifam.converged # TODO
+
+
+    #######################################
     mgyf = request.GET.get('id', None)
     id_filepath = os.path.join(base_dir, 'mgnifam_names.txt')
 
@@ -171,22 +233,22 @@ def details(request):
     first_split_first_part = first_split[0]
     first_split_second_part = first_split[1]
     family_id = first_split_first_part.split('_')[0]
-    family_size = first_split_first_part.split('_')[1]
-    protein_parts = first_split_second_part.split('_')
-    protein_rep = format_protein_name(protein_parts[0])
-    region_start = ""
-    region_end = ""
-    if (len(protein_parts) == 1):
-        region = ""
-    elif (len(protein_parts) == 3):
-        region_start = int(protein_parts[1])
-        region_end = int(protein_parts[2])
-        region = f"/{region_start}-{region_end}"
+    # family_size = first_split_first_part.split('_')[1]
+    # protein_parts = first_split_second_part.split('_')
+    # protein_rep = format_protein_name(protein_parts[0])
+    # region_start = ""
+    # region_end = ""
+    # if (len(protein_parts) == 1):
+    #     region = ""
+    # elif (len(protein_parts) == 3):
+    #     region_start = int(protein_parts[1])
+    #     region_end = int(protein_parts[2])
+    #     region = f"/{region_start}-{region_end}"
         
-    elif (len(protein_parts) == 5):
-        region_start = int(protein_parts[1]) + int(protein_parts[3]) - 1
-        region_end = int(protein_parts[1]) + int(protein_parts[4]) - 1
-        region = f"/{region_start}-{region_end}"
+    # elif (len(protein_parts) == 5):
+    #     region_start = int(protein_parts[1]) + int(protein_parts[3]) - 1
+    #     region_end = int(protein_parts[1]) + int(protein_parts[4]) - 1
+    #     region = f"/{region_start}-{region_end}"
         
 
     # Family members
