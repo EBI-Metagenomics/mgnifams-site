@@ -49,38 +49,20 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
-def format_protein_link(protein_id):
+def format_protein_link(protein_id, region):
     """
     Formats the protein ID into a clickable link.
-    Example inputs: '149902623', '149902623_1_116', '149902623/30_116', '149902623_1_116/30_116'
     Output: HTML link element
     """
-    region_start = ""
-    region_end = ""
-    number_of_underscores = protein_id.count('_')
-    if (number_of_underscores == 0):
-        formatted_name = format_protein_name(protein_id)
-        link_text = formatted_name
-    elif (number_of_underscores == 1):
-        parts = protein_id.split('/')
-        formatted_name = format_protein_name(parts[0])
-        link_text = f"{formatted_name}/{parts[1].replace('_', '-')}"
-        region_parts = parts[1].split("_")
-        region_start = int(region_parts[0])
-        region_end = int(region_parts[1])
-    elif (number_of_underscores == 2):
-        parts = protein_id.split('_')
-        formatted_name = format_protein_name(parts[0])
-        link_text = f"{formatted_name}/{parts[1]}-{parts[2]}"
-        region_start = int(parts[1])
-        region_end = int(parts[2])
-    elif (number_of_underscores == 3):
-        formatted_name = format_protein_name(protein_id.split('_')[0])
-        start = int(protein_id.split('_')[1])
-        region = protein_id.split('/')[1].split('_')
-        region_start = start + int(region[0]) - 1
-        region_end = start + int(region[1]) - 1
-        link_text = f"{formatted_name}/{region_start}-{region_end}"
+    formatted_name = format_protein_name(str(protein_id))
+    link_text      = formatted_name
+    region_start   = ""
+    region_end     = ""
+    if (region != "-"):
+        region_parts = region.split("-")
+        region_start = region_parts[0]
+        region_end   = region_parts[1]
+        link_text    = f"{formatted_name}/{region_start}-{region_end}"
 
     link_url = f"http://proteins.mgnify.org/{formatted_name}"
     if region_start != "":
@@ -148,22 +130,12 @@ def generate_structure_link(part):
     else:
         return part
 
-# def details(request):
-
-#     # Fetch related MgnifamProteins objects
-#     mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam_id=mgnifam)
-
-#     # Fetch related MgnifamPfams objects
-#     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam_id=mgnifam)
-
-#     # Fetch related MgnifamFolds objects
-#     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam_id=mgnifam)
-
 def details(request):
     mgyf = request.GET.get('id', None)
     mgyf_id = translate_mgyf_to_int_id(mgyf)
 
     try:
+        # Fetch Mgnifam object
         mgnifam = Mgnifam.objects.get(id=mgyf_id)
     except Mgnifam.DoesNotExist:
         messages.error(request, 'Invalid ID entered. Please check and try again.')
@@ -206,25 +178,26 @@ def details(request):
     domain_architecture_file = mgnifam.domain_architecture_file
     domains_json = os.path.join("pfams/translated/", domain_architecture_file)
 
+    # Fetch MgnifamProteins objects
+    mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
+    family_members_links = []
+    for mgnifam_protein in mgnifam_proteins:
+        protein_id = mgnifam_protein.protein
+        region = mgnifam_protein.region
+        family_members_links.append(format_protein_link(protein_id, region))
+
+    # # Fetch related MgnifamPfams objects
+    # mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
+
+    # # Fetch related MgnifamFolds objects
+    # mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
+
     #######################################
 
     filename_no_ext = cif_file.split('.')[0]
     first_split = filename_no_ext.split('-')
     first_split_first_part = first_split[0]
     family_id = first_split_first_part.split('_')[0]
-
-    # Family members
-    family_members_links = []
-    target_family = 'mgnifam' + family_id.replace('mgnfam', '') 
-    try:
-        result = subprocess.run(['grep', f'^{target_family}\t', os.path.join(base_dir, 'families/updated_refined_families.tsv')], capture_output=True, text=True)
-        if result.returncode == 0:
-            lines = result.stdout.splitlines()
-            for line in lines:
-                protein_id = line.split('\t')[1]
-                family_members_links.append(format_protein_link(protein_id))
-    except Exception as e:
-        print(f"Error running grep: {e}")
 
     # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
@@ -291,19 +264,19 @@ def details(request):
     return render(request, 'explorer/details.html', {
         'mgyf': mgyf,
         'family_size': family_size,
-        'family_members_links': family_members_links,
-        'cif_path': cif_file,  
         'protein_rep': protein_rep,
         'region': region,
         'region_start': region_start,
         'region_end': region_end,
-        'biomes_filepath': biomes_filepath,
-        'domains_json': domains_json,
+        'cif_path': cif_file,
         'seed_msa_filepath': seed_msa_filepath,
         'full_msa_filepath': full_msa_filepath,
         'rf': rf,
         'hmm_filepath': hmm_filepath,
         'hmm_logo_json': hmm_logo_json,
+        'biomes_filepath': biomes_filepath,
+        'domains_json': domains_json,
+        'family_members_links': family_members_links,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })

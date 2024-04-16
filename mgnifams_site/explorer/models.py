@@ -22,7 +22,7 @@ class Mgnifam(models.Model):
 
 class MgnifamProteins(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam_id = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
     protein = models.IntegerField()
     region = models.TextField()
 
@@ -34,7 +34,7 @@ class MgnifamProteins(models.Model):
 
 class MgnifamPfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam_id = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
     rank = models.IntegerField()
     pfam_id = models.CharField(max_length=8)
     pfam_hit = models.TextField()
@@ -50,7 +50,7 @@ class MgnifamPfams(models.Model):
 
 class MgnifamFolds(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam_id = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
     target_structure = models.TextField()
     aligned_length = models.IntegerField()
     query_start = models.IntegerField()
