@@ -149,26 +149,6 @@ def generate_structure_link(part):
         return part
 
 # def details(request):
-#     mgyf_id = request.GET.get('id', None)
-
-#     # Fetch Mgnifam object from the database
-#     try:
-#         mgnifam = Mgnifam.objects.get(id=mgyf_id)
-#     except Mgnifam.DoesNotExist:
-#         messages.error(request, 'Invalid ID entered. Please check and try again.')
-#         return redirect('index')
-
-#     # Extract data from the Mgnifam object
-#     family_size = mgnifam.family_size
-#     protein_rep = mgnifam.protein_rep
-#     region = mgnifam.rep_region
-#     converged = mgnifam.converged
-#     cif_file = mgnifam.cif_file
-#     seed_msa_file = mgnifam.seed_msa_file
-#     msa_file = mgnifam.msa_file
-#     hmm_file = mgnifam.hmm_file
-#     biomes_file = mgnifam.biomes_file
-#     domain_architecture_file = mgnifam.domain_architecture_file
 
 #     # Fetch related MgnifamProteins objects
 #     mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam_id=mgnifam)
@@ -202,7 +182,9 @@ def details(request):
     else:
         region = ""
     # converged = mgnifam.converged # TODO
+
     cif_file = mgnifam.cif_file
+
     seed_msa_file = mgnifam.seed_msa_file
     seed_msa_filepath = os.path.join("families/seed_msa/", seed_msa_file)
     msa_file = mgnifam.msa_file
@@ -218,45 +200,18 @@ def details(request):
     if response_data and 'uuid' in response_data:
         uuid = response_data['uuid']
     hmm_logo_json = fetch_skylign_logo_json(uuid)
-    # domain_architecture_file = mgnifam.domain_architecture_file
+
+    biomes_file = mgnifam.biomes_file
+    biomes_filepath = os.path.join("biome_sunburst/result/", biomes_file)
+    domain_architecture_file = mgnifam.domain_architecture_file
+    domains_json = os.path.join("pfams/translated/", domain_architecture_file)
 
     #######################################
-
-
-    # Construct the path for the cif file
-    # cif_directory = os.path.join(base_dir, 'cif/')
-    # id = translate_mgyf_to_file_id(mgyf)
-    # cif_files = glob.glob(os.path.join(cif_directory, id + '_*'))
-    # Extract only the filename from the first matching cif file
-    # cif_filename = os.path.basename(cif_files[0]) if cif_files else None
-    # print(cif_filename)
-    # Check if cif file exists
-    # if not cif_filename:
-    #     messages.error(request, 'No CIF file found for the given ID.')
-    #     return redirect('index')
 
     filename_no_ext = cif_file.split('.')[0]
     first_split = filename_no_ext.split('-')
     first_split_first_part = first_split[0]
-    first_split_second_part = first_split[1]
     family_id = first_split_first_part.split('_')[0]
-    # family_size = first_split_first_part.split('_')[1]
-    # protein_parts = first_split_second_part.split('_')
-    # protein_rep = format_protein_name(protein_parts[0])
-    # region_start = ""
-    # region_end = ""
-    # if (len(protein_parts) == 1):
-    #     region = ""
-    # elif (len(protein_parts) == 3):
-    #     region_start = int(protein_parts[1])
-    #     region_end = int(protein_parts[2])
-    #     region = f"/{region_start}-{region_end}"
-        
-    # elif (len(protein_parts) == 5):
-    #     region_start = int(protein_parts[1]) + int(protein_parts[3]) - 1
-    #     region_end = int(protein_parts[1]) + int(protein_parts[4]) - 1
-    #     region = f"/{region_start}-{region_end}"
-        
 
     # Family members
     family_members_links = []
@@ -270,11 +225,6 @@ def details(request):
                 family_members_links.append(format_protein_link(protein_id))
     except Exception as e:
         print(f"Error running grep: {e}")
-
-    # Biomes distribution file path
-    biomes_filepath = get_filepath(family_id, "biome_sunburst/result/")
-    # Domain architecture file path
-    domains_json = get_filepath(family_id, "pfams/translated/")
 
     # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
