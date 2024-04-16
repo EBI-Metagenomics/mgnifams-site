@@ -186,11 +186,22 @@ def details(request):
         region = mgnifam_protein.region
         family_members_links.append(format_protein_link(protein_id, region))
 
-    # # Fetch related MgnifamPfams objects
-    # mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
+    # Fetch related MgnifamPfams objects
+    mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
+    hits_data = []
+    for mgnifam_pfam in mgnifam_pfams:
+        hit = {
+            'rank': mgnifam_pfam.rank,
+            'name': mgnifam_pfam.pfam_hit,
+            'pfam_id': mgnifam_pfam.pfam_id,
+            'e_value': mgnifam_pfam.e_value,
+            'query_hmm': mgnifam_pfam.query_hmm_range,
+            'template_hmm': mgnifam_pfam.template_hmm_range,
+        }
+        hits_data.append(hit)
 
-    # # Fetch related MgnifamFolds objects
-    # mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
+    # Fetch related MgnifamFolds objects
+    mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
 
     #######################################
 
@@ -198,37 +209,6 @@ def details(request):
     first_split = filename_no_ext.split('-')
     first_split_first_part = first_split[0]
     family_id = first_split_first_part.split('_')[0]
-
-    # Model annotation / HHblits
-    unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
-    with open(unannotated_filepath, 'r') as file:
-        unannotated_content = file.read()
-    is_annotated = not (family_id + '_') in unannotated_content
-    if is_annotated:
-        hits_directory = os.path.join(base_dir, 'hh/hits/')
-        hits_files = glob.glob(os.path.join(hits_directory, family_id + '_*'))
-
-        if hits_files:
-            with open(hits_files[0], 'r') as file:
-                hits_data = []
-                for line in file:
-                    name = line[4:34].strip()
-                    pfam_id = name.split(';')[0].strip().split('.')[0]
-                    
-                    hit = {
-                        'rank': line[0:3].strip(),
-                        'name': name,
-                        'pfam_id': pfam_id,
-                        'e_value': line[41:48].strip(),
-                        'query_hmm': line[75:83].strip(),
-                        'template_hmm': line[84:99].strip(),
-                    }
-                    hits_data.append(hit)
-        else:
-            hits_data = []
-
-    else:
-        hits_data = []
 
     # Structural annotation / Foldseek
     foldseek_annotated_filepath = os.path.join(base_dir, 'foldseek/annotated.txt')
