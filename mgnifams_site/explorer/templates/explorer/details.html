@@ -180,7 +180,7 @@
                                 </td>
                                 <td class="vf-table__cell">{{ hit.query_hmm }}</td>
                                 <td class="vf-table__cell">{{ hit.template_hmm }}</td>
-                                <td class="vf-table__cell">{{ hit.e_value }}</td>                            
+                                <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>                            
                             </tr>
                         {% endfor %}
                     </tbody>

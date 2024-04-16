@@ -30,12 +30,7 @@ def index(request):
         'first_id': first_id
     }
 
-    return render(request, 'explorer/index.html', context)
-
-def translate_mgyf_to_file_id(mgyf):
-    id = re.sub(r'^MGYF0+', '', mgyf)
-    file_id = 'mgnfam' + id
-    return file_id              
+    return render(request, 'explorer/index.html', context)           
 
 def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0+', '', mgyf)
@@ -69,29 +64,6 @@ def format_protein_link(protein_id, region):
         link_url += f"/?s={region_start}&e={region_end}"
 
     return f'<a href="{link_url}">{link_text}</a>'
-
-def get_filepath(family_id, sub_dir):
-    dir = os.path.join(base_dir, sub_dir)
-    search_pattern = os.path.join(dir, family_id + '_*')
-    
-    for filepath in glob.glob(search_pattern):
-        filename = os.path.basename(filepath)
-        parts = filename.split('_')
-        if parts[0] == family_id:
-            # Return the relative path from the base directory
-            return os.path.relpath(filepath, base_dir)
-
-    return None
-
-def read_rf_file(family_id):
-    rf_folder = os.path.join(base_dir, 'families', 'rf')
-    for filename in os.listdir(rf_folder):
-        parts = filename.split('_')
-        if parts[0] == family_id:
-            with open(os.path.join(rf_folder, filename), 'r') as file:
-                rf = file.read()
-            return rf
-    return None
 
 def call_skylign_api(base_dir, file_path):
     url = "http://skylign.org"
@@ -196,50 +168,27 @@ def details(request):
             'pfam_id': mgnifam_pfam.pfam_id,
             'e_value': mgnifam_pfam.e_value,
             'query_hmm': mgnifam_pfam.query_hmm_range,
-            'template_hmm': mgnifam_pfam.template_hmm_range,
+            'template_hmm': mgnifam_pfam.template_hmm_range
         }
         hits_data.append(hit)
 
     # Fetch related MgnifamFolds objects
     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
-
-    #######################################
-
-    filename_no_ext = cif_file.split('.')[0]
-    first_split = filename_no_ext.split('-')
-    first_split_first_part = first_split[0]
-    family_id = first_split_first_part.split('_')[0]
-
-    # Structural annotation / Foldseek
-    foldseek_annotated_filepath = os.path.join(base_dir, 'foldseek/annotated.txt')
     structural_annotations = []
-    with open(foldseek_annotated_filepath, 'r') as file:
-        for line in file:
-            if line.startswith(family_id + '_'):
-                foldseek_folder = os.path.join(base_dir, 'foldseek/')
-                for filepath in glob.glob(foldseek_folder + '*'):
-                    filename = os.path.basename(filepath)
-                    if filename.startswith(('alphafold_', 'esm_', 'pdb_')):
-                        with open(filepath, 'r') as f:
-                            for file_line in f:
-                                parts = file_line.strip().split('\t')
-                                first_part = parts[0].split('-')[0].split('_')[0]
-                                target_structure_identifier = generate_structure_link(parts[1])
-                                if first_part == family_id:
-                                    annotation = {
-                                        'target_structure_identifier': target_structure_identifier,
-                                        'aligned_length': int(parts[3]),
-                                        'query_start': int(parts[6]),
-                                        'query_end': int(parts[7]),
-                                        'target_start': int(parts[8]),
-                                        'target_end': int(parts[9]),
-                                        'e_value': float(parts[10])
-                                    }
-                                    structural_annotations.append(annotation)
-                        structural_annotations.sort(key=lambda x: x['e_value'])
-                        for i, annotation in enumerate(structural_annotations, start=1):
-                            annotation['rank'] = i
-                break
+    for mgnifam_fold in mgnifam_folds:
+        annotation = {
+            'target_structure_identifier': generate_structure_link(mgnifam_fold.target_structure),
+            'aligned_length': mgnifam_fold.aligned_length,
+            'query_start': mgnifam_fold.query_start,
+            'query_end': mgnifam_fold.query_end,
+            'target_start': mgnifam_fold.target_start,
+            'target_end': mgnifam_fold.target_end,
+            'e_value': mgnifam_fold.e_value
+        }
+        structural_annotations.append(annotation)
+    structural_annotations.sort(key=lambda x: x['e_value'])
+    for i, annotation in enumerate(structural_annotations, start=1):
+        annotation['rank'] = i
 
     return render(request, 'explorer/details.html', {
         'mgyf': mgyf,
