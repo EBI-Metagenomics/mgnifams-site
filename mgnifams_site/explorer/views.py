@@ -32,10 +32,6 @@ def index(request):
 
     return render(request, 'explorer/index.html', context)
 
-def id_exists(check_id, filepath):
-    with open(filepath, 'r') as f:
-        return check_id in f.read().splitlines()
-
 def translate_mgyf_to_file_id(mgyf):
     id = re.sub(r'^MGYF0+', '', mgyf)
     file_id = 'mgnfam' + id
@@ -184,8 +180,8 @@ def generate_structure_link(part):
 #     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam_id=mgnifam)
 
 def details(request):
-    mgyf_id = request.GET.get('id', None)
-    mgyf_id = translate_mgyf_to_int_id(mgyf_id)
+    mgyf = request.GET.get('id', None)
+    mgyf_id = translate_mgyf_to_int_id(mgyf)
 
     try:
         mgnifam = Mgnifam.objects.get(id=mgyf_id)
@@ -205,30 +201,41 @@ def details(request):
         region = f"/{region}"
     else:
         region = ""
-        
     # converged = mgnifam.converged # TODO
-
+    cif_file = mgnifam.cif_file
+    seed_msa_file = mgnifam.seed_msa_file
+    seed_msa_filepath = os.path.join("families/seed_msa/", seed_msa_file)
+    msa_file = mgnifam.msa_file
+    full_msa_filepath = os.path.join("families/msa/", msa_file)
+    rf_file = mgnifam.rf_file
+    rf_filepath = os.path.join("families/rf/", rf_file)
+    with open(os.path.join(base_dir, rf_filepath), 'r') as file:
+        rf = file.read()
+    hmm_file = mgnifam.hmm_file
+    hmm_filepath = os.path.join("families/hmm/", hmm_file)
+    response_data = call_skylign_api(base_dir, hmm_filepath)
+    uuid = ""
+    if response_data and 'uuid' in response_data:
+        uuid = response_data['uuid']
+    hmm_logo_json = fetch_skylign_logo_json(uuid)
+    # domain_architecture_file = mgnifam.domain_architecture_file
 
     #######################################
-    mgyf = request.GET.get('id', None)
-    id_filepath = os.path.join(base_dir, 'mgnifam_names.txt')
 
-    # Validate if ID exists in mgnifam_names.txt
-    if not id_exists(mgyf, id_filepath):
-        messages.error(request, 'Invalid ID entered. Please check and try again.')
-        return redirect('index')
+
     # Construct the path for the cif file
-    cif_directory = os.path.join(base_dir, 'cif/')
-    id = translate_mgyf_to_file_id(mgyf)
-    cif_files = glob.glob(os.path.join(cif_directory, id + '_*'))
+    # cif_directory = os.path.join(base_dir, 'cif/')
+    # id = translate_mgyf_to_file_id(mgyf)
+    # cif_files = glob.glob(os.path.join(cif_directory, id + '_*'))
     # Extract only the filename from the first matching cif file
-    cif_filename = os.path.basename(cif_files[0]) if cif_files else None
+    # cif_filename = os.path.basename(cif_files[0]) if cif_files else None
+    # print(cif_filename)
     # Check if cif file exists
-    if not cif_filename:
-        messages.error(request, 'No CIF file found for the given ID.')
-        return redirect('index')
+    # if not cif_filename:
+    #     messages.error(request, 'No CIF file found for the given ID.')
+    #     return redirect('index')
 
-    filename_no_ext = cif_filename.split('.')[0]
+    filename_no_ext = cif_file.split('.')[0]
     first_split = filename_no_ext.split('-')
     first_split_first_part = first_split[0]
     first_split_second_part = first_split[1]
@@ -268,19 +275,6 @@ def details(request):
     biomes_filepath = get_filepath(family_id, "biome_sunburst/result/")
     # Domain architecture file path
     domains_json = get_filepath(family_id, "pfams/translated/")
-
-    # Seed MSA viewer
-    seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
-    full_msa_filepath = get_filepath(family_id, "families/msa/")
-    rf = read_rf_file(family_id)
-    
-    # HMM viewer
-    hmm_filepath = get_filepath(family_id, "families/hmm/")
-    response_data = call_skylign_api(base_dir, hmm_filepath)
-    uuid = ""
-    if response_data and 'uuid' in response_data:
-        uuid = response_data['uuid']
-    hmm_logo_json = fetch_skylign_logo_json(uuid)
 
     # Model annotation / HHblits
     unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
@@ -348,7 +342,7 @@ def details(request):
         'mgyf': mgyf,
         'family_size': family_size,
         'family_members_links': family_members_links,
-        'cif_path': cif_filename,  
+        'cif_path': cif_file,  
         'protein_rep': protein_rep,
         'region': region,
         'region_start': region_start,

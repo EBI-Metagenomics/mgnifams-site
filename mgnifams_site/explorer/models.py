@@ -10,6 +10,7 @@ class Mgnifam(models.Model):
     seed_msa_file = models.TextField()
     msa_file = models.TextField()
     hmm_file = models.TextField()
+    rf_file = models.TextField()
     biomes_file = models.TextField()
     domain_architecture_file = models.TextField()
 
