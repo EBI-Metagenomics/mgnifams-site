@@ -1,13 +1,25 @@
-$(document).ready(function () {
+const translate_to_hmm_pos = (sequence, position) => {
+    let hmm_pos = 0;
 
-    // Family members
+    for (let i = 0; i < sequence.length; i++) {
+        if (sequence[i] === 'x') {
+            hmm_pos = hmm_pos + 1;
+            if (i >= position) break;
+        }
+    }
+
+    return hmm_pos;
+};
+
+const loadFamilyData = () => {
     document.getElementById('show-members-btn').addEventListener('click', function() {
         let div = document.getElementById('family-members-div');
         div.style.display = div.style.display === 'none' ? 'block' : 'none';
         this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
     });
+};
 
-    // Biomes distribution
+const loadBiomeData = () => {
     let biomesDataURL = document.getElementById('biomes-data').dataset.url;
     d3.csv(biomesDataURL, function(err, rows){
         function unpack(rows, key) {
@@ -31,8 +43,9 @@ $(document).ready(function () {
 
         Plotly.newPlot('sunburst-div', data, layout, {showSendToCloud: true});
     })
+};
 
-    // MSA viewer
+const loadMSAData = () => {
     let rootDiv = document.getElementById("msa-div")
     let msaDataURL = document.getElementById('msa-data').dataset.url;
     let opts = {
@@ -64,21 +77,13 @@ $(document).ready(function () {
         }
     };
     let m = new msa.msa(opts);
-
-    const translate_to_hmm_pos = (sequence, position) => {
-        let hmm_pos = 0;
-
-        for (let i = 0; i < sequence.length; i++) {
-            if (sequence[i] === 'x') {
-                hmm_pos = hmm_pos + 1;
-                if (i >= position) break;
-            }
-        }
-
-        return hmm_pos;
-    };
-    
     m.render();
+};
 
-    // HMM Viewer
+$(document).ready(function () {
+
+    loadFamilyData();
+    loadBiomeData();
+    loadMSAData();
+    
 })
