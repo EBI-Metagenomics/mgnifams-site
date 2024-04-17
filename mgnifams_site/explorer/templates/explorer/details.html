@@ -5,8 +5,6 @@
 {% block content %}
 {% load custom_filters %}
 
-<script src="{% static 'explorer/details.js' %}"></script>
-
 <div id="tooltip" class="tooltip"></div>
 
 <section class="vf-content | vf-stack vf-stack--600">
@@ -58,7 +56,9 @@
         <article class="vf-card vf-card--brand vf-card--bordered vf-grid__col--span-2">
             <div class="vf-card__content | vf-stack vf-stack--600 ">
                 <h3 class="vf-card__heading">Biomes distribution</h3>
+                <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}"></div>
                 <div id="sunburst-div"></div>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--primary vf-button--sm">Download biomes CSV file</a>
             </div>
         </article>
     </div>
@@ -95,11 +95,12 @@
                         </li>
                     </ul>
                 </p>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf }}.cif" class="vf-button vf-button--primary vf-button--sm">Download CIF file</a>
             </div>
             <div class="vf-grid__col--span-3">
                 <div id="pdb_viewer">
                     <pdbe-molstar
-                        custom-data-url="{% static "cif/"|add:cif_path %}"
+                        custom-data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}"
                         custom-data-format="cif"
                         alphafold-view="true"
                         bg-color-r="255"
@@ -117,9 +118,10 @@
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Multiple Sequence Alignment (Seed)</h3>
+            <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}"></div>
             <div id="msa-div"></div>
-            <a href="{% static seed_msa_filepath %}" download class="vf-button vf-button--primary vf-button--sm">Download seed MSA file</a>
-            <a href="{% static full_msa_filepath %}" download class="vf-button vf-button--primary vf-button--sm">Download full MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download seed MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download full MSA file</a>
         </div>
     </article>
 
@@ -135,7 +137,7 @@
             </div>
             <div id="logo" class="logo"></div>
             <div id="col_info" class="col_info"></div>
-            <a href="{% static hmm_filepath %}" download class="vf-button vf-button--primary vf-button--sm">Download HMM file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf }}.hmm" class="vf-button vf-button--primary vf-button--sm">Download HMM file</a>
         </div>
     </article>
 
@@ -148,7 +150,9 @@
                     The numbers on the left describe how many times each architecture was found.
                 </p>
             </div>
+            <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}"></div>
             <div id="architecturesContainer"></div>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--primary vf-button--sm">Download domains JSON file</a>
         </div>
     </article>
 
@@ -180,7 +184,7 @@
                                 </td>
                                 <td class="vf-table__cell">{{ hit.query_hmm }}</td>
                                 <td class="vf-table__cell">{{ hit.template_hmm }}</td>
-                                <td class="vf-table__cell">{{ hit.e_value }}</td>                            
+                                <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>                            
                             </tr>
                         {% endfor %}
                     </tbody>
@@ -235,272 +239,25 @@
     </article>
 </section>
 
-{% comment %} Family members {% endcomment %}
-<script>
-    document.getElementById('show-members-btn').addEventListener('click', function() {
-        var div = document.getElementById('family-members-div');
-        div.style.display = div.style.display === 'none' ? 'block' : 'none';
-        this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
-    });
-</script>
-
+<script src="{% static 'explorer/details.js' %}"></script>
 {% comment %} Biomes distribution {% endcomment %}
 <script src='https://cdn.plot.ly/plotly-2.29.1.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
-<script>
-
-    d3.csv("../static/{{ biomes_filepath }}", function(err, rows){
-        function unpack(rows, key) {
-            return rows.map(function(row) { return row[key]; });
-        }
-
-        var data = [
-            {
-                type: "sunburst",
-                ids: unpack(rows, 'ids'),
-                labels: unpack(rows, 'labels'),
-                parents:unpack(rows, 'parents'),
-                values:unpack(rows, 'counts')
-            }
-        ];
-
-        var layout = {
-            margin: {l: 0, r: 0, b: 0, t:0},
-            extendsunburstcolorway: true
-        };
-
-        Plotly.newPlot('sunburst-div', data, layout, {showSendToCloud: true});
-    })
-
-</script>
-
 {% comment %} PDB viewer {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
-
 {% comment %} MSA Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/msa/msa.min.css" %}">
 <script src="{% static "explorer/msa/msa.min.js" %}"></script>
-<script>
-
-    var rootDiv = document.getElementById("msa-div")
-
-    var opts = {
-        el: rootDiv,
-            importURL: "../static/{{ seed_msa_filepath }}",  menu: {
-            menuFontsize: "14px",
-            menuItemFontsize: "14px",
-            menuItemLineHeight: "14px",
-            menuMarginLeft: "3px",
-            menuPadding: "3px 4px 3px 4px",
-        },
-        bootstrapMenu: true,
-        vis: {
-            seqlogo: false,
-            conserv: false,
-            overviewbox: false,
-            gapHeader: false,
-            labelId: true,
-            labelName: true,
-            labelPartition: false,
-            labelCheckbox: false
-        },
-        colorscheme: {
-            scheme: "clustal2", // name of your color scheme
-            colorBackground: true, // otherwise only the text will be colored
-            showLowerCase: true, // used to hide and show lowercase chars in the overviewbox
-            opacity: 0.6 //opacity for the residues
-        }
-    };
-    var m = new msa.msa(opts);
-
-    const translate_to_hmm_pos = (sequence, position) => {
-        let hmm_pos = 0;
-
-        for (let i = 0; i < sequence.length; i++) {
-            if (sequence[i] === 'x') {
-                hmm_pos = hmm_pos + 1;
-                if (i >= position) break;
-            }
-        }
-
-        return hmm_pos;
-    };
-
-    {% comment %} const click_hmm = (hmm_pos) => {
-        const inputCol = document.querySelector('.logo_position');
-        inputCol.focus();
-        inputCol.value = null;
-        inputCol.value = hmm_pos;
-        const event = new KeyboardEvent('keypress', {
-            key: 'Enter',
-            code: 'Enter',
-            keyCode: 13,
-            which: 13,
-            bubbles: true
-        });
-        inputCol.dispatchEvent(event);
-        const inputColButton = document.querySelector('.button.logo_change');
-        inputColButton.click();
-    };
-
-    m.g.on("residue:click", function(data){
-        hmm_pos = translate_to_hmm_pos("{{ rf }}", data.rowPos)
-        click_hmm(hmm_pos);
-    }); {% endcomment %}
-    m.render();
-</script>
-
 {% comment %} HMM Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/hmm/hmm_logo.min.css" %}">
 <script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
+
 <script>
-    const extract_hmm_column = (p_text) => {
-        var parts = p_text.split(':');
-        var numberPart = parts[parts.length - 1];
-        var col = parseInt(numberPart);
-        return col;
-    };
-
-    const translate_to_msa_pos = (sequence, hmm_position) => {
-        let x_counter = 0;
-        let msa_pos;
-        for ( msa_pos = 0; msa_pos < sequence.length; msa_pos++) {
-            if (sequence[msa_pos] === 'x') {
-                x_counter = x_counter + 1;
-                if (x_counter == hmm_position) break;
-            }
-        }
-        return msa_pos;
-    };
-
-    const link_hmm_to_msa = () => {
-        // need a dummy init p in the col_info div to tie the event
-        const hiddenParagraph = document.createElement('p');
-        hiddenParagraph.textContent = 'Hidden paragraph content';
-        hiddenParagraph.style.display = 'none';
-        const divElement = document.getElementById('col_info');
-        divElement.appendChild(hiddenParagraph);
-        // create the observer
-        const observer = new MutationObserver(function(mutationsList, observer) {
-            for(const mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    mutation.addedNodes.forEach(node => {
-                        if (node.tagName === 'P') {
-                            const divElement = document.getElementById('col_info');
-                            const pElement = divElement.querySelector('p:first-of-type');
-                            let clicked_col = extract_hmm_column(pElement.textContent);
-                            let msa_pos = translate_to_msa_pos("{{ rf }}", clicked_col);
-                            let elements = document.getElementsByClassName('msa-col-header');
-                            elements[msa_pos].click();
-                        }
-                    });
-                }
-            }
-        });
-        // Configure and start observing for changes in child nodes
-        const config = { childList: true, subtree: true };
-        observer.observe(divElement, config);
-    };
-
-    $(document).ready(function () {
-        let hmmLogoJson = JSON.parse('{{ hmm_logo_json | safe }}');
-        let logoDiv = document.getElementById('logo');
-        logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
-        $('#logo').hmm_logo({height_toggle: true, column_info: "#col_info"});
-        // switch to maximum observed scale
-        let radioInput = document.querySelector('input[name="scale"][value="obs"]');
-        radioInput.click();
-        // hide Coordinates fieldset options
-        let logoSettingsDiv = document.querySelector('.logo_settings');
-        let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
-        fieldsets[2].style.display = 'none';
-
-        // link event to msa
-        link_hmm_to_msa();
-    });
-</script>
-
-{% comment %} Domain Architecture {% endcomment %}
-<script>
-    const renderArchitecture = (jsonData) => {
-        const max_shown_length = 30;
-        const architecturesContainer = document.getElementById('architecturesContainer');
-
-        const showTooltip = (event, text, max_shown_length) => {
-            if (text.length > max_shown_length) {
-                const tooltip = document.getElementById('tooltip');
-                tooltip.textContent = text;
-                tooltip.style.display = 'block';
-                tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
-                tooltip.style.top = event.pageY  + 'px';
-            }
-        };
-
-        const hideTooltip = () => {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.display = 'none';
-        };
-        
-        // Loop through each architecture container
-        jsonData.architecture_containers.slice(0, 10).forEach(container => {
-            const containerDiv = document.createElement('div');
-            containerDiv.classList.add('architecture-div');
-            const architectureTextPara = document.createElement('span');
-            architectureTextPara.textContent = `${container.architecture_text}`;
-            architectureTextPara.classList.add('descr-span');
-            containerDiv.appendChild(architectureTextPara);
-
-            // Loop through each domain in the container
-            container.domains.forEach(domain => {
-                const domainSpan = document.createElement('span');
-                const domainLink = document.createElement('a');
-                domainLink.textContent = domain.name.length > max_shown_length ? domain.name.substring(0, (max_shown_length - 3)) + "..." : domain.name;
-                domainLink.href = domain.link;
-                domainLink.setAttribute('target', '_blank');
-                domainLink.classList.add('domain-link');
-                domainSpan.classList.add('domain-span');
-                domainSpan.style.backgroundColor = domain.color;
-                domainSpan.style.color = domain.font_color;
-                domainSpan.appendChild(domainLink);
-                domainSpan.addEventListener('mouseover', function(event) {
-                    showTooltip(event, domain.name, max_shown_length);
-                });
-                domainSpan.addEventListener('mouseout', hideTooltip);
-                containerDiv.appendChild(domainSpan);
-            });
-
-            architecturesContainer.appendChild(containerDiv);
-        });
-    };
-
-    fetch("../static/{{ domains_json }}")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            renderArchitecture(data);
-        })
-        .catch(error => {
-            console.error('Error fetching domain architecture JSON:', error);
-        });
-</script>
-
-{% comment %} Datatables {% endcomment %}
-<script>
-    $(document).ready( function () {
-        if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-            $('#pfams-table').DataTable();
-        }
-        if ($('#structural-annotations-table:contains("No structural annotations found")').length === 0) {
-            $('#structural-annotations-table').DataTable();
-        }
-    } );
+    let rf = '{{ rf }}'
+    let hmm_logo_json = '{{ hmm_logo_json | safe }}'
 </script>
 
 {% endblock %}

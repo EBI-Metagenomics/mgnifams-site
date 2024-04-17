@@ -2,7 +2,10 @@ import os
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from Bio import SeqIO
+from explorer.models import Mgnifam, MgnifamProteins, MgnifamPfams, MgnifamFolds
 import re
 import glob
 import requests
@@ -29,16 +32,11 @@ def index(request):
         'first_id': first_id
     }
 
-    return render(request, 'explorer/index.html', context)
+    return render(request, 'explorer/index.html', context)           
 
-def id_exists(check_id, filepath):
-    with open(filepath, 'r') as f:
-        return check_id in f.read().splitlines()
-
-def translate_mgyf_to_file_id(mgyf):
+def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0+', '', mgyf)
-    file_id = 'mgnfam' + id
-    return file_id              
+    return int(id)              
 
 def format_protein_name(raw_name):
     """
@@ -48,38 +46,20 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
-def format_protein_link(protein_id):
+def format_protein_link(protein_id, region):
     """
     Formats the protein ID into a clickable link.
-    Example inputs: '149902623', '149902623_1_116', '149902623/30_116', '149902623_1_116/30_116'
     Output: HTML link element
     """
-    region_start = ""
-    region_end = ""
-    number_of_underscores = protein_id.count('_')
-    if (number_of_underscores == 0):
-        formatted_name = format_protein_name(protein_id)
-        link_text = formatted_name
-    elif (number_of_underscores == 1):
-        parts = protein_id.split('/')
-        formatted_name = format_protein_name(parts[0])
-        link_text = f"{formatted_name}/{parts[1].replace('_', '-')}"
-        region_parts = parts[1].split("_")
-        region_start = int(region_parts[0])
-        region_end = int(region_parts[1])
-    elif (number_of_underscores == 2):
-        parts = protein_id.split('_')
-        formatted_name = format_protein_name(parts[0])
-        link_text = f"{formatted_name}/{parts[1]}-{parts[2]}"
-        region_start = int(parts[1])
-        region_end = int(parts[2])
-    elif (number_of_underscores == 3):
-        formatted_name = format_protein_name(protein_id.split('_')[0])
-        start = int(protein_id.split('_')[1])
-        region = protein_id.split('/')[1].split('_')
-        region_start = start + int(region[0]) - 1
-        region_end = start + int(region[1]) - 1
-        link_text = f"{formatted_name}/{region_start}-{region_end}"
+    formatted_name = format_protein_name(str(protein_id))
+    link_text      = formatted_name
+    region_start   = ""
+    region_end     = ""
+    if (region != "-"):
+        region_parts = region.split("-")
+        region_start = region_parts[0]
+        region_end   = region_parts[1]
+        link_text    = f"{formatted_name}/{region_start}-{region_end}"
 
     link_url = f"http://proteins.mgnify.org/{formatted_name}"
     if region_start != "":
@@ -87,34 +67,10 @@ def format_protein_link(protein_id):
 
     return f'<a href="{link_url}">{link_text}</a>'
 
-def get_filepath(family_id, sub_dir):
-    dir = os.path.join(base_dir, sub_dir)
-    search_pattern = os.path.join(dir, family_id + '_*')
-    
-    for filepath in glob.glob(search_pattern):
-        filename = os.path.basename(filepath)
-        parts = filename.split('_')
-        if parts[0] == family_id:
-            # Return the relative path from the base directory
-            return os.path.relpath(filepath, base_dir)
-
-    return None
-
-def read_rf_file(family_id):
-    rf_folder = os.path.join(base_dir, 'families', 'rf')
-    for filename in os.listdir(rf_folder):
-        parts = filename.split('_')
-        if parts[0] == family_id:
-            with open(os.path.join(rf_folder, filename), 'r') as file:
-                rf = file.read()
-            return rf
-    return None
-
-def call_skylign_api(base_dir, file_path):
+def call_skylign_api(blob_data):
     url = "http://skylign.org"
     headers = {'Accept': 'application/json'}
-    hmm_filepath = os.path.join(base_dir, file_path)
-    files = {'file': open(hmm_filepath, 'rb')}
+    files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
 
     response = requests.post(url, headers=headers, files=files, data=data)
@@ -149,155 +105,101 @@ def generate_structure_link(part):
 
 def details(request):
     mgyf = request.GET.get('id', None)
-    id_filepath = os.path.join(base_dir, 'mgnifam_names.txt')
+    mgyf_id = translate_mgyf_to_int_id(mgyf)
 
-    # Validate if ID exists in mgnifam_names.txt
-    if not id_exists(mgyf, id_filepath):
+    try:
+        # Fetch Mgnifam object
+        mgnifam = Mgnifam.objects.get(id=mgyf_id)
+    except Mgnifam.DoesNotExist:
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
-    # Construct the path for the cif file
-    cif_directory = os.path.join(base_dir, 'cif/')
-    id = translate_mgyf_to_file_id(mgyf)
-    cif_files = glob.glob(os.path.join(cif_directory, id + '_*'))
-    # Extract only the filename from the first matching cif file
-    cif_filename = os.path.basename(cif_files[0]) if cif_files else None
-    # Check if cif file exists
-    if not cif_filename:
-        messages.error(request, 'No CIF file found for the given ID.')
-        return redirect('index')
 
-    filename_no_ext = cif_filename.split('.')[0]
-    first_split = filename_no_ext.split('-')
-    first_split_first_part = first_split[0]
-    first_split_second_part = first_split[1]
-    family_id = first_split_first_part.split('_')[0]
-    family_size = first_split_first_part.split('_')[1]
-    protein_parts = first_split_second_part.split('_')
-    protein_rep = format_protein_name(protein_parts[0])
+    family_size = mgnifam.family_size
+    protein_rep = format_protein_name(str(mgnifam.protein_rep))
+    region = mgnifam.rep_region
     region_start = ""
     region_end = ""
-    if (len(protein_parts) == 1):
+    if (region != "-"):
+        region_parts = region.split("-")
+        region_start = region_parts[0]
+        region_end   = region_parts[1]
+        region = f"/{region}"
+    else:
         region = ""
-    elif (len(protein_parts) == 3):
-        region_start = int(protein_parts[1])
-        region_end = int(protein_parts[2])
-        region = f"/{region_start}-{region_end}"
-        
-    elif (len(protein_parts) == 5):
-        region_start = int(protein_parts[1]) + int(protein_parts[3]) - 1
-        region_end = int(protein_parts[1]) + int(protein_parts[4]) - 1
-        region = f"/{region_start}-{region_end}"
-        
+    # converged = mgnifam.converged # TODO
 
-    # Family members
-    family_members_links = []
-    target_family = 'mgnifam' + family_id.replace('mgnfam', '') 
-    try:
-        result = subprocess.run(['grep', f'^{target_family}\t', os.path.join(base_dir, 'families/updated_refined_families.tsv')], capture_output=True, text=True)
-        if result.returncode == 0:
-            lines = result.stdout.splitlines()
-            for line in lines:
-                protein_id = line.split('\t')[1]
-                family_members_links.append(format_protein_link(protein_id))
-    except Exception as e:
-        print(f"Error running grep: {e}")
+    cif_blob = mgnifam.cif_blob.decode('utf-8')
 
-    # Biomes distribution file path
-    biomes_filepath = get_filepath(family_id, "biome_sunburst/result/")
-    # Domain architecture file path
-    domains_json = get_filepath(family_id, "pfams/translated/")
-
-    # Seed MSA viewer
-    seed_msa_filepath = get_filepath(family_id, "families/seed_msa/")
-    full_msa_filepath = get_filepath(family_id, "families/msa/")
-    rf = read_rf_file(family_id)
-    
-    # HMM viewer
-    hmm_filepath = get_filepath(family_id, "families/hmm/")
-    response_data = call_skylign_api(base_dir, hmm_filepath)
+    seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
+    msa_blob = mgnifam.msa_blob.decode('utf-8')
+    rf = mgnifam.rf_blob.decode('utf-8')
+    hmm_blob = mgnifam.hmm_blob.decode('utf-8')
+    response_data = call_skylign_api(hmm_blob)
     uuid = ""
     if response_data and 'uuid' in response_data:
         uuid = response_data['uuid']
     hmm_logo_json = fetch_skylign_logo_json(uuid)
 
-    # Model annotation / HHblits
-    unannotated_filepath = os.path.join(base_dir, 'hh/unannotated.txt')
-    with open(unannotated_filepath, 'r') as file:
-        unannotated_content = file.read()
-    is_annotated = not (family_id + '_') in unannotated_content
-    if is_annotated:
-        hits_directory = os.path.join(base_dir, 'hh/hits/')
-        hits_files = glob.glob(os.path.join(hits_directory, family_id + '_*'))
+    biomes_blob = mgnifam.biomes_blob.decode('utf-8')
+    domain_architecture_blob = mgnifam.domain_architecture_blob.decode('utf-8')
 
-        if hits_files:
-            with open(hits_files[0], 'r') as file:
-                hits_data = []
-                for line in file:
-                    name = line[4:34].strip()
-                    pfam_id = name.split(';')[0].strip().split('.')[0]
-                    
-                    hit = {
-                        'rank': line[0:3].strip(),
-                        'name': name,
-                        'pfam_id': pfam_id,
-                        'e_value': line[41:48].strip(),
-                        'query_hmm': line[75:83].strip(),
-                        'template_hmm': line[84:99].strip(),
-                    }
-                    hits_data.append(hit)
-        else:
-            hits_data = []
+    # Fetch MgnifamProteins objects
+    mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
+    family_members_links = []
+    for mgnifam_protein in mgnifam_proteins:
+        protein_id = mgnifam_protein.protein
+        region = mgnifam_protein.region
+        family_members_links.append(format_protein_link(protein_id, region))
 
-    else:
-        hits_data = []
+    # Fetch related MgnifamPfams objects
+    mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
+    hits_data = []
+    for mgnifam_pfam in mgnifam_pfams:
+        hit = {
+            'rank': mgnifam_pfam.rank,
+            'name': mgnifam_pfam.pfam_hit,
+            'pfam_id': mgnifam_pfam.pfam_id,
+            'e_value': mgnifam_pfam.e_value,
+            'query_hmm': mgnifam_pfam.query_hmm_range,
+            'template_hmm': mgnifam_pfam.template_hmm_range
+        }
+        hits_data.append(hit)
 
-    # Structural annotation / Foldseek
-    foldseek_annotated_filepath = os.path.join(base_dir, 'foldseek/annotated.txt')
+    # Fetch related MgnifamFolds objects
+    mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
     structural_annotations = []
-    with open(foldseek_annotated_filepath, 'r') as file:
-        for line in file:
-            if line.startswith(family_id + '_'):
-                foldseek_folder = os.path.join(base_dir, 'foldseek/')
-                for filepath in glob.glob(foldseek_folder + '*'):
-                    filename = os.path.basename(filepath)
-                    if filename.startswith(('alphafold_', 'esm_', 'pdb_')):
-                        with open(filepath, 'r') as f:
-                            for file_line in f:
-                                parts = file_line.strip().split('\t')
-                                first_part = parts[0].split('-')[0].split('_')[0]
-                                target_structure_identifier = generate_structure_link(parts[1])
-                                if first_part == family_id:
-                                    annotation = {
-                                        'target_structure_identifier': target_structure_identifier,
-                                        'aligned_length': int(parts[3]),
-                                        'query_start': int(parts[6]),
-                                        'query_end': int(parts[7]),
-                                        'target_start': int(parts[8]),
-                                        'target_end': int(parts[9]),
-                                        'e_value': float(parts[10])
-                                    }
-                                    structural_annotations.append(annotation)
-                        structural_annotations.sort(key=lambda x: x['e_value'])
-                        for i, annotation in enumerate(structural_annotations, start=1):
-                            annotation['rank'] = i
-                break
+    for mgnifam_fold in mgnifam_folds:
+        annotation = {
+            'target_structure_identifier': generate_structure_link(mgnifam_fold.target_structure),
+            'aligned_length': mgnifam_fold.aligned_length,
+            'query_start': mgnifam_fold.query_start,
+            'query_end': mgnifam_fold.query_end,
+            'target_start': mgnifam_fold.target_start,
+            'target_end': mgnifam_fold.target_end,
+            'e_value': mgnifam_fold.e_value
+        }
+        structural_annotations.append(annotation)
+    structural_annotations.sort(key=lambda x: x['e_value'])
+    for i, annotation in enumerate(structural_annotations, start=1):
+        annotation['rank'] = i
 
     return render(request, 'explorer/details.html', {
         'mgyf': mgyf,
+        'mgyf_id': mgyf_id,
         'family_size': family_size,
-        'family_members_links': family_members_links,
-        'cif_path': cif_filename,  
         'protein_rep': protein_rep,
         'region': region,
         'region_start': region_start,
         'region_end': region_end,
-        'biomes_filepath': biomes_filepath,
-        'domains_json': domains_json,
-        'seed_msa_filepath': seed_msa_filepath,
-        'full_msa_filepath': full_msa_filepath,
+        'cif_blob': cif_blob,
+        'seed_msa_blob': seed_msa_blob,
+        'msa_blob': msa_blob,
         'rf': rf,
-        'hmm_filepath': hmm_filepath,
+        'hmm_blob': hmm_blob,
         'hmm_logo_json': hmm_logo_json,
+        'biomes_blob': biomes_blob,
+        'domain_architecture_blob': domain_architecture_blob,
+        'family_members_links': family_members_links,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })
@@ -308,3 +210,10 @@ def mgnifam_names(request):
         mgnifam_names = f.readlines()
 
     return render(request, 'explorer/mgnifam_names.html', {'mgnifam_names': mgnifam_names})
+
+def serve_blob_as_file(request, pk, column_name):
+    mgnifam_instance = get_object_or_404(Mgnifam, pk=pk)
+    blob_data = getattr(mgnifam_instance, column_name)
+    response = HttpResponse(blob_data, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment;'
+    return response

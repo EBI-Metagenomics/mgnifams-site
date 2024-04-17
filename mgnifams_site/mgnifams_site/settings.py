@@ -78,7 +78,7 @@ WSGI_APPLICATION = "mgnifams_site.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "mgnifams.sqlite3",
     }
 }
 
@@ -122,8 +122,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../data'),
-    # os.path.join(BASE_DIR, '../data_old'),
+    os.path.join(BASE_DIR, '../data')
 ]
 
 # Default primary key field type
