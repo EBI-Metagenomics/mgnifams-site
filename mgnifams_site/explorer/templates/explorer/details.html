@@ -59,6 +59,7 @@
             <div class="vf-card__content | vf-stack vf-stack--600 ">
                 <h3 class="vf-card__heading">Biomes distribution</h3>
                 <div id="sunburst-div"></div>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--primary vf-button--sm">Download biomes CSV file</a>
             </div>
         </article>
     </div>
@@ -136,7 +137,7 @@
             </div>
             <div id="logo" class="logo"></div>
             <div id="col_info" class="col_info"></div>
-            <a href="{% static hmm_filepath %}" download class="vf-button vf-button--primary vf-button--sm">Download HMM file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf }}.hmm" class="vf-button vf-button--primary vf-button--sm">Download HMM file</a>
         </div>
     </article>
 
@@ -150,6 +151,7 @@
                 </p>
             </div>
             <div id="architecturesContainer"></div>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--primary vf-button--sm">Download domains JSON file</a>
         </div>
     </article>
 
@@ -250,7 +252,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
 <script>
 
-    d3.csv("../static/{{ biomes_filepath }}", function(err, rows){
+    d3.csv("{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}", function(err, rows){
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
         }
@@ -478,7 +480,7 @@
         });
     };
 
-    fetch("../static/{{ domains_json }}")
+    fetch("{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}")
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

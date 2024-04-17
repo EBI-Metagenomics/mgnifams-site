@@ -67,11 +67,10 @@ def format_protein_link(protein_id, region):
 
     return f'<a href="{link_url}">{link_text}</a>'
 
-def call_skylign_api(base_dir, file_path):
+def call_skylign_api(blob_data):
     url = "http://skylign.org"
     headers = {'Accept': 'application/json'}
-    hmm_filepath = os.path.join(base_dir, file_path)
-    files = {'file': open(hmm_filepath, 'rb')}
+    files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
 
     response = requests.post(url, headers=headers, files=files, data=data)
@@ -134,18 +133,15 @@ def details(request):
     seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
     msa_blob = mgnifam.msa_blob.decode('utf-8')
     rf = mgnifam.rf_blob.decode('utf-8')
-    hmm_file = mgnifam.hmm_file
-    hmm_filepath = os.path.join("families/hmm/", hmm_file)
-    response_data = call_skylign_api(base_dir, hmm_filepath)
+    hmm_blob = mgnifam.hmm_blob.decode('utf-8')
+    response_data = call_skylign_api(hmm_blob)
     uuid = ""
     if response_data and 'uuid' in response_data:
         uuid = response_data['uuid']
     hmm_logo_json = fetch_skylign_logo_json(uuid)
 
-    biomes_file = mgnifam.biomes_file
-    biomes_filepath = os.path.join("biome_sunburst/result/", biomes_file)
-    domain_architecture_file = mgnifam.domain_architecture_file
-    domains_json = os.path.join("pfams/translated/", domain_architecture_file)
+    biomes_blob = mgnifam.biomes_blob.decode('utf-8')
+    domain_architecture_blob = mgnifam.domain_architecture_blob.decode('utf-8')
 
     # Fetch MgnifamProteins objects
     mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
@@ -199,10 +195,10 @@ def details(request):
         'seed_msa_blob': seed_msa_blob,
         'msa_blob': msa_blob,
         'rf': rf,
-        'hmm_filepath': hmm_filepath,
+        'hmm_blob': hmm_blob,
         'hmm_logo_json': hmm_logo_json,
-        'biomes_filepath': biomes_filepath,
-        'domains_json': domains_json,
+        'biomes_blob': biomes_blob,
+        'domain_architecture_blob': domain_architecture_blob,
         'family_members_links': family_members_links,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
