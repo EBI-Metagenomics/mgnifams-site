@@ -95,11 +95,12 @@
                         </li>
                     </ul>
                 </p>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf }}.cif" class="vf-button vf-button--primary vf-button--sm">Download CIF file</a>
             </div>
             <div class="vf-grid__col--span-3">
                 <div id="pdb_viewer">
                     <pdbe-molstar
-                        custom-data-url="{% static "cif/"|add:cif_path %}"
+                        custom-data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}"
                         custom-data-format="cif"
                         alphafold-view="true"
                         bg-color-r="255"
@@ -118,8 +119,8 @@
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Multiple Sequence Alignment (Seed)</h3>
             <div id="msa-div"></div>
-            <a href="{% static seed_msa_filepath %}" download class="vf-button vf-button--primary vf-button--sm">Download seed MSA file</a>
-            <a href="{% static full_msa_filepath %}" download class="vf-button vf-button--primary vf-button--sm">Download full MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download seed MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download full MSA file</a>
         </div>
     </article>
 
@@ -289,7 +290,8 @@
 
     var opts = {
         el: rootDiv,
-            importURL: "../static/{{ seed_msa_filepath }}",  menu: {
+            importURL: "{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}",
+            menu: {
             menuFontsize: "14px",
             menuItemFontsize: "14px",
             menuItemLineHeight: "14px",

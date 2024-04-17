@@ -2,6 +2,8 @@ import os
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from Bio import SeqIO
 from explorer.models import Mgnifam, MgnifamProteins, MgnifamPfams, MgnifamFolds
 import re
@@ -127,16 +129,11 @@ def details(request):
         region = ""
     # converged = mgnifam.converged # TODO
 
-    cif_file = mgnifam.cif_file
+    cif_blob = mgnifam.cif_blob.decode('utf-8')
 
-    seed_msa_file = mgnifam.seed_msa_file
-    seed_msa_filepath = os.path.join("families/seed_msa/", seed_msa_file)
-    msa_file = mgnifam.msa_file
-    full_msa_filepath = os.path.join("families/msa/", msa_file)
-    rf_file = mgnifam.rf_file
-    rf_filepath = os.path.join("families/rf/", rf_file)
-    with open(os.path.join(base_dir, rf_filepath), 'r') as file:
-        rf = file.read()
+    seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
+    msa_blob = mgnifam.msa_blob.decode('utf-8')
+    rf = mgnifam.rf_blob.decode('utf-8')
     hmm_file = mgnifam.hmm_file
     hmm_filepath = os.path.join("families/hmm/", hmm_file)
     response_data = call_skylign_api(base_dir, hmm_filepath)
@@ -192,14 +189,15 @@ def details(request):
 
     return render(request, 'explorer/details.html', {
         'mgyf': mgyf,
+        'mgyf_id': mgyf_id,
         'family_size': family_size,
         'protein_rep': protein_rep,
         'region': region,
         'region_start': region_start,
         'region_end': region_end,
-        'cif_path': cif_file,
-        'seed_msa_filepath': seed_msa_filepath,
-        'full_msa_filepath': full_msa_filepath,
+        'cif_blob': cif_blob,
+        'seed_msa_blob': seed_msa_blob,
+        'msa_blob': msa_blob,
         'rf': rf,
         'hmm_filepath': hmm_filepath,
         'hmm_logo_json': hmm_logo_json,
@@ -216,3 +214,10 @@ def mgnifam_names(request):
         mgnifam_names = f.readlines()
 
     return render(request, 'explorer/mgnifam_names.html', {'mgnifam_names': mgnifam_names})
+
+def serve_blob_as_file(request, pk, column_name):
+    mgnifam_instance = get_object_or_404(Mgnifam, pk=pk)
+    blob_data = getattr(mgnifam_instance, column_name)
+    response = HttpResponse(blob_data, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment;'
+    return response
