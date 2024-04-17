@@ -4,6 +4,7 @@ tmp/
 bin/db_config.ini
 **/pfams/result
 mgnifams.sqlite3
+mgnifams_no_blobs.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

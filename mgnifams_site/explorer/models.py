@@ -14,6 +14,14 @@ class Mgnifam(models.Model):
     biomes_file = models.TextField()
     domain_architecture_file = models.TextField()
 
+    cif_blob = models.BinaryField(null=True)
+    seed_msa_blob = models.BinaryField(null=True)
+    msa_blob = models.BinaryField(null=True)
+    hmm_blob = models.BinaryField(null=True)
+    rf_blob = models.BinaryField(null=True)
+    biomes_blob = models.BinaryField(null=True)
+    domain_architecture_blob = models.BinaryField(null=True)
+    
     def __str__(self):
         return f"Mgnifam ID: {self.id}"
 
