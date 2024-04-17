@@ -5,8 +5,6 @@
 {% block content %}
 {% load custom_filters %}
 
-<script src="{% static 'explorer/details.js' %}"></script>
-
 <div id="tooltip" class="tooltip"></div>
 
 <section class="vf-content | vf-stack vf-stack--600">
@@ -58,6 +56,7 @@
         <article class="vf-card vf-card--brand vf-card--bordered vf-grid__col--span-2">
             <div class="vf-card__content | vf-stack vf-stack--600 ">
                 <h3 class="vf-card__heading">Biomes distribution</h3>
+                <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}"></div>
                 <div id="sunburst-div"></div>
                 <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--primary vf-button--sm">Download biomes CSV file</a>
             </div>
@@ -119,6 +118,7 @@
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Multiple Sequence Alignment (Seed)</h3>
+            <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}"></div>
             <div id="msa-div"></div>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download seed MSA file</a>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download full MSA file</a>
@@ -238,128 +238,23 @@
     </article>
 </section>
 
-{% comment %} Family members {% endcomment %}
-<script>
-    document.getElementById('show-members-btn').addEventListener('click', function() {
-        var div = document.getElementById('family-members-div');
-        div.style.display = div.style.display === 'none' ? 'block' : 'none';
-        this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
-    });
-</script>
-
+<script src="{% static 'explorer/details.js' %}"></script>
 {% comment %} Biomes distribution {% endcomment %}
 <script src='https://cdn.plot.ly/plotly-2.29.1.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
-<script>
-
-    d3.csv("{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}", function(err, rows){
-        function unpack(rows, key) {
-            return rows.map(function(row) { return row[key]; });
-        }
-
-        var data = [
-            {
-                type: "sunburst",
-                ids: unpack(rows, 'ids'),
-                labels: unpack(rows, 'labels'),
-                parents:unpack(rows, 'parents'),
-                values:unpack(rows, 'counts')
-            }
-        ];
-
-        var layout = {
-            margin: {l: 0, r: 0, b: 0, t:0},
-            extendsunburstcolorway: true
-        };
-
-        Plotly.newPlot('sunburst-div', data, layout, {showSendToCloud: true});
-    })
-
-</script>
-
 {% comment %} PDB viewer {% endcomment %}
 <script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
-
 {% comment %} MSA Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/msa/msa.min.css" %}">
 <script src="{% static "explorer/msa/msa.min.js" %}"></script>
-<script>
-
-    var rootDiv = document.getElementById("msa-div")
-
-    var opts = {
-        el: rootDiv,
-            importURL: "{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}",
-            menu: {
-            menuFontsize: "14px",
-            menuItemFontsize: "14px",
-            menuItemLineHeight: "14px",
-            menuMarginLeft: "3px",
-            menuPadding: "3px 4px 3px 4px",
-        },
-        bootstrapMenu: true,
-        vis: {
-            seqlogo: false,
-            conserv: false,
-            overviewbox: false,
-            gapHeader: false,
-            labelId: true,
-            labelName: true,
-            labelPartition: false,
-            labelCheckbox: false
-        },
-        colorscheme: {
-            scheme: "clustal2", // name of your color scheme
-            colorBackground: true, // otherwise only the text will be colored
-            showLowerCase: true, // used to hide and show lowercase chars in the overviewbox
-            opacity: 0.6 //opacity for the residues
-        }
-    };
-    var m = new msa.msa(opts);
-
-    const translate_to_hmm_pos = (sequence, position) => {
-        let hmm_pos = 0;
-
-        for (let i = 0; i < sequence.length; i++) {
-            if (sequence[i] === 'x') {
-                hmm_pos = hmm_pos + 1;
-                if (i >= position) break;
-            }
-        }
-
-        return hmm_pos;
-    };
-
-    {% comment %} const click_hmm = (hmm_pos) => {
-        const inputCol = document.querySelector('.logo_position');
-        inputCol.focus();
-        inputCol.value = null;
-        inputCol.value = hmm_pos;
-        const event = new KeyboardEvent('keypress', {
-            key: 'Enter',
-            code: 'Enter',
-            keyCode: 13,
-            which: 13,
-            bubbles: true
-        });
-        inputCol.dispatchEvent(event);
-        const inputColButton = document.querySelector('.button.logo_change');
-        inputColButton.click();
-    };
-
-    m.g.on("residue:click", function(data){
-        hmm_pos = translate_to_hmm_pos("{{ rf }}", data.rowPos)
-        click_hmm(hmm_pos);
-    }); {% endcomment %}
-    m.render();
-</script>
-
 {% comment %} HMM Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/hmm/hmm_logo.min.css" %}">
 <script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
+
+
 <script>
     const extract_hmm_column = (p_text) => {
         var parts = p_text.split(':');
