@@ -67,24 +67,89 @@ const loadMSAData = () => {
     m.render();
 };
 
+const extract_hmm_column = (p_text) => {
+    let parts = p_text.split(':');
+    let numberPart = parts[parts.length - 1];
+    let col = parseInt(numberPart);
+    return col;
+};
+
+const translate_to_msa_pos = (sequence, hmm_position) => {
+    let x_counter = 0;
+    let msa_pos;
+    for ( msa_pos = 0; msa_pos < sequence.length; msa_pos++) {
+        if (sequence[msa_pos] === 'x') {
+            x_counter = x_counter + 1;
+            if (x_counter == hmm_position) break;
+        }
+    }
+    return msa_pos;
+};
+
+const link_hmm_to_msa = () => {
+    // need a dummy init p in the col_info div to tie the event
+    const hiddenParagraph = document.createElement('p');
+    hiddenParagraph.textContent = 'Hidden paragraph content';
+    hiddenParagraph.style.display = 'none';
+    const divElement = document.getElementById('col_info');
+    divElement.appendChild(hiddenParagraph);
+    // create the observer
+    const observer = new MutationObserver(function(mutationsList, observer) {
+        for(const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => {
+                    if (node.tagName === 'P') {
+                        const divElement = document.getElementById('col_info');
+                        const pElement = divElement.querySelector('p:first-of-type');
+                        let clicked_col = extract_hmm_column(pElement.textContent);
+                        let msa_pos = translate_to_msa_pos(rf, clicked_col);
+                        let elements = document.getElementsByClassName('msa-col-header');
+                        elements[msa_pos].click();
+                    }
+                });
+            }
+        }
+    });
+    // Configure and start observing for changes in child nodes
+    const config = { childList: true, subtree: true };
+    observer.observe(divElement, config);
+};
+
+const loadHMMData = () => {
+    let hmmLogoJson = JSON.parse(hmm_logo_json);
+    let logoDiv = document.getElementById('logo');
+    logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
+    $('#logo').hmm_logo({height_toggle: true, column_info: "#col_info"});
+    // switch to maximum observed scale
+    let radioInput = document.querySelector('input[name="scale"][value="obs"]');
+    radioInput.click();
+    // hide Coordinates fieldset options
+    let logoSettingsDiv = document.querySelector('.logo_settings');
+    let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
+    fieldsets[2].style.display = 'none';
+
+    // link event to msa
+    link_hmm_to_msa();
+};
+
+const showTooltip = (event, text, max_shown_length) => {
+    if (text.length > max_shown_length) {
+        const tooltip = document.getElementById('tooltip');
+        tooltip.textContent = text;
+        tooltip.style.display = 'block';
+        tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
+        tooltip.style.top = event.pageY  + 'px';
+    }
+};
+
+const hideTooltip = () => {
+    const tooltip = document.getElementById('tooltip');
+    tooltip.style.display = 'none';
+};
+
 const renderArchitecture = (jsonData) => {
     const max_shown_length = 30;
     const architecturesContainer = document.getElementById('architecturesContainer');
-
-    const showTooltip = (event, text, max_shown_length) => {
-        if (text.length > max_shown_length) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.textContent = text;
-            tooltip.style.display = 'block';
-            tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
-            tooltip.style.top = event.pageY  + 'px';
-        }
-    };
-
-    const hideTooltip = () => {
-        const tooltip = document.getElementById('tooltip');
-        tooltip.style.display = 'none';
-    };
     
     // Loop through each architecture container
     jsonData.architecture_containers.slice(0, 10).forEach(container => {
@@ -149,6 +214,7 @@ $(document).ready(function () {
     loadFamilyData();
     loadBiomeData();
     loadMSAData();
+    loadHMMData();
     loadDomainData();
     loadDatatables();
 
