@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://mgnifams-demo.mgnify.org',
+    'https://mgnifams-demo.mgnify.org',
 ]
 
 ROOT_URLCONF = "mgnifams_site.urls"
@@ -78,7 +84,7 @@ WSGI_APPLICATION = "mgnifams_site.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "mgnifams.sqlite3",
+        "NAME": BASE_DIR / "dbs" / "mgnifams.sqlite3",
     }
 }
 
