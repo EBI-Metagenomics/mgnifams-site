@@ -123,9 +123,6 @@ def details(request):
         region_parts = region.split("-")
         region_start = region_parts[0]
         region_end   = region_parts[1]
-        region = f"/{region}"
-    else:
-        region = ""
     # converged = mgnifam.converged # TODO
 
     cif_blob = mgnifam.cif_blob.decode('utf-8')
@@ -188,7 +185,6 @@ def details(request):
         'mgyf_id': mgyf_id,
         'family_size': family_size,
         'protein_rep': protein_rep,
-        'region': region,
         'region_start': region_start,
         'region_end': region_end,
         'cif_blob': cif_blob,
