@@ -87,21 +87,21 @@ def fetch_skylign_logo_json(uuid):
         return json.dumps(response.json())
     return None
 
-def generate_structure_link(part):
+def generate_structure_link_and_db(part):
     if part.startswith('MGYP'):
         # Remove '.pdb.gz' extension and format link for MGYP
         id = part.replace('.pdb.gz', '')
-        return f'<a href="http://proteins.mgnify.org/{id}">{id}</a>'
+        return f'<a href="http://proteins.mgnify.org/{id}">{id}</a>', 'ESM'
     elif part.startswith('AF'):
         # Split with '-' and keep the second part for AlphaFold
         af_id = part.split('-')[1]
-        return f'<a href="https://alphafold.ebi.ac.uk/entry/{af_id}">{af_id}</a>'
+        return f'<a href="https://alphafold.ebi.ac.uk/entry/{af_id}">{af_id}</a>', 'AlphaFold'
     elif '.cif.gz' in part:
         # Split with '.' and keep the first part for RCSB PDB
         pdb_id = part.split('.')[0]
-        return f'<a href="https://www.rcsb.org/structure/{pdb_id}">{pdb_id}</a>'
+        return f'<a href="https://www.rcsb.org/structure/{pdb_id}">{pdb_id}</a>', 'PDB'
     else:
-        return part
+        return part, ''
 
 def details(request):
     mgyf = request.GET.get('id', None)
@@ -166,8 +166,10 @@ def details(request):
     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
     structural_annotations = []
     for mgnifam_fold in mgnifam_folds:
+        link, db = generate_structure_link_and_db(mgnifam_fold.target_structure)
         annotation = {
-            'target_structure_identifier': generate_structure_link(mgnifam_fold.target_structure),
+            'target_structure_identifier': link,
+            'target_structure_db': db,
             'aligned_length': mgnifam_fold.aligned_length,
             'query_start': mgnifam_fold.query_start,
             'query_end': mgnifam_fold.query_end,

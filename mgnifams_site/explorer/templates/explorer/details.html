@@ -209,6 +209,7 @@
                         <tr class="vf-table__row">
                             <th class="vf-table__heading" scope="col">Rank</th>
                             <th class="vf-table__heading" scope="col">Target Structure</th>
+                            <th class="vf-table__heading" scope="col">Target DB</th>
                             <th class="vf-table__heading" scope="col">Aligned Length</th>
                             <th class="vf-table__heading" scope="col">Query Start</th>
                             <th class="vf-table__heading" scope="col">Query End</th>
@@ -222,6 +223,7 @@
                             <tr class="vf-table__row">
                                 <td class="vf-table__cell">{{ annotation.rank }}</td>
                                 <td class="vf-table__cell">{{ annotation.target_structure_identifier | safe }}</td>
+                                <td class="vf-table__cell">{{ annotation.target_structure_db }}</td>
                                 <td class="vf-table__cell">{{ annotation.aligned_length }}</td>
                                 <td class="vf-table__cell">{{ annotation.query_start }}</td>
                                 <td class="vf-table__cell">{{ annotation.query_end }}</td>
