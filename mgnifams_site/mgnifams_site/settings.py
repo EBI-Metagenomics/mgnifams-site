@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-@)v&-nhm7cz5y*v-&3cf=lk$pi7!lone+!r(=&93z%2srtmj5i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST")] # export ALLOWED_HOST="127.0.0.1"
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST"), "127.0.0.1"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://mgnifams-demo.mgnify.org',
+    'https://mgnifams-demo.mgnify.org',
 ]
 
 ROOT_URLCONF = "mgnifams_site.urls"
@@ -78,7 +84,7 @@ WSGI_APPLICATION = "mgnifams_site.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "dbs" / "mgnifams.sqlite3",
     }
 }
 
@@ -122,8 +128,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../data'),
-    # os.path.join(BASE_DIR, '../data_old'),
+    os.path.join(BASE_DIR, '../data')
 ]
 
 # Default primary key field type

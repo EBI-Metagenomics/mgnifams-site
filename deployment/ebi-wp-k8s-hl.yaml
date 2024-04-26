@@ -36,6 +36,13 @@ items:
           labels:
             app: mgnifams-site
         spec:
+          securityContext:
+            runAsUser: 7123
+            runAsGroup: 1347
+          volumes:
+            - name: mgnifams-app-storage
+              persistentVolumeClaim:
+                claimName: mgnifams-volume-claim
           containers:
             - image: quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl
               imagePullPolicy: Always
@@ -46,6 +53,9 @@ items:
               ports:
                 - containerPort: 8000
                   name: django
+              volumeMounts:
+              - mountPath: "/app/dbs"
+                name: mgnifams-app-storage
           imagePullSecrets:
             - name: quay-pull-secret
   - apiVersion: v1
@@ -82,5 +92,35 @@ items:
                     name: mgnifams-site
                     port:
                       number: 8000
+  - apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: mgnifams-vol-1
+      namespace: mgnifams-hl-exp
+    spec:
+      capacity:
+        storage: 8Gi
+      volumeMode: Filesystem
+      accessModes:
+        - ReadOnlyMany
+      persistentVolumeReclaimPolicy: Recycle
+      mountOptions:
+        - nfsvers=3
+      nfs:
+        server: hh-isi-srv-vlan1496.ebi.ac.uk
+        path: /ifs/public/rw/metagenomics/mgnifams/dbs
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      name: mgnifams-volume-claim
+      namespace: mgnifams-hl-exp
+    spec:
+      storageClassName: ""
+      accessModes:
+        - ReadOnlyMany
+      resources:
+        requests:
+          storage: 6Gi
+      volumeName: mgnifams-vol-1
 
 
