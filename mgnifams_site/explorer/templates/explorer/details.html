@@ -48,7 +48,15 @@
                                     <i class="icon icon-common icon-close"></i>
                                 {% endif %}
                             </td>
-                        </tr> 
+                        </tr>
+                        {% if converged %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">Converged</td>
+                            <td class="vf-table__cell">
+                                <i class="icon icon-common icon-check-square"></i>
+                            </td>
+                        </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

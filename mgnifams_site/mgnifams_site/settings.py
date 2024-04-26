@@ -84,7 +84,7 @@ WSGI_APPLICATION = "mgnifams_site.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "dbs" / "mgnifams.sqlite3",
+        "NAME": BASE_DIR / "dbs" / "khalifams.sqlite3",
     }
 }
 
