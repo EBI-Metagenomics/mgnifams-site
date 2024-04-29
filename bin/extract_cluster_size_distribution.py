@@ -42,7 +42,7 @@ def plot_size_counts(size_counts_df):
     start_time = time.time()
 
     plt.figure(figsize=(10, 6))
-    sns.barplot(x='Size', y='Count', data=size_counts_df)
+    sns.stripplot(x='Size', y='Count', data=size_counts_df, jitter=True)
 
     # Rotate x-axis labels for better readability if needed
     plt.xticks(rotation=45)
@@ -50,7 +50,7 @@ def plot_size_counts(size_counts_df):
     # Add labels and title
     plt.xlabel('Size')
     plt.ylabel('Count')
-    plt.title('Bar Plot of Size vs Count')
+    plt.title('Dot Plot of Size vs Count')
 
     print(str(time.time() - start_time) + "\n")
 
@@ -69,7 +69,7 @@ grouped_size_counts_log_df['Count'] = np.log10(grouped_size_counts_log_df['Count
 grouped_size_counts_log_df.to_csv('data/grouped_size_counts_log.csv', index=False)
 
 # OR Load
-# grouped_size_counts_df = pd.read_csv('data/grouped_size_counts_50AA.csv')
+# grouped_size_counts_df = pd.read_csv('data/grouped_size_counts.csv')
 
 # AND Plot
-# plot_size_counts(grouped_size_counts_df)
+plot_size_counts(grouped_size_counts_df)
