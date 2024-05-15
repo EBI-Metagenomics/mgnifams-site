@@ -123,12 +123,15 @@ def details(request):
         region_parts = region.split("-")
         region_start = region_parts[0]
         region_end   = region_parts[1]
-    # converged = mgnifam.converged # TODO
+    converged = mgnifam.converged
 
     cif_blob = mgnifam.cif_blob.decode('utf-8')
 
     seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
-    msa_blob = mgnifam.msa_blob.decode('utf-8')
+    if mgnifam.msa_blob is not None:
+        msa_blob = mgnifam.msa_blob.decode('utf-8')
+    else:
+        msa_blob = ""
     rf = mgnifam.rf_blob.decode('utf-8')
     hmm_blob = mgnifam.hmm_blob.decode('utf-8')
     response_data = call_skylign_api(hmm_blob)
@@ -189,6 +192,7 @@ def details(request):
         'protein_rep': protein_rep,
         'region_start': region_start,
         'region_end': region_end,
+        'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
         'msa_blob': msa_blob,
