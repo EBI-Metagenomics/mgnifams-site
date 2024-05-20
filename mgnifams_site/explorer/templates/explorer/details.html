@@ -23,7 +23,7 @@
                             <td class="vf-table__cell">Family representative sequence</td>
                             <td class="vf-table__cell">
                                 {% if region_start != "" and region_end != "" %}
-                                    <a href="http://proteins.mgnify.org/{{ protein_rep }}/?s={{ region_start }}&e={{ region_end }}" target="_blank">{{ protein_rep }}/{{ region_start }}-{{region_end}}</a>
+                                    <a href="http://proteins.mgnify.org/{{ protein_rep }}/?start={{ region_start }}&end={{ region_end }}" target="_blank">{{ protein_rep }}/{{ region_start }}-{{region_end}}</a>
                                 {% else %}
                                     <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>
                                 {% endif %}
