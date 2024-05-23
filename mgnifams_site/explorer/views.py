@@ -123,6 +123,7 @@ def details(request):
         region_parts = region.split("-")
         region_start = region_parts[0]
         region_end   = region_parts[1]
+    plddt = mgnifam.plddt
     converged = mgnifam.converged
 
     cif_blob = mgnifam.cif_blob.decode('utf-8')
@@ -192,6 +193,7 @@ def details(request):
         'protein_rep': protein_rep,
         'region_start': region_start,
         'region_end': region_end,
+        'plddt': plddt,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,

@@ -53,6 +53,15 @@ nightingale-manager {
     height: 600px;
 }
 
+.legendColor{
+    padding-right: 15px;
+}
+
+.plddtColor {
+    padding: 5px;
+    border-radius: 3px;
+}
+
 .dataTables_filter input {
     font-family: 'IBM Plex Sans', Helvetica, Arial, sans-serif;
     font-size: 19px;

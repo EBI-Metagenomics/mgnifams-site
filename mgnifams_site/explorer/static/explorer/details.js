@@ -32,6 +32,27 @@ const loadBiomeData = () => {
     })
 };
 
+const loadStructureScoreColor = () => {
+    const plddt = parseFloat(document.querySelector('.plddtColor').textContent.trim());
+
+    const getPlddtColors = (plddt) => {
+        if (plddt >= 90) {
+            return { backgroundColor: 'rgb(0, 83, 214)', color: 'white' }; // Very high confidence (blue)
+        } else if (plddt >= 70) {
+            return { backgroundColor: 'rgb(101, 203, 243)', color: 'black' }; // High confidence (cyan)
+        } else if (plddt >= 50) {
+            return { backgroundColor: 'rgb(255, 219, 19)', color: 'black' }; // Low confidence (yellow)
+        } else {
+            return { backgroundColor: 'rgb(255, 125, 69)', color: 'black' }; // Very low confidence (orange)
+        }
+    };
+
+    const plddtElement = document.querySelector('.plddtColor');
+    const colors = getPlddtColors(plddt);
+    plddtElement.style.backgroundColor = colors.backgroundColor;
+    plddtElement.style.color = colors.color;
+};
+
 const loadMSAData = () => {
     let rootDiv = document.getElementById("msa-div")
     let msaDataURL = document.getElementById('msa-data').dataset.url;
@@ -213,6 +234,7 @@ $(document).ready(function () {
 
     loadFamilyData();
     loadBiomeData();
+    loadStructureScoreColor();
     loadMSAData();
     loadHMMData();
     loadDomainData();
