@@ -192,6 +192,15 @@ const renderArchitecture = (jsonData) => {
             domainSpan.classList.add('domain-span');
             domainSpan.style.backgroundColor = domain.color;
             domainSpan.style.color = domain.font_color;
+
+            if (domain.name.includes("MGnifam")) {
+                domainLink.style.fontWeight    = 'bold';
+                domainSpan.style.paddingLeft   = '15px';
+                domainSpan.style.paddingRight  = '15px';
+                domainSpan.style.paddingTop    = '6px';
+                domainSpan.style.paddingBottom = '6px';
+            }
+
             domainSpan.appendChild(domainLink);
             domainSpan.addEventListener('mouseover', function(event) {
                 showTooltip(event, domain.name, max_shown_length);
