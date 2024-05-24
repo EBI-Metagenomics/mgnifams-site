@@ -57,7 +57,7 @@ def format_protein_link(protein_id, region):
     if region_start != "":
         link_url += f"/?s={region_start}&e={region_end}"
 
-    return f'<a href="{link_url}">{link_text}</a>'
+    return link_text, f'<a href="{link_url}">{link_text}</a>'
 
 def call_skylign_api(blob_data):
     url = "http://skylign.org"
@@ -137,12 +137,15 @@ def details(request):
     domain_architecture_blob = mgnifam.domain_architecture_blob.decode('utf-8')
 
     # Fetch MgnifamProteins objects
-    mgnifam_proteins = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
+    mgnifam_proteins     = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
+    family_members       = []
     family_members_links = []
     for mgnifam_protein in mgnifam_proteins:
         protein_id = mgnifam_protein.protein
         region = mgnifam_protein.region
-        family_members_links.append(format_protein_link(protein_id, region))
+        family_member, family_member_link = format_protein_link(protein_id, region)
+        family_members.append(family_member)
+        family_members_links.append(family_member_link)
 
     # Fetch related MgnifamPfams objects
     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
@@ -195,6 +198,7 @@ def details(request):
         'hmm_logo_json': hmm_logo_json,
         'biomes_blob': biomes_blob,
         'domain_architecture_blob': domain_architecture_blob,
+        'family_members': family_members,
         'family_members_links': family_members_links,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations

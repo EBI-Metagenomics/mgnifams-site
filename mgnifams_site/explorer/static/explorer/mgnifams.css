@@ -116,7 +116,7 @@ nightingale-manager {
     outline: 0 !important;
 }
 
-#show-members-btn {
+#show-members-btn, #download-members-btn {
     display: inline-block;
     vertical-align: super;
     padding: 2px;

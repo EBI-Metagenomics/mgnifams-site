@@ -17,7 +17,11 @@
                     <tbody class="vf-table__body">
                         <tr class="vf-table__row">
                             <td class="vf-table__cell">Total number of sequences in the family</td>
-                            <td class="vf-table__cell">{{ family_size }} <button id="show-members-btn" class="vf-button">Show</button></td>
+                            <td class="vf-table__cell">
+                                {{ family_size }}
+                                <button id="show-members-btn" class="vf-button">Show</button>
+                                <button id="download-members-btn" class="vf-button" onclick="downloadProteins('{{ mgyf }}', {{ family_members }})">Download</button>
+                            </td>
                         </tr>
                         <tr class="vf-table__row">
                             <td class="vf-table__cell">Family representative sequence</td>

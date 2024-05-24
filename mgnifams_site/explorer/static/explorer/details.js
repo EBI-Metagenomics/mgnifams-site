@@ -230,6 +230,24 @@ const loadDatatables = () => {
     }
 };
 
+const downloadProteins = (mgyf, family_members) => {
+    // Create file content
+    const fileContent = family_members.join("\n");
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = mgyf + '_mgyps.txt';
+    document.body.appendChild(a);
+    a.click();
+
+    // Cleanup
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
 $(document).ready(function () {
 
     loadFamilyData();
