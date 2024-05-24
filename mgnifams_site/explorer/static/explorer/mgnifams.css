@@ -159,7 +159,7 @@ nightingale-manager {
     text-decoration: none !important;
     color: inherit !important;
 }
-.tooltip {
+.domain_tooltip {
     position: absolute;
     background-color: #fff;
     border-style: dotted;
@@ -167,4 +167,49 @@ nightingale-manager {
     padding: 5px;
     display: none;
     z-index: 2;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: #555;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 2000;
+    bottom: 100%; /* Position above the tooltip icon */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Arrow pointing down */
+    left: 25%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-icon {
+    margin-left: 5px;
+    font-size: 16px;
 }

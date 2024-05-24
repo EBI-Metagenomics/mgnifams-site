@@ -134,17 +134,17 @@ const loadHMMData = () => {
 
 const showTooltip = (event, text, max_shown_length) => {
     if (text.length > max_shown_length) {
-        const tooltip = document.getElementById('tooltip');
-        tooltip.textContent = text;
-        tooltip.style.display = 'block';
-        tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
-        tooltip.style.top = event.pageY  + 'px';
+        const domain_tooltip = document.getElementById('domain_tooltip');
+        domain_tooltip.textContent = text;
+        domain_tooltip.style.display = 'block';
+        domain_tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
+        domain_tooltip.style.top = event.pageY  + 'px';
     }
 };
 
 const hideTooltip = () => {
-    const tooltip = document.getElementById('tooltip');
-    tooltip.style.display = 'none';
+    const domain_tooltip = document.getElementById('domain_tooltip');
+    domain_tooltip.style.display = 'none';
 };
 
 const renderArchitecture = (jsonData) => {

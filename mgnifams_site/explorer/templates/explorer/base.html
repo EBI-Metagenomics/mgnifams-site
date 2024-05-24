@@ -6,42 +6,44 @@
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="description"
-                  content="MGnifams: Metagenomic derived protein families." />
+                content="MGnifams: Metagenomic derived protein families." />
             <meta name="keywords"
-                  content="MGnify, MGnifams, Metagenomics, Protein, Domains, Structures" />
+                content="MGnify, MGnifams, Metagenomics, Protein, Domains, Structures" />
             <title>
                 {% block title %}
                     MGnifams
                 {% endblock title %}
             </title>
             <link rel="shortcut icon"
-                  type="image/x-icon"
-                  href="{% static "explorer/favicon.ico" %}" />
+                type="image/x-icon"
+                href="{% static "explorer/favicon.ico" %}" />
             <link rel="stylesheet" href="{% static "explorer/mgnifams.css" %}">
             <link rel="stylesheet"
-                  href="//assets.emblstatic.net/vf/v2.5.7/css/styles.css" />
+                href="//assets.emblstatic.net/vf/v2.5.7/css/styles.css" />
             <link rel="stylesheet"
-                  href="//ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.3/fonts.css"
-                  type="text/css"
-                  media="all" />
+                href="//ebi.emblstatic.net/web_guidelines/EBI-Icon-fonts/v1.3/fonts.css"
+                type="text/css"
+                media="all" />
             <link rel="stylesheet"
-                  href="https://assets.emblstatic.net/vf/v2/assets/ebi-header-footer/ebi-header-footer.css"
-                  type="text/css"
-                  media="all" />            
+                href="https://assets.emblstatic.net/vf/v2/assets/ebi-header-footer/ebi-header-footer.css"
+                type="text/css"
+                media="all" />
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
             <script defer="defer"
-                    src="//ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.4/js/script.js"></script>
+                src="//ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.4/js/script.js"></script>
             <link rel="import"
-                  href="https://www.embl.org/api/v1/pattern.html?filter-content-type=article&filter-id=6682&pattern=node-body&source=contenthub"
-                  data-target="self"
-                  data-embl-js-content-hub-loader>
+                href="https://www.embl.org/api/v1/pattern.html?filter-content-type=article&filter-id=6682&pattern=node-body&source=contenthub"
+                data-target="self"
+                data-embl-js-content-hub-loader>
             <script src="https://assets.emblstatic.net/vf/v2.5.7/scripts/scripts.js"></script>
             <!-- sortable tables -->
             <link rel="stylesheet"
-                  type="text/css"
-                  href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+                type="text/css"
+                href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script type="text/javascript"
-                    src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+                src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
             <link rel="stylesheet"
                 type="text/css"
                 href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-3.1.0.css">
@@ -54,7 +56,7 @@
             {% if request.resolver_match.url_name in "home" %}<p class="vf-hero__kicker">MGnifams</p>{% endif %}
             <h1 class="vf-hero__heading">MGnifams</h1>
             <p class="vf-hero__text">
-                A metagenomics-derived protein families resource.
+                A metagenomics-derived protein families resource
             </p>
         </div>
     </section>
@@ -62,44 +64,44 @@
         <ul class="vf-navigation__list | vf-list | vf-cluster__inner">
             <li class="vf-navigation__item">
                 <a href="{% url "index" %}"
-                   class="vf-navigation__link">Home</a>
+                    class="vf-navigation__link">Home</a>
             </li>
             <li class="vf-navigation__item">
                 <a href="http://proteins.mgnify.org/"
-                   target="_blank"
-                   class="vf-navigation__link">
+                    target="_blank"
+                    class="vf-navigation__link">
                     <i class="icon icon-common icon-external-link-alt"></i>
                     Protein Landing Page
                 </a>
             </li>
             <li class="vf-navigation__item">
                 <a href="https://www.ebi.ac.uk/metagenomics"
-                   target="_blank"
-                   class="vf-navigation__link">
+                    target="_blank"
+                    class="vf-navigation__link">
                     <i class="icon icon-common icon-external-link-alt"></i>
                     MGnify
                 </a>
             </li>
             <li class="vf-navigation__item">
                 <a href="https://www.ebi.ac.uk/metagenomics/sequence-search/search/phmmer"
-                   target="_blank"
-                   class="vf-navigation__link">
+                    target="_blank"
+                    class="vf-navigation__link">
                     <i class="icon icon-common icon-external-link-alt"></i>
                     Sequence Search
                 </a>
             </li>
             <li class="vf-navigation__item">
                 <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/"
-                   target="_blank"
-                   class="vf-navigation__link">
+                    target="_blank"
+                    class="vf-navigation__link">
                     <i class="icon icon-common icon-external-link-alt"></i>
                     Protein Database Release
                 </a>
             </li>
             <li class="vf-navigation__item">
                 <a href="https://docs.mgnify.org/src/docs.html"
-                   target="_blank"
-                   class="vf-navigation__link">
+                    target="_blank"
+                    class="vf-navigation__link">
                     <i class="icon icon-common icon-external-link-alt"></i>
                     Documentation
                 </a>
