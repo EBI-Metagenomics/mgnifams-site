@@ -4,28 +4,20 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from Bio import SeqIO
 from explorer.models import Mgnifam, MgnifamProteins, MgnifamPfams, MgnifamFolds
 import re
-import glob
 import requests
 import json
-import subprocess
 
-# Global init
-base_dir = "../data/" # "../data/" "../data_old/"
-
-def count_lines_in_file(filepath):
-    with open(filepath, 'r') as f:
-        return sum(1 for _ in f)
+def format_family_name(id):
+    formatted_name = str(id).zfill(10)
+    return "MGYF" + formatted_name    
 
 def index(request):
-    # Calculate statistics
-    num_mgnifams = count_lines_in_file(os.path.join(base_dir, 'mgnifam_names.txt'))
+    num_mgnifams = Mgnifam.objects.count()
 
-    # Get the first ID from mgnifam_names.txt
-    with open(os.path.join(base_dir, 'mgnifam_names.txt'), 'r') as f:
-        first_id = f.readline().strip()
+    first_mgnifam = Mgnifam.objects.first()
+    first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
 
     context = {
         'num_mgnifams': num_mgnifams,
@@ -207,13 +199,6 @@ def details(request):
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })
-
-def mgnifam_names(request):
-    # Read the cluster rep names from the file
-    with open(os.path.join(base_dir, 'mgnifam_names.txt'), 'r') as f:
-        mgnifam_names = f.readlines()
-
-    return render(request, 'explorer/mgnifam_names.html', {'mgnifam_names': mgnifam_names})
 
 def serve_blob_as_file(request, pk, column_name):
     mgnifam_instance = get_object_or_404(Mgnifam, pk=pk)
