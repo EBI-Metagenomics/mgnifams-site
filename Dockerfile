@@ -3,7 +3,6 @@ LABEL authors="sandyr"
 
 WORKDIR /app
 ADD mgnifams_site .
-ADD data ../data
 ADD requirements.txt .
 
 RUN pip install -r requirements.txt
