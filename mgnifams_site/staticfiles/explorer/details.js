@@ -32,6 +32,27 @@ const loadBiomeData = () => {
     })
 };
 
+const loadStructureScoreColor = () => {
+    const plddt = parseFloat(document.querySelector('.plddtColor').textContent.trim());
+
+    const getPlddtColors = (plddt) => {
+        if (plddt >= 90) {
+            return { backgroundColor: 'rgb(0, 83, 214)', color: 'white' }; // Very high confidence (blue)
+        } else if (plddt >= 70) {
+            return { backgroundColor: 'rgb(101, 203, 243)', color: 'black' }; // High confidence (cyan)
+        } else if (plddt >= 50) {
+            return { backgroundColor: 'rgb(255, 219, 19)', color: 'black' }; // Low confidence (yellow)
+        } else {
+            return { backgroundColor: 'rgb(255, 125, 69)', color: 'black' }; // Very low confidence (orange)
+        }
+    };
+
+    const plddtElement = document.querySelector('.plddtColor');
+    const colors = getPlddtColors(plddt);
+    plddtElement.style.backgroundColor = colors.backgroundColor;
+    plddtElement.style.color = colors.color;
+};
+
 const loadMSAData = () => {
     let rootDiv = document.getElementById("msa-div")
     let msaDataURL = document.getElementById('msa-data').dataset.url;
@@ -171,6 +192,15 @@ const renderArchitecture = (jsonData) => {
             domainSpan.classList.add('domain-span');
             domainSpan.style.backgroundColor = domain.color;
             domainSpan.style.color = domain.font_color;
+
+            if (domain.name.includes("MGnifam")) {
+                domainLink.style.fontWeight    = 'bold';
+                domainSpan.style.paddingLeft   = '15px';
+                domainSpan.style.paddingRight  = '15px';
+                domainSpan.style.paddingTop    = '6px';
+                domainSpan.style.paddingBottom = '6px';
+            }
+
             domainSpan.appendChild(domainLink);
             domainSpan.addEventListener('mouseover', function(event) {
                 showTooltip(event, domain.name, max_shown_length);
@@ -209,10 +239,29 @@ const loadDatatables = () => {
     }
 };
 
+const downloadProteins = (mgyf, family_members) => {
+    // Create file content
+    const fileContent = family_members.join("\n");
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a temporary link element
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = mgyf + '_mgyps.txt';
+    document.body.appendChild(a);
+    a.click();
+
+    // Cleanup
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+
 $(document).ready(function () {
 
     loadFamilyData();
     loadBiomeData();
+    loadStructureScoreColor();
     loadMSAData();
     loadHMMData();
     loadDomainData();
