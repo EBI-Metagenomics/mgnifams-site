@@ -45,10 +45,18 @@
                                 Family representative sequence
                             </td>
                             <td class="vf-table__cell">
-                                {% if region_start != "" and region_end != "" %}
-                                    <a href="http://proteins.mgnify.org/{{ protein_rep }}/?start={{ region_start }}&end={{ region_end }}" target="_blank">{{ protein_rep }}/{{ region_start }}-{{region_end}}</a>
+                                {% if 'MGYG' in protein_rep %}
+                                    {% if region_start != "" and region_end != "" %}
+                                        {{ protein_rep }}/{{ region_start }}-{{region_end}}
+                                    {% else %}
+                                        {{ protein_rep }}
+                                    {% endif %}
                                 {% else %}
-                                    <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>
+                                    {% if region_start != "" and region_end != "" %}
+                                        <a href="http://proteins.mgnify.org/{{ protein_rep }}/?start={{ region_start }}&end={{ region_end }}" target="_blank">{{ protein_rep }}/{{ region_start }}-{{region_end}}</a>
+                                    {% else %}
+                                        <a href="http://proteins.mgnify.org/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>
+                                    {% endif %}
                                 {% endif %}
                             </td>
                         </tr>
