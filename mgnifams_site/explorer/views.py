@@ -43,21 +43,27 @@ def format_protein_link(protein_id, region):
     Formats the protein ID into a clickable link.
     Output: HTML link element
     """
-    formatted_name = format_protein_name(str(protein_id))
-    link_text      = formatted_name
-    region_start   = ""
-    region_end     = ""
+    region_start = ""
+    region_end   = ""
     if (region != "-"):
         region_parts = region.split("-")
         region_start = region_parts[0]
         region_end   = region_parts[1]
-        link_text    = f"{formatted_name}/{region_start}-{region_end}"
 
-    link_url = f"http://proteins.mgnify.org/{formatted_name}"
-    if region_start != "":
-        link_url += f"/?s={region_start}&e={region_end}"
+    if 'MGYG' in protein_id:
+        mgyg_with_region = f"{protein_id}/{region_start}-{region_end}"
+        return mgyg_with_region, mgyg_with_region
+    else:
+        formatted_name = format_protein_name(protein_id)
+        link_text      = formatted_name
+        if (region != "-"):
+            link_text = f"{formatted_name}/{region_start}-{region_end}"
 
-    return link_text, f'<a href="{link_url}">{link_text}</a>'
+        link_url = f"http://proteins.mgnify.org/{formatted_name}"
+        if region_start != "":
+            link_url += f"/?start={region_start}&end={region_end}"
+
+        return link_text, f'<a href="{link_url}">{link_text}</a>'
 
 def call_skylign_api(blob_data):
     url = "http://skylign.org"
@@ -107,7 +113,10 @@ def details(request):
         return redirect('index')
 
     family_size = mgnifam.family_size
-    protein_rep = format_protein_name(str(mgnifam.protein_rep))
+    if 'MGYG' not in mgnifam.protein_rep:
+        protein_rep = format_protein_name(mgnifam.protein_rep)
+    else:
+        protein_rep = mgnifam.protein_rep
     region = mgnifam.rep_region
     region_start = ""
     region_end = ""

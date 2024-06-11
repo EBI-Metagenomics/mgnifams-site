@@ -3,7 +3,7 @@ from django.db import models
 class Mgnifam(models.Model):
     id = models.IntegerField(primary_key=True)
     family_size = models.IntegerField()
-    protein_rep = models.IntegerField()
+    protein_rep = models.TextField()
     rep_region = models.TextField()
     rep_length = models.IntegerField()
     plddt = models.FloatField()
@@ -34,7 +34,7 @@ class Mgnifam(models.Model):
 class MgnifamProteins(models.Model):
     id = models.AutoField(primary_key=True)
     mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
-    protein = models.IntegerField()
+    protein = models.TextField()
     region = models.TextField()
 
     def __str__(self):
