@@ -55,7 +55,7 @@ def format_protein_link(protein_id, region):
 
     link_url = f"http://proteins.mgnify.org/{formatted_name}"
     if region_start != "":
-        link_url += f"/?s={region_start}&e={region_end}"
+        link_url += f"/?start={region_start}&end={region_end}"
 
     return link_text, f'<a href="{link_url}">{link_text}</a>'
 
