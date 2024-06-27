@@ -235,6 +235,10 @@
             <div id="logo" class="logo"></div>
             <div id="col_info" class="col_info"></div>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf }}.hmm" class="vf-button vf-button--primary vf-button--sm">Download HMM file</a>
+            <form action="{% url 'submit_hmmsearch' mgyf_id=mgyf_id %}" method="post" target="_blank" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="vf-button vf-button--primary vf-button--sm">Submit HMM Search</button>
+            </form>
         </div>
     </article>
 

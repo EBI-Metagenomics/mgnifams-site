@@ -1,21 +1,17 @@
-import os
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from explorer.models import Mgnifam, MgnifamProteins, MgnifamPfams, MgnifamFolds
+import xml.etree.ElementTree as ET
 import re
 import requests
 import json
 
 def format_family_name(id):
-    formatted_name = str(id).zfill(10)
-    return "MGYF" + formatted_name    
+    return "MGYF" + str(id).zfill(10)    
 
 def index(request):
-    num_mgnifams = Mgnifam.objects.count()
-
+    num_mgnifams  = Mgnifam.objects.count()
     first_mgnifam = Mgnifam.objects.first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
 
@@ -210,3 +206,31 @@ def serve_blob_as_file(request, pk, column_name):
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = f'attachment;'
     return response
+
+def send_hmmsearch_request(mgyf_id):
+    mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)
+    hmm_blob = mgnifam.hmm_blob
+
+    url = "https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch"
+    headers = {
+        'Expect': '',
+        'Accept': 'text/xml',
+    }
+    data = {
+        'seqdb': 'pdb',
+        'seq': hmm_blob
+    }
+    response = requests.post(url, headers=headers, data=data)
+
+    return response.content
+
+def submit_hmmsearch(request, mgyf_id):
+    response_content = send_hmmsearch_request(mgyf_id)
+
+    # Parse XML response to extract UUID
+    root = ET.fromstring(response_content)
+    uuid = root.find(".//data[@name='results']").attrib.get('uuid')
+
+    hmmer_url = f"https://www.ebi.ac.uk/Tools/hmmer/results/{uuid}/domain"
+    
+    return redirect(hmmer_url)
