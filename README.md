@@ -8,79 +8,27 @@ python manage.py collectstatic
 python manage.py runserver 8000
 ```
 
-## Demo deployment (Kubernetes)
-There is a basic Kubernetes configuration for deploying this to EBI's Web Production K8s clusters:
+# Deployment to EBI WebProd Kubernetes
+Pre-requisites:
+* Permission to push to a docker registry. We currently use a [team quay.io](quay.io/microbiome-informatics).
+* A kubeconfig that allows you to manage the EBI WebProd K8s cluster (e.g. in `~/mgnify-k8s-team-admin-hh.conf` below)
 
-A quay.io "pull secret" is required (as a K8s secret YAML), along with a K8s cluster admin configuration.
-
-With those in place:
-
-```bash
-docker build -f Dockerfile -t quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl --load .
-docker push quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl
-kubectl apply -f deployment/ebi-wp-k8s-hl.yaml
+**Normal usage**: Push to the `main` branch, and Quay.io will automatically build and tag the `:latest` container.
+Wait a few minutes for the build, and then restart the deployment to pull the image again:
+```shell
+ kubectl --kubeconfig ~/mgnify-k8s-team-admin-hh.conf rollout restart deployment mgnifams-site -n mgnifams-hl-exp
 ```
 
-## bin scripts to produce data
+**Non-normal usage**:
+Secrets setup (one-time):
+- Make a secrets .env file at `k8s-hl/secrets.env` with the database connection config (env vars read by `settings.py) and the `DJANGO_SECRET_KEY`.
+	- Push it with e.g.: `kubectl --kubeconfig ~/mgnify-k8s-team-admin-hh.conf --namespace mgnifams-hl-exp create secret generic mgnifams-secret --from-env-file=deployment/secrets.env`
+- Get authentication credentials for quay.io (the built image is private). You can get a Kubernetes secrets yaml file from your Quay.io user settings, in the "CLI Password" section.
+	- Download the secrets yaml and name the secret `name: quay-pull-secret` in the metadata section. Put this into the `k8s-hl` folder as `secrets-quayio.yml`.
 
-extract_rf.py
-
-Only used to produce earlier version rf files to link HMM to MSA. Now it is incorporated in the family generation pipeline.
-
-### Biome distribution
-
-1. python3 bin/get_biome_distribution.py bin/db_config.ini data/families/updated_refined_families.tsv tmp/ data/biome_sunburst/tmp/
-
-Query the PostgreSQL proteins database for biome data relative to the sequences in each family
-
-Arguments:
-
-config_file: Path to the configuration file for the database secrets
-
-edge_list_file: Path to the edge list file with two columns (family-sequence)
-
-tmp_dir: Path to the tmp directory  (intermediate)
-
-result_dir: Path to the result directory  (intermediate)
-
-2. python3 bin/parse_biome_sunburst.py bin/db_config.ini data/biome_sunburst/tmp/ data/biome_sunburst/result/
-
-Query the PostgreSQL proteins database for biome names and parse into the final sunburst format
-
-config_file: Path to the configuration file for the database secrets
-
-counts_dir: Path to the folder with biomes ids and counts per family
-
-out_dir: Path to the results directory (final)
-
-### Domain architecture
-
-1. python3 bin/get_pfams.py bin/db_config.ini data/families/updated_refined_families.tsv data/pfams/tmp
-
-Query the PostgreSQL proteins database for for each family to get the pfam domains for all of its underlying sequences
-
-config_file: Path to the configuration file for the database secrets
-
-edge_list_file: Path to the edge list file with two columns (family-sequence)
-
-result_dir: Path to the result directory  (intermediate)
-
-2. python3 bin/parse_pfams.py data/families/updated_refined_families.tsv data/pfams/tmp/ data/pfams/result/
-
-Parse pfam ids into domain architecture format
-
-edge_list_file: Path to the edge list file with two columns  (family-sequence)
-
-read_dir: Path to the folder with pfam ids per family and sequence
-
-out_dir: Path to the results directory  (intermediate)
-
-3. python3 bin/translate_pfams.py bin/db_config.ini data/pfams/result/ data/pfams/translated/
-
-Query a PostgreSQL database and translate pfam ids into clickable names
-
-config_file: Path to the configuration file for the database secrets
-
-read_dir: Path to the folder with the domain architecture json files
-
-out_dir: Path to the translated results directory (final)
+To redeploy with a manual build, or having changed the kubernetes config:
+```shell
+docker build -f Dockerfile -t quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl --load .
+docker push quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl
+kubectl --kubeconfig ~/mgnify-k8s-team-admin-hh.conf apply -f deployment/ebi-wp-k8s-hl.yaml
+```

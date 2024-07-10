@@ -49,7 +49,7 @@ def format_protein_link(protein_id, region):
         region_end   = region_parts[1]
         link_text    = f"{formatted_name}/{region_start}-{region_end}"
 
-    link_url = f"http://proteins.mgnify.org/{formatted_name}"
+    link_url = f"https://www.ebi.ac.uk/metagenomics/proteins/{formatted_name}"
     if region_start != "":
         link_url += f"/?start={region_start}&end={region_end}"
 
@@ -79,7 +79,7 @@ def generate_structure_link_and_db(part):
     if part.startswith('MGYP'):
         # Remove '.pdb.gz' extension and format link for MGYP
         id = part.replace('.pdb.gz', '')
-        return f'<a href="http://proteins.mgnify.org/{id}">{id}</a>', 'ESM'
+        return f'<a href="https://www.ebi.ac.uk/metagenomics/proteins/{id}">{id}</a>', 'ESM'
     elif part.startswith('AF'):
         # Split with '-' and keep the second part for AlphaFold
         af_id = part.split('-')[1]

@@ -48,6 +48,8 @@ items:
               imagePullPolicy: Always
               name: mgnifams-site
               envFrom:
+                - secretRef:
+                    name: mgnifams-secret
                 - configMapRef:
                     name: proxy-config
               ports:
