@@ -112,7 +112,7 @@ def details(request):
         region_start = region_parts[0]
         region_end   = region_parts[1]
     plddt = mgnifam.plddt
-    converged = mgnifam.converged
+    converged = (mgnifam.converged == "True") # casting to boolean
 
     cif_blob = mgnifam.cif_blob.decode('utf-8')
 
