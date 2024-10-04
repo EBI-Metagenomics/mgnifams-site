@@ -87,7 +87,7 @@ def generate_structure_link_and_db(part):
     elif '.cif.gz' in part:
         # Split with '.' and keep the first part for RCSB PDB
         pdb_id = part.split('.')[0]
-        return f'<a href="https://www.rcsb.org/structure/{pdb_id}">{pdb_id}</a>', 'PDB'
+        return f'<a href="https://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}">{pdb_id}</a>', 'PDB'
     else:
         return part, ''
 
