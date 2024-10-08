@@ -17,6 +17,9 @@ class Mgnifam(models.Model):
     biomes_file = models.TextField()
     domain_architecture_file = models.TextField()
 
+    quality_rank = models.IntegerField(default=0)
+    novelty_rank = models.IntegerField(default=0)
+
     cif_blob = models.BinaryField(null=True)
     seed_msa_blob = models.BinaryField(null=True)
     msa_blob = models.BinaryField(null=True)

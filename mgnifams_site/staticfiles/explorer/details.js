@@ -173,7 +173,7 @@ const renderArchitecture = (jsonData) => {
     const architecturesContainer = document.getElementById('architecturesContainer');
     
     // Loop through each architecture container
-    jsonData.architecture_containers.slice(0, 10).forEach(container => {
+    jsonData.architecture_containers.slice(0, 15).forEach(container => {
         const containerDiv = document.createElement('div');
         containerDiv.classList.add('architecture-div');
         const architectureTextPara = document.createElement('span');

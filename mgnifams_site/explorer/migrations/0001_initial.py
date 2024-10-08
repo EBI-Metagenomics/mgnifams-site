@@ -28,6 +28,8 @@ class Migration(migrations.Migration):
                 ("rf_file", models.TextField()),
                 ("biomes_file", models.TextField()),
                 ("domain_architecture_file", models.TextField()),
+                ("novelty_rank", models.IntegerField(default=0)),
+                ("quality_rank", models.IntegerField(default=0)),
                 ("cif_blob", models.BinaryField(null=True)),
                 ("seed_msa_blob", models.BinaryField(null=True)),
                 ("msa_blob", models.BinaryField(null=True)),
