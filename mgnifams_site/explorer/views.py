@@ -114,6 +114,9 @@ def details(request):
     plddt = mgnifam.plddt
     converged = (mgnifam.converged == "True") # casting to boolean
 
+    novelty_rank = mgnifam.novelty_rank or 0
+    quality_rank = mgnifam.quality_rank or 0
+
     cif_blob = mgnifam.cif_blob.decode('utf-8')
 
     seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
@@ -186,6 +189,8 @@ def details(request):
         'region_end': region_end,
         'plddt': plddt,
         'converged': converged,
+        'novelty_rank': novelty_rank,
+        'quality_rank': quality_rank,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
         'msa_blob': msa_blob,

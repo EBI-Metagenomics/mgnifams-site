@@ -363,4 +363,11 @@
     let hmm_logo_json = '{{ hmm_logo_json | safe }}'
 </script>
 
+<script>
+    let noveltyRank = '{{ novelty_rank }}';
+    console.log("n", noveltyRank);
+    let qualityRank = '{{ quality_rank }}';
+    console.log("q", qualityRank);
+</script>
+
 {% endblock %}
