@@ -42,7 +42,7 @@ items:
           volumes:
             - name: mgnifams-app-storage
               persistentVolumeClaim:
-                claimName: mgnifams-volume-claim
+                claimName: mgnifams-volume-claim-2
           containers:
             - image: quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl
               imagePullPolicy: Always
@@ -97,11 +97,11 @@ items:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: mgnifams-vol-1
+      name: mgnifams-vol-2
       namespace: mgnifams-hl-exp
     spec:
       capacity:
-        storage: 8Gi
+        storage: 300Gi
       volumeMode: Filesystem
       accessModes:
         - ReadOnlyMany
@@ -110,28 +110,11 @@ items:
         - nfsvers=3
       nfs:
         server: hh-isi-srv-vlan1496.ebi.ac.uk
-        path: /ifs/public/rw/metagenomics/mgnifams/dbs
-  # - apiVersion: v1
-  #   kind: PersistentVolume
-  #   metadata:
-  #     name: mgnifams-vol-2
-  #     namespace: mgnifams-hl-exp
-  #   spec:
-  #     capacity:
-  #       storage: 300Gi
-  #     volumeMode: Filesystem
-  #     accessModes:
-  #       - ReadOnlyMany
-  #     persistentVolumeReclaimPolicy: Recycle
-  #     mountOptions:
-  #       - nfsvers=3
-  #     nfs:
-  #       server: hh-isi-srv-vlan1496.ebi.ac.uk
-  #       path: /ifs/public/services/metagenomics/mgnifams/dbs
+        path: /ifs/public/services/metagenomics/mgnifams/dbs
   - apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: mgnifams-volume-claim
+      name: mgnifams-volume-claim-2
       namespace: mgnifams-hl-exp
     spec:
       storageClassName: ""
@@ -139,7 +122,7 @@ items:
         - ReadOnlyMany
       resources:
         requests:
-          storage: 6Gi
-      volumeName: mgnifams-vol-1
+          storage: 300Gi
+      volumeName: mgnifams-vol-2
 
 
