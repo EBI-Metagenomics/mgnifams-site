@@ -134,6 +134,7 @@ def details(request):
 
     biomes_blob = mgnifam.biomes_blob.decode('utf-8')
     domain_architecture_blob = mgnifam.domain_architecture_blob.decode('utf-8')
+    pred_secondary_structure_blob = mgnifam.pred_secondary_structure_blob.decode('utf-8')
 
     # Fetch MgnifamProteins objects
     mgnifam_proteins     = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
@@ -199,6 +200,7 @@ def details(request):
         'hmm_logo_json': hmm_logo_json,
         'biomes_blob': biomes_blob,
         'domain_architecture_blob': domain_architecture_blob,
+        'pred_secondary_structure_blob': pred_secondary_structure_blob,
         'family_members': family_members,
         'family_members_links': family_members_links,
         'hits_data': hits_data,

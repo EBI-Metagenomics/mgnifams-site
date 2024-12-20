@@ -16,6 +16,7 @@ class Mgnifam(models.Model):
     rf_file = models.TextField()
     biomes_file = models.TextField()
     domain_architecture_file = models.TextField()
+    pred_secondary_structure_file = models.TextField(null=True)
 
     quality_rank = models.IntegerField(default=0)
     novelty_rank = models.IntegerField(default=0)
@@ -27,6 +28,7 @@ class Mgnifam(models.Model):
     rf_blob = models.BinaryField(null=True)
     biomes_blob = models.BinaryField(null=True)
     domain_architecture_blob = models.BinaryField(null=True)
+    pred_secondary_structure_blob = models.BinaryField(null=True)
     
     def __str__(self):
         return f"Mgnifam ID: {self.id}"

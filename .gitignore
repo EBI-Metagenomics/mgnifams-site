@@ -1,6 +1,7 @@
 bin/db_config.ini
 mgnifams.sqlite3
 mgnifams_no_blobs.sqlite3
+sqlite_reps.fasta
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

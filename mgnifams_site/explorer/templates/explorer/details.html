@@ -203,6 +203,15 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Feature viewer - predicted secondary structure</h3>
+            <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}"></div>
+            <div id="featuresContainer"></div>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--primary vf-button--sm">Download features JSON file</a>
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">
                 Multiple Sequence Alignment (Seed)
                 <span class="tooltip">
@@ -224,7 +233,7 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">HMM Viewer</h3>
+            <h3 class="vf-card__heading">HMM viewer</h3>
             <div>
                 <p>
                     Stack height is the information content (aka relative entropy) of the position,
@@ -244,7 +253,7 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Domain Architecture</h3>
+            <h3 class="vf-card__heading">Domain architecture</h3>
             <div>
                 <p>
                     The top 15 prevalent domain architectures (MGnifams and Pfams) of the underlying family sequences.
@@ -351,6 +360,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
+{% comment %} Feature viewer (s4pred) {% endcomment %}
+<script src="https://cdn.jsdelivr.net/gh/calipho-sib/feature-viewer@v1.1.0/dist/feature-viewer.bundle.js"></script>
 {% comment %} MSA Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/msa/msa.min.css" %}">
 <script src="{% static "explorer/msa/msa.min.js" %}"></script>

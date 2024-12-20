@@ -53,6 +53,37 @@ const loadStructureScoreColor = () => {
     plddtElement.style.color = colors.color;
 };
 
+const renderFeatures = (jsonData) => {
+    var ft = new FeatureViewer.createFeature(jsonData.sequence,
+        '#featuresContainer',
+        {
+            showAxis: true,
+            showSequence: true,
+            toolbar: true
+        });
+
+        jsonData.features.forEach(feature => {
+            ft.addFeature(feature);
+        });
+};
+
+const loadSecondaryStructureData = () => {
+    let featureDataURL = document.getElementById('feature-data').dataset.url;
+    fetch(featureDataURL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            renderFeatures(data);
+        })
+        .catch(error => {
+            console.error('Error fetching features JSON:', error);
+        });
+};
+
 const loadMSAData = () => {
     let rootDiv = document.getElementById("msa-div")
     let msaDataURL = document.getElementById('msa-data').dataset.url;
@@ -262,6 +293,7 @@ $(document).ready(function () {
     loadFamilyData();
     loadBiomeData();
     loadStructureScoreColor();
+    loadSecondaryStructureData();
     loadMSAData();
     loadHMMData();
     loadDomainData();
