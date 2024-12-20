@@ -54,7 +54,12 @@ const loadStructureScoreColor = () => {
 };
 
 const renderFeatures = (jsonData) => {
-    var ft = new FeatureViewer.createFeature(jsonData.sequence,
+    if (!jsonData || !jsonData.sequence || !Array.isArray(jsonData.features)) {
+        console.error('Invalid data structure for Feature Viewer:', jsonData);
+        return;
+    }
+
+    const ft = new FeatureViewer.createFeature(jsonData.sequence,
         '#featuresContainer',
         {
             showAxis: true,
@@ -62,9 +67,17 @@ const renderFeatures = (jsonData) => {
             toolbar: true
         });
 
-        jsonData.features.forEach(feature => {
-            ft.addFeature(feature);
-        });
+    jsonData.features.forEach(feature => {
+        if (feature && feature.type && Array.isArray(feature.data)) {
+            try {
+                ft.addFeature(feature);
+            } catch (error) {
+                console.error('Error adding feature:', feature, error);
+            }
+        } else {
+            console.warn('Invalid feature object:', feature);
+        }
+    });
 };
 
 const loadSecondaryStructureData = () => {
