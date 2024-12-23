@@ -36,7 +36,8 @@
                 href="https://www.embl.org/api/v1/pattern.html?filter-content-type=article&filter-id=6682&pattern=node-body&source=contenthub"
                 data-target="self"
                 data-embl-js-content-hub-loader>
-            <script src="https://assets.emblstatic.net/vf/v2.5.7/scripts/scripts.js"></script>
+            {% comment %} <script src="https://assets.emblstatic.net/vf/v2.5.7/scripts/scripts.js"></script> {% endcomment %}
+            {% comment %} The above commented EMBL JS, creates a bug for feature viewer, leading to an error and not showing confidence score plot {% endcomment %}
             <!-- sortable tables -->
             <link rel="stylesheet"
                 type="text/css"
