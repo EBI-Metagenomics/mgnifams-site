@@ -7,121 +7,121 @@
 
 <div id="domain_tooltip" class="domain_tooltip"></div>
 
-<section class="vf-content | vf-stack vf-stack--600">
-    <h2> Protein Family: {{ mgyf }} </h2>
-    <div class="vf-grid vf-grid__col-3">
-        <article class="vf-card vf-card--brand vf-card--bordered">
-            <div class="vf-card__content | vf-stack vf-stack--600">
-                <h3 class="vf-card__heading">Overview</h3>
-                <table class="vf-table | vf-u-width__100">
-                    <tbody class="vf-table__body">
-                        <tr class="vf-table__row">
-                            <td class="vf-table__cell">
-                                <span class="tooltip">
-                                    <i class="fas fa-question-circle tooltip-icon"></i>
-                                    <span class="tooltiptext">
-                                        These are MGnify proteins that have been iteratively recruited in the family through a series
-                                        of processes such as: creating a seed alignment from the family's initial cluster, building an HMM model,
-                                        recruiting proteins from MGnify with the HMM model and then creating a full sequence alignment.
-                                    </span>
+<section class="vf-content | vf-stack vf-stack--400">
+    <h2> Protein Family: {{ mgyf }} </h2>=
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Overview</h3>
+            <table class="vf-table | vf-u-width__100">
+                <tbody class="vf-table__body">
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    This is the top-scoring MGnify protein (along with its specific region if not whole)
+                                    that was recruited in the family through hmmsearch. Links to the MGnify Proteins site.
                                 </span>
-                                Total number of sequences in the family
-                            </td>
-                        </tr>
-                        <tr class="vf-table__row">
-                            <td class="vf-table__cell">
-                                <span class="tooltip">
-                                    <i class="fas fa-question-circle tooltip-icon"></i>
-                                    <span class="tooltiptext">
-                                        This is the top-scoring MGnify protein (along with its specific region if not whole)
-                                        that was recruited in the family through hmmsearch. Links to the MGnify Proteins site.
-                                    </span>
+                            </span>
+                            Family representative sequence
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if region_start != "" and region_end != "" %}
+                                <a href="https://www.ebi.ac.uk/metagenomics/proteins/{{ protein_rep }}/?start={{ region_start }}&end={{ region_end }}" target="_blank">{{ protein_rep }}/{{ region_start }}-{{region_end}}</a>
+                            {% else %}
+                                <a href="https://www.ebi.ac.uk/metagenomics/proteins/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    # Amino Acids (AA)
                                 </span>
-                                Family representative sequence
-                            </td>
-                            <td class="vf-table__cell">
-                                {% if region_start != "" and region_end != "" %}
-                                    <a href="https://www.ebi.ac.uk/metagenomics/proteins/{{ protein_rep }}/?start={{ region_start }}&end={{ region_end }}" target="_blank">{{ protein_rep }}/{{ region_start }}-{{region_end}}</a>
-                                {% else %}
-                                    <a href="https://www.ebi.ac.uk/metagenomics/proteins/{{ protein_rep }}" target="_blank">{{ protein_rep }}</a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr class="vf-table__row">
-                            <td class="vf-table__cell">
-                                <span class="tooltip">
-                                    <i class="fas fa-question-circle tooltip-icon"></i>
-                                    <span class="tooltiptext">
-                                        Denotes if Pfam domain annotation hits were identified through model searching with the hhsuite/hhblits tool.
-                                    </span>
+                            </span>
+                            Representative length
+                        </td>
+                        <td class="vf-table__cell">
+                            {{ rep_length }}
+                        </td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    The total number of MGnify sequences that have been iteratively recruited in the family through a series
+                                    of processes such as: creating a seed alignment from the family's initial cluster, building an HMM model,
+                                    and finally recruiting and aligning sequences from MGnify Proteins with the family HMM model.
                                 </span>
-                                Profile-profile matches
-                            </td>
-                            <td class="vf-table__cell">
-                                {% if hits_data %}
-                                    <i class="icon icon-common icon-check-square"></i>
-                                {% else %}
-                                    <i class="icon icon-common icon-close"></i>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr class="vf-table__row">
-                            <td class="vf-table__cell">
-                                <span class="tooltip">
-                                    <i class="fas fa-question-circle tooltip-icon"></i>
-                                    <span class="tooltiptext">
-                                        Denotes if structure homologs of the family's representative sequence have been identified 
-                                        in the AlphaFoldDB, ESMAtlas or PDB databases through the foldseek tool.
-                                    </span>
+                            </span>
+                            Total number of sequences in the family
+                        </td>
+                        <td class="vf-table__cell">
+                            {{ full_size }}
+                        </td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    Denotes if Pfam domain annotation hits were identified through model searching with the hhsuite/hhblits tool.
                                 </span>
-                                Structure-structure hits
-                            </td>
-                            <td class="vf-table__cell">
-                                {% if structural_annotations %}
-                                    <i class="icon icon-common icon-check-square"></i>
-                                {% else %}
-                                    <i class="icon icon-common icon-close"></i>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% if converged %}
-                        <tr class="vf-table__row">
-                            <td class="vf-table__cell">
-                                <span class="tooltip">
-                                    <i class="fas fa-question-circle tooltip-icon"></i>
-                                    <span class="tooltiptext">
-                                        This family has refined its model and stopped recruiting
-                                        new sequences from the pool in three or less iterations.
-                                    </span>
-                                </span>
-                                Converged
-                            </td>
-                            <td class="vf-table__cell">
+                            </span>
+                            Profile-profile matches
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if hits_data %}
                                 <i class="icon icon-common icon-check-square"></i>
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-        </article>
-        <article class="vf-card vf-card--brand vf-card--bordered vf-grid__col--span-2">
-            <div class="vf-card__content | vf-stack vf-stack--600 ">
-                <h3 class="vf-card__heading">
-                    Biomes distribution
-                    <span class="tooltip">
-                        <i class="fas fa-question-circle tooltip-icon"></i>
-                        <span class="tooltiptext">
-                            An interactive sunburst plot of the biomes where the family's underlying MGnify proteins were found in.
-                        </span>
-                    </span>
-                </h3>
-                <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}"></div>
-                <div id="sunburst-div"></div>
-                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
-            </div>
-        </article>
-    </div>
+                            {% else %}
+                                <i class="icon icon-common icon-close"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    Denotes if structure homologs of the family's representative sequence have been identified 
+                                    in the AlphaFoldDB, ESMAtlas or PDB databases through the foldseek tool.
+                                </span>
+                            </span>
+                            Structure-structure hits
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if structural_annotations %}
+                                <i class="icon icon-common icon-check-square"></i>
+                            {% else %}
+                                <i class="icon icon-common icon-close"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if converged %}
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    This family has refined its model and stopped recruiting
+                                    new sequences from the pool in three or less iterations.
+                                </span>
+                            </span>
+                            Converged
+                        </td>
+                        <td class="vf-table__cell">
+                            <i class="icon icon-common icon-check-square"></i>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </article>
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-grid vf-grid__col-4 | vf-card__content">
@@ -218,7 +218,8 @@
         </div>
     </article>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
+    {% comment %} TODO {% endcomment %}
+    {% comment %} <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">HMM viewer</h3>
             <div>
@@ -235,6 +236,23 @@
                 {% csrf_token %}
                 <button type="submit" class="vf-button vf-button--secondary vf-button--sm">Submit HMM Search</button>
             </form>
+        </div>
+    </article> {% endcomment %}
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400 ">
+            <h3 class="vf-card__heading">
+                Biomes distribution
+                <span class="tooltip">
+                    <i class="fas fa-question-circle tooltip-icon"></i>
+                    <span class="tooltiptext">
+                        An interactive sunburst plot of the biomes where the family's underlying MGnify proteins were found in.
+                    </span>
+                </span>
+            </h3>
+            <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}"></div>
+            <div id="sunburst-div"></div>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
         </div>
     </article>
 
@@ -275,7 +293,7 @@
                     <tbody class="vf-table__body">
                         {% for hit in hits_data %}
                             <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam_id }}">
-                                <td class="vf-table__cell">{{ hit.rank }}</td>
+                                <td class="vf-table__cell">{{ hit.prob }}</td>
                                 <td class="vf-table__cell">
                                     <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam_id }}" target="_blank">{{ hit.name }}</a>
                                 </td>
@@ -318,7 +336,7 @@
                     <tbody class="vf-table__body">
                         {% for annotation in structural_annotations %}
                             <tr class="vf-table__row">
-                                <td class="vf-table__cell">{{ annotation.rank }}</td>
+                                <td class="vf-table__cell">{{ annotation.prob }}</td>
                                 <td class="vf-table__cell">{{ annotation.target_structure_identifier | safe }}</td>
                                 <td class="vf-table__cell">{{ annotation.target_structure_db }}</td>
                                 <td class="vf-table__cell">{{ annotation.aligned_length }}</td>

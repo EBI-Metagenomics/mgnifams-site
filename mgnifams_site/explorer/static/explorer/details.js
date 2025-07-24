@@ -298,7 +298,7 @@ $(document).ready(function () {
     loadStructureScoreColor();
     loadSecondaryStructureData();
     loadMSAData();
-    loadHMMData();
+    // loadHMMData(); // TODO update
     loadDomainData();
     loadDatatables();
 

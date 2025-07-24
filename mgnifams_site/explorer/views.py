@@ -34,27 +34,6 @@ def format_protein_name(raw_name):
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return "MGYP" + formatted_name
 
-def format_protein_link(protein_id, region):
-    """
-    Formats the protein ID into a clickable link.
-    Output: HTML link element
-    """
-    formatted_name = format_protein_name(str(protein_id))
-    link_text      = formatted_name
-    region_start   = ""
-    region_end     = ""
-    if (region != "-"):
-        region_parts = region.split("-")
-        region_start = region_parts[0]
-        region_end   = region_parts[1]
-        link_text    = f"{formatted_name}/{region_start}-{region_end}"
-
-    link_url = f"https://www.ebi.ac.uk/metagenomics/proteins/{formatted_name}"
-    if region_start != "":
-        link_url += f"/?start={region_start}&end={region_end}"
-
-    return link_text, f'<a href="{link_url}">{link_text}</a>'
-
 def call_skylign_api(blob_data):
     url = "http://skylign.org"
     headers = {'Accept': 'application/json'}
@@ -111,6 +90,7 @@ def details(request):
         region_parts = region.split("-")
         region_start = region_parts[0]
         region_end   = region_parts[1]
+    rep_length = mgnifam.rep_length
     plddt = mgnifam.plddt
     converged = (mgnifam.converged == "True") # casting to boolean
 
@@ -138,7 +118,7 @@ def details(request):
     hits_data = []
     for mgnifam_pfam in mgnifam_pfams:
         hit = {
-            'rank': mgnifam_pfam.rank,
+            'prob': mgnifam_pfam.prob,
             'name': mgnifam_pfam.pfam_hit,
             'pfam_id': mgnifam_pfam.pfam_id,
             'e_value': mgnifam_pfam.e_value,
@@ -165,7 +145,7 @@ def details(request):
         structural_annotations.append(annotation)
     structural_annotations.sort(key=lambda x: x['e_value'])
     for i, annotation in enumerate(structural_annotations, start=1):
-        annotation['rank'] = i
+        annotation['prob'] = i
 
     return render(request, 'explorer/details.html', {
         'mgyf': mgyf,
@@ -174,10 +154,10 @@ def details(request):
         'protein_rep': protein_rep,
         'region_start': region_start,
         'region_end': region_end,
+        'rep_length': rep_length,
         'plddt': plddt,
         'converged': converged,
         'cif_blob': cif_blob,
-        'seed_msa_blob': seed_msa_blob,
         'seed_msa_blob': seed_msa_blob,
         'rf': rf,
         'hmm_blob': hmm_blob,
