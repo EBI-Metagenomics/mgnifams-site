@@ -116,9 +116,9 @@
                         </span>
                     </span>
                 </h3>
-                <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}"></div>
+                <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}"></div>
                 <div id="sunburst-div"></div>
-                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
             </div>
         </article>
     </div>
@@ -191,9 +191,9 @@
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Feature viewer - predicted secondary structure</h3>
-            <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}"></div>
+            <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}"></div>
             <div id="featuresContainer"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
         </div>
     </article>
 
@@ -214,7 +214,7 @@
             <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}"></div>
             <div id="msa-div"></div>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download seed MSA file</a>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download full MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download full MSA file</a>
         </div>
     </article>
 
@@ -247,9 +247,9 @@
                     The numbers on the left indicate how many times each domain architecture appeared.
                 </p>
             </div>
-            <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}"></div>
+            <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}"></div>
             <div id="architecturesContainer"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
         </div>
     </article>
 
@@ -357,13 +357,6 @@
 <script>
     let rf = '{{ rf }}'
     let hmm_logo_json = '{{ hmm_logo_json | safe }}'
-</script>
-
-<script>
-    let noveltyRank = '{{ novelty_rank }}';
-    console.log("n", noveltyRank);
-    let qualityRank = '{{ quality_rank }}';
-    console.log("q", qualityRank);
 </script>
 
 {% comment %} Feature viewer (s4pred) - Must be inserted after HMM Viewer, else there is a hmm_logo function bug{% endcomment %}

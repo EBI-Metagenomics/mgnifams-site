@@ -114,16 +114,13 @@ def details(request):
     plddt = mgnifam.plddt
     converged = (mgnifam.converged == "True") # casting to boolean
 
-    novelty_rank = mgnifam.novelty_rank or 0
-    quality_rank = mgnifam.quality_rank or 0
-
     cif_blob = mgnifam.cif_blob.decode('utf-8')
 
     seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
-    if mgnifam.msa_blob is not None:
-        msa_blob = mgnifam.msa_blob.decode('utf-8')
+    if mgnifam.seed_msa_blob is not None:
+        seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
     else:
-        msa_blob = ""
+        seed_msa_blob = ""
     rf = mgnifam.rf_blob.decode('utf-8')
     hmm_blob = mgnifam.hmm_blob.decode('utf-8')
     response_data = call_skylign_api(hmm_blob)
@@ -132,9 +129,9 @@ def details(request):
         uuid = response_data['uuid']
     hmm_logo_json = fetch_skylign_logo_json(uuid)
 
-    biomes_blob = mgnifam.biomes_blob.decode('utf-8')
-    domain_architecture_blob = mgnifam.domain_architecture_blob.decode('utf-8')
-    pred_secondary_structure_blob = mgnifam.pred_secondary_structure_blob.decode('utf-8')
+    biome_blob = mgnifam.biome_blob.decode('utf-8')
+    domain_blob = mgnifam.domain_blob.decode('utf-8')
+    s4pred_blob = mgnifam.s4pred_blob.decode('utf-8')
 
     # Fetch related MgnifamPfams objects
     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
@@ -179,18 +176,15 @@ def details(request):
         'region_end': region_end,
         'plddt': plddt,
         'converged': converged,
-        'novelty_rank': novelty_rank,
-        'quality_rank': quality_rank,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
-        'msa_blob': msa_blob,
+        'seed_msa_blob': seed_msa_blob,
         'rf': rf,
         'hmm_blob': hmm_blob,
         'hmm_logo_json': hmm_logo_json,
-        'biomes_blob': biomes_blob,
-        'domain_architecture_blob': domain_architecture_blob,
-        'pred_secondary_structure_blob': pred_secondary_structure_blob,
-        'family_members': family_members,
+        'biome_blob': biome_blob,
+        'domain_blob': domain_blob,
+        's4pred_blob': s4pred_blob,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })
