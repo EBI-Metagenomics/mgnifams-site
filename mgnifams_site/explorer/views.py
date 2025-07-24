@@ -102,7 +102,7 @@ def details(request):
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
 
-    family_size = mgnifam.family_size
+    full_size = mgnifam.full_size
     protein_rep = format_protein_name(str(mgnifam.protein_rep))
     region = mgnifam.rep_region
     region_start = ""
@@ -173,7 +173,7 @@ def details(request):
     return render(request, 'explorer/details.html', {
         'mgyf': mgyf,
         'mgyf_id': mgyf_id,
-        'family_size': family_size,
+        'full_size': full_size,
         'protein_rep': protein_rep,
         'region_start': region_start,
         'region_end': region_end,
