@@ -1,11 +1,3 @@
-const loadFamilyData = () => {
-    document.getElementById('show-members-btn').addEventListener('click', function() {
-        let div = document.getElementById('family-members-div');
-        div.style.display = div.style.display === 'none' ? 'block' : 'none';
-        this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
-    });
-};
-
 const loadBiomeData = () => {
     let biomesDataURL = document.getElementById('biomes-data').dataset.url;
     d3.csv(biomesDataURL, function(err, rows){

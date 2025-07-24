@@ -27,11 +27,6 @@
                                 </span>
                                 Total number of sequences in the family
                             </td>
-                            <td class="vf-table__cell">
-                                {{ family_size }}
-                                <button id="show-members-btn" class="vf-button">Show</button>
-                                <button id="download-members-btn" class="vf-button" onclick="downloadProteins('{{ mgyf }}', {{ family_members }})">Download</button>
-                            </td>
                         </tr>
                         <tr class="vf-table__row">
                             <td class="vf-table__cell">
@@ -123,17 +118,9 @@
                 </h3>
                 <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}"></div>
                 <div id="sunburst-div"></div>
-                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--primary vf-button--sm">Download biomes CSV file</a>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biomes_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
             </div>
         </article>
-    </div>
-
-    <div id="family-members-div" style="display: none;">
-        <span style="font-size: 0.8em;">
-            {% for link in family_members_links %}
-                {{ link|safe }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </span>
     </div>
 
     <article class="vf-card vf-card--brand vf-card--bordered">
@@ -160,7 +147,7 @@
                         </li>
                     </ul>
                 </p>
-                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf }}.cif" class="vf-button vf-button--primary vf-button--sm">Download CIF file</a>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf }}.cif" class="vf-button vf-button--secondary vf-button--sm">Download CIF file</a>
             </div>
             <div class="vf-grid__col--span-3">
                 <div id="pdb_viewer">
@@ -206,7 +193,7 @@
             <h3 class="vf-card__heading">Feature viewer - predicted secondary structure</h3>
             <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}"></div>
             <div id="featuresContainer"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--primary vf-button--sm">Download features JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='pred_secondary_structure_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
         </div>
     </article>
 
@@ -226,8 +213,8 @@
             </h3>
             <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}"></div>
             <div id="msa-div"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download seed MSA file</a>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--primary vf-button--sm">Download full MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download seed MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='msa_blob' %}" download="{{ mgyf }}_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download full MSA file</a>
         </div>
     </article>
 
@@ -243,10 +230,10 @@
             </div>
             <div id="logo" class="logo"></div>
             <div id="col_info" class="col_info"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf }}.hmm" class="vf-button vf-button--primary vf-button--sm">Download HMM file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf }}.hmm" class="vf-button vf-button--secondary vf-button--sm">Download HMM file</a>
             <form action="{% url 'submit_hmmsearch' mgyf_id=mgyf_id %}" method="post" target="_blank" style="display:inline;">
                 {% csrf_token %}
-                <button type="submit" class="vf-button vf-button--primary vf-button--sm">Submit HMM Search</button>
+                <button type="submit" class="vf-button vf-button--secondary vf-button--sm">Submit HMM Search</button>
             </form>
         </div>
     </article>
@@ -262,7 +249,7 @@
             </div>
             <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}"></div>
             <div id="architecturesContainer"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--primary vf-button--sm">Download domains JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_architecture_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
         </div>
     </article>
 

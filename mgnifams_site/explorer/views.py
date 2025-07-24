@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse
-from explorer.models import Mgnifam, MgnifamProteins, MgnifamPfams, MgnifamFolds
+from explorer.models import Mgnifam, MgnifamFunfams, MgnifamPfams, MgnifamFolds
 import xml.etree.ElementTree as ET
 import re
 import requests
@@ -136,17 +136,6 @@ def details(request):
     domain_architecture_blob = mgnifam.domain_architecture_blob.decode('utf-8')
     pred_secondary_structure_blob = mgnifam.pred_secondary_structure_blob.decode('utf-8')
 
-    # Fetch MgnifamProteins objects
-    mgnifam_proteins     = MgnifamProteins.objects.filter(mgnifam=mgyf_id)
-    family_members       = []
-    family_members_links = []
-    for mgnifam_protein in mgnifam_proteins:
-        protein_id = mgnifam_protein.protein
-        region = mgnifam_protein.region
-        family_member, family_member_link = format_protein_link(protein_id, region)
-        family_members.append(family_member)
-        family_members_links.append(family_member_link)
-
     # Fetch related MgnifamPfams objects
     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
     hits_data = []
@@ -202,7 +191,6 @@ def details(request):
         'domain_architecture_blob': domain_architecture_blob,
         'pred_secondary_structure_blob': pred_secondary_structure_blob,
         'family_members': family_members,
-        'family_members_links': family_members_links,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })
