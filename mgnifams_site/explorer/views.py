@@ -118,12 +118,14 @@ def details(request):
     hits_data = []
     for mgnifam_pfam in mgnifam_pfams:
         hit = {
+            'pfam': mgnifam_pfam.pfam,
+            'name': mgnifam_pfam.name,
+            'description': mgnifam_pfam.description,
             'prob': mgnifam_pfam.prob,
-            'name': mgnifam_pfam.pfam_hit,
-            'pfam_id': mgnifam_pfam.pfam_id,
             'e_value': mgnifam_pfam.e_value,
-            'query_hmm': mgnifam_pfam.query_hmm_range,
-            'template_hmm': mgnifam_pfam.template_hmm_range
+            'length': mgnifam_pfam.length,
+            'query_hmm': mgnifam_pfam.query_hmm,
+            'template_hmm': mgnifam_pfam.template_hmm
         }
         hits_data.append(hit)
 

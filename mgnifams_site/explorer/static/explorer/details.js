@@ -268,10 +268,10 @@ const loadDomainData = () => {
 
 const loadDatatables = () => {
     if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-        $('#pfams-table').DataTable();
+        $('#pfams-table').DataTable({ordering: false});
     }
     if ($('#structural-annotations-table:contains("No structural annotations found")').length === 0) {
-        $('#structural-annotations-table').DataTable();
+        $('#structural-annotations-table').DataTable({ordering: false});
     }
 };
 

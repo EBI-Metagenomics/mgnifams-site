@@ -283,23 +283,29 @@
                 <table id="pfams-table" class="vf-table .vf-u-margin__bottom--400">
                     <thead class="vf-table__header">
                         <tr class="vf-table__row">
-                            <th class="vf-table__heading" scope="col">Rank</th>
-                            <th class="vf-table__heading" scope="col">Pfam hit</th>
+                            <th class="vf-table__heading" scope="col">Pfam</th>
+                            <th class="vf-table__heading" scope="col">Name</th>
+                            <th class="vf-table__heading" scope="col">Description</th>
+                            <th class="vf-table__heading" scope="col">Probability</th>
+                            <th class="vf-table__heading" scope="col">E-value</th>
+                            <th class="vf-table__heading" scope="col">Length</th>
                             <th class="vf-table__heading" scope="col">MGnifam HMM</th>
                             <th class="vf-table__heading" scope="col">Pfam HMM</th>
-                            <th class="vf-table__heading" scope="col">E-value</th>
                         </tr>
                     </thead>
                     <tbody class="vf-table__body">
                         {% for hit in hits_data %}
-                            <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam_id }}">
-                                <td class="vf-table__cell">{{ hit.prob }}</td>
+                            <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam }}">
                                 <td class="vf-table__cell">
-                                    <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam_id }}" target="_blank">{{ hit.name }}</a>
+                                    <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam }}" target="_blank">{{ hit.pfam }}</a>
                                 </td>
+                                <td class="vf-table__cell">{{ hit.name }}</td>
+                                <td class="vf-table__cell">{{ hit.description }}</td>
+                                <td class="vf-table__cell">{{ hit.prob }}</td>
+                                <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>
+                                <td class="vf-table__cell">{{ hit.length }}</td>
                                 <td class="vf-table__cell">{{ hit.query_hmm }}</td>
                                 <td class="vf-table__cell">{{ hit.template_hmm }}</td>
-                                <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>                            
                             </tr>
                         {% endfor %}
                     </tbody>
