@@ -90,6 +90,7 @@ def details(request):
     converged = (mgnifam.converged == "True") # casting to boolean
 
     plddt = mgnifam.plddt
+    ptm = mgnifam.ptm
 
     rep_sequence = mgnifam.rep_sequence
     consensus = mgnifam.consensus
@@ -187,6 +188,7 @@ def details(request):
         'rep_sequence': rep_sequence,
         'consensus': consensus,
         'plddt': plddt,
+        'ptm': ptm,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
