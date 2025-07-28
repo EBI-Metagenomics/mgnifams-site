@@ -87,8 +87,12 @@ def details(request):
         region_start = region_parts[0]
         region_end   = region_parts[1]
     rep_length = mgnifam.rep_length
-    plddt = mgnifam.plddt
     converged = (mgnifam.converged == "True") # casting to boolean
+
+    plddt = mgnifam.plddt
+
+    rep_sequence = mgnifam.rep_sequence
+    consensus = mgnifam.consensus
 
     cif_blob = mgnifam.cif_blob.decode('utf-8')
 
@@ -180,6 +184,8 @@ def details(request):
         'region_start': region_start,
         'region_end': region_end,
         'rep_length': rep_length,
+        'rep_sequence': rep_sequence,
+        'consensus': consensus,
         'plddt': plddt,
         'converged': converged,
         'cif_blob': cif_blob,

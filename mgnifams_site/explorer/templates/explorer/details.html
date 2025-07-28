@@ -8,7 +8,7 @@
 <div id="domain_tooltip" class="domain_tooltip"></div>
 
 <section class="vf-content | vf-stack vf-stack--400">
-    <h2> Protein Family: {{ mgyf }} </h2>=
+    <h2> Protein Family: {{ mgyf }} </h2>
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
@@ -427,6 +427,26 @@
             {% endif %}
         </div>
     </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400 | sequenceViewerDiv">
+            <h3 class="vf-card__heading">Family Representative Sequence Viewer</h3>
+            <p id="positionMessage">Amino acid position: -</p>
+            <div id="proteinSequenceContainer" class="protein-sequence-container">
+                {{ rep_sequence }}
+            </div>
+            <div>
+                <p>
+                    <b>HMM Consensus</b>
+                    {{ consensus }}
+                </p>
+            </div>
+            {% comment %} <div class="right-align">
+                <button id="copy_button" class="vf-button vf-button--primary vf-button--sm">Copy</button>
+            </div> {% endcomment %}
+        </div>
+    </article>
+
 </section>
 
 <script src="{% static 'explorer/details.js' %}"></script>
