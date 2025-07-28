@@ -346,10 +346,10 @@
                                 <td class="vf-table__cell">{{ annotation.target_structure_identifier | safe }}</td>
                                 <td class="vf-table__cell">{{ annotation.target_structure_db }}</td>
                                 <td class="vf-table__cell">{{ annotation.aligned_length }}</td>
-                                <td class="vf-table__cell">{{ annotation.query_start }}</td>
-                                <td class="vf-table__cell">{{ annotation.query_end }}</td>
-                                <td class="vf-table__cell">{{ annotation.target_start }}</td>
-                                <td class="vf-table__cell">{{ annotation.target_end }}</td>
+                                <td class="vf-table__cell">{{ annotation.q_start }}</td>
+                                <td class="vf-table__cell">{{ annotation.q_end }}</td>
+                                <td class="vf-table__cell">{{ annotation.t_start }}</td>
+                                <td class="vf-table__cell">{{ annotation.t_end }}</td>
                                 <td class="vf-table__cell">{{ annotation.e_value|floatformat:"-g" }}</td>
                             </tr>
                         {% endfor %}

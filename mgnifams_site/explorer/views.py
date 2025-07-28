@@ -55,11 +55,7 @@ def fetch_skylign_logo_json(uuid):
     return None
 
 def generate_structure_link_and_db(part):
-    if part.startswith('MGYP'):
-        # Remove '.pdb.gz' extension and format link for MGYP
-        id = part.replace('.pdb.gz', '')
-        return f'<a href="https://www.ebi.ac.uk/metagenomics/proteins/{id}">{id}</a>', 'ESM'
-    elif part.startswith('AF'):
+    if part.startswith('AF'):
         # Split with '-' and keep the second part for AlphaFold
         af_id = part.split('-')[1]
         return f'<a href="https://alphafold.ebi.ac.uk/entry/{af_id}">{af_id}</a>', 'AlphaFold'
@@ -133,15 +129,15 @@ def details(request):
     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
     structural_annotations = []
     for mgnifam_fold in mgnifam_folds:
-        link, db = generate_structure_link_and_db(mgnifam_fold.target_structure)
+        link, db = generate_structure_link_and_db(mgnifam_fold.fold)
         annotation = {
             'target_structure_identifier': link,
             'target_structure_db': db,
             'aligned_length': mgnifam_fold.aligned_length,
-            'query_start': mgnifam_fold.query_start,
-            'query_end': mgnifam_fold.query_end,
-            'target_start': mgnifam_fold.target_start,
-            'target_end': mgnifam_fold.target_end,
+            'q_start': mgnifam_fold.q_start,
+            'q_end': mgnifam_fold.q_end,
+            't_end': mgnifam_fold.t_end,
+            't_end': mgnifam_fold.t_end,
             'e_value': mgnifam_fold.e_value
         }
         structural_annotations.append(annotation)
