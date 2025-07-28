@@ -109,6 +109,33 @@ def details(request):
     domain_blob = mgnifam.domain_blob.decode('utf-8')
     s4pred_blob = mgnifam.s4pred_blob.decode('utf-8')
 
+    # Fetch related MgnifamFunfams objects
+    mgnifam_funfams = MgnifamFunfams.objects.filter(mgnifam=mgyf_id)
+    funfams_data = []
+    for mgnifam_funfam in mgnifam_funfams:
+        try:
+            superfamily, ff_part = mgnifam_funfam.funfam.split('-FF-')
+            funfam_number = str(int(ff_part))  # e.g., '000002' → 2
+            funfam_url = f"http://cathdb.info/version/4_3_0/superfamily/{superfamily}/funfam/{funfam_number}"
+        except ValueError:
+            superfamily = None
+            funfam_number = None
+            funfam_url = "#"
+        hit = {
+            'funfam': mgnifam_funfam.funfam,
+            'funfam_url': funfam_url,
+            'e_value': mgnifam_funfam.e_value,
+            'score': mgnifam_funfam.score,
+            'hmm_from': mgnifam_funfam.hmm_from,
+            'hmm_to': mgnifam_funfam.hmm_to,
+            'ali_from': mgnifam_funfam.ali_from,
+            'ali_to': mgnifam_funfam.ali_to,
+            'env_from': mgnifam_funfam.env_from,
+            'env_to': mgnifam_funfam.env_to,
+            'acc': mgnifam_funfam.acc
+        }
+        funfams_data.append(hit)
+
     # Fetch related MgnifamPfams objects
     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
     hits_data = []
@@ -163,6 +190,7 @@ def details(request):
         'biome_blob': biome_blob,
         'domain_blob': domain_blob,
         's4pred_blob': s4pred_blob,
+        'funfams_data': funfams_data,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
     })

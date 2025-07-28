@@ -69,10 +69,28 @@
                             <span class="tooltip">
                                 <i class="fas fa-question-circle tooltip-icon"></i>
                                 <span class="tooltiptext">
+                                    Denotes if FunFam functional annotation hits were identified via the hmmer/hmmsearch tool.
+                                </span>
+                            </span>
+                            Sequence-HMM FunFam matches
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if funfams_data %}
+                                <i class="icon icon-common icon-check-square"></i>
+                            {% else %}
+                                <i class="icon icon-common icon-close"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
                                     Denotes if Pfam domain annotation hits were identified through model searching with the hhsuite/hhblits tool.
                                 </span>
                             </span>
-                            Profile-profile matches
+                            Profile-profile Pfam matches
                         </td>
                         <td class="vf-table__cell">
                             {% if hits_data %}
@@ -88,7 +106,7 @@
                                 <i class="fas fa-question-circle tooltip-icon"></i>
                                 <span class="tooltiptext">
                                     Denotes if structure homologs of the family's representative sequence have been identified 
-                                    in the AlphaFoldDB, ESMAtlas or PDB databases through the foldseek tool.
+                                    in the AlphaFoldDB or PDB databases through the foldseek tool.
                                 </span>
                             </span>
                             Structure-structure hits
@@ -273,7 +291,56 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Profile-profile matches</h3>
+            <h3 class="vf-card__heading">Functional annotation though Funfam matches</h3>
+            <div>
+                <p>
+                    The family representative sequence was searched against the FunFam database (ver. 4.3.0) with hmmer/hmmsearch.
+                </p>
+            </div>
+            {% if funfams_data %}
+                <table id="pfams-table" class="vf-table .vf-u-margin__bottom--400">
+                    <thead class="vf-table__header">
+                        <tr class="vf-table__row">
+                            <th class="vf-table__heading" scope="col">FunFam</th>
+                            <th class="vf-table__heading" scope="col">E-value</th>
+                            <th class="vf-table__heading" scope="col">Score</th>
+                            <th class="vf-table__heading" scope="col">HMM from</th>
+                            <th class="vf-table__heading" scope="col">HMM to</th>
+                            <th class="vf-table__heading" scope="col">Alignment from</th>
+                            <th class="vf-table__heading" scope="col">Alignment to</th>
+                            <th class="vf-table__heading" scope="col">Envelope from</th>
+                            <th class="vf-table__heading" scope="col">Envelope to</th>
+                            <th class="vf-table__heading" scope="col">Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody class="vf-table__body">
+                        {% for hit in funfams_data %}
+                            <tr class="vf-table__row pfam-item" data-proteinfunfam="{{ hit.funfam }}">
+                                <td class="vf-table__cell">
+                                    <a href="{{ hit.funfam_url }}" target="_blank">{{ hit.funfam }}</a>
+                                </td>
+                                <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>
+                                <td class="vf-table__cell">{{ hit.score }}</td>
+                                <td class="vf-table__cell">{{ hit.hmm_from }}</td>
+                                <td class="vf-table__cell">{{ hit.hmm_to }}</td>
+                                <td class="vf-table__cell">{{ hit.ali_from }}</td>
+                                <td class="vf-table__cell">{{ hit.ali_to }}</td>
+                                <td class="vf-table__cell">{{ hit.env_from }}</td>
+                                <td class="vf-table__cell">{{ hit.env_to }}</td>
+                                <td class="vf-table__cell">{{ hit.acc }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No FunFam hits found</p>
+            {% endif %}
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Profile-profile Pfam matches</h3>
             <div>
                 <p>
                     This MGnifam HMM profile was searched against the profile Pfam database (ver. 35.0) with HHblits from HH-suite.
@@ -321,7 +388,7 @@
             <h3 class="vf-card__heading">Structure-structure hits</h3>
             <div>
                 <p>
-                    This MGnifam 3D structure was searched against the Alphafold/UniProt, PDB and ESMAtlas30 databases with foldseek.
+                    This MGnifam 3D structure was searched against the Alphafold/UniProt and PDB databases with foldseek.
                 </p>
             </div>
             {% if structural_annotations %}
@@ -356,7 +423,7 @@
                     </tbody>
                 </table>
             {% else %}
-                <p>No structural annotations found</p>
+                <p>No structural matches found</p>
             {% endif %}
         </div>
     </article>
