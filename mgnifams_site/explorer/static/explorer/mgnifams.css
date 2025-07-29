@@ -116,25 +116,6 @@ nightingale-manager {
     outline: 0 !important;
 }
 
-#show-members-btn, #download-members-btn {
-    display: inline-block;
-    vertical-align: super;
-    padding: 2px;
-    font-size: 14px;
-}
-
-#family-members-div {
-    display:none;
-    background-color: #e0ffe0;
-    border: 1px solid gray;
-    padding: 10px;
-    margin-top: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-    text-align: justify;
-    font-size: 13px;
-}
-
 .architecture-div {
     margin-bottom: 5px;
     line-height: 30px;
@@ -212,4 +193,22 @@ nightingale-manager {
 .tooltip-icon {
     margin-left: 5px;
     font-size: 16px;
+}
+
+.sequenceViewerDiv {
+    overflow: auto !important;
+}
+
+.protein-sequence-container {
+    word-wrap: break-word;
+    overflow-y: scroll;
+    height: 20em;
+    padding: 10px;
+    background-color: #e1fae8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 2px;
 }
