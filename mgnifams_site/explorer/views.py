@@ -92,6 +92,10 @@ def details(request):
     plddt = mgnifam.plddt
     ptm = mgnifam.ptm
 
+    helix_percent = mgnifam.helix_percent
+    strand_percent = mgnifam.strand_percent
+    coil_percent = mgnifam.coil_percent
+
     rep_sequence = mgnifam.rep_sequence
     consensus = mgnifam.consensus
 
@@ -189,6 +193,9 @@ def details(request):
         'consensus': consensus,
         'plddt': plddt,
         'ptm': ptm,
+        'helix_percent': helix_percent,
+        'strand_percent': strand_percent,
+        'coil_percent': coil_percent,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,

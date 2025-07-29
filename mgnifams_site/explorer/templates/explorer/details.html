@@ -220,6 +220,24 @@
             <h3 class="vf-card__heading">Feature viewer - predicted secondary structure</h3>
             <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}"></div>
             <div id="featuresContainer"></div>
+            <div>
+<pre style="font-family: monospace;">
+α-helices:  {{ helix_percent }}%
+β-strands:  {{ strand_percent }}%
+coils:      {{ coil_percent }}%
+</pre>
+            <p>
+                {% if helix_percent >= 40 %}
+                    The protein appears to be helix-rich, suggesting it may have a compact or globular structure.
+                {% elif strand_percent >= 40 %}
+                    The protein is likely rich in β-strands, which may indicate a β-sheet-dominated architecture.
+                {% elif coil_percent >= 50 %}
+                    The high coil content suggests a largely unstructured or flexible protein.
+                {% else %}
+                    The secondary structure shows a balanced composition of helices, strands, and coils, indicating a mixed fold.
+                {% endif %}
+            </p>
+        </div>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
         </div>
     </article>
