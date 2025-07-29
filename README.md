@@ -21,7 +21,7 @@ Wait a few minutes for the build, and then restart the deployment to pull the im
 
 **Non-normal usage**:
 Secrets setup (one-time):
-- Make a secrets .env file at `k8s-hl/secrets.env` with the database connection config (env vars read by `settings.py) and the `DJANGO_SECRET_KEY`.
+- Make a secrets .env file at `k8s-hl/secrets.env` with the database connection config (env vars read by `settings.py`) and the `DJANGO_SECRET_KEY`.
 	- Push it with e.g.: `kubectl --kubeconfig ~/mgnify-k8s-team-admin-hh.conf --namespace mgnifams-hl-exp create secret generic mgnifams-secret --from-env-file=deployment/secrets.env`
 - Get authentication credentials for quay.io (the built image is private). You can get a Kubernetes secrets yaml file from your Quay.io user settings, in the "CLI Password" section.
 	- Download the secrets yaml and name the secret `name: quay-pull-secret` in the metadata section. Put this into the `k8s-hl` folder as `secrets-quayio.yml`.
