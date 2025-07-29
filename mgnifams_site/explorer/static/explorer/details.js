@@ -1,11 +1,3 @@
-const loadFamilyData = () => {
-    document.getElementById('show-members-btn').addEventListener('click', function() {
-        let div = document.getElementById('family-members-div');
-        div.style.display = div.style.display === 'none' ? 'block' : 'none';
-        this.textContent = div.style.display === 'none' ? 'Show' : 'Hide';
-    });
-};
-
 const loadBiomeData = () => {
     let biomesDataURL = document.getElementById('biomes-data').dataset.url;
     d3.csv(biomesDataURL, function(err, rows){
@@ -276,10 +268,10 @@ const loadDomainData = () => {
 
 const loadDatatables = () => {
     if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-        $('#pfams-table').DataTable();
+        $('#pfams-table').DataTable({ordering: false});
     }
     if ($('#structural-annotations-table:contains("No structural annotations found")').length === 0) {
-        $('#structural-annotations-table').DataTable();
+        $('#structural-annotations-table').DataTable({ordering: false});
     }
 };
 
@@ -301,9 +293,102 @@ const downloadProteins = (mgyf, family_members) => {
     URL.revokeObjectURL(url);
 };
 
-$(document).ready(function () {
+const loadProteinSequenceContainer = () => {
 
-    loadFamilyData();
+    const proteinSequenceContainer = document.getElementById(
+        'proteinSequenceContainer'
+    );
+    const positionMessage = document.getElementById('positionMessage');
+    const proteinSequence = proteinSequenceContainer.textContent.trim();
+    proteinSequenceContainer.innerHTML = '';
+
+    /**
+     * Load the sequence in the protein sequence viewer
+     * @param {*} proteinSequence 
+     * @param {*} proteinSequenceContainer 
+     */
+    const displaySequence = (proteinSequence, proteinSequenceContainer) => {
+        for (let i = 0; i < proteinSequence.length; i++) {
+        const span = document.createElement('span');
+        span.textContent = proteinSequence[i];
+        proteinSequenceContainer.appendChild(span);
+        }
+    };
+
+    /**
+     * Get the start and end from the query string
+     * @returns { start and end}
+     */
+    const getStartAndEnd = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const start = urlParams.get('start');
+        const end = urlParams.get('end');
+        return { start: start, end: end };
+    };
+
+    /**
+     * Highlight a region of the protein
+     * @param {*} proteinSequenceContainer the DOM element container 
+     * @param {*} start start position 
+     * @param {*} end end postition
+     */
+    const highlightRegion = (proteinSequenceContainer, start, end) => {
+        for (let i = start; i <= end; i++) {
+        const span = proteinSequenceContainer.children[i - 1];
+        span.classList.add('highlight');
+        }
+    };
+
+    /**
+     * Event handlers
+     *
+     * */
+    const updatePositionMessage = (position) => {
+        positionMessage.textContent = `Amino acid position: ${position}`;
+    };
+    const updateCursorStyle = (cursorStyle) => {
+        proteinSequenceContainer.style.cursor = cursorStyle;
+    };
+
+    const handleMouseOver = (event) => {
+        if (event.target.tagName === 'SPAN') {
+        const position = Array.from(
+            proteinSequenceContainer.querySelectorAll('span')
+        ).indexOf(event.target);
+        updatePositionMessage(position + 1); // Add 1 to convert from 0-indexed position to 1-indexed
+        const targetElement = event.target;
+        targetElement.style.backgroundColor = '#ffc4c4';
+        }
+    };
+
+    proteinSequenceContainer.addEventListener('mouseover', (event) => {
+        updateCursorStyle('pointer');
+        handleMouseOver(event);
+    });
+
+    proteinSequenceContainer.addEventListener('mousemove', handleMouseOver);
+
+    proteinSequenceContainer.addEventListener('mouseout', (event) => {
+        updatePositionMessage(' -');
+        updateCursorStyle('auto');
+        if (event.target.tagName === 'SPAN') {
+        event.target.style.backgroundColor = '';
+        }
+    });
+
+    /**
+     * Render time!
+     */
+    displaySequence(proteinSequence, proteinSequenceContainer);
+
+    const { start, end } = getStartAndEnd();
+
+    if (start !== null && end !== null) {
+        highlightRegion(proteinSequenceContainer, start, end);
+    }
+}
+
+$(document).ready(function () {
     loadBiomeData();
     loadStructureScoreColor();
     loadSecondaryStructureData();
@@ -311,5 +396,5 @@ $(document).ready(function () {
     loadHMMData();
     loadDomainData();
     loadDatatables();
-
+    loadProteinSequenceContainer();
 })
