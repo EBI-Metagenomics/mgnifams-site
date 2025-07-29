@@ -393,9 +393,8 @@ $(document).ready(function () {
     loadStructureScoreColor();
     loadSecondaryStructureData();
     loadMSAData();
-    // loadHMMData(); // TODO update
+    loadHMMData();
     loadDomainData();
     loadDatatables();
     loadProteinSequenceContainer();
-
 })

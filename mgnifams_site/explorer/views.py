@@ -35,7 +35,7 @@ def format_protein_name(raw_name):
     return "MGYP" + formatted_name
 
 def call_skylign_api(blob_data):
-    url = "http://skylign.org"
+    url = "https://pavlopoulos-lab.org/skylign/" # "http://skylign.org"
     headers = {'Accept': 'application/json'}
     files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
@@ -47,7 +47,7 @@ def call_skylign_api(blob_data):
         return None
 
 def fetch_skylign_logo_json(uuid):
-    url = f'http://skylign.org/logo/{uuid}'
+    url = f'https://pavlopoulos-lab.org/skylign/logo/{uuid}' # f'http://skylign.org/logo/{uuid}'
     headers = {'Accept': 'application/json'}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
