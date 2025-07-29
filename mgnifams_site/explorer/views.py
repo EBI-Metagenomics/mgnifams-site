@@ -210,30 +210,30 @@ def serve_blob_as_file(request, pk, column_name):
     response['Content-Disposition'] = f'attachment;'
     return response
 
-def send_hmmsearch_request(mgyf_id):
-    mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)
-    hmm_blob = mgnifam.hmm_blob
+# def send_hmmsearch_request(mgyf_id):
+#     mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)
+#     hmm_blob = mgnifam.hmm_blob
 
-    url = "https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch"
-    headers = {
-        'Expect': '',
-        'Accept': 'text/xml',
-    }
-    data = {
-        'seqdb': 'pdb',
-        'seq': hmm_blob
-    }
-    response = requests.post(url, headers=headers, data=data)
+#     url = "https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch"
+#     headers = {
+#         'Expect': '',
+#         'Accept': 'text/xml',
+#     }
+#     data = {
+#         'seqdb': 'pdb',
+#         'seq': hmm_blob
+#     }
+#     response = requests.post(url, headers=headers, data=data)
 
-    return response.content
+#     return response.content
 
-def submit_hmmsearch(request, mgyf_id):
-    response_content = send_hmmsearch_request(mgyf_id)
+# def submit_hmmsearch(request, mgyf_id):
+#     response_content = send_hmmsearch_request(mgyf_id)
 
-    # Parse XML response to extract UUID
-    root = ET.fromstring(response_content)
-    uuid = root.find(".//data[@name='results']").attrib.get('uuid')
+#     # Parse XML response to extract UUID
+#     root = ET.fromstring(response_content)
+#     uuid = root.find(".//data[@name='results']").attrib.get('uuid')
 
-    hmmer_url = f"https://www.ebi.ac.uk/Tools/hmmer/results/{uuid}/domain"
+#     hmmer_url = f"https://www.ebi.ac.uk/Tools/hmmer/results/{uuid}/domain"
     
-    return redirect(hmmer_url)
+#     return redirect(hmmer_url)
