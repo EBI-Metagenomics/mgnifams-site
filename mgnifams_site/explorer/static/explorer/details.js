@@ -267,11 +267,14 @@ const loadDomainData = () => {
 };
 
 const loadDatatables = () => {
-    if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-        $('#pfams-table').DataTable({ordering: false});
+    if ($('#funfams-table:contains("No FunFam hits found")').length === 0) {
+        $('#funfams-table').DataTable({ order: [[2, 'desc']] }); // Score
     }
-    if ($('#structural-annotations-table:contains("No structural annotations found")').length === 0) {
-        $('#structural-annotations-table').DataTable({ordering: false});
+    if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
+        $('#pfams-table').DataTable({ order: [[3, 'desc']] }); // Probability
+    }
+    if ($('#structural-annotations-table:contains("No structural matches found")').length === 0) {
+        $('#structural-annotations-table').DataTable({ order: [[0, 'asc']] }); // Rank
     }
 };
 
