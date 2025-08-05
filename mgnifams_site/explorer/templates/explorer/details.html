@@ -217,7 +217,7 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Feature viewer - predicted secondary structure</h3>
+            <h3 class="vf-card__heading">Predicted secondary structure</h3>
             <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}"></div>
             <div id="featuresContainer"></div>
             <div>
@@ -239,6 +239,29 @@ coils:      {{ coil_percent }}%
             </p>
         </div>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Predicted transmembrane regions</h3>
+            <div id="tm-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}"></div>
+            <div id="tm_featuresContainer"></div>
+            <div>
+<pre style="font-family: monospace;">
+inside:   {{ inside_percent }}%
+membrane: {{ membrane_percent }}%
+outside:  {{ outside_percent }}%
+</pre>
+            <p>
+                {% if membrane_percent >= 10 %}
+                    This appears to be a transmembrane protein.
+                {% else %}
+                    This does not seem to be a transmembrane protein.
+                {% endif %}
+            </p>
+        </div>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}" download="{{ mgyf }}_tm.json" class="vf-button vf-button--secondary vf-button--sm">Download transmembrane JSON file</a>
         </div>
     </article>
 

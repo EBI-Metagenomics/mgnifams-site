@@ -96,6 +96,10 @@ def details(request):
     strand_percent = mgnifam.strand_percent
     coil_percent = mgnifam.coil_percent
 
+    inside_percent = mgnifam.inside_percent
+    membrane_percent = mgnifam.membrane_percent
+    outside_percent = mgnifam.outside_percent
+
     rep_sequence = mgnifam.rep_sequence
     consensus = mgnifam.consensus
 
@@ -117,6 +121,7 @@ def details(request):
     biome_blob = mgnifam.biome_blob.decode('utf-8')
     domain_blob = mgnifam.domain_blob.decode('utf-8')
     s4pred_blob = mgnifam.s4pred_blob.decode('utf-8')
+    tm_blob = mgnifam.tm_blob.decode('utf-8')
 
     # Fetch related MgnifamFunfams objects
     mgnifam_funfams = MgnifamFunfams.objects.filter(mgnifam=mgyf_id)
@@ -196,6 +201,9 @@ def details(request):
         'helix_percent': helix_percent,
         'strand_percent': strand_percent,
         'coil_percent': coil_percent,
+        'inside_percent': inside_percent,
+        'membrane_percent': membrane_percent,
+        'outside_percent': outside_percent,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
@@ -205,6 +213,7 @@ def details(request):
         'biome_blob': biome_blob,
         'domain_blob': domain_blob,
         's4pred_blob': s4pred_blob,
+        'tm_blob': tm_blob,
         'funfams_data': funfams_data,
         'hits_data': hits_data,
         'structural_annotations': structural_annotations
