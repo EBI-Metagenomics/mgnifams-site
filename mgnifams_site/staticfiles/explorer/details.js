@@ -56,7 +56,9 @@ const renderFeatures = (jsonData) => {
         {
             showAxis: true,
             showSequence: true,
-            toolbar: true
+            brushActive: true, //zoom
+            toolbar: true,
+            zoomMax:50 //define the maximum range of the zoom
         });
 
     jsonData.features.forEach(feature => {
