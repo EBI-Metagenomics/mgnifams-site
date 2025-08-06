@@ -159,7 +159,7 @@ nightingale-manager {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 400px;
-    background-color: #555;
+    background-color: lightslategray;
     color: #fff;
     font-size: 16px;
     text-align: center;
@@ -193,4 +193,22 @@ nightingale-manager {
 .tooltip-icon {
     margin-left: 5px;
     font-size: 16px;
+}
+
+.sequenceViewerDiv {
+    overflow: auto !important;
+}
+
+.protein-sequence-container {
+    word-wrap: break-word;
+    overflow-y: scroll;
+    height: 20em;
+    padding: 10px;
+    background-color: #e1fae8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 2px;
 }

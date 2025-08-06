@@ -217,7 +217,16 @@
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">Feature viewer - predicted secondary structure</h3>
+            <h3 class="vf-card__heading">
+                Predicted secondary structure
+                <span class="tooltip">
+                    <i class="fas fa-question-circle tooltip-icon"></i>
+                    <span class="tooltiptext">
+                        The secondary structure prediction was carried out with the 
+                        <a href="https://github.com/psipred/s4pred" target="_blank">s4pred</a> software.
+                    </span>
+                </span>
+            </h3>
             <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}"></div>
             <div id="featuresContainer"></div>
             <div>
@@ -242,6 +251,40 @@ coils:      {{ coil_percent }}%
         </div>
     </article>
 
+    {% if tm_blob %}
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">
+                Predicted transmembrane regions
+                <span class="tooltip">
+                    <i class="fas fa-question-circle tooltip-icon"></i>
+                    <span class="tooltiptext">
+                        The transmembrane region prediction was carried out with the 
+                        <a href="https://dtu.biolib.com/DeepTMHMM" target="_blank">DeepTMHMMM</a> software.
+                    </span>
+                </span>
+            </h3>
+            <div id="tm-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}"></div>
+            <div id="tm_featuresContainer"></div>
+            <div>
+<pre style="font-family: monospace;">
+inside:   {{ inside_percent }}%
+membrane: {{ membrane_percent }}%
+outside:  {{ outside_percent }}%
+</pre>
+            <p>
+                {% if membrane_percent >= 10 %}
+                    This appears to be a transmembrane protein.
+                {% else %}
+                    This does not seem to be a transmembrane protein.
+                {% endif %}
+            </p>
+        </div>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}" download="{{ mgyf }}_tm.json" class="vf-button vf-button--secondary vf-button--sm">Download transmembrane JSON file</a>
+        </div>
+    </article>
+    {% endif %}
+
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">
@@ -249,10 +292,10 @@ coils:      {{ coil_percent }}%
                 <span class="tooltip">
                     <i class="fas fa-question-circle tooltip-icon"></i>
                     <span class="tooltiptext">
-                        The seed alignment is used to create the HMM model of the family.
-                        The full alignment incorporates all sequences that have been recruited in the family
-                        after searching with the HMM model against the sequence pool.
-                        The full alignment is usually quite larger than the seed one.
+                        This is the seed alignment that was used to create the HMM model of the family.
+                        It is different to the full alignment, which incorporates all MGnify sequences 
+                        that have been recruited in the family after searching with the HMM model against the sequence pool.
+                        The full alignment is usually quite larger than the seed one and can be downloaded via the FTP.
                     </span>
                 </span>
             </h3>
@@ -264,12 +307,21 @@ coils:      {{ coil_percent }}%
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
-            <h3 class="vf-card__heading">HMM viewer</h3>
+            <h3 class="vf-card__heading">
+                HMM viewer
+                <span class="tooltip">
+                    <i class="fas fa-question-circle tooltip-icon"></i>
+                    <span class="tooltiptext">
+                        The family HMM is visualized via the
+                        <a href="http://skylign.org/" target="_blank">Skylign</a> API.
+                    </span>
+                </span>
+            </h3>
             <div>
                 <p>
-                    Stack height is the information content (aka relative entropy) of the position,
-                    and letters divide that height according to their estimated probability.
-                    Click on a stack to highlight the relative column on the seed MSA viewer above.
+                    The height of each stack represents the information content (also known as relative entropy) at that position,
+                    while the size of each letter within the stack reflects its estimated probability.
+                    Click on a stack to highlight the corresponding column in the seed MSA viewer above.
                 </p>
             </div>
             <div id="logo" class="logo"></div>
@@ -289,7 +341,7 @@ coils:      {{ coil_percent }}%
                 <span class="tooltip">
                     <i class="fas fa-question-circle tooltip-icon"></i>
                     <span class="tooltiptext">
-                        An interactive sunburst plot of the biomes where the family's underlying MGnify proteins were found in.
+                        An interactive sunburst plot showing the biomes where the family's underlying MGnify proteins were detected.
                     </span>
                 </span>
             </h3>
@@ -304,8 +356,8 @@ coils:      {{ coil_percent }}%
             <h3 class="vf-card__heading">Domain architecture</h3>
             <div>
                 <p>
-                    The top 15 prevalent domain architectures (MGnifams and Pfams) of the underlying family full alignment sequences.
-                    The numbers on the left indicate how many MGnify sequences had the respective domain architecture.
+                    The top 15 most prevalent domain architectures (including MGnifams and Pfams) found in the full alignment sequences of the family.
+                    The numbers on the left indicate how many MGnify sequences share each domain architecture.
                 </p>
             </div>
             <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}"></div>
@@ -319,7 +371,9 @@ coils:      {{ coil_percent }}%
             <h3 class="vf-card__heading">Functional annotation through Funfam matches</h3>
             <div>
                 <p>
-                    The family representative sequence was searched against the FunFam database (ver. 4.3.0) with hmmer/hmmsearch.
+                    The family representative sequence was searched against the FunFam database
+                    (<a href="https://download.cathdb.info/cath/releases/all-releases/v4_3_0/sequence-data/funfam-hmm3-v4_3_0.lib.gz"
+                    target="_blank">ver. 4.3.0</a>) with hmmer/hmmsearch.
                 </p>
             </div>
             {% if funfams_data %}
@@ -368,7 +422,10 @@ coils:      {{ coil_percent }}%
             <h3 class="vf-card__heading">Profile-profile Pfam matches</h3>
             <div>
                 <p>
-                    This MGnifam HMM profile was searched against the profile Pfam database (ver. 35.0) with HHblits from HH-suite.
+                    This MGnifam HMM profile was searched against the profile Pfam database 
+                    (<a href="https://wwwuser.gwdguser.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/pfamA_35.0.tar.gz"
+                    target="_blank">ver. 35.0</a>) with HHblits from HH-suite.
+                    
                 </p>
             </div>
             {% if hits_data %}
@@ -413,7 +470,10 @@ coils:      {{ coil_percent }}%
             <h3 class="vf-card__heading">Structure-structure hits</h3>
             <div>
                 <p>
-                    This MGnifam 3D structure was searched against the Alphafold/UniProt and PDB databases with foldseek.
+                    This MGnifam 3D structure was searched against the Alphafold/UniProt and PDB databases with
+                    <a href="https://github.com/steineggerlab/foldseek"
+                    target="_blank">foldseek</a>.
+                    
                 </p>
             </div>
             {% if structural_annotations %}

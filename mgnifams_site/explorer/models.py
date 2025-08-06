@@ -12,6 +12,9 @@ class Mgnifam(models.Model):
     helix_percent = models.FloatField()
     strand_percent = models.FloatField()
     coil_percent = models.FloatField()
+    inside_percent = models.FloatField()
+    membrane_percent = models.FloatField()
+    outside_percent = models.FloatField()
     rep_sequence = models.TextField()
     consensus = models.TextField()
 
@@ -22,6 +25,7 @@ class Mgnifam(models.Model):
     biome_blob = models.BinaryField(null=True, default=None)
     domain_blob = models.BinaryField(null=True, default=None)
     s4pred_blob = models.BinaryField(null=True, default=None)
+    tm_blob = models.BinaryField(null=True, default=None)
 
     def __str__(self):
         return f"Mgnifam ID: {self.id}"

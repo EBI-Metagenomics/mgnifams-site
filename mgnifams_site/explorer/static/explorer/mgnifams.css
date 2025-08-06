@@ -159,7 +159,7 @@ nightingale-manager {
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 400px;
-    background-color: #555;
+    background-color: lightslategray;
     color: #fff;
     font-size: 16px;
     text-align: center;

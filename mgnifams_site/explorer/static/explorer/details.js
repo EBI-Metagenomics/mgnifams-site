@@ -45,18 +45,20 @@ const loadStructureScoreColor = () => {
     plddtElement.style.color = colors.color;
 };
 
-const renderFeatures = (jsonData) => {
+const renderFeatures = (jsonData, container_id) => {
     if (!jsonData || !jsonData.sequence || !Array.isArray(jsonData.features)) {
         console.error('Invalid data structure for Feature Viewer:', jsonData);
         return;
     }
 
     const ft = new FeatureViewer.createFeature(jsonData.sequence,
-        '#featuresContainer',
+        container_id,
         {
             showAxis: true,
             showSequence: true,
-            toolbar: true
+            brushActive: true, //zoom
+            toolbar: true,
+            zoomMax:50 //define the maximum range of the zoom
         });
 
     jsonData.features.forEach(feature => {
@@ -72,8 +74,8 @@ const renderFeatures = (jsonData) => {
     });
 };
 
-const loadSecondaryStructureData = () => {
-    let featureDataURL = document.getElementById('feature-data').dataset.url;
+const loadFeaturesData = (data_container_id, feature_container_id) => {
+    let featureDataURL = document.getElementById(data_container_id).dataset.url;
     fetch(featureDataURL)
         .then(response => {
             if (!response.ok) {
@@ -82,7 +84,7 @@ const loadSecondaryStructureData = () => {
             return response.json();
         })
         .then(data => {
-            renderFeatures(data);
+            renderFeatures(data, feature_container_id);
         })
         .catch(error => {
             console.error('Error fetching features JSON:', error);
@@ -394,7 +396,10 @@ const loadProteinSequenceContainer = () => {
 $(document).ready(function () {
     loadBiomeData();
     loadStructureScoreColor();
-    loadSecondaryStructureData();
+    loadFeaturesData('feature-data', '#featuresContainer')
+    if (document.getElementById('tm-data')) {
+        loadFeaturesData('tm-data', '#tm_featuresContainer')
+    }
     loadMSAData();
     loadHMMData();
     loadDomainData();
