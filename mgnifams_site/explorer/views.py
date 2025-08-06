@@ -121,7 +121,7 @@ def details(request):
     biome_blob = mgnifam.biome_blob.decode('utf-8')
     domain_blob = mgnifam.domain_blob.decode('utf-8')
     s4pred_blob = mgnifam.s4pred_blob.decode('utf-8')
-    tm_blob = mgnifam.tm_blob.decode('utf-8')
+    tm_blob = mgnifam.tm_blob.decode('utf-8') if mgnifam.tm_blob else ''
 
     # Fetch related MgnifamFunfams objects
     mgnifam_funfams = MgnifamFunfams.objects.filter(mgnifam=mgyf_id)

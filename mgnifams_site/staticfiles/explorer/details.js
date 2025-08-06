@@ -397,7 +397,9 @@ $(document).ready(function () {
     loadBiomeData();
     loadStructureScoreColor();
     loadFeaturesData('feature-data', '#featuresContainer')
-    loadFeaturesData('tm-data', '#tm_featuresContainer')
+    if (document.getElementById('tm-data')) {
+        loadFeaturesData('tm-data', '#tm_featuresContainer')
+    }
     loadMSAData();
     loadHMMData();
     loadDomainData();
