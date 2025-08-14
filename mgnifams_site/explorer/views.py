@@ -210,6 +210,7 @@ def details(request):
         'signal_percent': signal_percent,
         'membrane_beta_percent': membrane_beta_percent,
         'periplasm_percent': periplasm_percent,
+        'membrane_total': membrane_alpha_percent + membrane_beta_percent,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
