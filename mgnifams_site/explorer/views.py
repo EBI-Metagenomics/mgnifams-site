@@ -97,8 +97,11 @@ def details(request):
     coil_percent = mgnifam.coil_percent
 
     inside_percent = mgnifam.inside_percent
-    membrane_percent = mgnifam.membrane_percent
+    membrane_alpha_percent = mgnifam.membrane_alpha_percent
     outside_percent = mgnifam.outside_percent
+    signal_percent = mgnifam.signal_percent
+    membrane_beta_percent = mgnifam.membrane_beta_percent
+    periplasm_percent = mgnifam.periplasm_percent
 
     rep_sequence = mgnifam.rep_sequence
     consensus = mgnifam.consensus
@@ -202,8 +205,11 @@ def details(request):
         'strand_percent': strand_percent,
         'coil_percent': coil_percent,
         'inside_percent': inside_percent,
-        'membrane_percent': membrane_percent,
+        'membrane_alpha_percent': membrane_alpha_percent,
         'outside_percent': outside_percent,
+        'signal_percent': signal_percent,
+        'membrane_beta_percent': membrane_beta_percent,
+        'periplasm_percent': periplasm_percent,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,

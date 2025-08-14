@@ -268,12 +268,28 @@ coils:      {{ coil_percent }}%
             <div id="tm_featuresContainer"></div>
             <div>
 <pre style="font-family: monospace;">
+{% if inside_percent > 0 %}
 inside:   {{ inside_percent }}%
-membrane: {{ membrane_percent }}%
+{% endif %}
+{% if membrane_alpha_percent > 0 %}
+membrane-α: {{ membrane_alpha_percent }}%
+{% endif %}
+{% if outside_percent > 0 %}
 outside:  {{ outside_percent }}%
+{% endif %}
+{% if signal_percent > 0 %}
+signal:   {{ signal_percent }}%
+{% endif %}
+{% if membrane_beta_percent > 0 %}
+membrane-β: {{ membrane_beta_percent }}%
+{% endif %}
+{% if periplasm_percent > 0 %}
+periplasm: {{ periplasm_percent }}%
+{% endif %}
 </pre>
             <p>
-                {% if membrane_percent >= 10 %}
+                {% set membrane_total = membrane_alpha_percent + membrane_beta_percent %}
+                {% if membrane_total >= 10 %}
                     This appears to be a transmembrane protein.
                 {% else %}
                     This does not seem to be a transmembrane protein.

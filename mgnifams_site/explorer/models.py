@@ -13,8 +13,11 @@ class Mgnifam(models.Model):
     strand_percent = models.FloatField()
     coil_percent = models.FloatField()
     inside_percent = models.FloatField()
-    membrane_percent = models.FloatField()
+    membrane_alpha_percent = models.FloatField()
     outside_percent = models.FloatField()
+    signal_percent = models.FloatField()
+    membrane_beta_percent = models.FloatField()
+    periplasm_percent = models.FloatField()
     rep_sequence = models.TextField()
     consensus = models.TextField()
 
