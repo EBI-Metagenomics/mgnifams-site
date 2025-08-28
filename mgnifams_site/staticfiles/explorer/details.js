@@ -273,7 +273,10 @@ const loadDatatables = () => {
         $('#funfams-table').DataTable({ order: [[2, 'desc']] }); // Score
     }
     if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-        $('#pfams-table').DataTable({ order: [[3, 'desc']] }); // Probability
+        $('#pfams-table').DataTable({ order: [[2, 'desc']] }); // Score
+    }
+    if ($('#pfams_model-table:contains("No MGnifam model Pfam hits found")').length === 0) {
+        $('#pfams_model-table').DataTable({ order: [[3, 'desc']] }); // Probability
     }
     if ($('#structural-annotations-table:contains("No structural matches found")').length === 0) {
         $('#structural-annotations-table').DataTable({ order: [[0, 'asc']] }); // Rank

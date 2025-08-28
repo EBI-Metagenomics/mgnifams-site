@@ -87,13 +87,31 @@
                             <span class="tooltip">
                                 <i class="fas fa-question-circle tooltip-icon"></i>
                                 <span class="tooltiptext">
+                                    Denotes if Pfam functional annotation hits were identified via the hmmer/hmmsearch tool.
+                                </span>
+                            </span>
+                            Sequence-HMM Pfam matches
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if pfams_data %}
+                                <i class="icon icon-common icon-check-square"></i>
+                            {% else %}
+                                <i class="icon icon-common icon-close"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
                                     Denotes if Pfam domain annotation hits were identified through model searching with the hhsuite/hhblits tool.
                                 </span>
                             </span>
                             Profile-profile Pfam matches
                         </td>
                         <td class="vf-table__cell">
-                            {% if hits_data %}
+                            {% if pfams_model_data %}
                                 <i class="icon icon-common icon-check-square"></i>
                             {% else %}
                                 <i class="icon icon-common icon-close"></i>
@@ -422,17 +440,66 @@ periplasm:  {{ periplasm_percent }}%
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
+            <h3 class="vf-card__heading">Functional annotation through Pfam matches</h3>
+            <div>
+                <p>
+                    The family representative sequence was searched against the Pfam database
+                    (<a href="https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.0/Pfam-A.seed.gz"
+                    target="_blank">ver. 38.0</a>) with hmmer/hmmsearch.
+                </p>
+            </div>
+            {% if pfams_data %}
+                <table id="pfams-table" class="vf-table .vf-u-margin__bottom--400">
+                    <thead class="vf-table__header">
+                        <tr class="vf-table__row">
+                            <th class="vf-table__heading" scope="col">Pfam</th>
+                            <th class="vf-table__heading" scope="col">E-value</th>
+                            <th class="vf-table__heading" scope="col">Score</th>
+                            <th class="vf-table__heading" scope="col">HMM from</th>
+                            <th class="vf-table__heading" scope="col">HMM to</th>
+                            <th class="vf-table__heading" scope="col">Alignment from</th>
+                            <th class="vf-table__heading" scope="col">Alignment to</th>
+                            <th class="vf-table__heading" scope="col">Envelope from</th>
+                            <th class="vf-table__heading" scope="col">Envelope to</th>
+                            <th class="vf-table__heading" scope="col">Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody class="vf-table__body">
+                        {% for hit in pfams_data %}
+                            <tr class="vf-table__row pfam-item" data-proteinfunfam="{{ hit.pfam }}">
+                                <td class="vf-table__cell">{{ hit.pfam }}</td>
+                                <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>
+                                <td class="vf-table__cell">{{ hit.score }}</td>
+                                <td class="vf-table__cell">{{ hit.hmm_from }}</td>
+                                <td class="vf-table__cell">{{ hit.hmm_to }}</td>
+                                <td class="vf-table__cell">{{ hit.ali_from }}</td>
+                                <td class="vf-table__cell">{{ hit.ali_to }}</td>
+                                <td class="vf-table__cell">{{ hit.env_from }}</td>
+                                <td class="vf-table__cell">{{ hit.env_to }}</td>
+                                <td class="vf-table__cell">{{ hit.acc }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No Pfam hits found</p>
+            {% endif %}
+        </div>
+    </article>
+
+    <article class="vf-card vf-card--brand vf-card--bordered">
+        <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Profile-profile Pfam matches</h3>
             <div>
                 <p>
-                    This MGnifam HMM profile was searched against the profile Pfam database 
+                    This MGnifam HMM profile was searched against the HH-suite profile Pfam database 
                     (<a href="https://wwwuser.gwdguser.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/pfamA_35.0.tar.gz"
-                    target="_blank">ver. 35.0</a>) with HHblits from HH-suite.
+                    target="_blank">ver. 35.0</a>) with HHsearch.
                     
                 </p>
             </div>
-            {% if hits_data %}
-                <table id="pfams-table" class="vf-table .vf-u-margin__bottom--400">
+            {% if pfams_model_data %}
+                <table id="pfams_model-table" class="vf-table .vf-u-margin__bottom--400">
                     <thead class="vf-table__header">
                         <tr class="vf-table__row">
                             <th class="vf-table__heading" scope="col">Pfam</th>
@@ -446,8 +513,8 @@ periplasm:  {{ periplasm_percent }}%
                         </tr>
                     </thead>
                     <tbody class="vf-table__body">
-                        {% for hit in hits_data %}
-                            <tr class="vf-table__row pfam-item" data-proteinpfam="{{ hit.pfam }}">
+                        {% for hit in pfams_model_data %}
+                            <tr class="vf-table__row pfam_model-item" data-proteinpfam="{{ hit.pfam }}">
                                 <td class="vf-table__cell">
                                     <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam }}" target="_blank">{{ hit.pfam }}</a>
                                 </td>
@@ -463,7 +530,7 @@ periplasm:  {{ periplasm_percent }}%
                     </tbody>
                 </table>
             {% else %}
-                <p>No Pfam hits found</p>
+                <p>No MGnifam model Pfam hits found</p>
             {% endif %}
         </div>
     </article>
