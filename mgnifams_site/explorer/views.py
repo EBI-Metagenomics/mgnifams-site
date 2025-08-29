@@ -40,10 +40,15 @@ def call_skylign_api(blob_data):
     files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
 
-    response = requests.post(url, headers=headers, files=files, data=data)
-    if response.status_code == 200:
+    try:
+        response = requests.post(url, headers=headers, files=files, data=data, timeout=5)
+        response.raise_for_status()
         return response.json()
-    else:
+    except requests.exceptions.Timeout:
+        print("⚠️ Skylign request timed out")
+        return None
+    except requests.exceptions.RequestException as e:
+        print(f"⚠️ Skylign error: {e}")
         return None
 
 def fetch_skylign_logo_json(uuid):
@@ -115,11 +120,12 @@ def details(request):
         seed_msa_blob = ""
     rf = mgnifam.rf_blob.decode('utf-8')
     hmm_blob = mgnifam.hmm_blob.decode('utf-8')
+
+    hmm_logo_json = "null"
     response_data = call_skylign_api(hmm_blob)
-    uuid = ""
     if response_data and 'uuid' in response_data:
         uuid = response_data['uuid']
-    hmm_logo_json = fetch_skylign_logo_json(uuid)
+        hmm_logo_json = fetch_skylign_logo_json(uuid)
 
     biome_blob = mgnifam.biome_blob.decode('utf-8')
     domain_blob = mgnifam.domain_blob.decode('utf-8')

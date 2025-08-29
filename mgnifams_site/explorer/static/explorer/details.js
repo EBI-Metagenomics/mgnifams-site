@@ -176,19 +176,23 @@ const link_hmm_to_msa = () => {
 
 const loadHMMData = () => {
     let hmmLogoJson = JSON.parse(hmm_logo_json);
-    let logoDiv = document.getElementById('logo');
-    logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
-    $('#logo').hmm_logo({height_toggle: true, column_info: "#col_info"});
-    // switch to maximum observed scale
-    let radioInput = document.querySelector('input[name="scale"][value="obs"]');
-    radioInput.click();
-    // hide Coordinates fieldset options
-    let logoSettingsDiv = document.querySelector('.logo_settings');
-    let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
-    fieldsets[2].style.display = 'none';
+    if (hmmLogoJson) {
+        let logoDiv = document.getElementById('logo');
+        logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
+        $('#logo').hmm_logo({height_toggle: true, column_info: "#col_info"});
+        // switch to maximum observed scale
+        let radioInput = document.querySelector('input[name="scale"][value="obs"]');
+        radioInput.click();
+        // hide Coordinates fieldset options
+        let logoSettingsDiv = document.querySelector('.logo_settings');
+        let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
+        fieldsets[2].style.display = 'none';
 
-    // link event to msa
-    link_hmm_to_msa();
+        // link event to msa
+        link_hmm_to_msa();
+    } else {
+        console.warn("No HMM logo JSON available (timed out or error)");
+    }
 };
 
 const showTooltip = (event, text, max_shown_length) => {
