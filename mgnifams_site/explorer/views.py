@@ -132,6 +132,7 @@ def details(request):
     for mgnifam_pfam in mgnifam_pfams:
         hit = {
             'pfam': mgnifam_pfam.pfam,
+            'name': mgnifam_pfam.name,
             'e_value': mgnifam_pfam.e_value,
             'score': mgnifam_pfam.score,
             'hmm_from': mgnifam_pfam.hmm_from,

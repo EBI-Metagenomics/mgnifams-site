@@ -41,6 +41,7 @@ class MgnifamPfams(models.Model):
     id = models.AutoField(primary_key=True)
     mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
     pfam = models.TextField()
+    name = models.TextField()
     e_value = models.FloatField()
     score = models.FloatField()
     hmm_from = models.IntegerField()

@@ -273,7 +273,7 @@ const loadDatatables = () => {
         $('#funfams-table').DataTable({ order: [[2, 'desc']] }); // Score
     }
     if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-        $('#pfams-table').DataTable({ order: [[2, 'desc']] }); // Score // TODO update after adding accession
+        $('#pfams-table').DataTable({ order: [[3, 'desc']] }); // Score
     }
     if ($('#pfams_model-table:contains("No MGnifam model Pfam hits found")').length === 0) {
         $('#pfams_model-table').DataTable({ order: [[3, 'desc']] }); // Probability

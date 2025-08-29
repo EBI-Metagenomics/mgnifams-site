@@ -453,6 +453,7 @@ periplasm:  {{ periplasm_percent }}%
                     <thead class="vf-table__header">
                         <tr class="vf-table__row">
                             <th class="vf-table__heading" scope="col">Pfam</th>
+                            <th class="vf-table__heading" scope="col">Name</th>
                             <th class="vf-table__heading" scope="col">E-value</th>
                             <th class="vf-table__heading" scope="col">Score</th>
                             <th class="vf-table__heading" scope="col">HMM from</th>
@@ -467,7 +468,10 @@ periplasm:  {{ periplasm_percent }}%
                     <tbody class="vf-table__body">
                         {% for hit in pfams_data %}
                             <tr class="vf-table__row pfam-item" data-proteinfunfam="{{ hit.pfam }}">
-                                <td class="vf-table__cell">{{ hit.pfam }}</td>
+                                <td class="vf-table__cell">
+                                    <a href="https://www.ebi.ac.uk/interpro/entry/pfam/{{ hit.pfam }}" target="_blank">{{ hit.pfam }}</a>
+                                </td>
+                                <td class="vf-table__cell">{{ hit.name }}</td>
                                 <td class="vf-table__cell">{{ hit.e_value|floatformat:"-g" }}</td>
                                 <td class="vf-table__cell">{{ hit.score }}</td>
                                 <td class="vf-table__cell">{{ hit.hmm_from }}</td>
