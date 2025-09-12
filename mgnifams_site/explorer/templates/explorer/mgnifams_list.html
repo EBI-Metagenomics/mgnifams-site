@@ -1,0 +1,167 @@
+{% extends "explorer/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<script src="{% static 'explorer/js/all_mgnifams.js' %}"></script>
+
+<section class="vf-content | vf-stack vf-stack--400">
+    <h3>Apply filters</h3>
+    <div id="filters" class="filter-container">
+
+        <!-- Sizes -->
+        <div class="filter-category">
+            <h4>Sizes range</h4>
+            <div class="filter-row">
+                <span>Full size:</span>
+                <input type="number" id="full_size_min" min="1" placeholder="1">
+                <input type="number" id="full_size_max" min="1" placeholder="Infinity">
+            </div>
+            <div class="filter-row">
+                <span>Representative length:</span>
+                <input type="number" id="rep_length_min" min="1" placeholder="1">
+                <input type="number" id="rep_length_max" min="1" placeholder="Infinity">
+            </div>
+            </div>
+
+            <!-- Compositional features -->
+            <div class="filter-category">
+            <h4>Compositional features range(%)</h4>
+            <div class="filter-row">
+                <span>Helix:</span>
+                <input type="number" id="helix_min" min="0" max="100" placeholder="0">
+                <input type="number" id="helix_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Strand:</span>
+                <input type="number" id="strand_min" min="0" max="100" placeholder="0">
+                <input type="number" id="strand_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Coil:</span>
+                <input type="number" id="coil_min" min="0" max="100" placeholder="0">
+                <input type="number" id="coil_max" min="0" max="100" placeholder="100">
+            </div>
+            </div>
+
+            <!-- Predicted transmembrane features -->
+            <div class="filter-category">
+            <h4>Predicted transmembrane features range(%)</h4>
+            <div class="filter-row">
+                <span>Inside:</span>
+                <input type="number" id="inside_min" min="0" max="100" placeholder="0">
+                <input type="number" id="inside_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Membrane-alpha:</span>
+                <input type="number" id="membrane_alpha_min" min="0" max="100" placeholder="0">
+                <input type="number" id="membrane_alpha_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Outside:</span>
+                <input type="number" id="outside_min" min="0" max="100" placeholder="0">
+                <input type="number" id="outside_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Signal:</span>
+                <input type="number" id="signal_min" min="0" max="100"placeholder="0">
+                <input type="number" id="signal_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Membrane-beta:</span>
+                <input type="number" id="membrane_beta_min" min="0" max="100" placeholder="0">
+                <input type="number" id="membrane_beta_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Periplasm:</span>
+                <input type="number" id="periplasm_min" min="0" max="100" placeholder="0">
+                <input type="number" id="periplasm_max" min="0" max="100" placeholder="100">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="vf-content | vf-stack vf-stack--600">
+    <h2>Available MGnifams</h2>
+    <article class="vf-card vf-card--brand vf-card--bordered vf-stack--600">
+        <div class="vf-card__content mgnifams-table-container | vf-stack vf-stack--600">
+            <table id="mgnifams-table" class="vf-table mgnifams-table .vf-u-margin__bottom--600">
+                <thead class="vf-table__header">
+                    <tr class="vf-table__row">
+                        <th class="vf-table__heading" scope="col">ID</th>
+                        <th class="vf-table__heading" scope="col">Full size</th>
+                        <th class="vf-table__heading" scope="col">Representative length</th>
+                        <th class="vf-table__heading" scope="col">Helix%</th>
+                        <th class="vf-table__heading" scope="col">Strand%</th>
+                        <th class="vf-table__heading" scope="col">Coil%</th>
+                        <th class="vf-table__heading" scope="col">Inside%</th>
+                        <th class="vf-table__heading" scope="col">Membrane-alpha%</th>
+                        <th class="vf-table__heading" scope="col">Outside%</th>
+                        <th class="vf-table__heading" scope="col">Signal%</th>
+                        <th class="vf-table__heading" scope="col">Membrane-beta%</th>
+                        <th class="vf-table__heading" scope="col">Periplasm%</th>
+                    </tr>
+                </thead>
+                <tbody class="vf-table__body">
+                    {% for mgnifam in mgnifams %}
+                    <tr class="vf-table__row mgnifam-item">
+                        <td class="vf-table__cell">
+                            <a href="{% url 'details' mgnifam.id|format_mgnifam_name %}">
+                                {{ mgnifam.id|format_mgnifam_name }}
+                            </a>
+                        </td>
+                        <td class="vf-table__cell">{{ mgnifam.full_size }}</td>
+                        <td class="vf-table__cell">{{ mgnifam.rep_length }}</td>
+                        <td class="vf-table__cell">{{ mgnifam.helix_percent }}</td>
+                        <td class="vf-table__cell">{{ mgnifam.strand_percent }}</td>
+                        <td class="vf-table__cell">{{ mgnifam.coil_percent }}</td>
+                        <td class="vf-table__cell">
+                            {% if mgnifam.inside_percent %}
+                                {{ mgnifam.inside_percent }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if mgnifam.membrane_alpha %}
+                                {{ mgnifam.membrane_alpha }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if mgnifam.outside_percent %}
+                                {{ mgnifam.outside_percent }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if mgnifam.signal_percent %}
+                                {{ mgnifam.signal_percent }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if mgnifam.membrane_beta_percent %}
+                                {{ mgnifam.membrane_beta_percent }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if mgnifam.periplasm_percent %}
+                                {{ mgnifam.periplasm_percent }}
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+
+{% endblock content %}

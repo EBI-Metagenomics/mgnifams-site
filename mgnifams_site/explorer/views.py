@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from explorer.models import Mgnifam, MgnifamPfams, MgnifamFunfams, MgnifamModelPfams, MgnifamFolds
 # import xml.etree.ElementTree as ET
 import re
@@ -24,7 +24,10 @@ def index(request):
 
 def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0+', '', mgyf)
-    return int(id)              
+    try:
+        return int(id)
+    except ValueError:
+        raise Http404(f"Invalid MGYF identifier: {mgyf}")              
 
 def format_protein_name(raw_name):
     """
@@ -71,13 +74,12 @@ def generate_structure_link_and_db(part):
     else:
         return part, ''
 
-def details(request):
-    mgyf = request.GET.get('id', None)
-    mgyf_id = translate_mgyf_to_int_id(mgyf)
+def details(request, pk):
+    mgyf_id = translate_mgyf_to_int_id(pk)
 
     try:
         # Fetch Mgnifam object
-        mgnifam = Mgnifam.objects.get(id=mgyf_id)
+        mgnifam = get_object_or_404(Mgnifam, id=mgyf_id)
     except Mgnifam.DoesNotExist:
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
@@ -215,7 +217,6 @@ def details(request):
         annotation['prob'] = i
 
     return render(request, 'explorer/details.html', {
-        'mgyf': mgyf,
         'mgyf_id': mgyf_id,
         'full_size': full_size,
         'protein_rep': protein_rep,
@@ -258,6 +259,13 @@ def serve_blob_as_file(request, pk, column_name):
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = f'attachment;'
     return response
+
+def mgnifams_list(request):
+    mgnifams = Mgnifam.objects.all()
+    context = {
+        'mgnifams': mgnifams,
+    }
+    return render(request, 'explorer/mgnifams_list.html', context)
 
 # def send_hmmsearch_request(mgyf_id):
 #     mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)
