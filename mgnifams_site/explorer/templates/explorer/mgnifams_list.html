@@ -6,42 +6,76 @@
 
 <section class="vf-content | vf-stack vf-stack--400">
     <h3>Apply filters</h3>
-    <div id="filters" class="vf-stack vf-stack--400">
-        <div class="vf-stack vf-stack--400">
+    <div id="filters" class="filter-container">
+
         <!-- Sizes -->
-        <label>Full size min: <input type="number" id="full_size_min" min="1" placeholder="1"></label>
-        <label>Full size max: <input type="number" id="full_size_max" min="1" placeholder="Infinity"></label>
+        <div class="filter-category">
+            <h4>Sizes range</h4>
+            <div class="filter-row">
+                <span>Full size:</span>
+                <input type="number" id="full_size_min" min="1" placeholder="1">
+                <input type="number" id="full_size_max" min="1" placeholder="Infinity">
+            </div>
+            <div class="filter-row">
+                <span>Representative length:</span>
+                <input type="number" id="rep_length_min" min="1" placeholder="1">
+                <input type="number" id="rep_length_max" min="1" placeholder="Infinity">
+            </div>
+            </div>
 
-        <label>Rep length min: <input type="number" id="rep_length_min" min="1" placeholder="1"></label>
-        <label>Rep length max: <input type="number" id="rep_length_max" min="1" placeholder="Infinity"></label>
+            <!-- Compositional features -->
+            <div class="filter-category">
+            <h4>Compositional features range(%)</h4>
+            <div class="filter-row">
+                <span>Helix:</span>
+                <input type="number" id="helix_min" min="0" max="100" placeholder="0">
+                <input type="number" id="helix_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Strand:</span>
+                <input type="number" id="strand_min" min="0" max="100" placeholder="0">
+                <input type="number" id="strand_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Coil:</span>
+                <input type="number" id="coil_min" min="0" max="100" placeholder="0">
+                <input type="number" id="coil_max" min="0" max="100" placeholder="100">
+            </div>
+            </div>
 
-        <!-- Percent columns -->
-        <label>Helix % min: <input type="number" id="helix_min" min="0" max="100" placeholder="0"></label>
-        <label>Helix % max: <input type="number" id="helix_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Strand % min: <input type="number" id="strand_min" min="0" max="100" placeholder="0"></label>
-        <label>Strand % max: <input type="number" id="strand_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Coil % min: <input type="number" id="coil_min" min="0" max="100" placeholder="0"></label>
-        <label>Coil % max: <input type="number" id="coil_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Inside % min: <input type="number" id="inside_min" min="0" max="100" placeholder="0"></label>
-        <label>Inside % max: <input type="number" id="inside_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Membrane-alpha % min: <input type="number" id="membrane_alpha_min" min="0" max="100" placeholder="0"></label>
-        <label>Membrane-alpha % max: <input type="number" id="membrane_alpha_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Outside % min: <input type="number" id="outside_min" min="0" max="100" placeholder="0"></label>
-        <label>Outside % max: <input type="number" id="outside_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Signal % min: <input type="number" id="signal_min" min="0" max="100" placeholder="0"></label>
-        <label>Signal % max: <input type="number" id="signal_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Membrane-beta % min: <input type="number" id="membrane_beta_min" min="0" max="100" placeholder="0"></label>
-        <label>Membrane-beta % max: <input type="number" id="membrane_beta_max" min="0" max="100" placeholder="100"></label>
-
-        <label>Periplasm % min: <input type="number" id="periplasm_min" min="0" max="100" placeholder="0"></label>
-        <label>Periplasm % max: <input type="number" id="periplasm_max" min="0" max="100" placeholder="100"></label>
+            <!-- Predicted transmembrane features -->
+            <div class="filter-category">
+            <h4>Predicted transmembrane features range(%)</h4>
+            <div class="filter-row">
+                <span>Inside:</span>
+                <input type="number" id="inside_min" min="0" max="100" placeholder="0">
+                <input type="number" id="inside_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Membrane-alpha:</span>
+                <input type="number" id="membrane_alpha_min" min="0" max="100" placeholder="0">
+                <input type="number" id="membrane_alpha_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Outside:</span>
+                <input type="number" id="outside_min" min="0" max="100" placeholder="0">
+                <input type="number" id="outside_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Signal:</span>
+                <input type="number" id="signal_min" min="0" max="100"placeholder="0">
+                <input type="number" id="signal_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Membrane-beta:</span>
+                <input type="number" id="membrane_beta_min" min="0" max="100" placeholder="0">
+                <input type="number" id="membrane_beta_max" min="0" max="100" placeholder="100">
+            </div>
+            <div class="filter-row">
+                <span>Periplasm:</span>
+                <input type="number" id="periplasm_min" min="0" max="100" placeholder="0">
+                <input type="number" id="periplasm_max" min="0" max="100" placeholder="100">
+            </div>
         </div>
     </div>
 </section>
@@ -56,15 +90,15 @@
                         <th class="vf-table__heading" scope="col">ID</th>
                         <th class="vf-table__heading" scope="col">Full size</th>
                         <th class="vf-table__heading" scope="col">Representative length</th>
-                        <th class="vf-table__heading" scope="col">Helix percent</th>
-                        <th class="vf-table__heading" scope="col">Strand percent</th>
-                        <th class="vf-table__heading" scope="col">Coil percent</th>
-                        <th class="vf-table__heading" scope="col">Inside percent</th>
-                        <th class="vf-table__heading" scope="col">Membrane-alpha percent</th>
-                        <th class="vf-table__heading" scope="col">Outside percent</th>
-                        <th class="vf-table__heading" scope="col">Signal percent</th>
-                        <th class="vf-table__heading" scope="col">Membrane-beta percent</th>
-                        <th class="vf-table__heading" scope="col">Periplasm percent</th>
+                        <th class="vf-table__heading" scope="col">Helix%</th>
+                        <th class="vf-table__heading" scope="col">Strand%</th>
+                        <th class="vf-table__heading" scope="col">Coil%</th>
+                        <th class="vf-table__heading" scope="col">Inside%</th>
+                        <th class="vf-table__heading" scope="col">Membrane-alpha%</th>
+                        <th class="vf-table__heading" scope="col">Outside%</th>
+                        <th class="vf-table__heading" scope="col">Signal%</th>
+                        <th class="vf-table__heading" scope="col">Membrane-beta%</th>
+                        <th class="vf-table__heading" scope="col">Periplasm%</th>
                     </tr>
                 </thead>
                 <tbody class="vf-table__body">
