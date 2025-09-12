@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
-from django.http import HttpResponse
-from explorer.models import Mgnifam, MgnifamFunfams, MgnifamPfams, MgnifamFolds
-import xml.etree.ElementTree as ET
+from django.http import HttpResponse, Http404
+from explorer.models import Mgnifam, MgnifamPfams, MgnifamFunfams, MgnifamModelPfams, MgnifamFolds
+# import xml.etree.ElementTree as ET
 import re
 import requests
 import json
@@ -24,7 +24,10 @@ def index(request):
 
 def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0+', '', mgyf)
-    return int(id)              
+    try:
+        return int(id)
+    except ValueError:
+        raise Http404(f"Invalid MGYF identifier: {mgyf}")              
 
 def format_protein_name(raw_name):
     """
@@ -40,10 +43,15 @@ def call_skylign_api(blob_data):
     files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
 
-    response = requests.post(url, headers=headers, files=files, data=data)
-    if response.status_code == 200:
+    try:
+        response = requests.post(url, headers=headers, files=files, data=data, timeout=5)
+        response.raise_for_status()
         return response.json()
-    else:
+    except requests.exceptions.Timeout:
+        print("⚠️ Skylign request timed out")
+        return None
+    except requests.exceptions.RequestException as e:
+        print(f"⚠️ Skylign error: {e}")
         return None
 
 def fetch_skylign_logo_json(uuid):
@@ -66,13 +74,12 @@ def generate_structure_link_and_db(part):
     else:
         return part, ''
 
-def details(request):
-    mgyf = request.GET.get('id', None)
-    mgyf_id = translate_mgyf_to_int_id(mgyf)
+def details(request, pk):
+    mgyf_id = translate_mgyf_to_int_id(pk)
 
     try:
         # Fetch Mgnifam object
-        mgnifam = Mgnifam.objects.get(id=mgyf_id)
+        mgnifam = get_object_or_404(Mgnifam, id=mgyf_id)
     except Mgnifam.DoesNotExist:
         messages.error(request, 'Invalid ID entered. Please check and try again.')
         return redirect('index')
@@ -97,8 +104,11 @@ def details(request):
     coil_percent = mgnifam.coil_percent
 
     inside_percent = mgnifam.inside_percent
-    membrane_percent = mgnifam.membrane_percent
+    membrane_alpha_percent = mgnifam.membrane_alpha_percent
     outside_percent = mgnifam.outside_percent
+    signal_percent = mgnifam.signal_percent
+    membrane_beta_percent = mgnifam.membrane_beta_percent
+    periplasm_percent = mgnifam.periplasm_percent
 
     rep_sequence = mgnifam.rep_sequence
     consensus = mgnifam.consensus
@@ -112,16 +122,36 @@ def details(request):
         seed_msa_blob = ""
     rf = mgnifam.rf_blob.decode('utf-8')
     hmm_blob = mgnifam.hmm_blob.decode('utf-8')
+
+    hmm_logo_json = "null"
     response_data = call_skylign_api(hmm_blob)
-    uuid = ""
     if response_data and 'uuid' in response_data:
         uuid = response_data['uuid']
-    hmm_logo_json = fetch_skylign_logo_json(uuid)
+        hmm_logo_json = fetch_skylign_logo_json(uuid)
 
     biome_blob = mgnifam.biome_blob.decode('utf-8')
     domain_blob = mgnifam.domain_blob.decode('utf-8')
     s4pred_blob = mgnifam.s4pred_blob.decode('utf-8')
     tm_blob = mgnifam.tm_blob.decode('utf-8') if mgnifam.tm_blob else ''
+
+    # Fetch related MgnifamPfams objects
+    mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
+    pfams_data = []
+    for mgnifam_pfam in mgnifam_pfams:
+        hit = {
+            'pfam': mgnifam_pfam.pfam,
+            'name': mgnifam_pfam.name,
+            'e_value': mgnifam_pfam.e_value,
+            'score': mgnifam_pfam.score,
+            'hmm_from': mgnifam_pfam.hmm_from,
+            'hmm_to': mgnifam_pfam.hmm_to,
+            'ali_from': mgnifam_pfam.ali_from,
+            'ali_to': mgnifam_pfam.ali_to,
+            'env_from': mgnifam_pfam.env_from,
+            'env_to': mgnifam_pfam.env_to,
+            'acc': mgnifam_pfam.acc
+        }
+        pfams_data.append(hit)
 
     # Fetch related MgnifamFunfams objects
     mgnifam_funfams = MgnifamFunfams.objects.filter(mgnifam=mgyf_id)
@@ -150,21 +180,21 @@ def details(request):
         }
         funfams_data.append(hit)
 
-    # Fetch related MgnifamPfams objects
-    mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
-    hits_data = []
-    for mgnifam_pfam in mgnifam_pfams:
+    # Fetch related MgnifamModelPfams objects
+    mgnifam_model_pfams = MgnifamModelPfams.objects.filter(mgnifam=mgyf_id)
+    pfams_model_data = []
+    for mgnifam_model_pfam in mgnifam_model_pfams:
         hit = {
-            'pfam': mgnifam_pfam.pfam,
-            'name': mgnifam_pfam.name,
-            'description': mgnifam_pfam.description,
-            'prob': mgnifam_pfam.prob,
-            'e_value': mgnifam_pfam.e_value,
-            'length': mgnifam_pfam.length,
-            'query_hmm': mgnifam_pfam.query_hmm,
-            'template_hmm': mgnifam_pfam.template_hmm
+            'pfam': mgnifam_model_pfam.pfam,
+            'name': mgnifam_model_pfam.name,
+            'description': mgnifam_model_pfam.description,
+            'prob': mgnifam_model_pfam.prob,
+            'e_value': mgnifam_model_pfam.e_value,
+            'length': mgnifam_model_pfam.length,
+            'query_hmm': mgnifam_model_pfam.query_hmm,
+            'template_hmm': mgnifam_model_pfam.template_hmm
         }
-        hits_data.append(hit)
+        pfams_model_data.append(hit)
 
     # Fetch related MgnifamFolds objects
     mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
@@ -187,7 +217,6 @@ def details(request):
         annotation['prob'] = i
 
     return render(request, 'explorer/details.html', {
-        'mgyf': mgyf,
         'mgyf_id': mgyf_id,
         'full_size': full_size,
         'protein_rep': protein_rep,
@@ -202,8 +231,12 @@ def details(request):
         'strand_percent': strand_percent,
         'coil_percent': coil_percent,
         'inside_percent': inside_percent,
-        'membrane_percent': membrane_percent,
+        'membrane_alpha_percent': membrane_alpha_percent,
         'outside_percent': outside_percent,
+        'signal_percent': signal_percent,
+        'membrane_beta_percent': membrane_beta_percent,
+        'periplasm_percent': periplasm_percent,
+        'membrane_total': membrane_alpha_percent + membrane_beta_percent,
         'converged': converged,
         'cif_blob': cif_blob,
         'seed_msa_blob': seed_msa_blob,
@@ -214,8 +247,9 @@ def details(request):
         'domain_blob': domain_blob,
         's4pred_blob': s4pred_blob,
         'tm_blob': tm_blob,
+        'pfams_data': pfams_data,
         'funfams_data': funfams_data,
-        'hits_data': hits_data,
+        'pfams_model_data': pfams_model_data,
         'structural_annotations': structural_annotations
     })
 
@@ -225,6 +259,13 @@ def serve_blob_as_file(request, pk, column_name):
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = f'attachment;'
     return response
+
+def mgnifams_list(request):
+    mgnifams = Mgnifam.objects.all()
+    context = {
+        'mgnifams': mgnifams,
+    }
+    return render(request, 'explorer/mgnifams_list.html', context)
 
 # def send_hmmsearch_request(mgyf_id):
 #     mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)

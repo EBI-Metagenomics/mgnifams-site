@@ -13,8 +13,11 @@ class Mgnifam(models.Model):
     strand_percent = models.FloatField()
     coil_percent = models.FloatField()
     inside_percent = models.FloatField()
-    membrane_percent = models.FloatField()
+    membrane_alpha_percent = models.FloatField()
     outside_percent = models.FloatField()
+    signal_percent = models.FloatField()
+    membrane_beta_percent = models.FloatField()
+    periplasm_percent = models.FloatField()
     rep_sequence = models.TextField()
     consensus = models.TextField()
 
@@ -32,6 +35,28 @@ class Mgnifam(models.Model):
 
     class Meta:
         db_table = 'mgnifam'
+
+
+class MgnifamPfams(models.Model):
+    id = models.AutoField(primary_key=True)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    pfam = models.TextField()
+    name = models.TextField()
+    e_value = models.FloatField()
+    score = models.FloatField()
+    hmm_from = models.IntegerField()
+    hmm_to = models.IntegerField()
+    ali_from = models.IntegerField()
+    ali_to = models.IntegerField()
+    env_from = models.IntegerField()
+    env_to = models.IntegerField()
+    acc = models.FloatField()
+
+    def __str__(self):
+        return f"MgnifamPfams ID: {self.id}"
+
+    class Meta:
+        db_table = 'mgnifam_pfams'
 
 
 class MgnifamFunfams(models.Model):
@@ -73,7 +98,7 @@ class MgnifamFolds(models.Model):
         db_table = 'mgnifam_folds'
 
 
-class MgnifamPfams(models.Model):
+class MgnifamModelPfams(models.Model):
     id = models.AutoField(primary_key=True)
     mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
     pfam = models.CharField(max_length=16)
@@ -86,7 +111,7 @@ class MgnifamPfams(models.Model):
     template_hmm = models.TextField()
 
     def __str__(self):
-        return f"MgnifamPfams ID: {self.id}"
+        return f"MgnifamModelPfams ID: {self.id}"
 
     class Meta:
-        db_table = 'mgnifam_pfams'
+        db_table = 'mgnifam_model_pfams'

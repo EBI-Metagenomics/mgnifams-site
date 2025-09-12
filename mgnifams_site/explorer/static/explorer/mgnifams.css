@@ -212,3 +212,48 @@ nightingale-manager {
     line-height: 1.6;
     letter-spacing: 2px;
 }
+
+.mgnifams-table-container {
+    overflow-x: auto; /* Add horizontal scrolling */
+    max-width: 100%; /* Keep the table within the article */
+}
+
+#filters {
+    margin-bottom: 1em;
+}
+
+.filter-container {
+    display: flex;
+    gap: 1em; /* space between categories */
+    flex-wrap: wrap; /* wrap to next line on small screens */
+}
+
+.filter-category {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+    border-radius: 4px;
+    background: #f9f9f9;
+    flex: 1 1 300px; /* allow flexible width, minimum 300px */
+}
+
+.filter-category h4 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-size: 1em;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+.filter-row span {
+    width: 130px; /* fixed width for labels */
+    font-weight: 500;
+}
+
+.filter-row input {
+    width: 70px; /* uniform width for inputs */
+}
