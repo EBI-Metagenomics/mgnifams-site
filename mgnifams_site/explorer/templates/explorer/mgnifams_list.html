@@ -4,6 +4,48 @@
 {% block content %}
 <script src="{% static 'explorer/js/all_mgnifams.js' %}"></script>
 
+<section class="vf-content | vf-stack vf-stack--400">
+    <h3>Apply filters</h3>
+    <div id="filters" class="vf-stack vf-stack--400">
+        <div class="vf-stack vf-stack--400">
+        <!-- Sizes -->
+        <label>Full size min: <input type="number" id="full_size_min" min="1" placeholder="1"></label>
+        <label>Full size max: <input type="number" id="full_size_max" min="1" placeholder="Infinity"></label>
+
+        <label>Rep length min: <input type="number" id="rep_length_min" min="1" placeholder="1"></label>
+        <label>Rep length max: <input type="number" id="rep_length_max" min="1" placeholder="Infinity"></label>
+
+        <!-- Percent columns -->
+        <label>Helix % min: <input type="number" id="helix_min" min="0" max="100" placeholder="0"></label>
+        <label>Helix % max: <input type="number" id="helix_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Strand % min: <input type="number" id="strand_min" min="0" max="100" placeholder="0"></label>
+        <label>Strand % max: <input type="number" id="strand_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Coil % min: <input type="number" id="coil_min" min="0" max="100" placeholder="0"></label>
+        <label>Coil % max: <input type="number" id="coil_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Inside % min: <input type="number" id="inside_min" min="0" max="100" placeholder="0"></label>
+        <label>Inside % max: <input type="number" id="inside_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Membrane-alpha % min: <input type="number" id="membrane_alpha_min" min="0" max="100" placeholder="0"></label>
+        <label>Membrane-alpha % max: <input type="number" id="membrane_alpha_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Outside % min: <input type="number" id="outside_min" min="0" max="100" placeholder="0"></label>
+        <label>Outside % max: <input type="number" id="outside_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Signal % min: <input type="number" id="signal_min" min="0" max="100" placeholder="0"></label>
+        <label>Signal % max: <input type="number" id="signal_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Membrane-beta % min: <input type="number" id="membrane_beta_min" min="0" max="100" placeholder="0"></label>
+        <label>Membrane-beta % max: <input type="number" id="membrane_beta_max" min="0" max="100" placeholder="100"></label>
+
+        <label>Periplasm % min: <input type="number" id="periplasm_min" min="0" max="100" placeholder="0"></label>
+        <label>Periplasm % max: <input type="number" id="periplasm_max" min="0" max="100" placeholder="100"></label>
+        </div>
+    </div>
+</section>
+
 <section class="vf-content | vf-stack vf-stack--600">
     <h2>Available MGnifams</h2>
     <article class="vf-card vf-card--brand vf-card--bordered vf-stack--600">
