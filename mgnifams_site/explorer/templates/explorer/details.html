@@ -8,7 +8,7 @@
 <div id="domain_tooltip" class="domain_tooltip"></div>
 
 <section class="vf-content | vf-stack vf-stack--400">
-    <h2> Protein Family: {{ mgyf }} </h2>
+    <h2> Protein Family: {{ mgyf_id|format_mgnifam_name }} </h2>
 
     <article class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
@@ -183,7 +183,7 @@
                         </li>
                     </ul>
                 </p>
-                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf }}.cif" class="vf-button vf-button--secondary vf-button--sm">Download CIF file</a>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}.cif" class="vf-button vf-button--secondary vf-button--sm">Download CIF file</a>
             </div>
             <div class="vf-grid__col--span-3">
                 <div id="pdb_viewer">
@@ -265,7 +265,7 @@ coils:      {{ coil_percent }}%
                 {% endif %}
             </p>
         </div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}" download="{{ mgyf }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
         </div>
     </article>
 
@@ -301,7 +301,7 @@ periplasm:  {{ periplasm_percent }}%
                 {% endif %}
             </p>
         </div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}" download="{{ mgyf }}_tm.json" class="vf-button vf-button--secondary vf-button--sm">Download transmembrane JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_tm.json" class="vf-button vf-button--secondary vf-button--sm">Download transmembrane JSON file</a>
         </div>
     </article>
     {% endif %}
@@ -322,7 +322,7 @@ periplasm:  {{ periplasm_percent }}%
             </h3>
             <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}"></div>
             <div id="msa-div"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf }}_seed_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download seed MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_seed_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download seed MSA file</a>
         </div>
     </article>
 
@@ -347,7 +347,7 @@ periplasm:  {{ periplasm_percent }}%
             </div>
             <div id="logo" class="logo"></div>
             <div id="col_info" class="col_info"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf }}.hmm" class="vf-button vf-button--secondary vf-button--sm">Download HMM file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}.hmm" class="vf-button vf-button--secondary vf-button--sm">Download HMM file</a>
             {% comment %} <form action="{% url 'submit_hmmsearch' mgyf_id=mgyf_id %}" method="post" target="_blank" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="vf-button vf-button--secondary vf-button--sm">Submit HMM Search</button>
@@ -368,7 +368,7 @@ periplasm:  {{ periplasm_percent }}%
             </h3>
             <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}"></div>
             <div id="sunburst-div"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}" download="{{ mgyf }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
         </div>
     </article>
 
@@ -383,7 +383,7 @@ periplasm:  {{ periplasm_percent }}%
             </div>
             <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}"></div>
             <div id="architecturesContainer"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}" download="{{ mgyf }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
         </div>
     </article>
 

@@ -6,7 +6,7 @@
     <p>Number of currently hosted <b>protein families:</b> {{ num_mgnifams }}</p>
 
     <form 
-        method="get" action="/details/"
+        onsubmit="event.preventDefault(); redirectToDetails();"
         class="vf-form vf-form--search vf-form--search--mini">
         <label for="id" class="vf-form__label">Enter MGnifam ID:</label>
         <input type="text" id="id" name="id" class="vf-form__input plp-input" required>
@@ -27,6 +27,14 @@
 <script>
     function populateExample() {
         document.getElementById("id").value = "{{ first_id }}";
+    }
+
+    function redirectToDetails() {
+        const id = document.getElementById("id").value.trim();
+        if (id) {
+            const detailsUrl = "{% url 'details' 'PROTID' %}".replace("PROTID", encodeURIComponent(id));
+            window.location.href = detailsUrl;
+        }
     }
 </script>
 {% endblock content %}

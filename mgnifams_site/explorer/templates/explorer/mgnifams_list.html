@@ -28,10 +28,11 @@
                 <tbody class="vf-table__body">
                     {% for mgnifam in mgnifams %}
                     <tr class="vf-table__row mgnifam-item">
-                        <td class="vf-table__cell">{{ mgnifam.id }}</td>
-                        {% comment %} <td class="vf-table__cell">
-                            <a href="{% url 'details' mgnifam.id %}">{{ mgnifam.id }}</a>
-                        </td> {% endcomment %}
+                        <td class="vf-table__cell">
+                            <a href="{% url 'details' mgnifam.id|format_mgnifam_name %}">
+                                {{ mgnifam.id|format_mgnifam_name }}
+                            </a>
+                        </td>
                         <td class="vf-table__cell">{{ mgnifam.full_size }}</td>
                         <td class="vf-table__cell">{{ mgnifam.rep_length }}</td>
                         <td class="vf-table__cell">{{ mgnifam.helix_percent }}</td>
