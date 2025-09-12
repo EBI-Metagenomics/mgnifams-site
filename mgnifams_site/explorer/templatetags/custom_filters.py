@@ -6,8 +6,6 @@ register = template.Library()
 
 @register.filter
 def format_mgnifam_name(raw_name):
-    print("raw_name")
-    print(raw_name)
     """
     Formats the mgnifam name by appending zeros in front to make it 10 characters,
     and then adds 'MGYF' as a prefix.
