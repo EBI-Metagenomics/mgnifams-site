@@ -115,42 +115,42 @@
                         <td class="vf-table__cell">{{ mgnifam.strand_percent }}</td>
                         <td class="vf-table__cell">{{ mgnifam.coil_percent }}</td>
                         <td class="vf-table__cell">
-                            {% if mgnifam.inside_percent %}
+                            {% if mgnifam.inside_percent != "" %}
                                 {{ mgnifam.inside_percent }}
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td class="vf-table__cell">
-                            {% if mgnifam.membrane_alpha %}
-                                {{ mgnifam.membrane_alpha }}
+                            {% if mgnifam.membrane_alpha_percent != "" %}
+                                {{ mgnifam.membrane_alpha_percent }}
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td class="vf-table__cell">
-                            {% if mgnifam.outside_percent %}
+                            {% if mgnifam.outside_percent != "" %}
                                 {{ mgnifam.outside_percent }}
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td class="vf-table__cell">
-                            {% if mgnifam.signal_percent %}
+                            {% if mgnifam.signal_percent != "" %}
                                 {{ mgnifam.signal_percent }}
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td class="vf-table__cell">
-                            {% if mgnifam.membrane_beta_percent %}
+                            {% if mgnifam.membrane_beta_percent != "" %}
                                 {{ mgnifam.membrane_beta_percent }}
                             {% else %}
                                 -
                             {% endif %}
                         </td>
                         <td class="vf-table__cell">
-                            {% if mgnifam.periplasm_percent %}
+                            {% if mgnifam.periplasm_percent != "" %}
                                 {{ mgnifam.periplasm_percent }}
                             {% else %}
                                 -
