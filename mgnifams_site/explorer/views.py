@@ -259,6 +259,13 @@ def serve_blob_as_file(request, pk, column_name):
     response['Content-Disposition'] = f'attachment;'
     return response
 
+def mgnifams_list(request):
+    mgnifams = Mgnifam.objects.all()
+    context = {
+        'mgnifams': mgnifams,
+    }
+    return render(request, 'explorer/mgnifams_list.html', context)
+
 # def send_hmmsearch_request(mgyf_id):
 #     mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)
 #     hmm_blob = mgnifam.hmm_blob

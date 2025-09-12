@@ -212,3 +212,8 @@ nightingale-manager {
     line-height: 1.6;
     letter-spacing: 2px;
 }
+
+.mgnifams-table-container {
+    overflow-x: auto; /* Add horizontal scrolling */
+    max-width: 100%; /* Keep the table within the article */
+}
