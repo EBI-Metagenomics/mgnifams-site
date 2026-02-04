@@ -38,7 +38,7 @@ def format_protein_name(raw_name):
     return "MGYP" + formatted_name
 
 def call_skylign_api(blob_data):
-    url = "https://pavlopoulos-lab.org/skylign/" # "http://skylign.org"
+    url = "https://skylign.org" # "https://pavlopoulos-lab.org/skylign/"
     headers = {'Accept': 'application/json'}
     files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
@@ -55,7 +55,7 @@ def call_skylign_api(blob_data):
         return None
 
 def fetch_skylign_logo_json(uuid):
-    url = f'https://pavlopoulos-lab.org/skylign/logo/{uuid}' # f'http://skylign.org/logo/{uuid}'
+    url = f'https://skylign.org/logo/{uuid}' # f'https://pavlopoulos-lab.org/skylign/logo/{uuid}'
     headers = {'Accept': 'application/json'}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
@@ -126,7 +126,7 @@ def details(request, pk):
     hmm_logo_json = "null"
     response_data = call_skylign_api(hmm_blob)
     if response_data and 'uuid' in response_data:
-        uuid = response_data['uuid']
+        uuid = response_data['uuid'].lower()
         hmm_logo_json = fetch_skylign_logo_json(uuid)
 
     biome_blob = mgnifam.biome_blob.decode('utf-8')
