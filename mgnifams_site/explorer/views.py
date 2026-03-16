@@ -1,5 +1,4 @@
-from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib import messages
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from explorer.models import Mgnifam, MgnifamPfams, MgnifamFunfams, MgnifamModelPfams, MgnifamFolds
 # import xml.etree.ElementTree as ET
@@ -23,11 +22,11 @@ def index(request):
     return render(request, 'explorer/index.html', context)           
 
 def translate_mgyf_to_int_id(mgyf):
-    id = re.sub(r'^MGYF0+', '', mgyf)
+    id = re.sub(r'^MGYF0*', '', mgyf)
     try:
-        return int(id)
+        return int(id) if id else 0
     except ValueError:
-        raise Http404(f"Invalid MGYF identifier: {mgyf}")              
+        raise Http404(f"Invalid MGYF identifier: {mgyf}")
 
 def format_protein_name(raw_name):
     """
@@ -57,10 +56,20 @@ def call_skylign_api(blob_data):
 def fetch_skylign_logo_json(uuid):
     url = f'https://skylign.org/logo/{uuid}' # f'https://pavlopoulos-lab.org/skylign/logo/{uuid}'
     headers = {'Accept': 'application/json'}
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return json.dumps(response.json())
+    try:
+        response = requests.get(url, headers=headers, timeout=5)
+        if response.status_code == 200:
+            return json.dumps(response.json())
+    except requests.exceptions.RequestException as e:
+        print(f"⚠️ Skylign logo fetch error: {e}")
     return None
+
+def decode_blob(blob, fallback=''):
+    if blob is None:
+        return fallback
+    if isinstance(blob, (bytes, memoryview)):
+        return bytes(blob).decode('utf-8')
+    return str(blob)
 
 def generate_structure_link_and_db(part):
     if part.startswith('AF'):
@@ -77,12 +86,7 @@ def generate_structure_link_and_db(part):
 def details(request, pk):
     mgyf_id = translate_mgyf_to_int_id(pk)
 
-    try:
-        # Fetch Mgnifam object
-        mgnifam = get_object_or_404(Mgnifam, id=mgyf_id)
-    except Mgnifam.DoesNotExist:
-        messages.error(request, 'Invalid ID entered. Please check and try again.')
-        return redirect('index')
+    mgnifam = get_object_or_404(Mgnifam, id=mgyf_id)
 
     full_size = mgnifam.full_size
     protein_rep = format_protein_name(str(mgnifam.protein_rep))
@@ -94,7 +98,7 @@ def details(request, pk):
         region_start = region_parts[0]
         region_end   = region_parts[1]
     rep_length = mgnifam.rep_length
-    converged = (mgnifam.converged == "True") # casting to boolean
+    converged = mgnifam.converged
 
     plddt = mgnifam.plddt
     ptm = mgnifam.ptm
@@ -113,26 +117,22 @@ def details(request, pk):
     rep_sequence = mgnifam.rep_sequence
     consensus = mgnifam.consensus
 
-    cif_blob = mgnifam.cif_blob.decode('utf-8')
-
-    seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
-    if mgnifam.seed_msa_blob is not None:
-        seed_msa_blob = mgnifam.seed_msa_blob.decode('utf-8')
-    else:
-        seed_msa_blob = ""
-    rf = mgnifam.rf_blob.decode('utf-8')
-    hmm_blob = mgnifam.hmm_blob.decode('utf-8')
+    cif_blob    = decode_blob(mgnifam.cif_blob)
+    seed_msa_blob = decode_blob(mgnifam.seed_msa_blob)
+    rf          = decode_blob(mgnifam.rf_blob)
+    hmm_blob    = decode_blob(mgnifam.hmm_blob)
 
     hmm_logo_json = "null"
-    response_data = call_skylign_api(hmm_blob)
-    if response_data and 'uuid' in response_data:
-        uuid = response_data['uuid'].lower()
-        hmm_logo_json = fetch_skylign_logo_json(uuid)
+    if hmm_blob:
+        response_data = call_skylign_api(hmm_blob)
+        if response_data and 'uuid' in response_data:
+            uuid = response_data['uuid'].lower()
+            hmm_logo_json = fetch_skylign_logo_json(uuid)
 
-    biome_blob = mgnifam.biome_blob.decode('utf-8')
-    domain_blob = mgnifam.domain_blob.decode('utf-8')
-    s4pred_blob = mgnifam.s4pred_blob.decode('utf-8')
-    tm_blob = mgnifam.tm_blob.decode('utf-8') if mgnifam.tm_blob else ''
+    biome_blob  = decode_blob(mgnifam.biome_blob)
+    domain_blob = decode_blob(mgnifam.domain_blob)
+    s4pred_blob = decode_blob(mgnifam.s4pred_blob)
+    tm_blob     = decode_blob(mgnifam.tm_blob)
 
     # Fetch related MgnifamPfams objects
     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
@@ -207,7 +207,7 @@ def details(request, pk):
             'aligned_length': mgnifam_fold.aligned_length,
             'q_start': mgnifam_fold.q_start,
             'q_end': mgnifam_fold.q_end,
-            't_end': mgnifam_fold.t_end,
+            't_start': mgnifam_fold.t_start,
             't_end': mgnifam_fold.t_end,
             'e_value': mgnifam_fold.e_value
         }
@@ -253,11 +253,15 @@ def details(request, pk):
         'structural_annotations': structural_annotations
     })
 
+BLOB_COLUMNS = {'seed_msa_blob', 'hmm_blob', 'rf_blob', 'cif_blob', 'biome_blob', 'domain_blob', 's4pred_blob', 'tm_blob'}
+
 def serve_blob_as_file(request, pk, column_name):
+    if column_name not in BLOB_COLUMNS:
+        raise Http404(f"Unknown blob column: {column_name}")
     mgnifam_instance = get_object_or_404(Mgnifam, pk=pk)
     blob_data = getattr(mgnifam_instance, column_name)
     response = HttpResponse(blob_data, content_type='application/octet-stream')
-    response['Content-Disposition'] = f'attachment;'
+    response['Content-Disposition'] = 'attachment;'
     return response
 
 def mgnifams_list(request):
