@@ -5,6 +5,9 @@
 ### Added
 - `CLAUDE.md` — developer guide covering build commands, architecture, and deployment
 - `explorer/tests.py` — initial test suite (21 tests) covering views, ID conversion, blob decoding, and security
+- `pyproject.toml` — Ruff configuration (linting rules E, F, I, UP; single-quote formatter; migrations excluded from line-length)
+- `.pre-commit-config.yaml` — pre-commit hooks running `ruff` (lint + auto-fix) and `ruff-format` on every commit
+- `ruff==0.9.10` added to `requirements.txt`
 
 ### Fixed
 

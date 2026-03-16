@@ -24,6 +24,23 @@ python manage.py collectstatic --noinput
 
 # Run tests (SECRET_KEY must be set — it has no fallback value)
 DJANGO_SECRET_KEY=test-secret-key python manage.py test
+
+# Run tests with coverage report
+DJANGO_SECRET_KEY=test-secret-key coverage run --source=explorer manage.py test explorer
+coverage report -m
+
+# Lint and format (from repo root)
+ruff check mgnifams_site      # lint
+ruff check --fix mgnifams_site  # lint + auto-fix
+ruff format mgnifams_site     # format
+
+# Install pre-commit hooks (one-time, after cloning)
+pre-commit install
+
+# Run pre-commit manually (hooks run automatically on git commit)
+pre-commit run --all-files   # whole repo
+pre-commit run ruff          # linter only
+pre-commit run ruff-format   # formatter only
 ```
 
 **Docker:**

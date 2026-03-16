@@ -3,3 +3,4 @@ django-cors-headers==4.3.1
 requests==2.32.4
 gunicorn==23.0.0
 biopython==1.86
+ruff==0.9.10

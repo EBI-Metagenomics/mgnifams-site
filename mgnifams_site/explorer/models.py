@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Mgnifam(models.Model):
     id = models.IntegerField(primary_key=True)
     full_size = models.IntegerField()
@@ -31,7 +32,7 @@ class Mgnifam(models.Model):
     tm_blob = models.BinaryField(null=True, default=None)
 
     def __str__(self):
-        return f"Mgnifam ID: {self.id}"
+        return f'Mgnifam ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam'
@@ -53,7 +54,7 @@ class MgnifamPfams(models.Model):
     acc = models.FloatField()
 
     def __str__(self):
-        return f"MgnifamPfams ID: {self.id}"
+        return f'MgnifamPfams ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_pfams'
@@ -74,7 +75,7 @@ class MgnifamFunfams(models.Model):
     acc = models.FloatField()
 
     def __str__(self):
-        return f"MgnifamFunfams ID: {self.id}"
+        return f'MgnifamFunfams ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_funfams'
@@ -92,7 +93,7 @@ class MgnifamFolds(models.Model):
     e_value = models.FloatField()
 
     def __str__(self):
-        return f"MgnifamFolds ID: {self.id}"
+        return f'MgnifamFolds ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_folds'
@@ -111,7 +112,7 @@ class MgnifamModelPfams(models.Model):
     template_hmm = models.TextField()
 
     def __str__(self):
-        return f"MgnifamModelPfams ID: {self.id}"
+        return f'MgnifamModelPfams ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_model_pfams'
