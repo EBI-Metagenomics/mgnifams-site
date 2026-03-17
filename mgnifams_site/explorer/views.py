@@ -293,6 +293,7 @@ def serve_blob_as_file(request, pk, column_name):
         raise Http404(f'No data for column: {column_name}')
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = 'attachment;'
+    response['Cache-Control'] = 'public, max-age=86400'  # 24 h — DB is static
     return response
 
 

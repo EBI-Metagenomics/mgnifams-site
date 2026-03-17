@@ -315,6 +315,13 @@ class ServeBlobViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, BLOB)
 
+    def test_serve_blob_has_cache_control_header(self):
+        # M2: blob data never changes — browser should cache for 24 h
+        url = reverse('serve_blob_as_file', args=[1, 'hmm_blob'])
+        response = self.client.get(url)
+        self.assertIn('public', response['Cache-Control'])
+        self.assertIn('max-age=86400', response['Cache-Control'])
+
     def test_serve_nonexistent_pk_returns_404(self):
         url = reverse('serve_blob_as_file', args=[99999, 'hmm_blob'])
         response = self.client.get(url)

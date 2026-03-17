@@ -11,6 +11,9 @@
 
 ### Performance
 
+**Added `Cache-Control` headers to blob responses** (`views.py`)
+`serve_blob_as_file` responses now include `Cache-Control: public, max-age=86400`. The database is pre-populated and never changes, so blobs are safe to cache for 24 hours — browsers will no longer re-fetch the same MSA, HMM, CIF, and other files on every page load. *(M2)*
+
 **`DEBUG` now reads from environment variable** (`settings.py`, `CLAUDE.md`)
 `DEBUG = True` was hardcoded, causing Django to accumulate every SQL query in memory and disable template caching in all environments. Changed to `DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'`. Defaults to `True` so local development is unaffected; production must set `DJANGO_DEBUG=False`. Updated `CLAUDE.md` dev server command and production env vars list accordingly. *(M1)*
 
