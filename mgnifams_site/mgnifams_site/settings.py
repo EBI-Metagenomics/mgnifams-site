@@ -127,6 +127,17 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Cache
+# File-based cache persists across gunicorn worker restarts without any extra
+# infrastructure. Override DJANGO_CACHE_DIR in production to point to a
+# writable path on the shared volume if cross-pod persistence is desired.
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.getenv('DJANGO_CACHE_DIR', '/tmp/mgnifams_cache'),
+    }
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

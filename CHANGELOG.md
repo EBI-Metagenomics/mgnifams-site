@@ -11,6 +11,9 @@
 
 ### Performance
 
+**Configured explicit file-based cache backend** (`settings.py`)
+Django was previously using the implicit `LocMemCache` default (in-process, lost on every gunicorn worker restart). Added an explicit `FileBasedCache` configuration that persists to disk across restarts. The cache directory defaults to `/tmp/mgnifams_cache` and can be overridden with the `DJANGO_CACHE_DIR` environment variable. *(H4)*
+
 **Cache Skylign logo JSON per family to avoid blocking HTTP calls on every page load** (`views.py`)
 The `details` view previously made two sequential blocking HTTP calls to `skylign.org` (POST + GET, up to 10 s worst-case) on every visit. Results are now cached in Django's cache backend under the key `skylign_logo_json_<id>` for 1 week. On a cache hit the external calls are skipped entirely. Failed fetches (`None`) are deliberately not cached so that the next request retries. *(H1)*
 
