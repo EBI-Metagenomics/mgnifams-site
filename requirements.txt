@@ -1,5 +1,4 @@
 django==4.2.28
-django-cors-headers==4.3.1
 requests==2.32.4
 gunicorn==23.0.0
 whitenoise==6.5.0

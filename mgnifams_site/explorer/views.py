@@ -1,6 +1,4 @@
 import json
-
-# import xml.etree.ElementTree as ET
 import re
 
 import requests
@@ -419,32 +417,3 @@ def mgnifams_data(request):
             'data': data,
         }
     )
-
-
-# def send_hmmsearch_request(mgyf_id):
-#     mgnifam  = get_object_or_404(Mgnifam, id=mgyf_id)
-#     hmm_blob = mgnifam.hmm_blob
-
-#     url = "https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch"
-#     headers = {
-#         'Expect': '',
-#         'Accept': 'text/xml',
-#     }
-#     data = {
-#         'seqdb': 'pdb',
-#         'seq': hmm_blob
-#     }
-#     response = requests.post(url, headers=headers, data=data)
-
-#     return response.content
-
-# def submit_hmmsearch(request, mgyf_id):
-#     response_content = send_hmmsearch_request(mgyf_id)
-
-#     # Parse XML response to extract UUID
-#     root = ET.fromstring(response_content)
-#     uuid = root.find(".//data[@name='results']").attrib.get('uuid')
-
-#     hmmer_url = f"https://www.ebi.ac.uk/Tools/hmmer/results/{uuid}/domain"
-
-#     return redirect(hmmer_url)
