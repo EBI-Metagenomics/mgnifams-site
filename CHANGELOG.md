@@ -11,6 +11,9 @@
 
 ### Performance
 
+**Added whitenoise for static file compression and cache-busting** (`settings.py`, `requirements.txt`, `explorer/storage.py`)
+Added `whitenoise==6.5.0`. `WhiteNoiseMiddleware` is now in `MIDDLEWARE` (after `SecurityMiddleware`) so whitenoise serves static files directly from the WSGI process. `STORAGES['staticfiles']` is set to a custom `ManifestOptionalStaticFilesStorage` subclass (`explorer/storage.py`) that wraps whitenoise's `CompressedManifestStaticFilesStorage` with `manifest_strict=False` — in production after `collectstatic`, static files are served with gzip/brotli compression and content-hash cache-busting; in development and tests the manifest is optional and no error is raised. *(M3)*
+
 **Added `Cache-Control` headers to blob responses** (`views.py`)
 `serve_blob_as_file` responses now include `Cache-Control: public, max-age=86400`. The database is pre-populated and never changes, so blobs are safe to cache for 24 hours — browsers will no longer re-fetch the same MSA, HMM, CIF, and other files on every page load. *(M2)*
 
