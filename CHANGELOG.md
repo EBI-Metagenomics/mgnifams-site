@@ -11,6 +11,15 @@
 
 ### Performance
 
+**Removed unused `biopython` dependency** (`requirements.txt`)
+`biopython==1.86` was listed but never imported anywhere in the codebase. Removed to reduce container image size and install time. *(L3)*
+
+**Moved page-specific CDN resources out of `base.html`** (`base.html`, `mgnifams_list.html`, `details.html`)
+DataTables CSS/JS and jQuery were loaded on every page (including the index). PDBe Molstar CSS was loaded on every page. Added a `{% block extra_head %}` extension point to `base.html`; DataTables + jQuery now load only on `mgnifams_list.html`, and Molstar CSS only on `details.html`. The index page now loads neither. *(L2)*
+
+**Structural fold annotations sorted at database level** (`views.py`)
+Replaced `list.sort(key=lambda x: x['e_value'])` in Python with `.order_by('e_value')` on the `MgnifamFolds` queryset so the database handles ordering instead of Python. *(L1)*
+
 **Added whitenoise for static file compression and cache-busting** (`settings.py`, `requirements.txt`, `explorer/storage.py`)
 Added `whitenoise==6.5.0`. `WhiteNoiseMiddleware` is now in `MIDDLEWARE` (after `SecurityMiddleware`) so whitenoise serves static files directly from the WSGI process. `STORAGES['staticfiles']` is set to a custom `ManifestOptionalStaticFilesStorage` subclass (`explorer/storage.py`) that wraps whitenoise's `CompressedManifestStaticFilesStorage` with `manifest_strict=False` — in production after `collectstatic`, static files are served with gzip/brotli compression and content-hash cache-busting; in development and tests the manifest is optional and no error is raised. *(M3)*
 

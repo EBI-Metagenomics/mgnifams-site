@@ -1,6 +1,14 @@
 {% extends "explorer/base.html" %}
 {% load static %}
 {% load custom_filters %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+{% endblock extra_head %}
+
 {% block content %}
 <script src="{% static 'explorer/js/all_mgnifams.js' %}"></script>
 

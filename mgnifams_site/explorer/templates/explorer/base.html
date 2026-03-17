@@ -38,16 +38,7 @@
                 data-embl-js-content-hub-loader>
             {% comment %} <script src="https://assets.emblstatic.net/vf/v2.5.7/scripts/scripts.js"></script> {% endcomment %}
             {% comment %} The above commented EMBL JS, creates a bug for feature viewer, leading to an error and not showing confidence score plot {% endcomment %}
-            <!-- sortable tables -->
-            <link rel="stylesheet"
-                type="text/css"
-                href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-            <script type="text/javascript"
-                src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-            <link rel="stylesheet"
-                type="text/css"
-                href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-3.1.0.css">
+            {% block extra_head %}{% endblock extra_head %}
         {% endblock head %}
 </head>
 <body class="vf-body | vf-stack vf-stack--200">

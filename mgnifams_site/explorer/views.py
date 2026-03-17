@@ -214,7 +214,7 @@ def details(request, pk):
         pfams_model_data.append(hit)
 
     # Fetch related MgnifamFolds objects
-    mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id)
+    mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id).order_by('e_value')
     structural_annotations = []
     for mgnifam_fold in mgnifam_folds:
         link, db = generate_structure_link_and_db(mgnifam_fold.fold)
@@ -229,7 +229,6 @@ def details(request, pk):
             'e_value': mgnifam_fold.e_value,
         }
         structural_annotations.append(annotation)
-    structural_annotations.sort(key=lambda x: x['e_value'])
     for i, annotation in enumerate(structural_annotations, start=1):
         annotation['prob'] = i
 
@@ -289,7 +288,7 @@ def serve_blob_as_file(request, pk, column_name):
         raise Http404(f'Unknown blob column: {column_name}')
     mgnifam_instance = get_object_or_404(Mgnifam.objects.only(column_name), pk=pk)
     blob_data = getattr(mgnifam_instance, column_name)
-    if blob_data is None:
+    if not blob_data:
         raise Http404(f'No data for column: {column_name}')
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = 'attachment;'
