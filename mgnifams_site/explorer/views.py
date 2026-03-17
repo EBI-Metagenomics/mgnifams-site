@@ -16,7 +16,7 @@ def format_family_name(id):
 
 def index(request):
     num_mgnifams = Mgnifam.objects.count()
-    first_mgnifam = Mgnifam.objects.first()
+    first_mgnifam = Mgnifam.objects.only('id').first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
 
     context = {'num_mgnifams': num_mgnifams, 'first_id': first_id}
@@ -95,7 +95,7 @@ def generate_structure_link_and_db(part):
 def details(request, pk):
     mgyf_id = translate_mgyf_to_int_id(pk)
 
-    mgnifam = get_object_or_404(Mgnifam, id=mgyf_id)
+    mgnifam = get_object_or_404(Mgnifam.objects.defer('biome_blob', 'domain_blob', 's4pred_blob'), id=mgyf_id)
 
     full_size = mgnifam.full_size
     protein_rep = format_protein_name(str(mgnifam.protein_rep))
@@ -138,10 +138,7 @@ def details(request, pk):
             uuid = response_data['uuid'].lower()
             hmm_logo_json = fetch_skylign_logo_json(uuid)
 
-    biome_blob = decode_blob(mgnifam.biome_blob)
-    domain_blob = decode_blob(mgnifam.domain_blob)
-    s4pred_blob = decode_blob(mgnifam.s4pred_blob)
-    tm_blob = decode_blob(mgnifam.tm_blob)
+    tm_blob = mgnifam.tm_blob is not None
 
     # Fetch related MgnifamPfams objects
     mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
@@ -255,9 +252,6 @@ def details(request, pk):
             'rf': rf,
             'hmm_blob': hmm_blob,
             'hmm_logo_json': hmm_logo_json,
-            'biome_blob': biome_blob,
-            'domain_blob': domain_blob,
-            's4pred_blob': s4pred_blob,
             'tm_blob': tm_blob,
             'pfams_data': pfams_data,
             'funfams_data': funfams_data,
@@ -282,15 +276,30 @@ BLOB_COLUMNS = {
 def serve_blob_as_file(request, pk, column_name):
     if column_name not in BLOB_COLUMNS:
         raise Http404(f'Unknown blob column: {column_name}')
-    mgnifam_instance = get_object_or_404(Mgnifam, pk=pk)
+    mgnifam_instance = get_object_or_404(Mgnifam.objects.only(column_name), pk=pk)
     blob_data = getattr(mgnifam_instance, column_name)
+    if blob_data is None:
+        raise Http404(f'No data for column: {column_name}')
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = 'attachment;'
     return response
 
 
 def mgnifams_list(request):
-    mgnifams = Mgnifam.objects.all()
+    mgnifams = Mgnifam.objects.only(
+        'id',
+        'full_size',
+        'rep_length',
+        'helix_percent',
+        'strand_percent',
+        'coil_percent',
+        'inside_percent',
+        'membrane_alpha_percent',
+        'outside_percent',
+        'signal_percent',
+        'membrane_beta_percent',
+        'periplasm_percent',
+    )
     context = {
         'mgnifams': mgnifams,
     }

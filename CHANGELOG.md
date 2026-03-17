@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - 2026-03-16
+## [Unreleased] - 2026-03-17
 
 ### Added
 - `CLAUDE.md` — developer guide covering build commands, architecture, and deployment
@@ -9,7 +9,19 @@
 - `.pre-commit-config.yaml` — pre-commit hooks running `ruff` (lint + auto-fix) and `ruff-format` on every commit
 - `ruff==0.9.10` added to `requirements.txt`
 
+### Performance
+
+**Avoid loading blob columns where they are not needed** (`views.py`)
+
+- `mgnifams_list` view: replaced `Mgnifam.objects.all()` with `.only()` listing the 12 scalar columns actually rendered in the table. All 8 binary blob fields are now excluded from the list-page query. *(C1)*
+- `serve_blob_as_file` view: replaced `get_object_or_404(Mgnifam, pk=pk)` with `Mgnifam.objects.only(column_name)` so each of the 6+ per-page blob-serve requests loads only the single requested column instead of the full row. *(H2)*
+- `index` view: replaced `Mgnifam.objects.first()` (which loaded all columns including all 8 blobs) with `Mgnifam.objects.only('id').first()`. *(H3)*
+- `details` view: `biome_blob`, `domain_blob`, and `s4pred_blob` are now deferred from the main `Mgnifam` query and no longer decoded or passed to the template context, since the browser fetches them lazily via `/serve_blob/` endpoints. `tm_blob` is no longer decoded to a full string — its presence is communicated to the template as a boolean. *(H5)*
+
 ### Fixed
+
+**Bug: `serve_blob_as_file` returned empty 200 for NULL blobs** (`views.py`)
+When a blob column is `NULL` in the database, the view was returning `HttpResponse(None)` — an empty 200 response. Browser JS calling `response.json()` on the empty body raised `SyntaxError: Unexpected end of JSON input`. Now raises `Http404` instead, which the JS `response.ok` check handles gracefully.
 
 **Bug: unconditional `.decode()` on nullable blob fields** (`views.py`)
 `cif_blob`, `seed_msa_blob`, `rf_blob`, `hmm_blob`, `biome_blob`, `domain_blob`, and `s4pred_blob` were all decoded without a `None` guard, causing `AttributeError` crashes for families with missing blobs. Replaced with a `decode_blob()` helper that handles `None`, `bytes`, `memoryview`, and `str` (the real DB stores blobs as plain strings, having been populated outside the Django ORM).

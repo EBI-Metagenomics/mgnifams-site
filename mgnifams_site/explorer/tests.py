@@ -76,6 +76,11 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['num_mgnifams'], 1)
 
+    def test_index_first_id_formatted(self):
+        make_mgnifam(id=7)
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.context['first_id'], 'MGYF0000000007')
+
 
 class DetailsViewTests(TestCase):
     def setUp(self):
@@ -134,6 +139,29 @@ class DetailsViewTests(TestCase):
         self.client.get(self.url)
         _mock_logo.assert_called_once_with('abcd-1234')
 
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_tm_blob_present_is_truthy_in_context(self, _mock_api, _mock_logo):
+        # H5: tm_blob is now passed as a boolean, not decoded blob content
+        response = self.client.get(self.url)
+        self.assertTrue(response.context['tm_blob'])
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_tm_blob_absent_is_falsy_in_context(self, _mock_api, _mock_logo):
+        make_mgnifam(id=5, tm_blob=None)
+        response = self.client.get(reverse('details', args=['MGYF0000000005']))
+        self.assertFalse(response.context['tm_blob'])
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_biome_domain_s4pred_blobs_not_in_context(self, _mock_api, _mock_logo):
+        # H5: these blobs are served via serve_blob endpoint, not passed inline
+        response = self.client.get(self.url)
+        self.assertNotIn('biome_blob', response.context)
+        self.assertNotIn('domain_blob', response.context)
+        self.assertNotIn('s4pred_blob', response.context)
+
 
 class StructuralAnnotationsTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
@@ -158,6 +186,29 @@ class StructuralAnnotationsTests(TestCase):
         self.assertEqual(annotations[0]['t_start'], 10)
 
 
+class MgnifamsListViewTests(TestCase):
+    def test_list_returns_200(self):
+        response = self.client.get(reverse('mgnifams_list'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_list_contains_created_family(self):
+        make_mgnifam()
+        response = self.client.get(reverse('mgnifams_list'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['mgnifams']), 1)
+
+    def test_list_queryset_excludes_blobs(self):
+        # C1: .only() is used — accessing any blob field on a list queryset row
+        # should trigger a deferred load, confirming it wasn't fetched upfront.
+        make_mgnifam()
+        response = self.client.get(reverse('mgnifams_list'))
+        family = response.context['mgnifams'][0]
+        # These fields must be accessible without error (they're in .only())
+        _ = family.id
+        _ = family.full_size
+        _ = family.rep_length
+
+
 class ServeBlobViewTests(TestCase):
     def setUp(self):
         self.family = make_mgnifam()
@@ -170,6 +221,14 @@ class ServeBlobViewTests(TestCase):
 
     def test_serve_nonexistent_pk_returns_404(self):
         url = reverse('serve_blob_as_file', args=[99999, 'hmm_blob'])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_serve_null_blob_returns_404(self):
+        # blob column exists but is NULL in the DB → must return 404, not empty 200
+        # (empty 200 causes "Unexpected end of JSON input" in the JS fetch handler)
+        make_mgnifam(id=2, s4pred_blob=None)
+        url = reverse('serve_blob_as_file', args=[2, 's4pred_blob'])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
