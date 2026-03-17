@@ -11,6 +11,9 @@
 
 ### Performance
 
+**Cache Skylign logo JSON per family to avoid blocking HTTP calls on every page load** (`views.py`)
+The `details` view previously made two sequential blocking HTTP calls to `skylign.org` (POST + GET, up to 10 s worst-case) on every visit. Results are now cached in Django's cache backend under the key `skylign_logo_json_<id>` for 1 week. On a cache hit the external calls are skipped entirely. Failed fetches (`None`) are deliberately not cached so that the next request retries. *(H1)*
+
 **Avoid loading blob columns where they are not needed** (`views.py`)
 
 - `mgnifams_list` view: now just renders the template — data is fetched by DataTables via the new `mgnifams_data` AJAX endpoint. *(C2)*

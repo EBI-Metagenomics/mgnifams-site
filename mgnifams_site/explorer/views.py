@@ -4,6 +4,7 @@ import json
 import re
 
 import requests
+from django.core.cache import cache
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -40,6 +41,9 @@ def format_protein_name(raw_name):
     """
     formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
     return 'MGYP' + formatted_name
+
+
+SKYLIGN_CACHE_TIMEOUT = 7 * 24 * 3600  # 1 week — DB is static so results never change
 
 
 def call_skylign_api(blob_data):
@@ -134,10 +138,16 @@ def details(request, pk):
 
     hmm_logo_json = 'null'
     if hmm_blob:
-        response_data = call_skylign_api(hmm_blob)
-        if response_data and 'uuid' in response_data:
-            uuid = response_data['uuid'].lower()
-            hmm_logo_json = fetch_skylign_logo_json(uuid)
+        _cache_key = f'skylign_logo_json_{mgyf_id}'
+        hmm_logo_json = cache.get(_cache_key) or 'null'
+        if hmm_logo_json == 'null':
+            response_data = call_skylign_api(hmm_blob)
+            if response_data and 'uuid' in response_data:
+                uuid = response_data['uuid'].lower()
+                fetched = fetch_skylign_logo_json(uuid)
+                if fetched is not None:
+                    cache.set(_cache_key, fetched, SKYLIGN_CACHE_TIMEOUT)
+                    hmm_logo_json = fetched
 
     tm_blob = mgnifam.tm_blob is not None
 

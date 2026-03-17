@@ -1,5 +1,6 @@
 from unittest.mock import patch
 
+from django.core.cache import cache
 from django.http import Http404
 from django.test import TestCase
 from django.urls import reverse
@@ -86,6 +87,7 @@ class DetailsViewTests(TestCase):
     def setUp(self):
         self.family = make_mgnifam()
         self.url = reverse('details', args=['MGYF0000000001'])
+        cache.clear()
 
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
@@ -138,6 +140,25 @@ class DetailsViewTests(TestCase):
     def test_skylign_uuid_lowercased(self, _mock_api, _mock_logo):
         self.client.get(self.url)
         _mock_logo.assert_called_once_with('abcd-1234')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value='"logo_json"')
+    @patch(SKYLIGN_PATCH, return_value={'uuid': 'ABCD-1234'})
+    def test_skylign_result_cached_on_second_request(self, mock_api, mock_logo):
+        # H1: Skylign should only be called once; second request hits cache
+        self.client.get(self.url)
+        self.client.get(self.url)
+        mock_api.assert_called_once()
+        mock_logo.assert_called_once()
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value={'uuid': 'ABCD-1234'})
+    def test_failed_skylign_fetch_not_cached(self, mock_api, mock_logo):
+        # H1: if logo fetch fails (None), result must not be cached so next
+        # request retries instead of serving a stale null forever
+        self.client.get(self.url)
+        self.client.get(self.url)
+        self.assertEqual(mock_api.call_count, 2)
+        self.assertEqual(mock_logo.call_count, 2)
 
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
