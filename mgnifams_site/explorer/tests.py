@@ -191,22 +191,97 @@ class MgnifamsListViewTests(TestCase):
         response = self.client.get(reverse('mgnifams_list'))
         self.assertEqual(response.status_code, 200)
 
-    def test_list_contains_created_family(self):
-        make_mgnifam()
+    def test_list_context_has_data_url(self):
+        # C2: list view no longer passes a queryset; data comes via AJAX endpoint
         response = self.client.get(reverse('mgnifams_list'))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['mgnifams']), 1)
+        self.assertIn('mgnifams_data_url', response.context)
+        self.assertNotIn('mgnifams', response.context)
 
-    def test_list_queryset_excludes_blobs(self):
-        # C1: .only() is used — accessing any blob field on a list queryset row
-        # should trigger a deferred load, confirming it wasn't fetched upfront.
-        make_mgnifam()
+    def test_details_url_prefix_has_no_double_slash(self):
         response = self.client.get(reverse('mgnifams_list'))
-        family = response.context['mgnifams'][0]
-        # These fields must be accessible without error (they're in .only())
-        _ = family.id
-        _ = family.full_size
-        _ = family.rep_length
+        prefix = response.context['details_url_prefix']
+        self.assertNotIn('//', prefix)
+        self.assertTrue(prefix.endswith('/'))
+
+
+class MgnifamsDataViewTests(TestCase):
+    def setUp(self):
+        self.url = reverse('mgnifams_data')
+        make_mgnifam(id=1, full_size=100, rep_length=80, helix_percent=30.0)
+        make_mgnifam(id=2, full_size=200, rep_length=160, helix_percent=60.0)
+
+    def _get(self, **params):
+        defaults = {
+            'draw': 1,
+            'start': 0,
+            'length': 50,
+            'order[0][column]': 0,
+            'order[0][dir]': 'asc',
+            'search[value]': '',
+        }
+        defaults.update(params)
+        return self.client.get(self.url, defaults)
+
+    def test_returns_valid_json_structure(self):
+        r = self._get()
+        self.assertEqual(r.status_code, 200)
+        data = r.json()
+        self.assertIn('draw', data)
+        self.assertIn('recordsTotal', data)
+        self.assertIn('recordsFiltered', data)
+        self.assertIn('data', data)
+
+    def test_records_total_matches_db(self):
+        r = self._get()
+        self.assertEqual(r.json()['recordsTotal'], 2)
+
+    def test_pagination_length(self):
+        r = self._get(length=1)
+        self.assertEqual(len(r.json()['data']), 1)
+
+    def test_pagination_start(self):
+        # With start=1, length=1 we get the second record (sorted by id asc)
+        r = self._get(start=1, length=1, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
+        self.assertEqual(r.json()['data'][0][0], 'MGYF0000000002')
+
+    def test_sort_desc(self):
+        r = self._get(**{'order[0][column]': 0, 'order[0][dir]': 'desc'})
+        rows = r.json()['data']
+        self.assertEqual(rows[0][0], 'MGYF0000000002')
+        self.assertEqual(rows[1][0], 'MGYF0000000001')
+
+    def test_range_filter_excludes_rows(self):
+        # full_size_min=150 should exclude id=1 (full_size=100)
+        r = self._get(full_size_min=150)
+        data = r.json()
+        self.assertEqual(data['recordsFiltered'], 1)
+        self.assertEqual(data['data'][0][0], 'MGYF0000000002')
+
+    def test_search_by_mgyf_id(self):
+        r = self._get(**{'search[value]': 'MGYF0000000001'})
+        data = r.json()
+        self.assertEqual(data['recordsFiltered'], 1)
+        self.assertEqual(data['data'][0][0], 'MGYF0000000001')
+
+    def test_search_by_numeric_id(self):
+        r = self._get(**{'search[value]': '2'})
+        data = r.json()
+        self.assertEqual(data['recordsFiltered'], 1)
+        self.assertEqual(data['data'][0][0], 'MGYF0000000002')
+
+    def test_search_nonexistent_returns_empty(self):
+        r = self._get(**{'search[value]': 'MGYF9999999999'})
+        data = r.json()
+        self.assertEqual(data['recordsFiltered'], 0)
+        self.assertEqual(data['data'], [])
+
+    def test_draw_echoed_back(self):
+        r = self._get(draw=42)
+        self.assertEqual(r.json()['draw'], 42)
+
+    def test_invalid_params_returns_400(self):
+        r = self.client.get(self.url, {'draw': 'bad', 'start': 'x'})
+        self.assertEqual(r.status_code, 400)
 
 
 class ServeBlobViewTests(TestCase):

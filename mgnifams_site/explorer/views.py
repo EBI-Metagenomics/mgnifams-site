@@ -4,8 +4,9 @@ import json
 import re
 
 import requests
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
 from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
 
@@ -285,25 +286,129 @@ def serve_blob_as_file(request, pk, column_name):
     return response
 
 
+_LIST_FIELDS = [
+    'id',
+    'full_size',
+    'rep_length',
+    'helix_percent',
+    'strand_percent',
+    'coil_percent',
+    'inside_percent',
+    'membrane_alpha_percent',
+    'outside_percent',
+    'signal_percent',
+    'membrane_beta_percent',
+    'periplasm_percent',
+]
+
+_FILTER_MAP = {
+    'full_size_min': 'full_size__gte',
+    'full_size_max': 'full_size__lte',
+    'rep_length_min': 'rep_length__gte',
+    'rep_length_max': 'rep_length__lte',
+    'helix_min': 'helix_percent__gte',
+    'helix_max': 'helix_percent__lte',
+    'strand_min': 'strand_percent__gte',
+    'strand_max': 'strand_percent__lte',
+    'coil_min': 'coil_percent__gte',
+    'coil_max': 'coil_percent__lte',
+    'inside_min': 'inside_percent__gte',
+    'inside_max': 'inside_percent__lte',
+    'membrane_alpha_min': 'membrane_alpha_percent__gte',
+    'membrane_alpha_max': 'membrane_alpha_percent__lte',
+    'outside_min': 'outside_percent__gte',
+    'outside_max': 'outside_percent__lte',
+    'signal_min': 'signal_percent__gte',
+    'signal_max': 'signal_percent__lte',
+    'membrane_beta_min': 'membrane_beta_percent__gte',
+    'membrane_beta_max': 'membrane_beta_percent__lte',
+    'periplasm_min': 'periplasm_percent__gte',
+    'periplasm_max': 'periplasm_percent__lte',
+}
+
+
 def mgnifams_list(request):
-    mgnifams = Mgnifam.objects.only(
-        'id',
-        'full_size',
-        'rep_length',
-        'helix_percent',
-        'strand_percent',
-        'coil_percent',
-        'inside_percent',
-        'membrane_alpha_percent',
-        'outside_percent',
-        'signal_percent',
-        'membrane_beta_percent',
-        'periplasm_percent',
+    return render(
+        request,
+        'explorer/mgnifams_list.html',
+        {
+            'mgnifams_data_url': reverse('mgnifams_data'),
+            'details_url_prefix': reverse('details', args=['MGYF0000000001']).replace('MGYF0000000001/', ''),
+        },
     )
-    context = {
-        'mgnifams': mgnifams,
-    }
-    return render(request, 'explorer/mgnifams_list.html', context)
+
+
+def mgnifams_data(request):
+    try:
+        draw = int(request.GET.get('draw', 1))
+        start = int(request.GET.get('start', 0))
+        length = int(request.GET.get('length', 50))
+        order_col = int(request.GET.get('order[0][column]', 0))
+    except (ValueError, TypeError):
+        return JsonResponse({'error': 'Invalid parameters'}, status=400)
+
+    order_dir = request.GET.get('order[0][dir]', 'asc')
+    search_value = request.GET.get('search[value]', '').strip()
+
+    sort_field = _LIST_FIELDS[order_col] if 0 <= order_col < len(_LIST_FIELDS) else 'id'
+    if order_dir == 'desc':
+        sort_field = '-' + sort_field
+
+    qs = Mgnifam.objects.only(*_LIST_FIELDS)
+    records_total = qs.count()
+
+    # Apply range filters
+    active_filters = {}
+    for param, lookup in _FILTER_MAP.items():
+        val = request.GET.get(param, '').strip()
+        if val:
+            try:
+                active_filters[lookup] = float(val)
+            except ValueError:
+                pass
+    if active_filters:
+        qs = qs.filter(**active_filters)
+
+    # Global search by family ID
+    if search_value:
+        try:
+            if search_value.upper().startswith('MGYF'):
+                search_id = translate_mgyf_to_int_id(search_value)
+            else:
+                search_id = int(search_value)
+            qs = qs.filter(id=search_id)
+        except (ValueError, Http404):
+            qs = qs.none()
+
+    records_filtered = qs.count()
+
+    rows = qs.order_by(sort_field)[start : start + length]
+    data = [
+        [
+            format_family_name(m.id),
+            m.full_size,
+            m.rep_length,
+            m.helix_percent,
+            m.strand_percent,
+            m.coil_percent,
+            m.inside_percent,
+            m.membrane_alpha_percent,
+            m.outside_percent,
+            m.signal_percent,
+            m.membrane_beta_percent,
+            m.periplasm_percent,
+        ]
+        for m in rows
+    ]
+
+    return JsonResponse(
+        {
+            'draw': draw,
+            'recordsTotal': records_total,
+            'recordsFiltered': records_filtered,
+            'data': data,
+        }
+    )
 
 
 # def send_hmmsearch_request(mgyf_id):

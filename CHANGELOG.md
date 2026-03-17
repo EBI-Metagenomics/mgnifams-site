@@ -13,7 +13,10 @@
 
 **Avoid loading blob columns where they are not needed** (`views.py`)
 
-- `mgnifams_list` view: replaced `Mgnifam.objects.all()` with `.only()` listing the 12 scalar columns actually rendered in the table. All 8 binary blob fields are now excluded from the list-page query. *(C1)*
+- `mgnifams_list` view: now just renders the template — data is fetched by DataTables via the new `mgnifams_data` AJAX endpoint. *(C2)*
+- `mgnifams_data` endpoint (`GET /mgnifams_data/`): new JSON view supporting DataTables server-side mode. Accepts `draw`, `start`, `length`, `order[0][column]`, `order[0][dir]`, `search[value]`, and range-filter params for all 10 numeric columns. Issues a single `SELECT … LIMIT … OFFSET` query instead of loading the whole table. *(C2)*
+- `all_mgnifams.js`: switched DataTables to `serverSide: true`; filter inputs are forwarded as extra AJAX params so the server applies them via ORM range lookups. *(C2)*
+- `mgnifams_list` view (previously): replaced `Mgnifam.objects.all()` with `.only()` listing the 12 scalar columns actually rendered in the table. All 8 binary blob fields are now excluded from the list-page query. *(C1)*
 - `serve_blob_as_file` view: replaced `get_object_or_404(Mgnifam, pk=pk)` with `Mgnifam.objects.only(column_name)` so each of the 6+ per-page blob-serve requests loads only the single requested column instead of the full row. *(H2)*
 - `index` view: replaced `Mgnifam.objects.first()` (which loaded all columns including all 8 blobs) with `Mgnifam.objects.only('id').first()`. *(H3)*
 - `details` view: `biome_blob`, `domain_blob`, and `s4pred_blob` are now deferred from the main `Mgnifam` query and no longer decoded or passed to the template context, since the browser fetches them lazily via `/serve_blob/` endpoints. `tm_blob` is no longer decoded to a full string — its presence is communicated to the template as a boolean. *(H5)*
