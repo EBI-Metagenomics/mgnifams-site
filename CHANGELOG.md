@@ -11,6 +11,9 @@
 
 ### Performance
 
+**`DEBUG` now reads from environment variable** (`settings.py`, `CLAUDE.md`)
+`DEBUG = True` was hardcoded, causing Django to accumulate every SQL query in memory and disable template caching in all environments. Changed to `DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'`. Defaults to `True` so local development is unaffected; production must set `DJANGO_DEBUG=False`. Updated `CLAUDE.md` dev server command and production env vars list accordingly. *(M1)*
+
 **Configured explicit file-based cache backend** (`settings.py`)
 Django was previously using the implicit `LocMemCache` default (in-process, lost on every gunicorn worker restart). Added an explicit `FileBasedCache` configuration that persists to disk across restarts. The cache directory defaults to `/tmp/mgnifams_cache` and can be overridden with the `DJANGO_CACHE_DIR` environment variable. *(H4)*
 

@@ -14,7 +14,7 @@ All Django management commands run from `mgnifams_site/`:
 cd mgnifams_site
 
 # Run development server
-python manage.py runserver 8000
+DJANGO_DEBUG=True python manage.py runserver 8000
 
 # Apply database migrations
 python manage.py migrate
@@ -52,6 +52,8 @@ docker run -p 8000:8000 mgnifams_site:latest
 **Environment variables required for production:**
 - `DJANGO_SECRET_KEY` — Django secret key
 - `ALLOWED_HOST` — Allowed host (e.g., `mgnifams-demo.mgnify.org`)
+- `DJANGO_DEBUG` — Set to `False` in production (defaults to `True` if unset)
+- `DJANGO_CACHE_DIR` — Writable path for the file-based cache (defaults to `/tmp/mgnifams_cache`)
 
 ## Architecture
 
