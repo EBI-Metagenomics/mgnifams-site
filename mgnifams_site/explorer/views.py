@@ -9,12 +9,9 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+from explorer.utils import format_family_name
 
 logger = logging.getLogger(__name__)
-
-
-def format_family_name(id):
-    return 'MGYF' + str(id).zfill(10)
 
 
 def index(request):
