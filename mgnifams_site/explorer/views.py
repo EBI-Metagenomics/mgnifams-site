@@ -70,7 +70,7 @@ def fetch_skylign_logo_json(uuid):
         if response.status_code == 200:
             return json.dumps(response.json())
     except requests.exceptions.RequestException as e:
-        print(f'⚠️ Skylign logo fetch error: {e}')
+        logger.warning('Skylign logo fetch error: %s', e)
     return None
 
 
@@ -95,176 +95,154 @@ def generate_structure_link_and_db(part):
         return part, ''
 
 
+def _get_hmm_logo_json(mgyf_id, hmm_blob):
+    if not hmm_blob:
+        return 'null'
+    cache_key = f'skylign_logo_json_{mgyf_id}'
+    cached = cache.get(cache_key)
+    if cached is not None:
+        return cached
+    response_data = call_skylign_api(hmm_blob)
+    if response_data and 'uuid' in response_data:
+        uuid = response_data['uuid'].lower()
+        fetched = fetch_skylign_logo_json(uuid)
+        if fetched is not None:
+            cache.set(cache_key, fetched, SKYLIGN_CACHE_TIMEOUT)
+            return fetched
+    return 'null'
+
+
+def _get_pfams_data(mgyf_id):
+    return [
+        {
+            'pfam': p.pfam,
+            'name': p.name,
+            'e_value': p.e_value,
+            'score': p.score,
+            'hmm_from': p.hmm_from,
+            'hmm_to': p.hmm_to,
+            'ali_from': p.ali_from,
+            'ali_to': p.ali_to,
+            'env_from': p.env_from,
+            'env_to': p.env_to,
+            'acc': p.acc,
+        }
+        for p in MgnifamPfams.objects.filter(mgnifam=mgyf_id)
+    ]
+
+
+def _get_funfams_data(mgyf_id):
+    results = []
+    for f in MgnifamFunfams.objects.filter(mgnifam=mgyf_id):
+        try:
+            superfamily, ff_part = f.funfam.split('-FF-')
+            funfam_number = str(int(ff_part))  # e.g., '000002' → 2
+            funfam_url = f'http://cathdb.info/version/4_3_0/superfamily/{superfamily}/funfam/{funfam_number}'
+        except ValueError:
+            funfam_url = '#'
+        results.append(
+            {
+                'funfam': f.funfam,
+                'funfam_url': funfam_url,
+                'e_value': f.e_value,
+                'score': f.score,
+                'hmm_from': f.hmm_from,
+                'hmm_to': f.hmm_to,
+                'ali_from': f.ali_from,
+                'ali_to': f.ali_to,
+                'env_from': f.env_from,
+                'env_to': f.env_to,
+                'acc': f.acc,
+            }
+        )
+    return results
+
+
+def _get_model_pfams_data(mgyf_id):
+    return [
+        {
+            'pfam': p.pfam,
+            'name': p.name,
+            'description': p.description,
+            'prob': p.prob,
+            'e_value': p.e_value,
+            'length': p.length,
+            'query_hmm': p.query_hmm,
+            'template_hmm': p.template_hmm,
+        }
+        for p in MgnifamModelPfams.objects.filter(mgnifam=mgyf_id)
+    ]
+
+
+def _get_structural_annotations(mgyf_id):
+    annotations = []
+    for i, fold in enumerate(MgnifamFolds.objects.filter(mgnifam=mgyf_id).order_by('e_value'), start=1):
+        link, db = generate_structure_link_and_db(fold.fold)
+        annotations.append(
+            {
+                'prob': i,
+                'target_structure_identifier': link,
+                'target_structure_db': db,
+                'aligned_length': fold.aligned_length,
+                'q_start': fold.q_start,
+                'q_end': fold.q_end,
+                't_start': fold.t_start,
+                't_end': fold.t_end,
+                'e_value': fold.e_value,
+            }
+        )
+    return annotations
+
+
 def details(request, pk):
     mgyf_id = translate_mgyf_to_int_id(pk)
-
     mgnifam = get_object_or_404(Mgnifam.objects.defer('biome_blob', 'domain_blob', 's4pred_blob'), id=mgyf_id)
 
-    full_size = mgnifam.full_size
-    protein_rep = format_protein_name(str(mgnifam.protein_rep))
     region = mgnifam.rep_region
-    region_start = ''
-    region_end = ''
+    region_start, region_end = ('', '')
     if region != '-':
-        region_parts = region.split('-')
-        region_start = region_parts[0]
-        region_end = region_parts[1]
-    rep_length = mgnifam.rep_length
-    converged = mgnifam.converged
-
-    plddt = mgnifam.plddt
-    ptm = mgnifam.ptm
-
-    helix_percent = mgnifam.helix_percent
-    strand_percent = mgnifam.strand_percent
-    coil_percent = mgnifam.coil_percent
-
-    inside_percent = mgnifam.inside_percent
-    membrane_alpha_percent = mgnifam.membrane_alpha_percent
-    outside_percent = mgnifam.outside_percent
-    signal_percent = mgnifam.signal_percent
-    membrane_beta_percent = mgnifam.membrane_beta_percent
-    periplasm_percent = mgnifam.periplasm_percent
-
-    rep_sequence = mgnifam.rep_sequence
-    consensus = mgnifam.consensus
+        region_start, region_end = region.split('-')
 
     cif_blob = decode_blob(mgnifam.cif_blob)
     seed_msa_blob = decode_blob(mgnifam.seed_msa_blob)
     rf = decode_blob(mgnifam.rf_blob)
     hmm_blob = decode_blob(mgnifam.hmm_blob)
 
-    hmm_logo_json = 'null'
-    if hmm_blob:
-        _cache_key = f'skylign_logo_json_{mgyf_id}'
-        hmm_logo_json = cache.get(_cache_key) or 'null'
-        if hmm_logo_json == 'null':
-            response_data = call_skylign_api(hmm_blob)
-            if response_data and 'uuid' in response_data:
-                uuid = response_data['uuid'].lower()
-                fetched = fetch_skylign_logo_json(uuid)
-                if fetched is not None:
-                    cache.set(_cache_key, fetched, SKYLIGN_CACHE_TIMEOUT)
-                    hmm_logo_json = fetched
-
-    tm_blob = mgnifam.tm_blob is not None
-
-    # Fetch related MgnifamPfams objects
-    mgnifam_pfams = MgnifamPfams.objects.filter(mgnifam=mgyf_id)
-    pfams_data = []
-    for mgnifam_pfam in mgnifam_pfams:
-        hit = {
-            'pfam': mgnifam_pfam.pfam,
-            'name': mgnifam_pfam.name,
-            'e_value': mgnifam_pfam.e_value,
-            'score': mgnifam_pfam.score,
-            'hmm_from': mgnifam_pfam.hmm_from,
-            'hmm_to': mgnifam_pfam.hmm_to,
-            'ali_from': mgnifam_pfam.ali_from,
-            'ali_to': mgnifam_pfam.ali_to,
-            'env_from': mgnifam_pfam.env_from,
-            'env_to': mgnifam_pfam.env_to,
-            'acc': mgnifam_pfam.acc,
-        }
-        pfams_data.append(hit)
-
-    # Fetch related MgnifamFunfams objects
-    mgnifam_funfams = MgnifamFunfams.objects.filter(mgnifam=mgyf_id)
-    funfams_data = []
-    for mgnifam_funfam in mgnifam_funfams:
-        try:
-            superfamily, ff_part = mgnifam_funfam.funfam.split('-FF-')
-            funfam_number = str(int(ff_part))  # e.g., '000002' → 2
-            funfam_url = f'http://cathdb.info/version/4_3_0/superfamily/{superfamily}/funfam/{funfam_number}'
-        except ValueError:
-            superfamily = None
-            funfam_number = None
-            funfam_url = '#'
-        hit = {
-            'funfam': mgnifam_funfam.funfam,
-            'funfam_url': funfam_url,
-            'e_value': mgnifam_funfam.e_value,
-            'score': mgnifam_funfam.score,
-            'hmm_from': mgnifam_funfam.hmm_from,
-            'hmm_to': mgnifam_funfam.hmm_to,
-            'ali_from': mgnifam_funfam.ali_from,
-            'ali_to': mgnifam_funfam.ali_to,
-            'env_from': mgnifam_funfam.env_from,
-            'env_to': mgnifam_funfam.env_to,
-            'acc': mgnifam_funfam.acc,
-        }
-        funfams_data.append(hit)
-
-    # Fetch related MgnifamModelPfams objects
-    mgnifam_model_pfams = MgnifamModelPfams.objects.filter(mgnifam=mgyf_id)
-    pfams_model_data = []
-    for mgnifam_model_pfam in mgnifam_model_pfams:
-        hit = {
-            'pfam': mgnifam_model_pfam.pfam,
-            'name': mgnifam_model_pfam.name,
-            'description': mgnifam_model_pfam.description,
-            'prob': mgnifam_model_pfam.prob,
-            'e_value': mgnifam_model_pfam.e_value,
-            'length': mgnifam_model_pfam.length,
-            'query_hmm': mgnifam_model_pfam.query_hmm,
-            'template_hmm': mgnifam_model_pfam.template_hmm,
-        }
-        pfams_model_data.append(hit)
-
-    # Fetch related MgnifamFolds objects
-    mgnifam_folds = MgnifamFolds.objects.filter(mgnifam=mgyf_id).order_by('e_value')
-    structural_annotations = []
-    for mgnifam_fold in mgnifam_folds:
-        link, db = generate_structure_link_and_db(mgnifam_fold.fold)
-        annotation = {
-            'target_structure_identifier': link,
-            'target_structure_db': db,
-            'aligned_length': mgnifam_fold.aligned_length,
-            'q_start': mgnifam_fold.q_start,
-            'q_end': mgnifam_fold.q_end,
-            't_start': mgnifam_fold.t_start,
-            't_end': mgnifam_fold.t_end,
-            'e_value': mgnifam_fold.e_value,
-        }
-        structural_annotations.append(annotation)
-    for i, annotation in enumerate(structural_annotations, start=1):
-        annotation['prob'] = i
-
     return render(
         request,
         'explorer/details.html',
         {
             'mgyf_id': mgyf_id,
-            'full_size': full_size,
-            'protein_rep': protein_rep,
+            'full_size': mgnifam.full_size,
+            'protein_rep': format_protein_name(str(mgnifam.protein_rep)),
             'region_start': region_start,
             'region_end': region_end,
-            'rep_length': rep_length,
-            'rep_sequence': rep_sequence,
-            'consensus': consensus,
-            'plddt': plddt,
-            'ptm': ptm,
-            'helix_percent': helix_percent,
-            'strand_percent': strand_percent,
-            'coil_percent': coil_percent,
-            'inside_percent': inside_percent,
-            'membrane_alpha_percent': membrane_alpha_percent,
-            'outside_percent': outside_percent,
-            'signal_percent': signal_percent,
-            'membrane_beta_percent': membrane_beta_percent,
-            'periplasm_percent': periplasm_percent,
-            'membrane_total': membrane_alpha_percent + membrane_beta_percent,
-            'converged': converged,
+            'rep_length': mgnifam.rep_length,
+            'rep_sequence': mgnifam.rep_sequence,
+            'consensus': mgnifam.consensus,
+            'plddt': mgnifam.plddt,
+            'ptm': mgnifam.ptm,
+            'helix_percent': mgnifam.helix_percent,
+            'strand_percent': mgnifam.strand_percent,
+            'coil_percent': mgnifam.coil_percent,
+            'inside_percent': mgnifam.inside_percent,
+            'membrane_alpha_percent': mgnifam.membrane_alpha_percent,
+            'outside_percent': mgnifam.outside_percent,
+            'signal_percent': mgnifam.signal_percent,
+            'membrane_beta_percent': mgnifam.membrane_beta_percent,
+            'periplasm_percent': mgnifam.periplasm_percent,
+            'membrane_total': mgnifam.membrane_alpha_percent + mgnifam.membrane_beta_percent,
+            'converged': mgnifam.converged,
             'cif_blob': cif_blob,
             'seed_msa_blob': seed_msa_blob,
             'rf': rf,
             'hmm_blob': hmm_blob,
-            'hmm_logo_json': hmm_logo_json,
-            'tm_blob': tm_blob,
-            'pfams_data': pfams_data,
-            'funfams_data': funfams_data,
-            'pfams_model_data': pfams_model_data,
-            'structural_annotations': structural_annotations,
+            'hmm_logo_json': _get_hmm_logo_json(mgyf_id, hmm_blob),
+            'tm_blob': mgnifam.tm_blob is not None,
+            'pfams_data': _get_pfams_data(mgyf_id),
+            'funfams_data': _get_funfams_data(mgyf_id),
+            'pfams_model_data': _get_model_pfams_data(mgyf_id),
+            'structural_annotations': _get_structural_annotations(mgyf_id),
         },
     )
 
