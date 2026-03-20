@@ -1,4 +1,5 @@
 import json
+import logging
 import re
 
 import requests
@@ -8,6 +9,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+
+logger = logging.getLogger(__name__)
 
 
 def format_family_name(id):
@@ -55,10 +58,10 @@ def call_skylign_api(blob_data):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.Timeout:
-        print('⚠️ Skylign request timed out')
+        logger.warning('Skylign request timed out')
         return None
     except requests.exceptions.RequestException as e:
-        print(f'⚠️ Skylign error: {e}')
+        logger.warning('Skylign error: %s', e)
         return None
 
 
