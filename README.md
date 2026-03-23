@@ -1,11 +1,19 @@
 # mgnifams-site
 
 ## Dev setup
+
+Requires **Python 3.12+**.
+
 ```bash
 pip install -r requirements.txt
 python manage.py migrate
-python manage.py collectstatic
-python manage.py runserver 8000
+DJANGO_SECRET_KEY=any-local-secret python manage.py collectstatic --noinput
+DJANGO_SECRET_KEY=any-local-secret python manage.py runserver 8000
+```
+
+Run tests:
+```bash
+DJANGO_SECRET_KEY=test-secret-key python manage.py test
 ```
 
 # Deployment to EBI WebProd Kubernetes
