@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Mgnifam(models.Model):
     id = models.IntegerField(primary_key=True)
     full_size = models.IntegerField()
@@ -31,7 +32,7 @@ class Mgnifam(models.Model):
     tm_blob = models.BinaryField(null=True, default=None)
 
     def __str__(self):
-        return f"Mgnifam ID: {self.id}"
+        return f'Mgnifam ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam'
@@ -39,7 +40,7 @@ class Mgnifam(models.Model):
 
 class MgnifamPfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='pfams')
     pfam = models.TextField()
     name = models.TextField()
     e_value = models.FloatField()
@@ -53,7 +54,7 @@ class MgnifamPfams(models.Model):
     acc = models.FloatField()
 
     def __str__(self):
-        return f"MgnifamPfams ID: {self.id}"
+        return f'MgnifamPfams ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_pfams'
@@ -61,7 +62,7 @@ class MgnifamPfams(models.Model):
 
 class MgnifamFunfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='funfams')
     funfam = models.TextField()
     e_value = models.FloatField()
     score = models.FloatField()
@@ -74,7 +75,7 @@ class MgnifamFunfams(models.Model):
     acc = models.FloatField()
 
     def __str__(self):
-        return f"MgnifamFunfams ID: {self.id}"
+        return f'MgnifamFunfams ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_funfams'
@@ -82,7 +83,7 @@ class MgnifamFunfams(models.Model):
 
 class MgnifamFolds(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='folds')
     fold = models.TextField()
     aligned_length = models.IntegerField()
     q_start = models.IntegerField()
@@ -92,7 +93,7 @@ class MgnifamFolds(models.Model):
     e_value = models.FloatField()
 
     def __str__(self):
-        return f"MgnifamFolds ID: {self.id}"
+        return f'MgnifamFolds ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_folds'
@@ -100,7 +101,7 @@ class MgnifamFolds(models.Model):
 
 class MgnifamModelPfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='model_pfams')
     pfam = models.CharField(max_length=16)
     name = models.TextField()
     description = models.TextField()
@@ -111,7 +112,7 @@ class MgnifamModelPfams(models.Model):
     template_hmm = models.TextField()
 
     def __str__(self):
-        return f"MgnifamModelPfams ID: {self.id}"
+        return f'MgnifamModelPfams ID: {self.id}'
 
     class Meta:
         db_table = 'mgnifam_model_pfams'

@@ -1,6 +1,14 @@
 {% extends "explorer/base.html" %}
 {% load static %}
 {% load custom_filters %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+{% endblock extra_head %}
+
 {% block content %}
 <script src="{% static 'explorer/js/all_mgnifams.js' %}"></script>
 
@@ -63,7 +71,7 @@
             </div>
             <div class="filter-row">
                 <span>Signal:</span>
-                <input type="number" id="signal_min" min="0" max="100"placeholder="0">
+                <input type="number" id="signal_min" min="0" max="100" placeholder="0">
                 <input type="number" id="signal_max" min="0" max="100" placeholder="100">
             </div>
             <div class="filter-row">
@@ -84,7 +92,10 @@
     <h2>Available MGnifams</h2>
     <article class="vf-card vf-card--brand vf-card--bordered vf-stack--600">
         <div class="vf-card__content mgnifams-table-container | vf-stack vf-stack--600">
-            <table id="mgnifams-table" class="vf-table mgnifams-table .vf-u-margin__bottom--600">
+            <table id="mgnifams-table"
+                   data-url="{{ mgnifams_data_url }}"
+                   data-details-prefix="{{ details_url_prefix }}"
+                   class="vf-table mgnifams-table .vf-u-margin__bottom--600">
                 <thead class="vf-table__header">
                     <tr class="vf-table__row">
                         <th class="vf-table__heading" scope="col">ID</th>
@@ -101,64 +112,7 @@
                         <th class="vf-table__heading" scope="col">Periplasm%</th>
                     </tr>
                 </thead>
-                <tbody class="vf-table__body">
-                    {% for mgnifam in mgnifams %}
-                    <tr class="vf-table__row mgnifam-item">
-                        <td class="vf-table__cell">
-                            <a href="{% url 'details' mgnifam.id|format_mgnifam_name %}">
-                                {{ mgnifam.id|format_mgnifam_name }}
-                            </a>
-                        </td>
-                        <td class="vf-table__cell">{{ mgnifam.full_size }}</td>
-                        <td class="vf-table__cell">{{ mgnifam.rep_length }}</td>
-                        <td class="vf-table__cell">{{ mgnifam.helix_percent }}</td>
-                        <td class="vf-table__cell">{{ mgnifam.strand_percent }}</td>
-                        <td class="vf-table__cell">{{ mgnifam.coil_percent }}</td>
-                        <td class="vf-table__cell">
-                            {% if mgnifam.inside_percent != "" %}
-                                {{ mgnifam.inside_percent }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td class="vf-table__cell">
-                            {% if mgnifam.membrane_alpha_percent != "" %}
-                                {{ mgnifam.membrane_alpha_percent }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td class="vf-table__cell">
-                            {% if mgnifam.outside_percent != "" %}
-                                {{ mgnifam.outside_percent }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td class="vf-table__cell">
-                            {% if mgnifam.signal_percent != "" %}
-                                {{ mgnifam.signal_percent }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td class="vf-table__cell">
-                            {% if mgnifam.membrane_beta_percent != "" %}
-                                {{ mgnifam.membrane_beta_percent }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                        <td class="vf-table__cell">
-                            {% if mgnifam.periplasm_percent != "" %}
-                                {{ mgnifam.periplasm_percent }}
-                            {% else %}
-                                -
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                <tbody class="vf-table__body"></tbody>
             </table>
         </div>
     </article>

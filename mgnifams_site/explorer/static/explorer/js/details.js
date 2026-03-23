@@ -161,7 +161,7 @@ const link_hmm_to_msa = () => {
                         const divElement = document.getElementById('col_info');
                         const pElement = divElement.querySelector('p:first-of-type');
                         let clicked_col = extract_hmm_column(pElement.textContent);
-                        let msa_pos = translate_to_msa_pos(rf, clicked_col);
+                        let msa_pos = translate_to_msa_pos(document.getElementById('logo').dataset.rf, clicked_col);
                         let elements = document.getElementsByClassName('msa-col-header');
                         elements[msa_pos].click();
                     }
@@ -175,7 +175,7 @@ const link_hmm_to_msa = () => {
 };
 
 const loadHMMData = () => {
-    let hmmLogoJson = JSON.parse(hmm_logo_json);
+    let hmmLogoJson = JSON.parse(document.getElementById('logo').dataset.hmmLogoJson);
     if (hmmLogoJson) {
         let logoDiv = document.getElementById('logo');
         logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));

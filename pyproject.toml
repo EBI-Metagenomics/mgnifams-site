@@ -1,0 +1,20 @@
+[tool.ruff]
+src = ["mgnifams_site"]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes (undefined names, unused imports, etc.)
+    "I",   # isort
+    "UP",  # pyupgrade (modernise Python syntax)
+]
+ignore = [
+    "E501",  # line too long — handled by the formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"*/migrations/*.py" = ["E501", "F401"]
+
+[tool.ruff.format]
+quote-style = "single"
