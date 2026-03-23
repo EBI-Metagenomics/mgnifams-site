@@ -1,9 +1,9 @@
-FROM python:3.11
+FROM python:3.11-slim
 LABEL authors="sandyr"
 
 WORKDIR /app
-ADD mgnifams_site .
-ADD requirements.txt .
+COPY mgnifams_site .
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
@@ -13,4 +13,4 @@ ENV PYTHONUNBUFFERED=0
 
 RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate --fake
-CMD python manage.py runserver 0.0.0.0:8000
+CMD gunicorn mgnifams_site.wsgi:application --bind 0.0.0.0:8000 --workers 3
