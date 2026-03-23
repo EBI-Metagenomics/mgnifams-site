@@ -40,7 +40,7 @@ class Mgnifam(models.Model):
 
 class MgnifamPfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='pfams')
     pfam = models.TextField()
     name = models.TextField()
     e_value = models.FloatField()
@@ -62,7 +62,7 @@ class MgnifamPfams(models.Model):
 
 class MgnifamFunfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='funfams')
     funfam = models.TextField()
     e_value = models.FloatField()
     score = models.FloatField()
@@ -83,7 +83,7 @@ class MgnifamFunfams(models.Model):
 
 class MgnifamFolds(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='folds')
     fold = models.TextField()
     aligned_length = models.IntegerField()
     q_start = models.IntegerField()
@@ -101,7 +101,7 @@ class MgnifamFolds(models.Model):
 
 class MgnifamModelPfams(models.Model):
     id = models.AutoField(primary_key=True)
-    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE)
+    mgnifam = models.ForeignKey(Mgnifam, on_delete=models.CASCADE, related_name='model_pfams')
     pfam = models.CharField(max_length=16)
     name = models.TextField()
     description = models.TextField()
