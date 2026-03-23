@@ -3,6 +3,9 @@ mgnifams.sqlite3
 mgnifams_no_blobs.sqlite3
 sqlite_reps.fasta
 
+# Django collectstatic output — generated at deploy time, not committed
+mgnifams_site/staticfiles/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
