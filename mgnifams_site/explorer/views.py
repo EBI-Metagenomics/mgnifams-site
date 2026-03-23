@@ -370,20 +370,20 @@ def mgnifams_data(request):
 
     rows = qs.order_by(sort_field)[start : start + length]
     data = [
-        [
-            format_family_name(m.id),
-            m.full_size,
-            m.rep_length,
-            m.helix_percent,
-            m.strand_percent,
-            m.coil_percent,
-            m.inside_percent,
-            m.membrane_alpha_percent,
-            m.outside_percent,
-            m.signal_percent,
-            m.membrane_beta_percent,
-            m.periplasm_percent,
-        ]
+        {
+            'mgnifam_id': format_family_name(m.id),
+            'full_size': m.full_size,
+            'rep_length': m.rep_length,
+            'helix_percent': m.helix_percent,
+            'strand_percent': m.strand_percent,
+            'coil_percent': m.coil_percent,
+            'inside_percent': m.inside_percent,
+            'membrane_alpha_percent': m.membrane_alpha_percent,
+            'outside_percent': m.outside_percent,
+            'signal_percent': m.signal_percent,
+            'membrane_beta_percent': m.membrane_beta_percent,
+            'periplasm_percent': m.periplasm_percent,
+        }
         for m in rows
     ]
 

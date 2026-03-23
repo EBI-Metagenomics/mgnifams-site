@@ -263,32 +263,32 @@ class MgnifamsDataViewTests(TestCase):
     def test_pagination_start(self):
         # With start=1, length=1 we get the second record (sorted by id asc)
         r = self._get(start=1, length=1, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
-        self.assertEqual(r.json()['data'][0][0], 'MGYF0000000002')
+        self.assertEqual(r.json()['data'][0]['mgnifam_id'], 'MGYF0000000002')
 
     def test_sort_desc(self):
         r = self._get(**{'order[0][column]': 0, 'order[0][dir]': 'desc'})
         rows = r.json()['data']
-        self.assertEqual(rows[0][0], 'MGYF0000000002')
-        self.assertEqual(rows[1][0], 'MGYF0000000001')
+        self.assertEqual(rows[0]['mgnifam_id'], 'MGYF0000000002')
+        self.assertEqual(rows[1]['mgnifam_id'], 'MGYF0000000001')
 
     def test_range_filter_excludes_rows(self):
         # full_size_min=150 should exclude id=1 (full_size=100)
         r = self._get(full_size_min=150)
         data = r.json()
         self.assertEqual(data['recordsFiltered'], 1)
-        self.assertEqual(data['data'][0][0], 'MGYF0000000002')
+        self.assertEqual(data['data'][0]['mgnifam_id'], 'MGYF0000000002')
 
     def test_search_by_mgyf_id(self):
         r = self._get(**{'search[value]': 'MGYF0000000001'})
         data = r.json()
         self.assertEqual(data['recordsFiltered'], 1)
-        self.assertEqual(data['data'][0][0], 'MGYF0000000001')
+        self.assertEqual(data['data'][0]['mgnifam_id'], 'MGYF0000000001')
 
     def test_search_by_numeric_id(self):
         r = self._get(**{'search[value]': '2'})
         data = r.json()
         self.assertEqual(data['recordsFiltered'], 1)
-        self.assertEqual(data['data'][0][0], 'MGYF0000000002')
+        self.assertEqual(data['data'][0]['mgnifam_id'], 'MGYF0000000002')
 
     def test_search_nonexistent_returns_empty(self):
         r = self._get(**{'search[value]': 'MGYF9999999999'})
