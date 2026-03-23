@@ -1,12 +1,20 @@
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
+import requests.exceptions
 from django.core.cache import cache
 from django.http import Http404
 from django.test import TestCase
 from django.urls import reverse
 
-from explorer.models import Mgnifam, MgnifamFolds
-from explorer.views import decode_blob, format_family_name, translate_mgyf_to_int_id
+from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+from explorer.views import (
+    call_skylign_api,
+    decode_blob,
+    fetch_skylign_logo_json,
+    format_family_name,
+    generate_structure_link_and_db,
+    translate_mgyf_to_int_id,
+)
 
 BLOB = b'placeholder'
 SKYLIGN_PATCH = 'explorer.views.call_skylign_api'
@@ -360,3 +368,203 @@ class DecodeBlobTests(TestCase):
     def test_none_returns_fallback(self):
         self.assertEqual(decode_blob(None), '')
         self.assertEqual(decode_blob(None, fallback='n/a'), 'n/a')
+
+
+class FormatFamilyNameTests(TestCase):
+    def test_none_returns_empty_string(self):
+        self.assertEqual(format_family_name(None), '')
+
+
+class ModelStrTests(TestCase):
+    def setUp(self):
+        self.family = make_mgnifam()
+
+    def test_mgnifam_str(self):
+        self.assertEqual(str(self.family), 'Mgnifam ID: 1')
+
+    def test_mgnifam_pfams_str(self):
+        p = MgnifamPfams.objects.create(
+            mgnifam=self.family,
+            pfam='PF00001',
+            name='test',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+        self.assertEqual(str(p), f'MgnifamPfams ID: {p.id}')
+
+    def test_mgnifam_funfams_str(self):
+        f = MgnifamFunfams.objects.create(
+            mgnifam=self.family,
+            funfam='1.10.10.10-FF-000001',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+        self.assertEqual(str(f), f'MgnifamFunfams ID: {f.id}')
+
+    def test_mgnifam_folds_str(self):
+        fold = MgnifamFolds.objects.create(
+            mgnifam=self.family,
+            fold='AF-P12345-F1',
+            aligned_length=50,
+            q_start=1,
+            q_end=50,
+            t_start=1,
+            t_end=50,
+            e_value=1e-5,
+        )
+        self.assertEqual(str(fold), f'MgnifamFolds ID: {fold.id}')
+
+    def test_mgnifam_model_pfams_str(self):
+        mp = MgnifamModelPfams.objects.create(
+            mgnifam=self.family,
+            pfam='PF00001',
+            name='test',
+            description='desc',
+            prob=0.9,
+            e_value=1e-5,
+            length=10,
+            query_hmm='1-10',
+            template_hmm='1-10',
+        )
+        self.assertEqual(str(mp), f'MgnifamModelPfams ID: {mp.id}')
+
+
+class CallSkylignApiTests(TestCase):
+    @patch('explorer.views.requests.post')
+    def test_successful_post_returns_json(self, mock_post):
+        mock_post.return_value.json.return_value = {'uuid': 'abc-123'}
+        mock_post.return_value.raise_for_status = MagicMock()
+        result = call_skylign_api(b'hmm data')
+        self.assertEqual(result, {'uuid': 'abc-123'})
+
+    @patch('explorer.views.requests.post', side_effect=requests.exceptions.Timeout)
+    def test_timeout_returns_none(self, _mock_post):
+        self.assertIsNone(call_skylign_api(b'hmm data'))
+
+    @patch('explorer.views.requests.post', side_effect=requests.exceptions.RequestException('err'))
+    def test_request_exception_returns_none(self, _mock_post):
+        self.assertIsNone(call_skylign_api(b'hmm data'))
+
+
+class FetchSkylignLogoJsonTests(TestCase):
+    @patch('explorer.views.requests.get')
+    def test_200_returns_json_string(self, mock_get):
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {'columns': []}
+        result = fetch_skylign_logo_json('test-uuid')
+        self.assertIsNotNone(result)
+
+    @patch('explorer.views.requests.get')
+    def test_non_200_returns_none(self, mock_get):
+        mock_get.return_value.status_code = 404
+        self.assertIsNone(fetch_skylign_logo_json('test-uuid'))
+
+    @patch('explorer.views.requests.get', side_effect=requests.exceptions.RequestException)
+    def test_request_exception_returns_none(self, _mock_get):
+        self.assertIsNone(fetch_skylign_logo_json('test-uuid'))
+
+
+class GenerateStructureLinkTests(TestCase):
+    def test_alphafold_part_returns_link_and_db(self):
+        link, db = generate_structure_link_and_db('AF-P12345-F1')
+        self.assertIn('P12345', link)
+        self.assertIn('alphafold', link)
+        self.assertEqual(db, 'AlphaFold')
+
+    def test_unknown_part_returns_as_is_with_empty_db(self):
+        link, db = generate_structure_link_and_db('UNKNOWN')
+        self.assertEqual(link, 'UNKNOWN')
+        self.assertEqual(db, '')
+
+
+class FunfamUrlTests(TestCase):
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_valid_funfam_builds_cathdb_url(self, _mock_api, _mock_logo):
+        family = make_mgnifam()
+        MgnifamFunfams.objects.create(
+            mgnifam=family,
+            funfam='1.10.10.10-FF-000002',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+        response = self.client.get(reverse('details', args=['MGYF0000000001']))
+        funfams = response.context['funfams_data']
+        self.assertIn('cathdb.info', funfams[0]['funfam_url'])
+        self.assertIn('/funfam/2', funfams[0]['funfam_url'])
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_malformed_funfam_uses_hash_url(self, _mock_api, _mock_logo):
+        family = make_mgnifam()
+        MgnifamFunfams.objects.create(
+            mgnifam=family,
+            funfam='malformed-no-ff-separator',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+        response = self.client.get(reverse('details', args=['MGYF0000000001']))
+        self.assertEqual(response.status_code, 200)
+        funfams = response.context['funfams_data']
+        self.assertEqual(funfams[0]['funfam_url'], '#')
+
+
+class MgnifamsDataEdgeCaseTests(TestCase):
+    def setUp(self):
+        self.url = reverse('mgnifams_data')
+        make_mgnifam(id=1, full_size=100)
+
+    def _get(self, **params):
+        defaults = {
+            'draw': 1,
+            'start': 0,
+            'length': 50,
+            'order[0][column]': 0,
+            'order[0][dir]': 'asc',
+            'search[value]': '',
+        }
+        defaults.update(params)
+        return self.client.get(self.url, defaults)
+
+    def test_non_numeric_filter_value_is_ignored(self):
+        r = self._get(full_size_min='abc')
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()['recordsTotal'], 1)
+
+    def test_search_non_numeric_non_mgyf_returns_empty(self):
+        r = self._get(**{'search[value]': 'not-a-number'})
+        data = r.json()
+        self.assertEqual(data['recordsFiltered'], 0)
+
+    def test_search_invalid_mgyf_format_returns_empty(self):
+        r = self._get(**{'search[value]': 'MGYF000000XXXX'})
+        data = r.json()
+        self.assertEqual(data['recordsFiltered'], 0)
