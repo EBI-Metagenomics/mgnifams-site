@@ -1,90 +1,105 @@
+const FILTER_LABELS = {
+  full_size_min:       'Full size ≥',
+  full_size_max:       'Full size ≤',
+  rep_length_min:      'Rep. length ≥',
+  rep_length_max:      'Rep. length ≤',
+  helix_min:           'Helix% ≥',
+  helix_max:           'Helix% ≤',
+  strand_min:          'Strand% ≥',
+  strand_max:          'Strand% ≤',
+  coil_min:            'Coil% ≥',
+  coil_max:            'Coil% ≤',
+  inside_min:          'Inside% ≥',
+  inside_max:          'Inside% ≤',
+  membrane_alpha_min:  'Membrane-alpha% ≥',
+  membrane_alpha_max:  'Membrane-alpha% ≤',
+  outside_min:         'Outside% ≥',
+  outside_max:         'Outside% ≤',
+  signal_min:          'Signal% ≥',
+  signal_max:          'Signal% ≤',
+  membrane_beta_min:   'Membrane-beta% ≥',
+  membrane_beta_max:   'Membrane-beta% ≤',
+  periplasm_min:       'Periplasm% ≥',
+  periplasm_max:       'Periplasm% ≤',
+};
+
 const loadMGnifamsTable = () => {
-  let mgnifamsTable = $("#mgnifams-table").DataTable({
-    dom: "iftplr",
+  const tableEl = document.getElementById('mgnifams-table');
+  const dataUrl = tableEl.dataset.url;
+  const detailsPrefix = tableEl.dataset.detailsPrefix;
+  const overlay = document.getElementById('loading-overlay');
+  const infoBox = document.getElementById('filter-info-box');
+  const applyBtn = document.getElementById('apply-filters-btn');
+
+  const filterInputIds = [
+    'full_size_min', 'full_size_max',
+    'rep_length_min', 'rep_length_max',
+    'helix_min', 'helix_max',
+    'strand_min', 'strand_max',
+    'coil_min', 'coil_max',
+    'inside_min', 'inside_max',
+    'membrane_alpha_min', 'membrane_alpha_max',
+    'outside_min', 'outside_max',
+    'signal_min', 'signal_max',
+    'membrane_beta_min', 'membrane_beta_max',
+    'periplasm_min', 'periplasm_max',
+  ];
+
+  let mgnifamsTable = $(tableEl).DataTable({
+    serverSide: true,
+    ajax: {
+      url: dataUrl,
+      data: function (d) {
+        filterInputIds.forEach((id) => {
+          d[id] = $(`#${id}`).val();
+        });
+      },
+    },
+    dom: 'iftplr',
     pageLength: 50,
-    language: { searchPlaceholder: "Search", search: "" },
+    language: { searchPlaceholder: 'Search by ID', search: '' },
+    columns: [
+      {
+        data: 'mgnifam_id',
+        render: (data) => `<a href="${detailsPrefix}${data}/">${data}</a>`,
+      },
+      { data: 'full_size' },
+      { data: 'rep_length' },
+      { data: 'helix_percent' },
+      { data: 'strand_percent' },
+      { data: 'coil_percent' },
+      { data: 'inside_percent' },
+      { data: 'membrane_alpha_percent' },
+      { data: 'outside_percent' },
+      { data: 'signal_percent' },
+      { data: 'membrane_beta_percent' },
+      { data: 'periplasm_percent' },
+    ],
   });
 
-  // Custom filtering function
-  $.fn.dataTable.ext.search.push((settings, data, dataIndex) => {
-    // Column values (skip ID at index 0)
-    const colValues = {
-      full_size: parseFloat(data[1]) || 0,
-      rep_length: parseFloat(data[2]) || 0,
-      helix: parseFloat(data[3]) || 0,
-      strand: parseFloat(data[4]) || 0,
-      coil: parseFloat(data[5]) || 0,
-      inside: parseFloat(data[6]) || 0,
-      membrane_alpha: parseFloat(data[7]) || 0,
-      outside: parseFloat(data[8]) || 0,
-      signal: parseFloat(data[9]) || 0,
-      membrane_beta: parseFloat(data[10]) || 0,
-      periplasm: parseFloat(data[11]) || 0,
-    };
+  const updateInfoBox = () => {
+    const parts = filterInputIds
+      .filter((id) => $(`#${id}`).val().trim() !== '')
+      .map((id) => `${FILTER_LABELS[id]} ${$(`#${id}`).val().trim()}`);
+    infoBox.textContent = parts.length
+      ? 'Active filters: ' + parts.join(' | ')
+      : 'No filters applied';
+  };
 
-    // Filter inputs
-    const filters = {
-      full_size: [
-        parseFloat($("#full_size_min").val()) || 1,
-        parseFloat($("#full_size_max").val()) || Infinity
-      ],
-      rep_length: [
-        parseFloat($("#rep_length_min").val()) || 1,
-        parseFloat($("#rep_length_max").val()) || Infinity
-      ],
-      helix: [
-        parseFloat($("#helix_min").val()) || 0,
-        parseFloat($("#helix_max").val()) || 100
-      ],
-      strand: [
-        parseFloat($("#strand_min").val()) || 0,
-        parseFloat($("#strand_max").val()) || 100
-      ],
-      coil: [
-        parseFloat($("#coil_min").val()) || 0,
-        parseFloat($("#coil_max").val()) || 100
-      ],
-      inside: [
-        parseFloat($("#inside_min").val()) || 0,
-        parseFloat($("#inside_max").val()) || 100
-      ],
-      membrane_alpha: [
-        parseFloat($("#membrane_alpha_min").val()) || 0,
-        parseFloat($("#membrane_alpha_max").val()) || 100
-      ],
-      outside: [
-        parseFloat($("#outside_min").val()) || 0,
-        parseFloat($("#outside_max").val()) || 100
-      ],
-      signal: [
-        parseFloat($("#signal_min").val()) || 0,
-        parseFloat($("#signal_max").val()) || 100
-      ],
-      membrane_beta: [
-        parseFloat($("#membrane_beta_min").val()) || 0,
-        parseFloat($("#membrane_beta_max").val()) || 100
-      ],
-      periplasm: [
-        parseFloat($("#periplasm_min").val()) || 0,
-        parseFloat($("#periplasm_max").val()) || 100
-      ],
-    };
+  updateInfoBox();
 
-    // Check each column against min/max
-    for (const col in colValues) {
-      if (
-        colValues[col] < filters[col][0] ||
-        colValues[col] > filters[col][1]
-      ) {
-        return false;
-      }
-    }
+  mgnifamsTable
+    .on('preXhr.dt', () => {
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+    })
+    .on('xhr.dt', () => {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+    });
 
-    return true;
-  });
-
-  // Redraw on input change
-  $("#filters input").on("keyup change", () => {
+  applyBtn.addEventListener('click', () => {
+    updateInfoBox();
     mgnifamsTable.draw();
   });
 };

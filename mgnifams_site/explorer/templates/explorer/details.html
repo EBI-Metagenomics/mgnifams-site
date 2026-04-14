@@ -2,6 +2,17 @@
 
 {% extends "explorer/base.html" %}
 {% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-3.1.0.css">
+{% endblock extra_head %}
+
 {% block content %}
 {% load custom_filters %}
 
@@ -345,13 +356,9 @@ periplasm:  {{ periplasm_percent }}%
                     Click on a stack to highlight the corresponding column in the seed MSA viewer above.
                 </p>
             </div>
-            <div id="logo" class="logo"></div>
+            <div id="logo" class="logo" data-rf="{{ rf }}" data-hmm-logo-json="{{ hmm_logo_json }}"></div>
             <div id="col_info" class="col_info"></div>
             <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}.hmm" class="vf-button vf-button--secondary vf-button--sm">Download HMM file</a>
-            {% comment %} <form action="{% url 'submit_hmmsearch' mgyf_id=mgyf_id %}" method="post" target="_blank" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit" class="vf-button vf-button--secondary vf-button--sm">Submit HMM Search</button>
-            </form> {% endcomment %}
         </div>
     </article>
 
@@ -623,11 +630,6 @@ periplasm:  {{ periplasm_percent }}%
 {% comment %} HMM Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/hmm/hmm_logo.min.css" %}">
 <script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
-
-<script>
-    let rf = '{{ rf }}'
-    let hmm_logo_json = '{{ hmm_logo_json | safe }}'
-</script>
 
 {% comment %} Feature viewer (s4pred) - Must be inserted after HMM Viewer, else there is a hmm_logo function bug{% endcomment %}
 <script src="https://cdn.jsdelivr.net/gh/calipho-sib/feature-viewer@v1.1.0/dist/feature-viewer.bundle.js"></script>
