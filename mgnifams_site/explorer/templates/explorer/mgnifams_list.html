@@ -10,6 +10,9 @@
 {% endblock extra_head %}
 
 {% block content %}
+<div id="loading-overlay" aria-hidden="true">
+    <div class="loading-spinner"></div>
+</div>
 <script src="{% static 'explorer/js/all_mgnifams.js' %}"></script>
 
 <section class="vf-content | vf-stack vf-stack--400">

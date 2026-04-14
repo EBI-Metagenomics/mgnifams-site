@@ -367,7 +367,8 @@ def mgnifams_data(request):
         except (ValueError, Http404):
             qs = qs.none()
 
-    records_filtered = qs.count()
+    has_filters = bool(active_filters) or bool(search_value)
+    records_filtered = qs.count() if has_filters else records_total
 
     rows = qs.order_by(sort_field)[start : start + length]
     data = [

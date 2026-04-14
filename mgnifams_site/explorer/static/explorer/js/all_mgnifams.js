@@ -1,7 +1,13 @@
+const debounce = (fn, delay) => {
+  let timer;
+  return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+};
+
 const loadMGnifamsTable = () => {
   const tableEl = document.getElementById('mgnifams-table');
   const dataUrl = tableEl.dataset.url;
   const detailsPrefix = tableEl.dataset.detailsPrefix;
+  const overlay = document.getElementById('loading-overlay');
 
   const filterInputIds = [
     'full_size_min', 'full_size_max',
@@ -49,9 +55,17 @@ const loadMGnifamsTable = () => {
     ],
   });
 
-  $('#filters input').on('keyup change', () => {
-    mgnifamsTable.draw();
-  });
+  mgnifamsTable
+    .on('preXhr.dt', () => {
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+    })
+    .on('xhr.dt', () => {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+    });
+
+  $('#filters input').on('keyup change', debounce(() => mgnifamsTable.draw(), 400));
 };
 
 $(document).ready(() => {
