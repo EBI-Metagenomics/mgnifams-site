@@ -8,6 +8,11 @@
 {% block content %}
 
 <section class="vf-content | vf-stack vf-stack--600">
+    <p>
+        MGnifams are derived from the <a href="https://ftp.ebi.ac.uk/pub/databases/metagenomics/peptide_database/current_release/" target="_blank">MGnify protein database</a>
+        (release <strong>2024_04</strong>, May 2024), which contains <strong>717,738,164</strong> metagenomic protein sequences.
+        Families are built by clustering these sequences iteratively and constructing HMM profiles, capturing the diversity of proteins found across diverse environmental metagenomes.
+    </p>
     <p>Number of currently hosted <b>protein families:</b> {{ num_mgnifams }}</p>
 
     <form

@@ -2,6 +2,11 @@
 
 ## [v2.1.0dev] - unreleased
 
+### Added
+
+- Nav link to the FTP site with seed MSA files and the MGnifams HMM library.
+- Home intro paragraph describing the MGnifams pipeline input data from the latest release of MGnify proteins (2024_04).
+
 ### Security
 
 **Patched CVEs in `django` and `requests`** (`requirements.txt`)
