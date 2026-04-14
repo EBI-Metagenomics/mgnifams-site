@@ -7,6 +7,8 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
+RUN mkdir -p /tmp/mgnifams_cache && chmod 777 /tmp/mgnifams_cache
+
 EXPOSE 8000
 ENV DJANGO_SETTINGS_MODULE=mgnifams_site.settings
 ENV PYTHONUNBUFFERED=0
