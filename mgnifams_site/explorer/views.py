@@ -4,6 +4,7 @@ import re
 
 import requests
 from django.core.cache import cache
+from django.db.models import Exists, OuterRef
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -287,6 +288,13 @@ _LIST_FIELDS = [
     'periplasm_percent',
 ]
 
+_ANNOTATION_FILTER_MAP = {
+    'has_pfam': MgnifamPfams,
+    'has_funfam': MgnifamFunfams,
+    'has_model_pfam': MgnifamModelPfams,
+    'has_structure': MgnifamFolds,
+}
+
 _FILTER_MAP = {
     'full_size_min': 'full_size__gte',
     'full_size_max': 'full_size__lte',
@@ -367,7 +375,18 @@ def mgnifams_data(request):
         except (ValueError, Http404):
             qs = qs.none()
 
-    has_filters = bool(active_filters) or bool(search_value)
+    # Apply annotation presence filters (yes/no/any)
+    active_annotation_filters = False
+    for param, model in _ANNOTATION_FILTER_MAP.items():
+        val = request.GET.get(param, '').strip()
+        if val == 'yes':
+            qs = qs.filter(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
+            active_annotation_filters = True
+        elif val == 'no':
+            qs = qs.exclude(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
+            active_annotation_filters = True
+
+    has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
 
     rows = qs.order_by(sort_field)[start : start + length]
