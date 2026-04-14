@@ -1,5 +1,18 @@
 # Changelog
 
+## [v2.1.0dev] - unreleased
+
+### Security
+
+**Patched CVEs in `django` and `requests`** (`requirements.txt`)
+
+| Package | Before | After | CVEs fixed |
+|---|---|---|---|
+| `django` | 6.0.3 | 6.0.4 | CVE-2026-33033, CVE-2026-33034, CVE-2026-4292, CVE-2026-4277, CVE-2026-3902 |
+| `requests` | 2.32.5 | 2.33.0 | CVE-2026-25645 |
+
+Identified via `pip-audit --disable-pip --no-deps -r requirements.txt`.
+
 ## [v2.0.0] - 2026-04-14
 
 ### Added
