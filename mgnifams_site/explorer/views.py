@@ -341,7 +341,8 @@ def mgnifams_data(request):
         sort_field = '-' + sort_field
 
     qs = Mgnifam.objects.only(*_LIST_FIELDS)
-    records_total = qs.count()
+
+    records_total = cache.get_or_set('mgnifam_total_count', Mgnifam.objects.count, timeout=None)
 
     # Apply range filters
     active_filters = {}

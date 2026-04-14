@@ -36,6 +36,19 @@ class Mgnifam(models.Model):
 
     class Meta:
         db_table = 'mgnifam'
+        indexes = [
+            models.Index(fields=['full_size'], name='idx_mgnifam_full_size'),
+            models.Index(fields=['rep_length'], name='idx_mgnifam_rep_length'),
+            models.Index(fields=['helix_percent'], name='idx_mgnifam_helix'),
+            models.Index(fields=['strand_percent'], name='idx_mgnifam_strand'),
+            models.Index(fields=['coil_percent'], name='idx_mgnifam_coil'),
+            models.Index(fields=['inside_percent'], name='idx_mgnifam_inside'),
+            models.Index(fields=['membrane_alpha_percent'], name='idx_mgnifam_membrane_alpha'),
+            models.Index(fields=['outside_percent'], name='idx_mgnifam_outside'),
+            models.Index(fields=['signal_percent'], name='idx_mgnifam_signal'),
+            models.Index(fields=['membrane_beta_percent'], name='idx_mgnifam_membrane_beta'),
+            models.Index(fields=['periplasm_percent'], name='idx_mgnifam_periplasm'),
+        ]
 
 
 class MgnifamPfams(models.Model):
