@@ -88,6 +88,35 @@
                 <input type="number" id="periplasm_max" min="0" max="100" placeholder="100">
             </div>
         </div>
+
+        <!-- Annotation presence filters -->
+        <div class="filter-category">
+            <h4>Annotation presence</h4>
+            <div class="filter-row annotation-filter-row">
+                <span>Pfam hits:</span>
+                <label><input type="radio" name="has_pfam" value="any" checked> Any</label>
+                <label><input type="radio" name="has_pfam" value="yes"> Yes</label>
+                <label><input type="radio" name="has_pfam" value="no"> No</label>
+            </div>
+            <div class="filter-row annotation-filter-row">
+                <span>FunFam hits:</span>
+                <label><input type="radio" name="has_funfam" value="any" checked> Any</label>
+                <label><input type="radio" name="has_funfam" value="yes"> Yes</label>
+                <label><input type="radio" name="has_funfam" value="no"> No</label>
+            </div>
+            <div class="filter-row annotation-filter-row">
+                <span>Profile-Pfam hits:</span>
+                <label><input type="radio" name="has_model_pfam" value="any" checked> Any</label>
+                <label><input type="radio" name="has_model_pfam" value="yes"> Yes</label>
+                <label><input type="radio" name="has_model_pfam" value="no"> No</label>
+            </div>
+            <div class="filter-row annotation-filter-row">
+                <span>Structure hits:</span>
+                <label><input type="radio" name="has_structure" value="any" checked> Any</label>
+                <label><input type="radio" name="has_structure" value="yes"> Yes</label>
+                <label><input type="radio" name="has_structure" value="no"> No</label>
+            </div>
+        </div>
     </div>
     <button id="apply-filters-btn" class="vf-button vf-button--primary vf-button--sm">Apply filters</button>
 </section>

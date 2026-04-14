@@ -1,3 +1,12 @@
+const ANNOTATION_FILTER_NAMES = ['has_pfam', 'has_funfam', 'has_model_pfam', 'has_structure'];
+
+const ANNOTATION_FILTER_LABELS = {
+  has_pfam:        'Pfam hits',
+  has_funfam:      'FunFam hits',
+  has_model_pfam:  'Profile-Pfam hits',
+  has_structure:   'Structure hits',
+};
+
 const FILTER_LABELS = {
   full_size_min:       'Full size ≥',
   full_size_max:       'Full size ≤',
@@ -53,6 +62,9 @@ const loadMGnifamsTable = () => {
         filterInputIds.forEach((id) => {
           d[id] = $(`#${id}`).val();
         });
+        ANNOTATION_FILTER_NAMES.forEach((name) => {
+          d[name] = $(`input[name="${name}"]:checked`).val();
+        });
       },
     },
     dom: 'iftplr',
@@ -81,6 +93,12 @@ const loadMGnifamsTable = () => {
     const parts = filterInputIds
       .filter((id) => $(`#${id}`).val().trim() !== '')
       .map((id) => `${FILTER_LABELS[id]} ${$(`#${id}`).val().trim()}`);
+    ANNOTATION_FILTER_NAMES.forEach((name) => {
+      const val = $(`input[name="${name}"]:checked`).val();
+      if (val && val !== 'any') {
+        parts.push(`${ANNOTATION_FILTER_LABELS[name]}: ${val}`);
+      }
+    });
     infoBox.textContent = parts.length
       ? 'Active filters: ' + parts.join(' | ')
       : 'No filters applied';
