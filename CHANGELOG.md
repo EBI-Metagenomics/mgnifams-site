@@ -1,11 +1,21 @@
 # Changelog
 
-## [Unreleased] - 2026-03-23
+## [v2.0.0] - 2026-04-14
 
 ### Added
 
 **Test coverage raised from 92% to 100%** (`explorer/tests.py`)
 19 new tests covering previously untested edge cases: `format_family_name(None)`, all five model `__str__` methods, `call_skylign_api` (success, timeout, `RequestException`), `fetch_skylign_logo_json` (200, non-200, `RequestException`), `generate_structure_link_and_db` (AlphaFold branch, unknown fallback), `_get_funfams_data` malformed funfam URL fallback (`'#'`) and valid CATH URL construction, non-numeric DataTables filter value, and non-numeric/invalid-MGYF search terms.
+
+### Fixed
+
+**Bug: `/tmp/mgnifams_cache` created as root during Docker build, blocking writes at runtime** (`Dockerfile`)
+`collectstatic` (run as root during `docker build`) triggers Django's `FileBasedCache.__init__`, which calls `os.makedirs('/tmp/mgnifams_cache', 0o700)`. The resulting directory is owned by root and mode `700`, so the container process (uid 7123) cannot write cache files. Added `RUN mkdir -p /tmp/mgnifams_cache && chmod 777 /tmp/mgnifams_cache` before `collectstatic` so the directory pre-exists with open permissions and Django's `exist_ok=True` leaves them untouched.
+
+### Performance
+
+**Skip `COUNT(*)` on unfiltered requests in `mgnifams_data`** (`views.py`)
+When no filters and no search are active, `records_filtered` equals `records_total` (already cached). Added a `has_filters` guard so `qs.count()` is only called when a filter or search is actually present. Eliminates one SQLite query on every unfiltered page load, column sort, and pagination click.
 
 ### Changed
 
@@ -33,6 +43,15 @@ Three files with no corresponding source (`explorer/details.js`, `explorer/hmm/h
 | `gunicorn` | 23.0.0 | 25.1.0 | major |
 | `whitenoise` | 6.5.0 | 6.12.0 | minor |
 | `ruff` | 0.9.10 | 0.15.7 | minor |
+
+**Replaced keyup with an explicit "Apply Filters" button** (`all_mgnifams.js`, `mgnifams_list.html`)
+Filter inputs previously fired a DataTables redraw on every keystroke. Replaced with a button that triggers the draw only when clicked, eliminating all intermediate queries and giving users full control over when the request fires. Column sorting and pagination still trigger their own redraws independently.
+
+**Added full-page loading overlay while data is in flight** (`all_mgnifams.js`, `mgnifams_list.html`, `mgnifams.css`)
+A fixed-position semi-transparent backdrop with a CSS-animated spinner now appears on every DataTables AJAX request (initial load, pagination, column sort, filter apply, search). Shown via `preXhr.dt` event, hidden via `xhr.dt` (fires on both success and error). No external library — pure CSS `border` spinner animation.
+
+**Added filter info box showing last applied filter parameters** (`all_mgnifams.js`, `mgnifams_list.html`, `mgnifams.css`)
+A persistent info bar below the filters section displays the parameters used in the last executed query (e.g. `Active filters: Helix% ≥ 50 | Strand% ≤ 30`) or `No filters applied` when none are set. Initialises on page load and updates each time "Apply filters" is clicked, reflecting the actual query state rather than live input state.
 
 **Dockerfile: switched to production-grade setup** (`Dockerfile`)
 - Base image: `python:3.11` → `python:3.12-slim` (required for Django 6.0; slim reduces image size from ~1.15 GB to ~280 MB)
