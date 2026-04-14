@@ -258,6 +258,20 @@ nightingale-manager {
     width: 70px; /* uniform width for inputs */
 }
 
+#apply-filters-btn {
+    margin-top: 0.75em;
+}
+
+.filter-info-box {
+    margin: 0.75em 0;
+    padding: 0.5em 0.85em;
+    background: #f0f4f8;
+    border-left: 4px solid #707372;
+    font-size: 0.95em;
+    color: #333;
+    border-radius: 2px;
+}
+
 #loading-overlay {
     display: none;
     position: fixed;

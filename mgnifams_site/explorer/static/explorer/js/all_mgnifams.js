@@ -1,6 +1,26 @@
-const debounce = (fn, delay) => {
-  let timer;
-  return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+const FILTER_LABELS = {
+  full_size_min:       'Full size ≥',
+  full_size_max:       'Full size ≤',
+  rep_length_min:      'Rep. length ≥',
+  rep_length_max:      'Rep. length ≤',
+  helix_min:           'Helix% ≥',
+  helix_max:           'Helix% ≤',
+  strand_min:          'Strand% ≥',
+  strand_max:          'Strand% ≤',
+  coil_min:            'Coil% ≥',
+  coil_max:            'Coil% ≤',
+  inside_min:          'Inside% ≥',
+  inside_max:          'Inside% ≤',
+  membrane_alpha_min:  'Membrane-alpha% ≥',
+  membrane_alpha_max:  'Membrane-alpha% ≤',
+  outside_min:         'Outside% ≥',
+  outside_max:         'Outside% ≤',
+  signal_min:          'Signal% ≥',
+  signal_max:          'Signal% ≤',
+  membrane_beta_min:   'Membrane-beta% ≥',
+  membrane_beta_max:   'Membrane-beta% ≤',
+  periplasm_min:       'Periplasm% ≥',
+  periplasm_max:       'Periplasm% ≤',
 };
 
 const loadMGnifamsTable = () => {
@@ -8,6 +28,8 @@ const loadMGnifamsTable = () => {
   const dataUrl = tableEl.dataset.url;
   const detailsPrefix = tableEl.dataset.detailsPrefix;
   const overlay = document.getElementById('loading-overlay');
+  const infoBox = document.getElementById('filter-info-box');
+  const applyBtn = document.getElementById('apply-filters-btn');
 
   const filterInputIds = [
     'full_size_min', 'full_size_max',
@@ -55,6 +77,17 @@ const loadMGnifamsTable = () => {
     ],
   });
 
+  const updateInfoBox = () => {
+    const parts = filterInputIds
+      .filter((id) => $(`#${id}`).val().trim() !== '')
+      .map((id) => `${FILTER_LABELS[id]} ${$(`#${id}`).val().trim()}`);
+    infoBox.textContent = parts.length
+      ? 'Active filters: ' + parts.join(' | ')
+      : 'No filters applied';
+  };
+
+  updateInfoBox();
+
   mgnifamsTable
     .on('preXhr.dt', () => {
       overlay.classList.add('active');
@@ -65,7 +98,10 @@ const loadMGnifamsTable = () => {
       overlay.setAttribute('aria-hidden', 'true');
     });
 
-  $('#filters input').on('keyup change', debounce(() => mgnifamsTable.draw(), 400));
+  applyBtn.addEventListener('click', () => {
+    updateInfoBox();
+    mgnifamsTable.draw();
+  });
 };
 
 $(document).ready(() => {
