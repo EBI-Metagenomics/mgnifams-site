@@ -83,6 +83,8 @@ const loadMGnifamsTable = () => {
       },
       { data: 'full_size' },
       { data: 'rep_length' },
+      { data: 'plddt' },
+      { data: 'ptm' },
       { data: 'helix_percent' },
       { data: 'strand_percent' },
       { data: 'coil_percent' },
