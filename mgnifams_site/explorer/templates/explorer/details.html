@@ -80,6 +80,33 @@
                             <span class="tooltip">
                                 <i class="fas fa-question-circle tooltip-icon"></i>
                                 <span class="tooltiptext">
+                                    Predicted Local Distance Difference Test (pLDDT) score from ESMFold,
+                                    ranging from 0 to 100. Higher values indicate greater confidence in
+                                    the predicted structure.
+                                </span>
+                            </span>
+                            pLDDT score
+                        </td>
+                        <td class="vf-table__cell">{{ plddt }}</td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
+                                    Predicted TM-score (pTM) from ESMFold, ranging from 0 to 1.
+                                    Higher values indicate a more globally accurate predicted structure.
+                                </span>
+                            </span>
+                            pTM score
+                        </td>
+                        <td class="vf-table__cell">{{ ptm }}</td>
+                    </tr>
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
                                     Denotes if FunFam functional annotation hits were identified via the hmmer/hmmsearch tool.
                                 </span>
                             </span>

@@ -39,6 +39,8 @@ class Mgnifam(models.Model):
         indexes = [
             models.Index(fields=['full_size'], name='idx_mgnifam_full_size'),
             models.Index(fields=['rep_length'], name='idx_mgnifam_rep_length'),
+            models.Index(fields=['plddt'], name='idx_mgnifam_plddt'),
+            models.Index(fields=['ptm'], name='idx_mgnifam_ptm'),
             models.Index(fields=['helix_percent'], name='idx_mgnifam_helix'),
             models.Index(fields=['strand_percent'], name='idx_mgnifam_strand'),
             models.Index(fields=['coil_percent'], name='idx_mgnifam_coil'),
