@@ -1,3 +1,4 @@
+import re
 from unittest.mock import MagicMock, patch
 
 import requests.exceptions
@@ -102,6 +103,35 @@ class DetailsViewTests(TestCase):
     def test_details_ok(self, _mock_api, _mock_logo):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_links_to_matching_detail_sections(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        content = response.content.decode()
+
+        for anchor, label in (
+            ('esmfold-structure', 'pLDDT score'),
+            ('esmfold-structure', 'pTM score'),
+            ('funfam-matches', 'Sequence-HMM FunFam matches'),
+            ('pfam-matches', 'Sequence-HMM Pfam matches'),
+            ('profile-pfam-matches', 'Profile-profile Pfam matches'),
+            ('structure-hits', 'Structure-structure hits'),
+        ):
+            self.assertContains(response, f'href="#{anchor}"')
+            self.assertContains(response, f'>{label}</a>', html=False)
+
+        for section_id, heading in (
+            ('esmfold-structure', 'ESMFold structure'),
+            ('funfam-matches', 'Functional annotation through Funfam matches'),
+            ('pfam-matches', 'Functional annotation through Pfam matches'),
+            ('profile-pfam-matches', 'Profile-profile Pfam matches'),
+            ('structure-hits', 'Structure-structure hits'),
+        ):
+            self.assertRegex(
+                content,
+                rf'(?s)<article id="{section_id}"[^>]*>.*?<h3[^>]*>\s*{re.escape(heading)}',
+            )
 
     pass  # placeholder so the class body remains valid if all tests above are removed
 
