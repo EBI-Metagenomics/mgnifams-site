@@ -191,6 +191,24 @@ class DetailsViewTests(TestCase):
         self.assertNotIn('domain_blob', response.context)
         self.assertNotIn('s4pred_blob', response.context)
 
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_links_to_matching_sections(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+
+        expected_targets = [
+            'family-representative-sequence-viewer',
+            'esmfold-structure',
+            'funfam-matches',
+            'pfam-matches',
+            'profile-profile-pfam-matches',
+            'structure-structure-hits',
+        ]
+
+        for target in expected_targets:
+            self.assertContains(response, f'href="#{target}"')
+            self.assertContains(response, f'id="{target}"')
+
 
 class StructuralAnnotationsTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
