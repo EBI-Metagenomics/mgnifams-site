@@ -191,6 +191,23 @@ class DetailsViewTests(TestCase):
         self.assertNotIn('domain_blob', response.context)
         self.assertNotIn('s4pred_blob', response.context)
 
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_table_fragment_links(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode()
+        self.assertIn('href="#esmfold-structure"', content)
+        self.assertIn('href="#funfam-matches"', content)
+        self.assertIn('href="#pfam-matches"', content)
+        self.assertIn('href="#profile-pfam-matches"', content)
+        self.assertIn('href="#structure-hits"', content)
+        self.assertIn('id="esmfold-structure"', content)
+        self.assertIn('id="funfam-matches"', content)
+        self.assertIn('id="pfam-matches"', content)
+        self.assertIn('id="profile-pfam-matches"', content)
+        self.assertIn('id="structure-hits"', content)
+
 
 class StructuralAnnotationsTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
