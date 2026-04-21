@@ -4,7 +4,7 @@ import re
 
 import requests
 from django.core.cache import cache
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -20,9 +20,16 @@ def index(request):
     first_mgnifam = Mgnifam.objects.only('id').first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
 
-    context = {'num_mgnifams': num_mgnifams, 'first_id': first_id}
-
-    return render(request, 'explorer/index.html', context)
+    return render(
+        request,
+        'explorer/index.html',
+        {
+            'num_mgnifams': num_mgnifams,
+            'first_id': first_id,
+            'mgnifams_data_url': reverse('mgnifams_data'),
+            'details_url_prefix': reverse('details', args=['MGYF0000000001']).replace('MGYF0000000001/', ''),
+        },
+    )
 
 
 def translate_mgyf_to_int_id(mgyf):
@@ -391,6 +398,26 @@ def mgnifams_data(request):
         elif val == 'no':
             qs = qs.exclude(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
             active_annotation_filters = True
+
+    # Apply annotation text search across Pfam/FunFam tables
+    annotation_term = request.GET.get('annotation_term', '').strip()
+    if len(annotation_term) >= 4:
+        qs = qs.filter(
+            Exists(
+                MgnifamPfams.objects.filter(mgnifam=OuterRef('pk')).filter(
+                    Q(pfam__icontains=annotation_term) | Q(name__icontains=annotation_term)
+                )
+            )
+            | Exists(
+                MgnifamModelPfams.objects.filter(mgnifam=OuterRef('pk')).filter(
+                    Q(pfam__icontains=annotation_term)
+                    | Q(name__icontains=annotation_term)
+                    | Q(description__icontains=annotation_term)
+                )
+            )
+            | Exists(MgnifamFunfams.objects.filter(mgnifam=OuterRef('pk'), funfam__icontains=annotation_term))
+        )
+        active_annotation_filters = True
 
     has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
