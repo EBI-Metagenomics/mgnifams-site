@@ -58,6 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (annotationTable) {
             annotationTable.draw();
         } else {
+            overlay.classList.add('active');
+            overlay.setAttribute('aria-hidden', 'false');
             annotationTable = $('#annotation-results-table').DataTable({
                 serverSide: true,
                 searching: false,
