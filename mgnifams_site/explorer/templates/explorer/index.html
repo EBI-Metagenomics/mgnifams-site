@@ -43,8 +43,8 @@
 
     <div
         id="annotation-search-section"
-        data-search-url="{% url 'annotation_search' %}"
-        data-details-prefix="{% url 'details' 'PROTID' %}"
+        data-url="{{ mgnifams_data_url }}"
+        data-details-prefix="{{ details_url_prefix }}"
     >
         <h3>
             Search by annotation

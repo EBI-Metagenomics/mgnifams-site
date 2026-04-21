@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Annotation search
     const section = document.getElementById('annotation-search-section');
-    const searchUrl = section.dataset.searchUrl;
-    const detailsPrefix = section.dataset.detailsPrefix.replace('PROTID/', '');
+    const dataUrl = section.dataset.url;
+    const detailsPrefix = section.dataset.detailsPrefix;
     const resultsBox = document.getElementById('annotation-results');
     const messageBox = document.getElementById('annotation-results-message');
     const input = document.getElementById('annotation-search');
@@ -35,11 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageBox.innerHTML = html ? `<p class="${cssClass}">${html}</p>` : '';
     };
 
-    const showTable = (show) => {
-        $('#annotation-results-table').toggle(show);
-    };
-
-    const runAnnotationSearch = async () => {
+    const runAnnotationSearch = () => {
         const term = input.value.trim();
 
         if (!term) {
@@ -47,64 +43,45 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        resultsBox.classList.remove('hidden');
-
         if (term.length < MIN_QUERY_LENGTH) {
+            resultsBox.classList.remove('hidden');
+            $('#annotation-results-table').hide();
             setMessage('Please enter at least 4 characters to search.', 'annotation-results-error');
-            showTable(false);
             return;
         }
 
-        setMessage('Searching…', 'annotation-results-loading');
+        resultsBox.classList.remove('hidden');
+        setMessage('', '');
 
-        try {
-            const response = await fetch(`${searchUrl}?term=${encodeURIComponent(term)}`);
-            const data = await response.json();
-            renderAnnotationResults(data, term);
-        } catch {
-            setMessage('Search failed. Please try again.', 'annotation-results-error');
-            showTable(false);
-        }
-    };
-
-    const renderAnnotationResults = (data, term) => {
-        if (data.count === 0) {
-            setMessage(`No families found for <em>${escapeHtml(term)}</em>.`, 'annotation-results-empty');
-            showTable(false);
-            return;
-        }
-
-        setMessage(
-            `${data.count} famil${data.count === 1 ? 'y' : 'ies'} found for <em>${escapeHtml(term)}</em>:`,
-            'annotation-results-header'
-        );
-
-        const rows = data.results.map((r) => [
-            `<a href="${detailsPrefix}${r.mgnifam_id}/">${r.mgnifam_id}</a>`,
-            r.full_size,
-            r.rep_length,
-            r.plddt,
-            r.ptm,
-            r.helix_percent,
-            r.strand_percent,
-            r.coil_percent,
-            r.inside_percent,
-            r.membrane_alpha_percent,
-            r.outside_percent,
-            r.signal_percent,
-            r.membrane_beta_percent,
-            r.periplasm_percent,
-        ]);
-
-        showTable(true);
+        $('#annotation-results-table').show();
         if (annotationTable) {
-            annotationTable.clear().rows.add(rows).draw();
+            annotationTable.draw();
         } else {
             annotationTable = $('#annotation-results-table').DataTable({
-                data: rows,
+                serverSide: true,
+                searching: false,
+                ajax: {
+                    url: dataUrl,
+                    data: (d) => { d.annotation_term = input.value.trim(); },
+                },
                 dom: 'iftplr',
                 pageLength: 50,
-                language: { searchPlaceholder: 'Filter results', search: '' },
+                columns: [
+                    { data: 'mgnifam_id', render: (data) => `<a href="${detailsPrefix}${data}/">${data}</a>` },
+                    { data: 'full_size' },
+                    { data: 'rep_length' },
+                    { data: 'plddt' },
+                    { data: 'ptm' },
+                    { data: 'helix_percent' },
+                    { data: 'strand_percent' },
+                    { data: 'coil_percent' },
+                    { data: 'inside_percent' },
+                    { data: 'membrane_alpha_percent' },
+                    { data: 'outside_percent' },
+                    { data: 'signal_percent' },
+                    { data: 'membrane_beta_percent' },
+                    { data: 'periplasm_percent' },
+                ],
             });
         }
     };

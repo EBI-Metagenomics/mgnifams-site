@@ -549,11 +549,14 @@ class FunfamUrlTests(TestCase):
         self.assertEqual(funfams[0]['funfam_url'], '#')
 
 
-class AnnotationSearchViewTests(TestCase):
+class AnnotationTermFilterTests(TestCase):
+    """Tests for annotation_term filter on the mgnifams_data endpoint."""
+
     def setUp(self):
+        cache.clear()
+        self.url = reverse('mgnifams_data')
         self.family1 = make_mgnifam(id=1)
         self.family2 = make_mgnifam(id=2)
-        self.url = reverse('annotation_search')
         MgnifamPfams.objects.create(
             mgnifam=self.family1,
             pfam='PF00001',
@@ -593,44 +596,47 @@ class AnnotationSearchViewTests(TestCase):
             acc=0.9,
         )
 
-    def test_no_params_returns_empty(self):
-        r = self.client.get(self.url)
-        data = r.json()
-        self.assertEqual(r.status_code, 200)
-        self.assertEqual(data['count'], 0)
-        self.assertEqual(data['results'], [])
+    def _get(self, **params):
+        defaults = {
+            'draw': 1,
+            'start': 0,
+            'length': 50,
+            'order[0][column]': 0,
+            'order[0][dir]': 'asc',
+            'search[value]': '',
+        }
+        defaults.update(params)
+        return self.client.get(self.url, defaults)
+
+    def _ids(self, r):
+        return [row['mgnifam_id'] for row in r.json()['data']]
 
     def test_pfam_id_match_in_pfams_table(self):
-        r = self.client.get(self.url, {'term': 'PF00001'})
-        data = r.json()
-        self.assertEqual(data['count'], 1)
-        self.assertEqual(data['results'][0]['mgnifam_id'], 'MGYF0000000001')
+        r = self._get(annotation_term='PF00001')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
 
     def test_pfam_name_match_in_pfams_table(self):
-        r = self.client.get(self.url, {'term': 'GTPase'})
-        data = r.json()
-        self.assertEqual(data['count'], 1)
-        self.assertEqual(data['results'][0]['mgnifam_id'], 'MGYF0000000001')
+        r = self._get(annotation_term='GTPase')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
 
     def test_pfam_id_match_in_model_pfams_table(self):
-        r = self.client.get(self.url, {'term': 'PF00002'})
-        data = r.json()
-        self.assertEqual(data['count'], 1)
-        self.assertEqual(data['results'][0]['mgnifam_id'], 'MGYF0000000002')
+        r = self._get(annotation_term='PF00002')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
 
     def test_pfam_description_match_in_model_pfams_table(self):
-        r = self.client.get(self.url, {'term': 'rhodopsin'})
-        data = r.json()
-        self.assertEqual(data['count'], 1)
-        self.assertEqual(data['results'][0]['mgnifam_id'], 'MGYF0000000002')
+        r = self._get(annotation_term='rhodopsin')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
 
     def test_funfam_match(self):
-        r = self.client.get(self.url, {'term': '1.10.10.10'})
-        data = r.json()
-        self.assertEqual(data['count'], 1)
-        self.assertEqual(data['results'][0]['mgnifam_id'], 'MGYF0000000001')
+        r = self._get(annotation_term='1.10.10.10')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
 
-    def test_term_matching_both_pfam_tables_deduplicates(self):
+    def test_match_across_tables_no_duplicates(self):
         MgnifamModelPfams.objects.create(
             mgnifam=self.family1,
             pfam='PF00001',
@@ -642,11 +648,10 @@ class AnnotationSearchViewTests(TestCase):
             query_hmm='1-10',
             template_hmm='1-10',
         )
-        r = self.client.get(self.url, {'term': 'PF00001'})
-        data = r.json()
-        self.assertEqual(data['count'], 1)
+        r = self._get(annotation_term='PF00001')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
 
-    def test_term_matching_pfam_and_funfam_returns_union(self):
+    def test_term_spanning_pfam_and_funfam_tables(self):
         MgnifamFunfams.objects.create(
             mgnifam=self.family2,
             funfam='1.10.10.10-FF-000002',
@@ -660,55 +665,17 @@ class AnnotationSearchViewTests(TestCase):
             env_to=10,
             acc=0.9,
         )
-        r = self.client.get(self.url, {'term': '1.10.10'})
-        data = r.json()
-        ids = [item['mgnifam_id'] for item in data['results']]
-        self.assertEqual(data['count'], 2)
-        self.assertIn('MGYF0000000001', ids)
-        self.assertIn('MGYF0000000002', ids)
+        r = self._get(annotation_term='1.10.10')
+        self.assertEqual(r.json()['recordsFiltered'], 2)
 
-    def test_short_query_returns_400(self):
-        r = self.client.get(self.url, {'term': 'PF0'})
-        self.assertEqual(r.status_code, 400)
+    def test_short_term_ignored(self):
+        r = self._get(annotation_term='PF0')
+        self.assertEqual(r.json()['recordsFiltered'], 2)
 
     def test_no_match_returns_empty(self):
-        r = self.client.get(self.url, {'term': 'NONEXISTENT99999'})
-        data = r.json()
-        self.assertEqual(data['count'], 0)
-        self.assertEqual(data['results'], [])
-
-    def test_results_include_all_list_fields(self):
-        r = self.client.get(self.url, {'term': 'PF00001'})
-        row = r.json()['results'][0]
-        for field in (
-            'mgnifam_id',
-            'full_size',
-            'rep_length',
-            'plddt',
-            'ptm',
-            'helix_percent',
-            'strand_percent',
-            'coil_percent',
-        ):
-            self.assertIn(field, row)
-
-    def test_results_ordered_by_id(self):
-        MgnifamFunfams.objects.create(
-            mgnifam=self.family2,
-            funfam='1.10.10.10-FF-000002',
-            e_value=1e-5,
-            score=10.0,
-            hmm_from=1,
-            hmm_to=10,
-            ali_from=1,
-            ali_to=10,
-            env_from=1,
-            env_to=10,
-            acc=0.9,
-        )
-        r = self.client.get(self.url, {'term': '1.10.10'})
-        ids = [item['mgnifam_id'] for item in r.json()['results']]
-        self.assertEqual(ids, sorted(ids))
+        r = self._get(annotation_term='NONEXISTENT99999')
+        self.assertEqual(r.json()['recordsFiltered'], 0)
+        self.assertEqual(r.json()['data'], [])
 
 
 class MgnifamsDataEdgeCaseTests(TestCase):

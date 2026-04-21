@@ -20,9 +20,16 @@ def index(request):
     first_mgnifam = Mgnifam.objects.only('id').first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
 
-    context = {'num_mgnifams': num_mgnifams, 'first_id': first_id}
-
-    return render(request, 'explorer/index.html', context)
+    return render(
+        request,
+        'explorer/index.html',
+        {
+            'num_mgnifams': num_mgnifams,
+            'first_id': first_id,
+            'mgnifams_data_url': reverse('mgnifams_data'),
+            'details_url_prefix': reverse('details', args=['MGYF0000000001']).replace('MGYF0000000001/', ''),
+        },
+    )
 
 
 def translate_mgyf_to_int_id(mgyf):
@@ -392,6 +399,26 @@ def mgnifams_data(request):
             qs = qs.exclude(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
             active_annotation_filters = True
 
+    # Apply annotation text search across Pfam/FunFam tables
+    annotation_term = request.GET.get('annotation_term', '').strip()
+    if len(annotation_term) >= 4:
+        qs = qs.filter(
+            Exists(
+                MgnifamPfams.objects.filter(mgnifam=OuterRef('pk')).filter(
+                    Q(pfam__icontains=annotation_term) | Q(name__icontains=annotation_term)
+                )
+            )
+            | Exists(
+                MgnifamModelPfams.objects.filter(mgnifam=OuterRef('pk')).filter(
+                    Q(pfam__icontains=annotation_term)
+                    | Q(name__icontains=annotation_term)
+                    | Q(description__icontains=annotation_term)
+                )
+            )
+            | Exists(MgnifamFunfams.objects.filter(mgnifam=OuterRef('pk'), funfam__icontains=annotation_term))
+        )
+        active_annotation_filters = True
+
     has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
 
@@ -424,48 +451,3 @@ def mgnifams_data(request):
             'data': data,
         }
     )
-
-
-def annotation_search(request):
-    term = request.GET.get('term', '').strip()
-
-    if not term:
-        return JsonResponse({'results': [], 'count': 0})
-
-    if len(term) < 4:
-        return JsonResponse({'error': 'Query must be at least 4 characters.'}, status=400)
-
-    ids = set()
-    ids.update(
-        MgnifamPfams.objects.filter(Q(pfam__icontains=term) | Q(name__icontains=term)).values_list(
-            'mgnifam_id', flat=True
-        )
-    )
-    ids.update(
-        MgnifamModelPfams.objects.filter(
-            Q(pfam__icontains=term) | Q(name__icontains=term) | Q(description__icontains=term)
-        ).values_list('mgnifam_id', flat=True)
-    )
-    ids.update(MgnifamFunfams.objects.filter(funfam__icontains=term).values_list('mgnifam_id', flat=True))
-
-    mgnifams = Mgnifam.objects.filter(id__in=ids).only(*_LIST_FIELDS).order_by('id')
-    results = [
-        {
-            'mgnifam_id': format_family_name(m.id),
-            'full_size': m.full_size,
-            'rep_length': m.rep_length,
-            'plddt': m.plddt,
-            'ptm': m.ptm,
-            'helix_percent': m.helix_percent,
-            'strand_percent': m.strand_percent,
-            'coil_percent': m.coil_percent,
-            'inside_percent': m.inside_percent,
-            'membrane_alpha_percent': m.membrane_alpha_percent,
-            'outside_percent': m.outside_percent,
-            'signal_percent': m.signal_percent,
-            'membrane_beta_percent': m.membrane_beta_percent,
-            'periplasm_percent': m.periplasm_percent,
-        }
-        for m in mgnifams
-    ]
-    return JsonResponse({'results': results, 'count': len(results)})
