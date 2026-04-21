@@ -246,6 +246,7 @@ class MgnifamsListViewTests(TestCase):
 
 class MgnifamsDataViewTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.url = reverse('mgnifams_data')
         make_mgnifam(id=1, full_size=100, rep_length=80, helix_percent=30.0)
         make_mgnifam(id=2, full_size=200, rep_length=160, helix_percent=60.0)
@@ -550,6 +551,7 @@ class FunfamUrlTests(TestCase):
 
 class MgnifamsDataEdgeCaseTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.url = reverse('mgnifams_data')
         make_mgnifam(id=1, full_size=100)
 
