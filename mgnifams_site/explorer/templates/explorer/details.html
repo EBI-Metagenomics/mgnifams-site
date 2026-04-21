@@ -85,7 +85,7 @@
                                     the predicted structure.
                                 </span>
                             </span>
-                            pLDDT score
+                            <a href="#esmfold-structure">pLDDT score</a>
                         </td>
                         <td class="vf-table__cell">{{ plddt }}</td>
                     </tr>
@@ -98,7 +98,7 @@
                                     Higher values indicate a more globally accurate predicted structure.
                                 </span>
                             </span>
-                            pTM score
+                            <a href="#esmfold-structure">pTM score</a>
                         </td>
                         <td class="vf-table__cell">{{ ptm }}</td>
                     </tr>
@@ -110,7 +110,7 @@
                                     Denotes if FunFam functional annotation hits were identified via the hmmer/hmmsearch tool.
                                 </span>
                             </span>
-                            Sequence-HMM FunFam matches
+                            <a href="#funfam-matches">Sequence-HMM FunFam matches</a>
                         </td>
                         <td class="vf-table__cell">
                             {% if funfams_data %}
@@ -128,7 +128,7 @@
                                     Denotes if Pfam functional annotation hits were identified via the hmmer/hmmsearch tool.
                                 </span>
                             </span>
-                            Sequence-HMM Pfam matches
+                            <a href="#pfam-matches">Sequence-HMM Pfam matches</a>
                         </td>
                         <td class="vf-table__cell">
                             {% if pfams_data %}
@@ -146,7 +146,7 @@
                                     Denotes if Pfam domain annotation hits were identified through model searching with the hhsuite/hhblits tool.
                                 </span>
                             </span>
-                            Profile-profile Pfam matches
+                            <a href="#pfam-model-matches">Profile-profile Pfam matches</a>
                         </td>
                         <td class="vf-table__cell">
                             {% if pfams_model_data %}
@@ -165,7 +165,7 @@
                                     in the AlphaFoldDB or PDB databases through the foldseek tool.
                                 </span>
                             </span>
-                            Structure-structure hits
+                            <a href="#structure-hits">Structure-structure hits</a>
                         </td>
                         <td class="vf-table__cell">
                             {% if structural_annotations %}
@@ -197,7 +197,7 @@
         </div>
     </article>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
+    <article id="esmfold-structure" class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-grid vf-grid__col-4 | vf-card__content">
             <div class="vf-grid__col--span-1">
                 <h3>ESMFold structure</h3>
@@ -421,7 +421,7 @@ periplasm:  {{ periplasm_percent }}%
         </div>
     </article>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
+    <article id="funfam-matches" class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Functional annotation through Funfam matches</h3>
             <div>
@@ -472,7 +472,7 @@ periplasm:  {{ periplasm_percent }}%
         </div>
     </article>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
+    <article id="pfam-matches" class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Functional annotation through Pfam matches</h3>
             <div>
@@ -525,7 +525,7 @@ periplasm:  {{ periplasm_percent }}%
         </div>
     </article>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
+    <article id="pfam-model-matches" class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Profile-profile Pfam matches</h3>
             <div>
@@ -573,7 +573,7 @@ periplasm:  {{ periplasm_percent }}%
         </div>
     </article>
 
-    <article class="vf-card vf-card--brand vf-card--bordered">
+    <article id="structure-hits" class="vf-card vf-card--brand vf-card--bordered">
         <div class="vf-card__content | vf-stack vf-stack--400">
             <h3 class="vf-card__heading">Structure-structure hits</h3>
             <div>

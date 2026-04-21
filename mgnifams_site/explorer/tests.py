@@ -103,6 +103,17 @@ class DetailsViewTests(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
 
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_rows_link_to_matching_sections(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        self.assertContains(response, 'href="#esmfold-structure">pLDDT score</a>')
+        self.assertContains(response, 'href="#esmfold-structure">pTM score</a>')
+        self.assertContains(response, 'href="#funfam-matches">Sequence-HMM FunFam matches</a>')
+        self.assertContains(response, 'href="#pfam-matches">Sequence-HMM Pfam matches</a>')
+        self.assertContains(response, 'href="#pfam-model-matches">Profile-profile Pfam matches</a>')
+        self.assertContains(response, 'href="#structure-hits">Structure-structure hits</a>')
+
     pass  # placeholder so the class body remains valid if all tests above are removed
 
     def test_details_nonexistent_id_returns_404(self):
