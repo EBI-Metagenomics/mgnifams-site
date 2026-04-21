@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultsBox = document.getElementById('annotation-results');
     const messageBox = document.getElementById('annotation-results-message');
     const input = document.getElementById('annotation-search');
+    const overlay = document.getElementById('loading-overlay');
 
     const MIN_QUERY_LENGTH = 4;
     let annotationTable = null;
@@ -83,6 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     { data: 'periplasm_percent' },
                 ],
             });
+            annotationTable
+                .on('preXhr.dt', () => {
+                    overlay.classList.add('active');
+                    overlay.setAttribute('aria-hidden', 'false');
+                })
+                .on('xhr.dt', () => {
+                    overlay.classList.remove('active');
+                    overlay.setAttribute('aria-hidden', 'true');
+                });
         }
     };
 
