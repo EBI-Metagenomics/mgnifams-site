@@ -2,7 +2,12 @@
 {% load static %}
 
 {% block extra_head %}
-<script defer src="{% static 'explorer/js/index.js' %}"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script defer src="{% static 'explorer/js/index.js' %}"></script>
 {% endblock extra_head %}
 
 {% block content %}
@@ -33,6 +38,61 @@
             <p style="color: red;">{{ message }}</p>
         {% endfor %}
     {% endif %}
+
+    <hr class="vf-divider">
+
+    <div
+        id="annotation-search-section"
+        data-search-url="{% url 'annotation_search' %}"
+        data-details-prefix="{% url 'details' 'PROTID' %}"
+    >
+        <h3>
+            Search by annotation
+            <span class="tooltip">
+                <i class="icon icon-common icon-info tooltip-icon"></i>
+                <span class="tooltiptext annotation-info-tooltip">
+                    Searches <strong>%term%</strong> (case-insensitive) across:<br>
+                    &bull; Pfam ID &amp; name <em>(sequence-HMM hits)</em><br>
+                    &bull; Pfam ID, name &amp; description <em>(profile-profile hits)</em><br>
+                    &bull; FunFam ID <em>(CATH FunFam hits)</em><br><br>
+                    Examples: <code>PF000</code>, <code>kinase</code>, <code>1.10.10</code>
+                </span>
+            </span>
+        </h3>
+        <div class="annotation-search-input-row">
+            <input type="text" id="annotation-search" class="vf-form__input" placeholder="Pfam ID, Pfam name, or FunFam ID (min. 4 characters)" aria-label="Search by Pfam or FunFam annotation">
+            <button id="annotation-search-btn" class="vf-button vf-button--primary vf-button--sm">Search</button>
+        </div>
+        <div id="annotation-results" class="annotation-results hidden" aria-live="polite">
+            <div id="annotation-results-message"></div>
+            <article class="vf-card vf-card--brand vf-card--bordered vf-stack--600" style="margin-top:1em">
+                <div class="vf-card__content mgnifams-table-container | vf-stack vf-stack--600">
+                    <table id="annotation-results-table"
+                           class="vf-table mgnifams-table">
+                        <thead class="vf-table__header">
+                            <tr class="vf-table__row">
+                                <th class="vf-table__heading" scope="col">ID</th>
+                                <th class="vf-table__heading" scope="col">Full size</th>
+                                <th class="vf-table__heading" scope="col">Representative length</th>
+                                <th class="vf-table__heading" scope="col">pLDDT</th>
+                                <th class="vf-table__heading" scope="col">pTM</th>
+                                <th class="vf-table__heading" scope="col">Helix%</th>
+                                <th class="vf-table__heading" scope="col">Strand%</th>
+                                <th class="vf-table__heading" scope="col">Coil%</th>
+                                <th class="vf-table__heading" scope="col">Inside%</th>
+                                <th class="vf-table__heading" scope="col">Membrane-alpha%</th>
+                                <th class="vf-table__heading" scope="col">Outside%</th>
+                                <th class="vf-table__heading" scope="col">Signal%</th>
+                                <th class="vf-table__heading" scope="col">Membrane-beta%</th>
+                                <th class="vf-table__heading" scope="col">Periplasm%</th>
+                            </tr>
+                        </thead>
+                        <tbody class="vf-table__body"></tbody>
+                    </table>
+                </div>
+            </article>
+        </div>
+    </div>
 
 </section>
 

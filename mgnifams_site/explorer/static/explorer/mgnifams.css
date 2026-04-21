@@ -280,6 +280,54 @@ nightingale-manager {
     border-radius: 2px;
 }
 
+.annotation-search-input-row {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    margin-top: 0.4em;
+}
+
+.annotation-search-input-row .vf-form__input {
+    flex: 1;
+    margin: 0 !important;
+}
+
+.annotation-info-tooltip {
+    width: 320px !important;
+    text-align: left !important;
+    line-height: 1.6;
+    font-size: 0.85em;
+}
+
+.annotation-results {
+    margin-top: 1em;
+    padding: 0.75em 1em;
+    background: #f0f4f8;
+    border-left: 4px solid #707372;
+    border-radius: 2px;
+}
+
+.annotation-results.hidden {
+    display: none;
+}
+
+#annotation-results-table {
+    display: none;
+}
+
+.annotation-results-header {
+    margin: 0 0 0.5em;
+    font-weight: 500;
+}
+
+.annotation-results-loading,
+.annotation-results-empty,
+.annotation-results-error {
+    margin: 0;
+    color: #555;
+}
+
+
 #loading-overlay {
     display: none;
     position: fixed;

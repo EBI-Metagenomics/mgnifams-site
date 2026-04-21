@@ -4,7 +4,7 @@ import re
 
 import requests
 from django.core.cache import cache
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -424,3 +424,48 @@ def mgnifams_data(request):
             'data': data,
         }
     )
+
+
+def annotation_search(request):
+    term = request.GET.get('term', '').strip()
+
+    if not term:
+        return JsonResponse({'results': [], 'count': 0})
+
+    if len(term) < 4:
+        return JsonResponse({'error': 'Query must be at least 4 characters.'}, status=400)
+
+    ids = set()
+    ids.update(
+        MgnifamPfams.objects.filter(Q(pfam__icontains=term) | Q(name__icontains=term)).values_list(
+            'mgnifam_id', flat=True
+        )
+    )
+    ids.update(
+        MgnifamModelPfams.objects.filter(
+            Q(pfam__icontains=term) | Q(name__icontains=term) | Q(description__icontains=term)
+        ).values_list('mgnifam_id', flat=True)
+    )
+    ids.update(MgnifamFunfams.objects.filter(funfam__icontains=term).values_list('mgnifam_id', flat=True))
+
+    mgnifams = Mgnifam.objects.filter(id__in=ids).only(*_LIST_FIELDS).order_by('id')
+    results = [
+        {
+            'mgnifam_id': format_family_name(m.id),
+            'full_size': m.full_size,
+            'rep_length': m.rep_length,
+            'plddt': m.plddt,
+            'ptm': m.ptm,
+            'helix_percent': m.helix_percent,
+            'strand_percent': m.strand_percent,
+            'coil_percent': m.coil_percent,
+            'inside_percent': m.inside_percent,
+            'membrane_alpha_percent': m.membrane_alpha_percent,
+            'outside_percent': m.outside_percent,
+            'signal_percent': m.signal_percent,
+            'membrane_beta_percent': m.membrane_beta_percent,
+            'periplasm_percent': m.periplasm_percent,
+        }
+        for m in mgnifams
+    ]
+    return JsonResponse({'results': results, 'count': len(results)})
