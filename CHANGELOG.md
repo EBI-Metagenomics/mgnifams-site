@@ -4,6 +4,7 @@
 
 ### Added
 
+- Statistics and About pages added
 - Added annotations search in the home page via FunFam id, Pfam id  (seq and model), Pfam name (seq and model), Pfam descr  (only model).
 - Added filters based on annotations existence.
 - Nav link to the FTP site with seed MSA files and the MGnifams HMM library.
