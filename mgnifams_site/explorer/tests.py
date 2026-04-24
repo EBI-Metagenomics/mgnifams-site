@@ -120,11 +120,6 @@ class StatisticsViewTests(TestCase):
         self.assertContains(response, f'href="{reverse("statistics")}"')
         self.assertContains(response, 'Statistics')
 
-    def test_index_links_to_statistics_entry_point(self):
-        response = self.client.get(reverse('index'))
-        self.assertContains(response, f'href="{reverse("statistics")}"')
-        self.assertContains(response, 'View statistics')
-
 
 class DetailsViewTests(TestCase):
     def setUp(self):

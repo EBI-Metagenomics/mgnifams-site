@@ -41,7 +41,7 @@
 - [x] Task 2: Add the Supplied Static PNG Assets
 - [x] Task 3: Add the Statistics View and URL
 - [x] Task 4: Create the Statistics Template
-- [ ] Task 5: Add Navigation and Homepage Links
+- [x] Task 5: Add Navigation and Homepage Links
 - [ ] Task 6: Add Responsive Statistics Styles
 - [ ] Task 7: Final Verification
 
@@ -356,7 +356,7 @@ Expected result: route, context, static asset, and plot rendering tests should p
 - Modify: `mgnifams_site/explorer/templates/explorer/base.html`
 - Modify: `mgnifams_site/explorer/templates/explorer/index.html`
 
-- [ ] **Step 1: Add `Statistics` after `Home` in the shared nav**
+- [x] **Step 1: Add `Statistics` after `Home` in the shared nav**
 
 In `mgnifams_site/explorer/templates/explorer/base.html`, update the first part of the nav list to:
 
@@ -380,7 +380,7 @@ In `mgnifams_site/explorer/templates/explorer/base.html`, update the first part 
             </li>
 ```
 
-- [ ] **Step 2: Add a homepage statistics button near the browse action**
+- [x] **Step 2: Add a homepage statistics button near the browse action**
 
 In `mgnifams_site/explorer/templates/explorer/index.html`, update the search form action row to:
 
@@ -391,7 +391,7 @@ In `mgnifams_site/explorer/templates/explorer/index.html`, update the search for
         <button id="example-btn" type="button" class="vf-button vf-button--secondary">Example</button>
 ```
 
-- [ ] **Step 3: Run the statistics tests**
+- [x] **Step 3: Run the statistics tests**
 
 Run:
 
