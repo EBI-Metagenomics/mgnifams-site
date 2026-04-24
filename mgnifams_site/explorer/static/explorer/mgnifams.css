@@ -354,3 +354,30 @@ nightingale-manager {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+.statistics-section {
+    margin-top: 2rem;
+}
+
+.statistics-plot {
+    margin-top: 1rem;
+}
+
+.statistics-plot__image-wrap {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid #d0d0ce;
+    background: #ffffff;
+}
+
+.statistics-plot__image {
+    display: block;
+    width: auto;
+    max-width: none;
+    height: auto;
+}
+
+.statistics-plot__caption {
+    color: #54585a;
+    font-size: 16px;
+}

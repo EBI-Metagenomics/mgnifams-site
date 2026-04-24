@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 import requests.exceptions
+from django.contrib.staticfiles import finders
 from django.core.cache import cache
 from django.http import Http404
 from django.test import TestCase
@@ -89,6 +90,58 @@ class IndexViewTests(TestCase):
         make_mgnifam(id=7)
         response = self.client.get(reverse('index'))
         self.assertEqual(response.context['first_id'], 'MGYF0000000007')
+
+
+class StatisticsViewTests(TestCase):
+    def test_statistics_url_returns_200(self):
+        response = self.client.get(reverse('statistics'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_statistics_context_lists_plot_sections(self):
+        response = self.client.get(reverse('statistics'))
+        self.assertIn('plot_sections', response.context)
+        self.assertEqual(
+            [section['heading'] for section in response.context['plot_sections']],
+            ['Family length distribution', 'Family size distribution'],
+        )
+
+    def test_statistics_page_renders_supplied_plot_paths(self):
+        response = self.client.get(reverse('statistics'))
+        self.assertContains(response, 'explorer/statistics/family_length_short.png')
+        self.assertContains(response, 'explorer/statistics/family_size_medium.png')
+        self.assertContains(response, 'Open image', count=2)
+
+    def test_statistics_static_assets_exist(self):
+        self.assertIsNotNone(finders.find('explorer/statistics/family_length_short.png'))
+        self.assertIsNotNone(finders.find('explorer/statistics/family_size_medium.png'))
+
+    def test_main_navigation_links_to_statistics(self):
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, f'href="{reverse("statistics")}"')
+        self.assertContains(response, 'Statistics')
+
+
+class AboutViewTests(TestCase):
+    def test_about_url_returns_200(self):
+        response = self.client.get(reverse('about'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_main_navigation_links_to_about(self):
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, f'href="{reverse("about")}"')
+        self.assertContains(response, 'About')
+
+    def test_about_page_describes_developer_and_funding(self):
+        response = self.client.get(reverse('about'))
+        self.assertContains(response, 'Evangelos Karatzas')
+        self.assertContains(response, 'EMBL-EBI')
+        self.assertContains(response, 'MGnify')
+        self.assertContains(response, 'MGnifams')
+        self.assertContains(response, 'ARISE')
+        self.assertContains(response, '101033864')
+        self.assertContains(response, 'https://github.com/EBI-Metagenomics/mgnifams/')
+        self.assertContains(response, 'https://github.com/vagkaratzas/')
+        self.assertContains(response, 'https://cordis.europa.eu/project/id/101033864/results')
 
 
 class DetailsViewTests(TestCase):

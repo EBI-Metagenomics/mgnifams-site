@@ -32,6 +32,52 @@ def index(request):
     )
 
 
+STATISTICS_PLOT_SECTIONS = [
+    {
+        'heading': 'Family length distribution',
+        'plots': [
+            {
+                'title': 'Short family lengths',
+                'filename': 'explorer/statistics/family_length_short.png',
+                'alt': (
+                    'Stacked bar chart showing MGnifam family length distribution for HMM consensus '
+                    'lengths 1 to 700, split into annotated and unannotated families.'
+                ),
+                'caption': 'Family length distribution for short HMM consensus lengths, binned by 25 amino acids.',
+            }
+        ],
+    },
+    {
+        'heading': 'Family size distribution',
+        'plots': [
+            {
+                'title': 'Medium family sizes',
+                'filename': 'explorer/statistics/family_size_medium.png',
+                'alt': (
+                    'Stacked bar chart showing MGnifam family size distribution for families with '
+                    '21 to 100000 sequences, split into annotated and unannotated families.'
+                ),
+                'caption': 'Family size distribution for medium-sized families, binned by 10000 sequences.',
+            }
+        ],
+    },
+]
+
+
+def statistics(request):
+    return render(
+        request,
+        'explorer/statistics.html',
+        {
+            'plot_sections': STATISTICS_PLOT_SECTIONS,
+        },
+    )
+
+
+def about(request):
+    return render(request, 'explorer/about.html')
+
+
 def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0*', '', mgyf)
     try:

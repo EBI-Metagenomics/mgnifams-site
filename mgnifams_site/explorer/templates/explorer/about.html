@@ -1,0 +1,41 @@
+{% extends "explorer/base.html" %}
+
+{% block title %}
+    About MGnifams
+{% endblock title %}
+
+{% block content %}
+<section class="vf-content | vf-stack vf-stack--600">
+    <header class="vf-stack vf-stack--400">
+        <h2>About MGnifams</h2>
+        <p>
+            This site provides a lightweight interface for exploring MGnifams,
+            metagenomics-derived protein families built from MGnify protein data.
+        </p>
+    </header>
+
+    <section class="vf-stack vf-stack--400" aria-labelledby="about-developer">
+        <h3 id="about-developer">About the developer</h3>
+        <p>
+            The MGnifams 
+            <a href="https://github.com/EBI-Metagenomics/mgnifams/" target="_blank" rel="noopener">pipeline</a>
+            and the MGnifams site development are led by
+            <a href="https://github.com/vagkaratzas/" target="_blank" rel="noopener">Evangelos Karatzas</a>,
+            a bioinformatics researcher and Research Fellow at EMBL-EBI working with the MGnify team
+            on MGnifams. His work focuses on bioinformatics web tools and scalable
+            Nextflow/nf-core workflows for generating and annotating metagenomics-derived
+            protein families.
+        </p>
+    </section>
+
+    <section class="vf-stack vf-stack--400" aria-labelledby="about-funding">
+        <h3 id="about-funding">Funding</h3>
+        <p>
+            This work is supported through the ARISE H2020 programme, grant agreement
+            <a href="https://cordis.europa.eu/project/id/101033864/results" target="_blank" rel="noopener">101033864</a>.
+            ARISE supports skills, recognition, and digital approaches for sustainable energy,
+            and provides the funding route for this MGnifams work.
+        </p>
+    </section>
+</section>
+{% endblock content %}
