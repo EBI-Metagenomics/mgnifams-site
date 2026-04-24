@@ -20,6 +20,8 @@
   - Add `STATISTICS_PLOT_SECTIONS` metadata and a `statistics` view.
 - Modify `mgnifams_site/explorer/urls.py`
   - Add the `/statistics/` route named `statistics`.
+- Modify `mgnifams_site/explorer/storage.py`
+  - Keep development and test rendering working when new app static files have not been collected into an existing static manifest yet.
 - Create `mgnifams_site/explorer/templates/explorer/statistics.html`
   - Render the page from `plot_sections` using a template loop.
 - Modify `mgnifams_site/explorer/templates/explorer/base.html`
@@ -38,7 +40,7 @@
 - [x] Task 1: Add Failing Statistics Tests
 - [x] Task 2: Add the Supplied Static PNG Assets
 - [x] Task 3: Add the Statistics View and URL
-- [ ] Task 4: Create the Statistics Template
+- [x] Task 4: Create the Statistics Template
 - [ ] Task 5: Add Navigation and Homepage Links
 - [ ] Task 6: Add Responsive Statistics Styles
 - [ ] Task 7: Final Verification
@@ -267,9 +269,32 @@ django.template.exceptions.TemplateDoesNotExist: explorer/statistics.html
 ### Task 4: Create the Statistics Template
 
 **Files:**
+- Modify: `mgnifams_site/explorer/storage.py`
 - Create: `mgnifams_site/explorer/templates/explorer/statistics.html`
 
-- [ ] **Step 1: Create the template**
+- [x] **Step 1: Add a manifest-storage fallback for newly added app static files**
+
+In `mgnifams_site/explorer/storage.py`, update `ManifestOptionalStaticFilesStorage` to:
+
+```python
+class ManifestOptionalStaticFilesStorage(CompressedManifestStaticFilesStorage):
+    """
+    Whitenoise storage with manifest_strict=False so that missing or not-yet-built
+    manifests don't raise errors in development or tests.  In production, after
+    `collectstatic` is run, files are served with content-hash cache-busting and
+    gzip/brotli compression as normal.
+    """
+
+    manifest_strict = False
+
+    def stored_name(self, name):
+        try:
+            return super().stored_name(name)
+        except ValueError:
+            return self.clean_name(name)
+```
+
+- [x] **Step 2: Create the template**
 
 Create `mgnifams_site/explorer/templates/explorer/statistics.html` with this content:
 
@@ -312,7 +337,7 @@ Create `mgnifams_site/explorer/templates/explorer/statistics.html` with this con
 {% endblock content %}
 ```
 
-- [ ] **Step 2: Run the statistics tests and confirm navigation/homepage failures remain**
+- [x] **Step 3: Run the statistics tests and confirm navigation/homepage failures remain**
 
 Run:
 

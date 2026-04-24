@@ -1,0 +1,36 @@
+{% extends "explorer/base.html" %}
+{% load static %}
+
+{% block title %}
+    MGnifams statistics
+{% endblock title %}
+
+{% block content %}
+<section class="vf-content | vf-stack vf-stack--600">
+    <header class="vf-stack vf-stack--400">
+        <h2>MGnifams statistics</h2>
+        <p>
+            These plots summarize the currently hosted MGnifams release and
+            show how families are distributed by length, size, and annotation status.
+        </p>
+    </header>
+
+    {% for section in plot_sections %}
+        <section class="statistics-section | vf-stack vf-stack--400" aria-labelledby="statistics-section-{{ forloop.counter }}">
+            <h3 id="statistics-section-{{ forloop.counter }}">{{ section.heading }}</h3>
+
+            {% for plot in section.plots %}
+                {% static plot.filename as plot_url %}
+                <figure class="statistics-plot | vf-stack vf-stack--400">
+                    <h4>{{ plot.title }}</h4>
+                    <div class="statistics-plot__image-wrap">
+                        <img class="statistics-plot__image" src="{{ plot_url }}" alt="{{ plot.alt }}">
+                    </div>
+                    <figcaption class="statistics-plot__caption">{{ plot.caption }}</figcaption>
+                    <p><a class="vf-link" href="{{ plot_url }}">Open image</a></p>
+                </figure>
+            {% endfor %}
+        </section>
+    {% endfor %}
+</section>
+{% endblock content %}
