@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add an expandable `/statistics/` page that displays the two supplied MGnifams release-level plot images and links to it from the main navigation and homepage.
+**Goal:** Add an expandable `/statistics/` page that displays the two supplied MGnifams release-level plot images and links to it from the main navigation.
 
 **Architecture:** Add a small Django view that passes structured plot metadata into a new template. Store supplied PNGs as static assets and render them through a reusable template loop so future plots can be added by extending metadata, not duplicating markup.
 
@@ -15,7 +15,7 @@
 ## File Structure
 
 - Modify `mgnifams_site/explorer/tests.py`
-  - Add focused tests for the statistics URL, static assets, rendered image paths, main navigation link, and homepage entry point.
+  - Add focused tests for the statistics URL, static assets, rendered image paths, and main navigation link.
 - Modify `mgnifams_site/explorer/views.py`
   - Add `STATISTICS_PLOT_SECTIONS` metadata and a `statistics` view.
 - Modify `mgnifams_site/explorer/urls.py`
@@ -26,8 +26,6 @@
   - Render the page from `plot_sections` using a template loop.
 - Modify `mgnifams_site/explorer/templates/explorer/base.html`
   - Add a `Statistics` link after `Home` in the shared main navigation.
-- Modify `mgnifams_site/explorer/templates/explorer/index.html`
-  - Add a secondary `View statistics` link near `View available MGnifams`.
 - Modify `mgnifams_site/explorer/static/explorer/mgnifams.css`
   - Add page-specific image overflow and caption styles.
 - Create directory `mgnifams_site/explorer/static/explorer/statistics/`
@@ -41,8 +39,8 @@
 - [x] Task 2: Add the Supplied Static PNG Assets
 - [x] Task 3: Add the Statistics View and URL
 - [x] Task 4: Create the Statistics Template
-- [x] Task 5: Add Navigation and Homepage Links
-- [ ] Task 6: Add Responsive Statistics Styles
+- [x] Task 5: Add Navigation Link
+- [x] Task 6: Add Responsive Statistics Styles
 - [ ] Task 7: Final Verification
 
 ---
@@ -106,10 +104,6 @@ class StatisticsViewTests(TestCase):
         self.assertContains(response, f'href="{reverse("statistics")}"')
         self.assertContains(response, 'Statistics')
 
-    def test_index_links_to_statistics_entry_point(self):
-        response = self.client.get(reverse('index'))
-        self.assertContains(response, f'href="{reverse("statistics")}"')
-        self.assertContains(response, 'View statistics')
 ```
 
 - [x] **Step 3: Run the new tests and confirm they fail for the expected reason**
@@ -337,7 +331,7 @@ Create `mgnifams_site/explorer/templates/explorer/statistics.html` with this con
 {% endblock content %}
 ```
 
-- [x] **Step 3: Run the statistics tests and confirm navigation/homepage failures remain**
+- [x] **Step 3: Run the statistics tests and confirm navigation failures remain**
 
 Run:
 
@@ -346,15 +340,14 @@ cd mgnifams_site
 DJANGO_SECRET_KEY=test-secret-key python manage.py test explorer.tests.StatisticsViewTests
 ```
 
-Expected result: route, context, static asset, and plot rendering tests should pass. The remaining failures should be the tests expecting the main navigation link and homepage entry point.
+Expected result: route, context, static asset, and plot rendering tests should pass. The remaining failure should be the test expecting the main navigation link.
 
 ---
 
-### Task 5: Add Navigation and Homepage Links
+### Task 5: Add Navigation Link
 
 **Files:**
 - Modify: `mgnifams_site/explorer/templates/explorer/base.html`
-- Modify: `mgnifams_site/explorer/templates/explorer/index.html`
 
 - [x] **Step 1: Add `Statistics` after `Home` in the shared nav**
 
@@ -380,18 +373,7 @@ In `mgnifams_site/explorer/templates/explorer/base.html`, update the first part 
             </li>
 ```
 
-- [x] **Step 2: Add a homepage statistics button near the browse action**
-
-In `mgnifams_site/explorer/templates/explorer/index.html`, update the search form action row to:
-
-```django
-        <input type="submit" value="Go to Details" class="vf-button vf-button--primary">
-        <a href="{% url 'mgnifams_list' %}" class="vf-button vf-button--secondary">View available MGnifams</a>
-        <a href="{% url 'statistics' %}" class="vf-button vf-button--secondary">View statistics</a>
-        <button id="example-btn" type="button" class="vf-button vf-button--secondary">Example</button>
-```
-
-- [x] **Step 3: Run the statistics tests**
+- [x] **Step 2: Run the statistics tests**
 
 Run:
 
@@ -403,7 +385,7 @@ DJANGO_SECRET_KEY=test-secret-key python manage.py test explorer.tests.Statistic
 Expected result:
 
 ```text
-Ran 6 tests
+Ran 5 tests
 OK
 ```
 
@@ -414,7 +396,7 @@ OK
 **Files:**
 - Modify: `mgnifams_site/explorer/static/explorer/mgnifams.css`
 
-- [ ] **Step 1: Append page-specific CSS**
+- [x] **Step 1: Append page-specific CSS**
 
 Append this CSS to `mgnifams_site/explorer/static/explorer/mgnifams.css`:
 
@@ -447,7 +429,7 @@ Append this CSS to `mgnifams_site/explorer/static/explorer/mgnifams.css`:
 }
 ```
 
-- [ ] **Step 2: Run the focused tests again**
+- [x] **Step 2: Run the focused tests again**
 
 Run:
 
@@ -459,7 +441,7 @@ DJANGO_SECRET_KEY=test-secret-key python manage.py test explorer.tests.Statistic
 Expected result:
 
 ```text
-Ran 6 tests
+Ran 5 tests
 OK
 ```
 
@@ -534,7 +516,6 @@ Stop the dev server with `Ctrl-C` after the smoke test.
 - Structured metadata for future plots: Task 3.
 - Reusable template loop: Task 4.
 - Main nav link after `Home`: Task 5.
-- Homepage entry point: Task 5.
 - Responsive wide-image behavior: Task 6.
 - Alt text, captions, and full-resolution image links: Tasks 3 and 4.
 - Focused Django tests: Task 1 through Task 5.

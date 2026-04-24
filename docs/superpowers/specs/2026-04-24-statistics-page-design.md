@@ -13,7 +13,6 @@ The page should be a durable place for future dataset overview plots, but the in
 
 - Add a first-class internal `/statistics/` page for MGnifams release-level plots.
 - Link the page from the shared main navigation so it is discoverable from every page.
-- Add a secondary homepage entry point near the existing `View available MGnifams` action.
 - Store the supplied PNG files as Django static assets.
 - Render plots from structured metadata so future plots can be added without duplicating template markup.
 - Keep the first version static and low-risk: no new database queries, background processing, charting libraries, or dynamic image generation.
@@ -37,7 +36,7 @@ Recommended placement:
 
 This keeps internal site destinations grouped first. The existing `Available MGnifams` browse page is currently linked from the homepage rather than the main nav, so the new statistics page should not require a broader navigation restructure.
 
-Also add a secondary link or button on the homepage near `View available MGnifams`. This gives users a contextual entry point from the current exploration workflow.
+Do not add a homepage button for the first version; the statistics page should be linked only from the shared main navigation.
 
 ## Route and View
 
@@ -139,7 +138,6 @@ Add focused Django tests for:
 - The `statistics` URL name resolves.
 - The response includes both static image paths.
 - The shared navigation includes the `Statistics` link.
-- The homepage includes the secondary statistics entry point.
 
 Existing test command:
 
@@ -155,7 +153,6 @@ Expected files to change:
 - `mgnifams_site/explorer/urls.py`
 - `mgnifams_site/explorer/views.py`
 - `mgnifams_site/explorer/templates/explorer/base.html`
-- `mgnifams_site/explorer/templates/explorer/index.html`
 - `mgnifams_site/explorer/templates/explorer/statistics.html`
 - `mgnifams_site/explorer/static/explorer/mgnifams.css`
 - `mgnifams_site/explorer/static/explorer/statistics/family_length_short.png`
@@ -172,7 +169,6 @@ Expected files to change:
 
 - Users can open `/statistics/` directly.
 - The main navigation contains an internal `Statistics` link.
-- The homepage offers a secondary route to the statistics page.
 - Both supplied PNGs render on the statistics page.
 - Each plot has a heading, caption, descriptive alt text, and direct full-resolution image link.
 - The page remains usable on narrow screens.
