@@ -36,7 +36,7 @@
 ## Task Progress
 
 - [x] Task 1: Add Failing Statistics Tests
-- [ ] Task 2: Add the Supplied Static PNG Assets
+- [x] Task 2: Add the Supplied Static PNG Assets
 - [ ] Task 3: Add the Statistics View and URL
 - [ ] Task 4: Create the Statistics Template
 - [ ] Task 5: Add Navigation and Homepage Links
@@ -133,7 +133,7 @@ django.urls.exceptions.NoReverseMatch: Reverse for 'statistics' not found.
 - Create: `mgnifams_site/explorer/static/explorer/statistics/family_length_short.png`
 - Create: `mgnifams_site/explorer/static/explorer/statistics/family_size_medium.png`
 
-- [ ] **Step 1: Create the statistics static asset directory**
+- [x] **Step 1: Create the statistics static asset directory**
 
 Run from the repository root:
 
@@ -141,7 +141,7 @@ Run from the repository root:
 mkdir -p mgnifams_site/explorer/static/explorer/statistics
 ```
 
-- [ ] **Step 2: Copy the supplied PNG files into the app static directory**
+- [x] **Step 2: Copy the supplied PNG files into the app static directory**
 
 Run from the repository root:
 
@@ -150,7 +150,7 @@ cp /home/vangelis/Downloads/images/family_length_short.png mgnifams_site/explore
 cp /home/vangelis/Downloads/images/family_size_medium.png mgnifams_site/explorer/static/explorer/statistics/family_size_medium.png
 ```
 
-- [ ] **Step 3: Verify the files exist**
+- [x] **Step 3: Verify the files exist**
 
 Run:
 
@@ -161,7 +161,7 @@ test -f mgnifams_site/explorer/static/explorer/statistics/family_size_medium.png
 
 Expected result: both commands exit with status `0` and print no output.
 
-- [ ] **Step 4: Run the static asset test**
+- [x] **Step 4: Run the static asset test**
 
 Run:
 
