@@ -37,7 +37,7 @@
 
 - [x] Task 1: Add Failing Statistics Tests
 - [x] Task 2: Add the Supplied Static PNG Assets
-- [ ] Task 3: Add the Statistics View and URL
+- [x] Task 3: Add the Statistics View and URL
 - [ ] Task 4: Create the Statistics Template
 - [ ] Task 5: Add Navigation and Homepage Links
 - [ ] Task 6: Add Responsive Statistics Styles
@@ -185,7 +185,7 @@ OK
 - Modify: `mgnifams_site/explorer/views.py`
 - Modify: `mgnifams_site/explorer/urls.py`
 
-- [ ] **Step 1: Add structured plot metadata and the view**
+- [x] **Step 1: Add structured plot metadata and the view**
 
 In `mgnifams_site/explorer/views.py`, add this block after `index` and before `translate_mgyf_to_int_id`:
 
@@ -232,7 +232,7 @@ def statistics(request):
     )
 ```
 
-- [ ] **Step 2: Add the URL route**
+- [x] **Step 2: Add the URL route**
 
 In `mgnifams_site/explorer/urls.py`, add the `statistics` path immediately after the index route:
 
@@ -247,7 +247,7 @@ urlpatterns = [
 ]
 ```
 
-- [ ] **Step 3: Run the statistics tests and confirm the next expected failure**
+- [x] **Step 3: Run the statistics tests and confirm the next expected failure**
 
 Run:
 
