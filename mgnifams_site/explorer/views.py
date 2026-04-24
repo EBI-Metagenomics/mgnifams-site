@@ -74,6 +74,10 @@ def statistics(request):
     )
 
 
+def about(request):
+    return render(request, 'explorer/about.html')
+
+
 def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0*', '', mgyf)
     try:

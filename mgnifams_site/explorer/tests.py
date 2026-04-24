@@ -121,6 +121,29 @@ class StatisticsViewTests(TestCase):
         self.assertContains(response, 'Statistics')
 
 
+class AboutViewTests(TestCase):
+    def test_about_url_returns_200(self):
+        response = self.client.get(reverse('about'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_main_navigation_links_to_about(self):
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, f'href="{reverse("about")}"')
+        self.assertContains(response, 'About')
+
+    def test_about_page_describes_developer_and_funding(self):
+        response = self.client.get(reverse('about'))
+        self.assertContains(response, 'Evangelos Karatzas')
+        self.assertContains(response, 'EMBL-EBI')
+        self.assertContains(response, 'MGnify')
+        self.assertContains(response, 'MGnifams')
+        self.assertContains(response, 'ARISE')
+        self.assertContains(response, '101033864')
+        self.assertContains(response, 'https://github.com/EBI-Metagenomics/mgnifams/')
+        self.assertContains(response, 'https://github.com/vagkaratzas/')
+        self.assertContains(response, 'https://cordis.europa.eu/project/id/101033864/results')
+
+
 class DetailsViewTests(TestCase):
     def setUp(self):
         self.family = make_mgnifam()
