@@ -44,7 +44,7 @@ items:
               persistentVolumeClaim:
                 claimName: mgnifams-volume-claim-2
           containers:
-            - image: quay.io/microbiome-informatics/mgnifams_site:ebi-wp-k8s-hl
+            - image: dockerhub.ebi.ac.uk/microbiome-informatics/mgnifams-site-container:ebi-wp-k8s-hl
               imagePullPolicy: Always
               name: mgnifams-site
               envFrom:
@@ -59,7 +59,7 @@ items:
               - mountPath: "/app/dbs"
                 name: mgnifams-app-storage
           imagePullSecrets:
-            - name: quay-pull-secret
+            - name: ebi-gitlab-pull-secret
   - apiVersion: v1
     kind: Service
     metadata:
@@ -124,5 +124,4 @@ items:
         requests:
           storage: 300Gi
       volumeName: mgnifams-vol-2
-
 
