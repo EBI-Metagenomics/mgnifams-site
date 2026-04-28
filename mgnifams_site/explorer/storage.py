@@ -10,3 +10,9 @@ class ManifestOptionalStaticFilesStorage(CompressedManifestStaticFilesStorage):
     """
 
     manifest_strict = False
+
+    def stored_name(self, name):
+        try:
+            return super().stored_name(name)
+        except ValueError:
+            return self.clean_name(name)

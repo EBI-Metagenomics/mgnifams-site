@@ -4,7 +4,7 @@ import re
 
 import requests
 from django.core.cache import cache
-from django.db.models import Exists, OuterRef
+from django.db.models import Exists, OuterRef, Q
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -20,9 +20,62 @@ def index(request):
     first_mgnifam = Mgnifam.objects.only('id').first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
 
-    context = {'num_mgnifams': num_mgnifams, 'first_id': first_id}
+    return render(
+        request,
+        'explorer/index.html',
+        {
+            'num_mgnifams': num_mgnifams,
+            'first_id': first_id,
+            'mgnifams_data_url': reverse('mgnifams_data'),
+            'details_url_prefix': reverse('details', args=['MGYF0000000001']).replace('MGYF0000000001/', ''),
+        },
+    )
 
-    return render(request, 'explorer/index.html', context)
+
+STATISTICS_PLOT_SECTIONS = [
+    {
+        'heading': 'Family length distribution',
+        'plots': [
+            {
+                'title': 'Short family lengths',
+                'filename': 'explorer/statistics/family_length_short.png',
+                'alt': (
+                    'Stacked bar chart showing MGnifam family length distribution for HMM consensus '
+                    'lengths 1 to 700, split into annotated and unannotated families.'
+                ),
+                'caption': 'Family length distribution for short HMM consensus lengths, binned by 25 amino acids.',
+            }
+        ],
+    },
+    {
+        'heading': 'Family size distribution',
+        'plots': [
+            {
+                'title': 'Medium family sizes',
+                'filename': 'explorer/statistics/family_size_medium.png',
+                'alt': (
+                    'Stacked bar chart showing MGnifam family size distribution for families with '
+                    '21 to 100000 sequences, split into annotated and unannotated families.'
+                ),
+                'caption': 'Family size distribution for medium-sized families, binned by 10000 sequences.',
+            }
+        ],
+    },
+]
+
+
+def statistics(request):
+    return render(
+        request,
+        'explorer/statistics.html',
+        {
+            'plot_sections': STATISTICS_PLOT_SECTIONS,
+        },
+    )
+
+
+def about(request):
+    return render(request, 'explorer/about.html')
 
 
 def translate_mgyf_to_int_id(mgyf):
@@ -277,6 +330,8 @@ _LIST_FIELDS = [
     'id',
     'full_size',
     'rep_length',
+    'plddt',
+    'ptm',
     'helix_percent',
     'strand_percent',
     'coil_percent',
@@ -300,6 +355,10 @@ _FILTER_MAP = {
     'full_size_max': 'full_size__lte',
     'rep_length_min': 'rep_length__gte',
     'rep_length_max': 'rep_length__lte',
+    'plddt_min': 'plddt__gte',
+    'plddt_max': 'plddt__lte',
+    'ptm_min': 'ptm__gte',
+    'ptm_max': 'ptm__lte',
     'helix_min': 'helix_percent__gte',
     'helix_max': 'helix_percent__lte',
     'strand_min': 'strand_percent__gte',
@@ -386,6 +445,26 @@ def mgnifams_data(request):
             qs = qs.exclude(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
             active_annotation_filters = True
 
+    # Apply annotation text search across Pfam/FunFam tables
+    annotation_term = request.GET.get('annotation_term', '').strip()
+    if len(annotation_term) >= 4:
+        qs = qs.filter(
+            Exists(
+                MgnifamPfams.objects.filter(mgnifam=OuterRef('pk')).filter(
+                    Q(pfam__icontains=annotation_term) | Q(name__icontains=annotation_term)
+                )
+            )
+            | Exists(
+                MgnifamModelPfams.objects.filter(mgnifam=OuterRef('pk')).filter(
+                    Q(pfam__icontains=annotation_term)
+                    | Q(name__icontains=annotation_term)
+                    | Q(description__icontains=annotation_term)
+                )
+            )
+            | Exists(MgnifamFunfams.objects.filter(mgnifam=OuterRef('pk'), funfam__icontains=annotation_term))
+        )
+        active_annotation_filters = True
+
     has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
 
@@ -395,6 +474,8 @@ def mgnifams_data(request):
             'mgnifam_id': format_family_name(m.id),
             'full_size': m.full_size,
             'rep_length': m.rep_length,
+            'plddt': m.plddt,
+            'ptm': m.ptm,
             'helix_percent': m.helix_percent,
             'strand_percent': m.strand_percent,
             'coil_percent': m.coil_percent,

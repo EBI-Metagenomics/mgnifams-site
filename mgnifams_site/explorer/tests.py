@@ -1,6 +1,7 @@
 from unittest.mock import MagicMock, patch
 
 import requests.exceptions
+from django.contrib.staticfiles import finders
 from django.core.cache import cache
 from django.http import Http404
 from django.test import TestCase
@@ -91,6 +92,58 @@ class IndexViewTests(TestCase):
         self.assertEqual(response.context['first_id'], 'MGYF0000000007')
 
 
+class StatisticsViewTests(TestCase):
+    def test_statistics_url_returns_200(self):
+        response = self.client.get(reverse('statistics'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_statistics_context_lists_plot_sections(self):
+        response = self.client.get(reverse('statistics'))
+        self.assertIn('plot_sections', response.context)
+        self.assertEqual(
+            [section['heading'] for section in response.context['plot_sections']],
+            ['Family length distribution', 'Family size distribution'],
+        )
+
+    def test_statistics_page_renders_supplied_plot_paths(self):
+        response = self.client.get(reverse('statistics'))
+        self.assertContains(response, 'explorer/statistics/family_length_short.png')
+        self.assertContains(response, 'explorer/statistics/family_size_medium.png')
+        self.assertContains(response, 'Open image', count=2)
+
+    def test_statistics_static_assets_exist(self):
+        self.assertIsNotNone(finders.find('explorer/statistics/family_length_short.png'))
+        self.assertIsNotNone(finders.find('explorer/statistics/family_size_medium.png'))
+
+    def test_main_navigation_links_to_statistics(self):
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, f'href="{reverse("statistics")}"')
+        self.assertContains(response, 'Statistics')
+
+
+class AboutViewTests(TestCase):
+    def test_about_url_returns_200(self):
+        response = self.client.get(reverse('about'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_main_navigation_links_to_about(self):
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, f'href="{reverse("about")}"')
+        self.assertContains(response, 'About')
+
+    def test_about_page_describes_developer_and_funding(self):
+        response = self.client.get(reverse('about'))
+        self.assertContains(response, 'Evangelos Karatzas')
+        self.assertContains(response, 'EMBL-EBI')
+        self.assertContains(response, 'MGnify')
+        self.assertContains(response, 'MGnifams')
+        self.assertContains(response, 'ARISE')
+        self.assertContains(response, '101033864')
+        self.assertContains(response, 'https://github.com/EBI-Metagenomics/mgnifams/')
+        self.assertContains(response, 'https://github.com/vagkaratzas/')
+        self.assertContains(response, 'https://cordis.europa.eu/project/id/101033864/results')
+
+
 class DetailsViewTests(TestCase):
     def setUp(self):
         self.family = make_mgnifam()
@@ -102,6 +155,17 @@ class DetailsViewTests(TestCase):
     def test_details_ok(self, _mock_api, _mock_logo):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, 200)
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_rows_link_to_matching_sections(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        self.assertContains(response, 'href="#esmfold-structure">pLDDT score</a>')
+        self.assertContains(response, 'href="#esmfold-structure">pTM score</a>')
+        self.assertContains(response, 'href="#funfam-matches">Sequence-HMM FunFam matches</a>')
+        self.assertContains(response, 'href="#pfam-matches">Sequence-HMM Pfam matches</a>')
+        self.assertContains(response, 'href="#pfam-model-matches">Profile-profile Pfam matches</a>')
+        self.assertContains(response, 'href="#structure-hits">Structure-structure hits</a>')
 
     pass  # placeholder so the class body remains valid if all tests above are removed
 
@@ -235,6 +299,7 @@ class MgnifamsListViewTests(TestCase):
 
 class MgnifamsDataViewTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.url = reverse('mgnifams_data')
         make_mgnifam(id=1, full_size=100, rep_length=80, helix_percent=30.0)
         make_mgnifam(id=2, full_size=200, rep_length=160, helix_percent=60.0)
@@ -537,8 +602,138 @@ class FunfamUrlTests(TestCase):
         self.assertEqual(funfams[0]['funfam_url'], '#')
 
 
+class AnnotationTermFilterTests(TestCase):
+    """Tests for annotation_term filter on the mgnifams_data endpoint."""
+
+    def setUp(self):
+        cache.clear()
+        self.url = reverse('mgnifams_data')
+        self.family1 = make_mgnifam(id=1)
+        self.family2 = make_mgnifam(id=2)
+        MgnifamPfams.objects.create(
+            mgnifam=self.family1,
+            pfam='PF00001',
+            name='Ras-like_GTPase',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+        MgnifamModelPfams.objects.create(
+            mgnifam=self.family2,
+            pfam='PF00002',
+            name='7tm_1',
+            description='7 transmembrane receptor (rhodopsin family)',
+            prob=0.9,
+            e_value=1e-5,
+            length=10,
+            query_hmm='1-10',
+            template_hmm='1-10',
+        )
+        MgnifamFunfams.objects.create(
+            mgnifam=self.family1,
+            funfam='1.10.10.10-FF-000001',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+
+    def _get(self, **params):
+        defaults = {
+            'draw': 1,
+            'start': 0,
+            'length': 50,
+            'order[0][column]': 0,
+            'order[0][dir]': 'asc',
+            'search[value]': '',
+        }
+        defaults.update(params)
+        return self.client.get(self.url, defaults)
+
+    def _ids(self, r):
+        return [row['mgnifam_id'] for row in r.json()['data']]
+
+    def test_pfam_id_match_in_pfams_table(self):
+        r = self._get(annotation_term='PF00001')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_pfam_name_match_in_pfams_table(self):
+        r = self._get(annotation_term='GTPase')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_pfam_id_match_in_model_pfams_table(self):
+        r = self._get(annotation_term='PF00002')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
+
+    def test_pfam_description_match_in_model_pfams_table(self):
+        r = self._get(annotation_term='rhodopsin')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
+
+    def test_funfam_match(self):
+        r = self._get(annotation_term='1.10.10.10')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_match_across_tables_no_duplicates(self):
+        MgnifamModelPfams.objects.create(
+            mgnifam=self.family1,
+            pfam='PF00001',
+            name='Ras-like_GTPase',
+            description='GTPase domain',
+            prob=0.9,
+            e_value=1e-5,
+            length=10,
+            query_hmm='1-10',
+            template_hmm='1-10',
+        )
+        r = self._get(annotation_term='PF00001')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+
+    def test_term_spanning_pfam_and_funfam_tables(self):
+        MgnifamFunfams.objects.create(
+            mgnifam=self.family2,
+            funfam='1.10.10.10-FF-000002',
+            e_value=1e-5,
+            score=10.0,
+            hmm_from=1,
+            hmm_to=10,
+            ali_from=1,
+            ali_to=10,
+            env_from=1,
+            env_to=10,
+            acc=0.9,
+        )
+        r = self._get(annotation_term='1.10.10')
+        self.assertEqual(r.json()['recordsFiltered'], 2)
+
+    def test_short_term_ignored(self):
+        r = self._get(annotation_term='PF0')
+        self.assertEqual(r.json()['recordsFiltered'], 2)
+
+    def test_no_match_returns_empty(self):
+        r = self._get(annotation_term='NONEXISTENT99999')
+        self.assertEqual(r.json()['recordsFiltered'], 0)
+        self.assertEqual(r.json()['data'], [])
+
+
 class MgnifamsDataEdgeCaseTests(TestCase):
     def setUp(self):
+        cache.clear()
         self.url = reverse('mgnifams_data')
         make_mgnifam(id=1, full_size=100)
 
