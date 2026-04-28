@@ -14,5 +14,4 @@ ENV DJANGO_SETTINGS_MODULE=mgnifams_site.settings
 ENV PYTHONUNBUFFERED=0
 
 RUN python manage.py collectstatic --noinput
-RUN python manage.py migrate --fake
 CMD gunicorn mgnifams_site.wsgi:application --bind 0.0.0.0:8000 --workers 3
