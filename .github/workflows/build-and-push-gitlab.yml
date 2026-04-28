@@ -57,6 +57,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          provenance: false
           tags: |
             ${{ vars.GITLAB_REGISTRY_IMAGE }}:latest
             ${{ vars.GITLAB_REGISTRY_IMAGE }}:ebi-wp-k8s-hl
