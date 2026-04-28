@@ -65,36 +65,3 @@ jobs:
           labels: |
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.event.workflow_run.head_sha }}
-
-  deploy:
-    name: Deploy to EBI WebProd Kubernetes
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    environment: production
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v4
-
-      - name: Configure kubeconfig
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        run: |
-          test -n "${KUBE_CONFIG}" || (echo "KUBE_CONFIG secret is not set" && exit 1)
-          mkdir -p "${HOME}/.kube"
-          printf '%s' "${KUBE_CONFIG}" > "${HOME}/.kube/config"
-          chmod 600 "${HOME}/.kube/config"
-
-      - name: Apply Kubernetes manifest
-        run: kubectl apply -f deployment/ebi-wp-k8s-hl.yaml
-
-      - name: Restart deployment
-        run: kubectl rollout restart deployment mgnifams-site -n mgnifams-hl-exp
-
-      - name: Wait for rollout
-        run: kubectl rollout status deployment mgnifams-site -n mgnifams-hl-exp
