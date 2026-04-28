@@ -1,6 +1,6 @@
 # Changelog
 
-## [v2.1.0dev] - unreleased
+## [v2.1.0] - 2026-04-28
 
 ### Added
 
@@ -9,6 +9,17 @@
 - Added filters based on annotations existence.
 - Nav link to the FTP site with seed MSA files and the MGnifams HMM library.
 - Home intro paragraph describing the MGnifams pipeline input data from the latest release of MGnify proteins (2024_04).
+- GitHub Actions CI workflow running pre-commit hooks and the Django test suite on pull requests and pushes to `main`.
+- GitHub Actions image publishing workflow that builds the Docker image after successful `main` CI and pushes `latest`, `ebi-wp-k8s-hl`, and commit-SHA tags to the EBI GitLab container registry.
+
+### Changed
+
+- Kubernetes deployment now pulls `dockerhub.ebi.ac.uk/microbiome-informatics/mgnifams-site-container:ebi-wp-k8s-hl` instead of the previous Quay image, using the `ebi-gitlab-pull-secret` image pull secret.
+
+### Fixed
+
+- Removed the build-time `python manage.py migrate --fake` Dockerfile step so image builds no longer require the runtime-mounted SQLite database path to exist during `docker build`.
+- Disabled Docker Buildx provenance attestations in the image publishing workflow to avoid EBI GitLab Container Registry displaying attestation manifests as 0B images.
 
 ### Security
 
