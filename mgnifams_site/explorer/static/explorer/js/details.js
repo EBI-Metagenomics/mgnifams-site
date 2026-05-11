@@ -134,15 +134,17 @@ const extract_hmm_column = (p_text) => {
 };
 
 const translate_to_msa_pos = (sequence, hmm_position) => {
+    // strips only leading/trailing RF dots
+    let trimmed_sequence = sequence.replace(/^\.+|\.+$/g, '');
     let x_counter = 0;
     let msa_pos;
-    for ( msa_pos = 0; msa_pos < sequence.length; msa_pos++) {
-        if (sequence[msa_pos] === 'x') {
+    for ( msa_pos = 0; msa_pos < trimmed_sequence.length; msa_pos++) {
+        if (trimmed_sequence[msa_pos] === 'x') {
             x_counter = x_counter + 1;
             if (x_counter == hmm_position) break;
         }
     }
-    return msa_pos;
+    return x_counter == hmm_position ? msa_pos : -1;
 };
 
 const link_hmm_to_msa = () => {
@@ -163,7 +165,9 @@ const link_hmm_to_msa = () => {
                         let clicked_col = extract_hmm_column(pElement.textContent);
                         let msa_pos = translate_to_msa_pos(document.getElementById('logo').dataset.rf, clicked_col);
                         let elements = document.getElementsByClassName('msa-col-header');
-                        elements[msa_pos].click();
+                        if (msa_pos >= 0 && elements[msa_pos]) {
+                            elements[msa_pos].click();
+                        }
                     }
                 });
             }

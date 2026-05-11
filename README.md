@@ -16,6 +16,11 @@ Run tests:
 DJANGO_SECRET_KEY=test-secret-key python manage.py test
 ```
 
+Run frontend JavaScript tests:
+```bash
+node tests/test_details_translate_to_msa_pos.js
+```
+
 # Deployment to EBI WebProd Kubernetes
 Pre-requisites:
 * Permission to push to a docker registry. We currently use a [team quay.io](quay.io/microbiome-informatics).
