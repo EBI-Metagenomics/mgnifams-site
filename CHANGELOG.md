@@ -1,6 +1,26 @@
 # Changelog
 
-## [v2.2.0dev] - unreleased
+## [v2.2.0] - 2026-05-12
+
+### Changed
+
+- Migrated dependency management from `requirements.txt`/pip to uv with `pyproject.toml` and `uv.lock` as the source of truth.
+- Replaced the pre-commit runner with `prek` while keeping `.pre-commit-config.yaml` for hook compatibility.
+- Updated GitHub Actions CI to install dependencies with `uv sync --frozen` and run hooks with `uv run prek`.
+- Updated the Dockerfile to install dependencies from the uv lockfile and run the app from the project `.venv`.
+- Documented the uv, audit, Ruff, prek, Django test, JavaScript test, and Docker build commands in `README.md`.
+
+### Fixed
+
+- Updated HMM viewer click events to correctly link to the now envelope-free seed MSA viewer positions.
+- Updated a static-file test to assert Django's resolved static URL, so it passes both with and without a collected static manifest.
+- Updated a `bytes`/`memoryview` check to the Python 3.12 union form required by the configured Ruff hooks.
+
+### Security
+
+- Pinned `django==6.0.5` to carry forward the security fix for the Django 6.0.4 audit findings.
+- Updated direct dependency pins to `requests==2.34.0`, `gunicorn==26.0.0`, `whitenoise==6.12.0`, `ruff==0.15.12`, and `prek==0.3.13`.
+- Verified the locked environment with `uv audit`; no known vulnerabilities were reported.
 
 ## [v2.1.0] - 2026-04-28
 
