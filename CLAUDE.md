@@ -14,33 +14,33 @@ All Django management commands run from `mgnifams_site/`:
 cd mgnifams_site
 
 # Run development server
-DJANGO_DEBUG=True python manage.py runserver 8000
+DJANGO_DEBUG=True uv run python manage.py runserver 8000
 
 # Apply database migrations
-python manage.py migrate
+uv run python manage.py migrate
 
 # Collect static files (required before deployment)
-python manage.py collectstatic --noinput
+uv run python manage.py collectstatic --noinput
 
 # Run tests (SECRET_KEY must be set — it has no fallback value)
-DJANGO_SECRET_KEY=test-secret-key python manage.py test
+DJANGO_SECRET_KEY=test-secret-key uv run python manage.py test
 
 # Run tests with coverage report
-DJANGO_SECRET_KEY=test-secret-key coverage run --source=explorer manage.py test explorer
-coverage report -m
+DJANGO_SECRET_KEY=test-secret-key uv run coverage run --source=explorer manage.py test explorer
+uv run coverage report -m
 
 # Lint and format (from repo root)
-ruff check mgnifams_site      # lint
-ruff check --fix mgnifams_site  # lint + auto-fix
-ruff format mgnifams_site     # format
+uv run ruff check mgnifams_site        # lint
+uv run ruff check --fix mgnifams_site  # lint + auto-fix
+uv run ruff format mgnifams_site       # format
 
-# Install pre-commit hooks (one-time, after cloning)
-pre-commit install
+# Install prek hooks (one-time, after cloning)
+uv run prek install
 
-# Run pre-commit manually (hooks run automatically on git commit)
-pre-commit run --all-files   # whole repo
-pre-commit run ruff          # linter only
-pre-commit run ruff-format   # formatter only
+# Run prek manually (hooks run automatically on git commit)
+uv run prek run --all-files   # whole repo
+uv run prek run ruff          # linter only
+uv run prek run ruff-format   # formatter only
 ```
 
 **Docker:**

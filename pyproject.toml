@@ -1,3 +1,23 @@
+[project]
+name = "mgnifams-site"
+version = "2.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "django==6.0.5",
+    "gunicorn==26.0.0",
+    "requests==2.34.0",
+    "whitenoise==6.12.0",
+]
+
+[dependency-groups]
+dev = [
+    "prek",
+    "ruff",
+]
+
+[tool.uv]
+package = false
+
 [tool.ruff]
 src = ["mgnifams_site"]
 line-length = 120

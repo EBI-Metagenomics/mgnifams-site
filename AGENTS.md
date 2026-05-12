@@ -9,25 +9,26 @@ This is a Python 3.12+ Django application. The Django project lives in `mgnifams
 Install dependencies from the repository root:
 
 ```bash
-python -m pip install -r requirements.txt
+uv python install 3.12
+uv sync
 ```
 
 Run Django commands from `mgnifams_site/`:
 
 ```bash
-DJANGO_SECRET_KEY=local-secret python manage.py migrate
-DJANGO_SECRET_KEY=local-secret python manage.py collectstatic --noinput
-DJANGO_SECRET_KEY=local-secret DJANGO_DEBUG=True python manage.py runserver 8000
-DJANGO_SECRET_KEY=test-secret-key python manage.py test
+DJANGO_SECRET_KEY=local-secret uv run python manage.py migrate
+DJANGO_SECRET_KEY=local-secret uv run python manage.py collectstatic --noinput
+DJANGO_SECRET_KEY=local-secret DJANGO_DEBUG=True uv run python manage.py runserver 8000
+DJANGO_SECRET_KEY=test-secret-key uv run python manage.py test
 ```
 
 Quality checks from the repository root:
 
 ```bash
-ruff check mgnifams_site
-ruff check --fix mgnifams_site
-ruff format mgnifams_site
-pre-commit run --all-files
+uv run ruff check mgnifams_site
+uv run ruff check --fix mgnifams_site
+uv run ruff format mgnifams_site
+uv run prek run --all-files
 ```
 
 Build the container with `docker build -f Dockerfile -t mgnifams_site:latest .`.
@@ -38,7 +39,7 @@ Use Ruff for linting and formatting. The configured line length is 120, formatte
 
 ## Testing Guidelines
 
-Use Django `TestCase` tests in `explorer/tests.py` or split into `test_*.py` files if the suite grows. Add focused tests for new views, URL behavior, model helpers, template context, and external API failure paths. CI runs `pre-commit run --all-files` and `python manage.py test` on pull requests and pushes to `main`.
+Use Django `TestCase` tests in `explorer/tests.py` or split into `test_*.py` files if the suite grows. Add focused tests for new views, URL behavior, model helpers, template context, and external API failure paths. CI runs `uv run prek run --all-files` and `uv run python manage.py test` on pull requests and pushes to `main`.
 
 ## Commit & Pull Request Guidelines
 
