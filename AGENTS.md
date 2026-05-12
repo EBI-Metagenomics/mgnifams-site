@@ -1,17 +1,37 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Snapshot
 
-This is a Python 3.12+ Django application. The Django project lives in `mgnifams_site/mgnifams_site/`, and the main app is `mgnifams_site/explorer/`. Core app files include `models.py`, `views.py`, `urls.py`, `storage.py`, and `templatetags/custom_filters.py`. Templates are under `mgnifams_site/explorer/templates/`, static CSS and JavaScript under `mgnifams_site/explorer/static/`, and migrations under `mgnifams_site/explorer/migrations/`. Tests currently live in `mgnifams_site/explorer/tests.py`. Deployment assets are in `deployment/`, with container setup in `Dockerfile`.
+`mgnifams-site` is a Python 3.12 Django app for browsing MGnifam protein family data. The Django project is in `mgnifams_site/mgnifams_site/`, and the main app is `mgnifams_site/explorer/`.
 
-## Build, Test, and Development Commands
+Important paths:
+- App code: `mgnifams_site/explorer/`
+- Templates: `mgnifams_site/explorer/templates/`
+- Static assets: `mgnifams_site/explorer/static/`
+- Tests: `mgnifams_site/explorer/tests.py`
+- Deployment assets: `deployment/`
+- Container config: `Dockerfile`
 
-Install dependencies from the repository root:
+## Dependencies And Tooling
+
+Use uv. Dependencies are declared in `pyproject.toml` and locked in `uv.lock`; do not reintroduce `requirements.txt`.
+
+From the repository root:
 
 ```bash
 uv python install 3.12
 uv sync
 ```
+
+Run prek hooks with:
+
+```bash
+uv run prek run --all-files --show-diff-on-failure
+```
+
+`.pre-commit-config.yaml` is intentionally kept for hook compatibility, but `prek` is the runner.
+
+## Common Commands
 
 Run Django commands from `mgnifams_site/`:
 
@@ -22,29 +42,63 @@ DJANGO_SECRET_KEY=local-secret DJANGO_DEBUG=True uv run python manage.py runserv
 DJANGO_SECRET_KEY=test-secret-key uv run python manage.py test
 ```
 
-Quality checks from the repository root:
+Run quality checks from the repository root:
 
 ```bash
+uv lock --check
+uv sync --frozen
+uv audit
 uv run ruff check mgnifams_site
-uv run ruff check --fix mgnifams_site
-uv run ruff format mgnifams_site
-uv run prek run --all-files
+uv run ruff format --check mgnifams_site
+uv run prek run --all-files --show-diff-on-failure
 ```
 
-Build the container with `docker build -f Dockerfile -t mgnifams_site:latest .`.
+Run frontend JavaScript tests from the repository root:
 
-## Coding Style & Naming Conventions
+```bash
+node tests/test_details_translate_to_msa_pos.js
+```
 
-Use Ruff for linting and formatting. The configured line length is 120, formatter quote style is single quotes, and linting enables `E`, `F`, `I`, and `UP` rules. Keep Django code idiomatic: model classes in `PascalCase`, functions and view helpers in `snake_case`, and tests named `test_*`. Avoid unrelated rewrites in generated migrations.
+Build the container with:
 
-## Testing Guidelines
+```bash
+docker build -f Dockerfile -t mgnifams_site:latest .
+```
 
-Use Django `TestCase` tests in `explorer/tests.py` or split into `test_*.py` files if the suite grows. Add focused tests for new views, URL behavior, model helpers, template context, and external API failure paths. CI runs `uv run prek run --all-files` and `uv run python manage.py test` on pull requests and pushes to `main`.
+## Architecture Notes
 
-## Commit & Pull Request Guidelines
+- The project has one Django app, `explorer`.
+- SQLite data lives under `mgnifams_site/dbs/`; the production database is mounted externally.
+- MGnifam IDs are stored as integers and displayed as formatted strings such as `MGYF00000001`.
+- External integrations include Skylign, AlphaFold EBI, PDBe, and CATH DB.
+- Frontend code is plain Django templates plus vanilla JavaScript, using EBI Visual Framework assets.
 
-Recent commits use short, lowercase, imperative or descriptive summaries, for example `changelog updated` or `added ci.yml with 2 test`. Keep the first line concise and mention the user-facing change or infrastructure area. Pull requests should include a short description, linked issue or ticket when relevant, test evidence, and screenshots for template or static asset changes.
+## Coding Style
 
-## Security & Configuration Tips
+Use Ruff for linting and formatting. The configured line length is 120, formatter quote style is single quotes, and linting enables `E`, `F`, `I`, and `UP`.
 
-Do not commit secrets or production database files. `DJANGO_SECRET_KEY` is required, `DJANGO_DEBUG` should be false in production, and `ALLOWED_HOST` must be set for deployed hosts. Treat Kubernetes credentials, registry tokens, and `deployment/secrets.env` as local-only material.
+Keep Django code idiomatic:
+- Model classes use `PascalCase`.
+- Functions, helpers, and tests use `snake_case`.
+- Tests should be named `test_*`.
+- Avoid unrelated rewrites in generated migrations.
+
+## Testing Guidance
+
+Use Django `TestCase` tests in `explorer/tests.py` or split into `test_*.py` files if the suite grows. Add focused tests for new views, URL behavior, model helpers, template context, and external API failure paths.
+
+CI runs prek hooks and Django tests on pull requests and pushes to `main`.
+
+## Security And Configuration
+
+Do not commit secrets, production database files, Kubernetes credentials, registry tokens, or `deployment/secrets.env`.
+
+Important environment variables:
+- `DJANGO_SECRET_KEY` is required.
+- `DJANGO_DEBUG` should be false in production.
+- `ALLOWED_HOST` must be set for deployed hosts.
+- `DJANGO_CACHE_DIR` controls the writable file cache path and defaults to `/tmp/mgnifams_cache`.
+
+## Commit And PR Notes
+
+Recent commits use short, lowercase, imperative or descriptive summaries. Keep the first line concise and mention the user-facing change or infrastructure area. Pull requests should include a short description, linked issue or ticket when relevant, test evidence, and screenshots for template or static asset changes.
