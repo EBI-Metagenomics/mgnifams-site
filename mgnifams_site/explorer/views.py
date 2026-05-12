@@ -131,7 +131,7 @@ def fetch_skylign_logo_json(uuid):
 def decode_blob(blob, fallback=''):
     if blob is None:
         return fallback
-    if isinstance(blob, (bytes, memoryview)):
+    if isinstance(blob, bytes | memoryview):
         return bytes(blob).decode('utf-8')
     return str(blob)
 

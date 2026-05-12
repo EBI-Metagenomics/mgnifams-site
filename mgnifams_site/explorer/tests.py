@@ -4,6 +4,7 @@ import requests.exceptions
 from django.contrib.staticfiles import finders
 from django.core.cache import cache
 from django.http import Http404
+from django.templatetags.static import static
 from django.test import TestCase
 from django.urls import reverse
 
@@ -107,8 +108,8 @@ class StatisticsViewTests(TestCase):
 
     def test_statistics_page_renders_supplied_plot_paths(self):
         response = self.client.get(reverse('statistics'))
-        self.assertContains(response, 'explorer/statistics/family_length_short.png')
-        self.assertContains(response, 'explorer/statistics/family_size_medium.png')
+        self.assertContains(response, static('explorer/statistics/family_length_short.png'))
+        self.assertContains(response, static('explorer/statistics/family_size_medium.png'))
         self.assertContains(response, 'Open image', count=2)
 
     def test_statistics_static_assets_exist(self):

@@ -12,24 +12,29 @@ permissions:
   contents: read
 
 jobs:
-  pre-commit:
-    name: Pre-commit
+  prek:
+    name: prek
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install pre-commit
-        run: python -m pip install pre-commit
+      - name: Install dependencies
+        run: uv sync --frozen
 
-      - name: Run pre-commit hooks
-        run: pre-commit run --all-files --show-diff-on-failure
+      - name: Run prek hooks
+        run: uv run prek run --all-files --show-diff-on-failure
 
   django-tests:
     name: Django tests
@@ -39,18 +44,21 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements.txt
 
       - name: Install dependencies
-        run: python -m pip install -r requirements.txt
+        run: uv sync --frozen
 
       - name: Run Django tests
         working-directory: mgnifams_site
         env:
           DJANGO_SECRET_KEY: test-secret-key
-        run: python manage.py test
+        run: uv run python manage.py test
