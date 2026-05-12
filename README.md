@@ -5,15 +5,51 @@
 Requires **Python 3.12+**.
 
 ```bash
-pip install -r requirements.txt
-python manage.py migrate
-DJANGO_SECRET_KEY=any-local-secret python manage.py collectstatic --noinput
-DJANGO_SECRET_KEY=any-local-secret python manage.py runserver 8000
+uv python install 3.12
+uv sync
+cd mgnifams_site
+uv run python manage.py migrate
+DJANGO_SECRET_KEY=any-local-secret uv run python manage.py collectstatic --noinput
+DJANGO_SECRET_KEY=any-local-secret uv run python manage.py runserver 8000
 ```
 
-Run tests:
+## Testing and checks
+
+Run the full backend test suite:
+
 ```bash
-DJANGO_SECRET_KEY=test-secret-key python manage.py test
+cd mgnifams_site
+DJANGO_SECRET_KEY=test-secret-key uv run python manage.py test
+```
+
+Run frontend JavaScript tests from the repository root:
+
+```bash
+node tests/test_details_translate_to_msa_pos.js
+```
+
+Run dependency and quality checks from the repository root:
+
+```bash
+uv lock --check
+uv sync --frozen
+uv audit
+uv run ruff check mgnifams_site
+uv run ruff format --check mgnifams_site
+uv run prek run --all-files --show-diff-on-failure
+```
+
+Build the Docker image:
+
+```bash
+docker build -f Dockerfile -t mgnifams_site:latest .
+```
+
+Prepare a release version bump:
+
+```bash
+uv version 2.2.0
+uv lock --check
 ```
 
 # Deployment to EBI WebProd Kubernetes

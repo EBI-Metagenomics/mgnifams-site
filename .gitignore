@@ -1,6 +1,5 @@
 bin/db_config.ini
-mgnifams.sqlite3
-mgnifams_no_blobs.sqlite3
+*.sqlite3
 sqlite_reps.fasta
 .codex
 
