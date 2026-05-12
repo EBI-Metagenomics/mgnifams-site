@@ -45,6 +45,13 @@ Build the Docker image:
 docker build -f Dockerfile -t mgnifams_site:latest .
 ```
 
+Prepare a release version bump:
+
+```bash
+uv version 2.2.0
+uv lock --check
+```
+
 # Deployment to EBI WebProd Kubernetes
 Pre-requisites:
 * Permission to push to a docker registry. We currently use a [team quay.io](quay.io/microbiome-informatics).

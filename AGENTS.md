@@ -65,6 +65,13 @@ Build the container with:
 docker build -f Dockerfile -t mgnifams_site:latest .
 ```
 
+Prepare a release version bump with:
+
+```bash
+uv version 2.2.0
+uv lock --check
+```
+
 ## Architecture Notes
 
 - The project has one Django app, `explorer`.
