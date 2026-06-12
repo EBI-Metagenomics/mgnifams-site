@@ -115,7 +115,7 @@ QUERY PLAN
 **Files:**
 - Modify: `mgnifams_site/explorer/tests.py`
 
-- [ ] **Step 1: Add `AnnotationPresenceFilterTests` class at the end of `tests.py`**
+- [x] **Step 1: Add `AnnotationPresenceFilterTests` class at the end of `tests.py`**
 
 ```python
 class AnnotationPresenceFilterTests(TestCase):
@@ -195,7 +195,7 @@ class AnnotationPresenceFilterTests(TestCase):
         self.assertEqual(r.json()['recordsFiltered'], 2)
 ```
 
-- [ ] **Step 2: Run tests to confirm they fail**
+- [x] **Step 2: Run tests to confirm they fail**
 
 ```bash
 cd /home/vangelis/Desktop/Projects/mgnifams-site
@@ -212,7 +212,7 @@ Expected: `TypeError: make_mgnifam() got an unexpected keyword argument 'has_pfa
 - Modify: `mgnifams_site/explorer/models.py:36-53`
 - Create: `mgnifams_site/explorer/migrations/0002_add_annotation_boolean_columns.py`
 
-- [ ] **Step 1: Add 4 fields to `Mgnifam` model in `models.py`**
+- [x] **Step 1: Add 4 fields to `Mgnifam` model in `models.py`**
 
 Insert after `periplasm_percent` (line 21) and before `rep_sequence` (line 22):
 
@@ -232,7 +232,7 @@ Also add the 4 indexes to the `Meta.indexes` list (after the existing `idx_mgnif
             models.Index(fields=['has_structure'],  name='idx_mgnifam_has_structure'),
 ```
 
-- [ ] **Step 2: Create the migration file**
+- [x] **Step 2: Create the migration file**
 
 Create `mgnifams_site/explorer/migrations/0002_add_annotation_boolean_columns.py`:
 
@@ -286,7 +286,7 @@ class Migration(migrations.Migration):
     ]
 ```
 
-- [ ] **Step 3: Run tests — should still fail (model fields exist now but view still uses Exists)**
+- [x] **Step 3: Run tests — should still fail (model fields exist now but view still uses Exists)**
 
 ```bash
 python -m pytest mgnifams_site/explorer/tests.py::AnnotationPresenceFilterTests -v 2>&1 | head -40
@@ -301,7 +301,7 @@ Expected: Tests fail because `make_mgnifam(has_pfam=True, ...)` now works but th
 **Files:**
 - Modify: `mgnifams_site/explorer/views.py`
 
-- [ ] **Step 1: Replace `_ANNOTATION_FILTER_MAP` (lines 346–351)**
+- [x] **Step 1: Replace `_ANNOTATION_FILTER_MAP` (lines 346–351)**
 
 Old:
 ```python
@@ -323,7 +323,7 @@ _ANNOTATION_FILTER_MAP = {
 }
 ```
 
-- [ ] **Step 2: Replace the annotation presence filter loop in `mgnifams_data` (lines 437–446)**
+- [x] **Step 2: Replace the annotation presence filter loop in `mgnifams_data` (lines 437–446)**
 
 Old:
 ```python
@@ -353,7 +353,7 @@ New:
             active_annotation_filters = True
 ```
 
-- [ ] **Step 3: Clean up the now-unused imports at the top of `views.py`**
+- [x] **Step 3: Clean up the now-unused imports at the top of `views.py`**
 
 The `Exists` and `OuterRef` imports are still needed by the `annotation_term` filter block (lines 449–466). Leave them in place — do not remove.
 
@@ -363,7 +363,7 @@ Also verify the model imports: `MgnifamPfams`, `MgnifamFunfams`, `MgnifamModelPf
 
 ## Task 4: Run Full Test Suite
 
-- [ ] **Step 1: Run all tests**
+- [x] **Step 1: Run all tests**
 
 ```bash
 cd /home/vangelis/Desktop/Projects/mgnifams-site
@@ -372,7 +372,7 @@ python -m pytest mgnifams_site/explorer/tests.py -v 2>&1 | tail -30
 
 Expected: All tests pass, including the new `AnnotationPresenceFilterTests`.
 
-- [ ] **Step 2: Confirm new tests all pass**
+- [x] **Step 2: Confirm new tests all pass**
 
 ```bash
 python -m pytest mgnifams_site/explorer/tests.py::AnnotationPresenceFilterTests -v

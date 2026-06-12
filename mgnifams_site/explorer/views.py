@@ -344,10 +344,10 @@ _LIST_FIELDS = [
 ]
 
 _ANNOTATION_FILTER_MAP = {
-    'has_pfam': MgnifamPfams,
-    'has_funfam': MgnifamFunfams,
-    'has_model_pfam': MgnifamModelPfams,
-    'has_structure': MgnifamFolds,
+    'has_pfam': 'has_pfam',
+    'has_funfam': 'has_funfam',
+    'has_model_pfam': 'has_model_pfam',
+    'has_structure': 'has_structure',
 }
 
 _FILTER_MAP = {
@@ -436,13 +436,13 @@ def mgnifams_data(request):
 
     # Apply annotation presence filters (yes/no/any)
     active_annotation_filters = False
-    for param, model in _ANNOTATION_FILTER_MAP.items():
+    for param, field in _ANNOTATION_FILTER_MAP.items():
         val = request.GET.get(param, '').strip()
         if val == 'yes':
-            qs = qs.filter(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
+            qs = qs.filter(**{field: True})
             active_annotation_filters = True
         elif val == 'no':
-            qs = qs.exclude(Exists(model.objects.filter(mgnifam=OuterRef('pk'))))
+            qs = qs.filter(**{field: False})
             active_annotation_filters = True
 
     # Apply annotation text search across Pfam/FunFam tables
