@@ -6,6 +6,11 @@
 
 - Replaced the four correlated `NOT EXISTS` subqueries in `mgnifams_data` with new, pre-computed indexed boolean columns on `mgnifam` (`has_pfam`, `has_funfam`, `has_model_pfam`, `has_structure`) to speed up site filter queries.
 
+### Security
+
+- Audit updates for `django` (6.0.5) and `idna` (3.18), and package updates for `certifi`, `requests`, `prek`, and `ruff`. More info under [audit_report_2026-06-15.md](audit_reports/audit_report_2026-06-15.md).
+- Added subresource integrity checks to external scripts (`<script />` tags) to resolve the CodeQL untrusted-source warning.
+
 ## [v2.2.0] - 2026-05-12
 
 ### Changed
