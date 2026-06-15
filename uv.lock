@@ -82,7 +82,7 @@ wheels = [
 
 [[package]]
 name = "mgnifams-site"
-version = "2.3.0"
+version = "2.4.0dev"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
