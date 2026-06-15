@@ -25,6 +25,7 @@ SKYLIGN_LOGO_PATCH = 'explorer.views.fetch_skylign_logo_json'
 
 
 def make_mgnifam(**kwargs):
+    # Defaults satisfy all non-null model fields so individual tests override only their relevant facts.
     defaults = dict(
         id=1,
         full_size=100,
@@ -95,8 +96,7 @@ class IdConversionTests(TestCase):
             translate_mgyf_to_int_id('MGYF000000XXXX')
 
     def test_translate_all_zeros_returns_zero(self):
-        # MGYF0000000000 correctly maps to ID 0; if ID 0 doesn't exist the
-        # DB lookup (not the parser) will produce the 404.
+        # The parser accepts the syntactic ID; missing rows are handled by the view's DB lookup.
         self.assertEqual(translate_mgyf_to_int_id('MGYF0000000000'), 0)
 
 
@@ -196,25 +196,19 @@ class DetailsViewTests(TestCase):
         self.assertContains(response, 'href="#pfam-model-matches">Profile-profile Pfam matches</a>')
         self.assertContains(response, 'href="#structure-hits">Structure-structure hits</a>')
 
-    pass  # placeholder so the class body remains valid if all tests above are removed
-
     def test_details_nonexistent_id_returns_404(self):
-        # Bug #2: the try/except DoesNotExist is dead code; Http404 should propagate
         response = self.client.get(reverse('details', args=['MGYF0000099999']))
         self.assertEqual(response.status_code, 404)
 
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_converged_true_in_context(self, _mock_api, _mock_logo):
-        # Bug #7: view does `mgnifam.converged == "True"` but converged is a BooleanField,
-        # so the comparison always returns False even when the DB value is True.
         response = self.client.get(self.url)
         self.assertTrue(response.context['converged'])
 
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_none_cif_blob_does_not_crash(self, _mock_api, _mock_logo):
-        # Bug #1: cif_blob.decode('utf-8') called unconditionally; crashes when None
         make_mgnifam(id=2, cif_blob=None)
         response = self.client.get(reverse('details', args=['MGYF0000000002']))
         self.assertEqual(response.status_code, 200)
@@ -222,7 +216,6 @@ class DetailsViewTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_none_seed_msa_blob_does_not_crash(self, _mock_api, _mock_logo):
-        # Bug #1: seed_msa_blob decoded before None check
         make_mgnifam(id=3, seed_msa_blob=None)
         response = self.client.get(reverse('details', args=['MGYF0000000003']))
         self.assertEqual(response.status_code, 200)
@@ -231,7 +224,6 @@ class DetailsViewTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_none_hmm_blob_does_not_crash(self, _mock_api, _mock_logo):
-        # Bug #1: hmm_blob.decode('utf-8') called unconditionally
         make_mgnifam(id=4, hmm_blob=None)
         response = self.client.get(reverse('details', args=['MGYF0000000004']))
         self.assertEqual(response.status_code, 200)
@@ -245,7 +237,6 @@ class DetailsViewTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value='"logo_json"')
     @patch(SKYLIGN_PATCH, return_value={'uuid': 'ABCD-1234'})
     def test_skylign_result_cached_on_second_request(self, mock_api, mock_logo):
-        # H1: Skylign should only be called once; second request hits cache
         self.client.get(self.url)
         self.client.get(self.url)
         mock_api.assert_called_once()
@@ -254,8 +245,7 @@ class DetailsViewTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value={'uuid': 'ABCD-1234'})
     def test_failed_skylign_fetch_not_cached(self, mock_api, mock_logo):
-        # H1: if logo fetch fails (None), result must not be cached so next
-        # request retries instead of serving a stale null forever
+        # Failed logo fetches stay uncached so a transient Skylign error can recover later.
         self.client.get(self.url)
         self.client.get(self.url)
         self.assertEqual(mock_api.call_count, 2)
@@ -264,7 +254,6 @@ class DetailsViewTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_tm_blob_present_is_truthy_in_context(self, _mock_api, _mock_logo):
-        # H5: tm_blob is now passed as a boolean, not decoded blob content
         response = self.client.get(self.url)
         self.assertTrue(response.context['tm_blob'])
 
@@ -278,7 +267,7 @@ class DetailsViewTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_biome_domain_s4pred_blobs_not_in_context(self, _mock_api, _mock_logo):
-        # H5: these blobs are served via serve_blob endpoint, not passed inline
+        # Large blobs are downloaded through serve_blob_as_file, not embedded into the page context.
         response = self.client.get(self.url)
         self.assertNotIn('biome_blob', response.context)
         self.assertNotIn('domain_blob', response.context)
@@ -305,7 +294,6 @@ class StructuralAnnotationsTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
     def test_t_start_present_in_structural_annotations(self, _mock_api, _mock_logo):
-        # Bug #3: duplicate 't_end' key means t_start is never included in the dict
         family = make_mgnifam()
         MgnifamFolds.objects.create(
             mgnifam=family,
@@ -330,7 +318,7 @@ class MgnifamsListViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_list_context_has_data_url(self):
-        # C2: list view no longer passes a queryset; data comes via AJAX endpoint
+        # The list page stays lightweight; table rows are loaded by the DataTables endpoint.
         response = self.client.get(reverse('mgnifams_list'))
         self.assertIn('mgnifams_data_url', response.context)
         self.assertNotIn('mgnifams', response.context)
@@ -383,9 +371,14 @@ class MgnifamsDataViewTests(TestCase):
         self.assertEqual(len(r.json()['data']), 1)
 
     def test_pagination_start(self):
-        # With start=1, length=1 we get the second record (sorted by id asc)
         r = self._get(start=1, length=1, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
         self.assertEqual(r.json()['data'][0]['mgnifam_id'], 'MGYF0000000002')
+
+    def test_length_minus_one_returns_all_filtered_rows(self):
+        r = self._get(length=-1, full_size_min=100, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
+        rows = r.json()['data']
+        self.assertEqual(len(rows), 2)
+        self.assertEqual([row['mgnifam_id'] for row in rows], ['MGYF0000000001', 'MGYF0000000002'])
 
     def test_sort_desc(self):
         r = self._get(**{'order[0][column]': 0, 'order[0][dir]': 'desc'})
@@ -394,7 +387,6 @@ class MgnifamsDataViewTests(TestCase):
         self.assertEqual(rows[1]['mgnifam_id'], 'MGYF0000000001')
 
     def test_range_filter_excludes_rows(self):
-        # full_size_min=150 should exclude id=1 (full_size=100)
         r = self._get(full_size_min=150)
         data = r.json()
         self.assertEqual(data['recordsFiltered'], 1)
@@ -438,7 +430,7 @@ class ServeBlobViewTests(TestCase):
         self.assertEqual(response.content, BLOB)
 
     def test_serve_blob_has_cache_control_header(self):
-        # M2: blob data never changes — browser should cache for 24 h
+        # Release blob data is immutable, so browsers can cache downloaded files for a day.
         url = reverse('serve_blob_as_file', args=[1, 'hmm_blob'])
         response = self.client.get(url)
         self.assertIn('public', response['Cache-Control'])
@@ -450,17 +442,14 @@ class ServeBlobViewTests(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_serve_null_blob_returns_404(self):
-        # blob column exists but is NULL in the DB → must return 404, not empty 200
-        # (empty 200 causes "Unexpected end of JSON input" in the JS fetch handler)
+        # Null blobs should not masquerade as empty files; callers expect a missing-resource status.
         make_mgnifam(id=2, s4pred_blob=None)
         url = reverse('serve_blob_as_file', args=[2, 's4pred_blob'])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 404)
 
     def test_serve_arbitrary_non_blob_column_is_rejected(self):
-        # Bug #4: no allowlist — any attribute name accepted, exposing non-blob fields.
-        # This test documents the expected secure behaviour (400/403/404);
-        # it will FAIL until an allowlist is added to serve_blob_as_file.
+        # The route takes a model field name, so it must be constrained to downloadable blob columns.
         url = reverse('serve_blob_as_file', args=[1, 'rep_sequence'])
         response = self.client.get(url)
         self.assertIn(response.status_code, [400, 403, 404])
@@ -476,7 +465,7 @@ class DecodeBlobTests(TestCase):
         self.assertEqual(decode_blob(memoryview(b'hello')), 'hello')
 
     def test_string_passthrough(self):
-        # Real SQLite DB stores blobs as str when inserted outside Django ORM.
+        # Production SQLite data may contain string values when populated outside Django's ORM.
         self.assertEqual(decode_blob('hello'), 'hello')
 
     def test_none_returns_fallback(self):
@@ -784,9 +773,8 @@ class AnnotationPresenceFilterTests(TestCase):
     def setUp(self):
         cache.clear()
         self.url = reverse('mgnifams_data')
-        # f1 has pfam + funfam; no model_pfam, no structure
+        # Keep the fixtures complementary so each yes/no annotation filter has one expected hit.
         make_mgnifam(id=1, has_pfam=True, has_funfam=True, has_model_pfam=False, has_structure=False)
-        # f2 has model_pfam + structure; no pfam, no funfam
         make_mgnifam(id=2, has_pfam=False, has_funfam=False, has_model_pfam=True, has_structure=True)
 
     def _get(self, **params):

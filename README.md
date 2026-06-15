@@ -25,7 +25,7 @@ DJANGO_SECRET_KEY=test-secret-key uv run python manage.py test
 Run frontend JavaScript tests from the repository root:
 
 ```bash
-node tests/test_details_translate_to_msa_pos.js
+for test_file in tests/test_*.js; do node "$test_file"; done
 ```
 
 Run dependency and quality checks from the repository root:

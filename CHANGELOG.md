@@ -2,6 +2,10 @@
 
 ## [v2.3.0dev] - unreleased
 
+### Added
+
+- Added CSV download support for the MGnifams table, exporting all rows matching the current search and filters.
+
 ### Changed
 
 - Replaced the four correlated `NOT EXISTS` subqueries in `mgnifams_data` with new, pre-computed indexed boolean columns on `mgnifam` (`has_pfam`, `has_funfam`, `has_model_pfam`, `has_structure`) to speed up site filter queries.
