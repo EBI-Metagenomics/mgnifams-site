@@ -1,3 +1,4 @@
+import re
 from unittest.mock import MagicMock, patch
 
 import requests.exceptions
@@ -57,6 +58,29 @@ def make_mgnifam(**kwargs):
     return Mgnifam.objects.create(**defaults)
 
 
+def assert_external_scripts_have_sri(test_case, response, script_urls):
+    content = response.content.decode()
+    for script_url in script_urls:
+        with test_case.subTest(script_url=script_url):
+            test_case.assertRegex(
+                content,
+                (
+                    r'<script\b'
+                    rf'(?=[^>]*\bsrc="{re.escape(script_url)}")'
+                    r'(?=[^>]*\bintegrity="sha384-[^"]+")'
+                    r'(?=[^>]*\bcrossorigin="anonymous")'
+                    r'[^>]*>'
+                ),
+            )
+
+
+DATATABLES_SCRIPT_URLS = [
+    'https://ebi.emblstatic.net/web_guidelines/EBI-Framework/v1.4/js/script.js',
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js',
+    'https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js',
+]
+
+
 class IdConversionTests(TestCase):
     def test_format_family_name(self):
         self.assertEqual(format_family_name(1), 'MGYF0000000001')
@@ -91,6 +115,10 @@ class IndexViewTests(TestCase):
         make_mgnifam(id=7)
         response = self.client.get(reverse('index'))
         self.assertEqual(response.context['first_id'], 'MGYF0000000007')
+
+    def test_external_scripts_use_subresource_integrity(self):
+        response = self.client.get(reverse('index'))
+        assert_external_scripts_have_sri(self, response, DATATABLES_SCRIPT_URLS)
 
 
 class StatisticsViewTests(TestCase):
@@ -256,6 +284,22 @@ class DetailsViewTests(TestCase):
         self.assertNotIn('domain_blob', response.context)
         self.assertNotIn('s4pred_blob', response.context)
 
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_external_scripts_use_subresource_integrity(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        external_scripts = [
+            'https://cdn.plot.ly/plotly-2.29.1.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js',
+            'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
+            'https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js',
+            'https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
+            'https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js',
+            'https://cdn.jsdelivr.net/gh/calipho-sib/feature-viewer@v1.1.0/dist/feature-viewer.bundle.js',
+        ]
+
+        assert_external_scripts_have_sri(self, response, DATATABLES_SCRIPT_URLS + external_scripts)
+
 
 class StructuralAnnotationsTests(TestCase):
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
@@ -296,6 +340,10 @@ class MgnifamsListViewTests(TestCase):
         prefix = response.context['details_url_prefix']
         self.assertNotIn('//', prefix)
         self.assertTrue(prefix.endswith('/'))
+
+    def test_external_scripts_use_subresource_integrity(self):
+        response = self.client.get(reverse('mgnifams_list'))
+        assert_external_scripts_have_sri(self, response, DATATABLES_SCRIPT_URLS)
 
 
 class MgnifamsDataViewTests(TestCase):
