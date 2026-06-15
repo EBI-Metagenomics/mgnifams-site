@@ -732,6 +732,86 @@ class AnnotationTermFilterTests(TestCase):
         self.assertEqual(r.json()['data'], [])
 
 
+class AnnotationPresenceFilterTests(TestCase):
+    def setUp(self):
+        cache.clear()
+        self.url = reverse('mgnifams_data')
+        # f1 has pfam + funfam; no model_pfam, no structure
+        make_mgnifam(id=1, has_pfam=True, has_funfam=True, has_model_pfam=False, has_structure=False)
+        # f2 has model_pfam + structure; no pfam, no funfam
+        make_mgnifam(id=2, has_pfam=False, has_funfam=False, has_model_pfam=True, has_structure=True)
+
+    def _get(self, **params):
+        defaults = {
+            'draw': 1,
+            'start': 0,
+            'length': 50,
+            'order[0][column]': 0,
+            'order[0][dir]': 'asc',
+            'search[value]': '',
+        }
+        defaults.update(params)
+        return self.client.get(self.url, defaults)
+
+    def _ids(self, r):
+        return [row['mgnifam_id'] for row in r.json()['data']]
+
+    def test_has_pfam_yes_returns_only_annotated(self):
+        r = self._get(has_pfam='yes')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_has_pfam_no_returns_only_unannotated(self):
+        r = self._get(has_pfam='no')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
+
+    def test_has_funfam_yes_returns_only_annotated(self):
+        r = self._get(has_funfam='yes')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_has_funfam_no_returns_only_unannotated(self):
+        r = self._get(has_funfam='no')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
+
+    def test_has_model_pfam_yes_returns_only_annotated(self):
+        r = self._get(has_model_pfam='yes')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
+
+    def test_has_model_pfam_no_returns_only_unannotated(self):
+        r = self._get(has_model_pfam='no')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_has_structure_yes_returns_only_annotated(self):
+        r = self._get(has_structure='yes')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000002', self._ids(r))
+
+    def test_has_structure_no_returns_only_unannotated(self):
+        r = self._get(has_structure='no')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_all_no_filters_return_fully_unannotated_families(self):
+        make_mgnifam(id=3, has_pfam=False, has_funfam=False, has_model_pfam=False, has_structure=False)
+        r = self._get(has_pfam='no', has_funfam='no', has_model_pfam='no', has_structure='no')
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000003', self._ids(r))
+
+    def test_annotation_filter_combined_with_range_filter(self):
+        r = self._get(has_pfam='yes', full_size_min=100)
+        self.assertEqual(r.json()['recordsFiltered'], 1)
+        self.assertIn('MGYF0000000001', self._ids(r))
+
+    def test_annotation_filter_any_value_applies_no_filter(self):
+        r = self._get(has_pfam='any')
+        self.assertEqual(r.json()['recordsFiltered'], 2)
+
+
 class MgnifamsDataEdgeCaseTests(TestCase):
     def setUp(self):
         cache.clear()

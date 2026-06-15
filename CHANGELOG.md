@@ -1,5 +1,11 @@
 # Changelog
 
+## [v2.3.0dev] - unreleased
+
+### Changed
+
+- Replaced the four correlated `NOT EXISTS` subqueries in `mgnifams_data` with new, pre-computed indexed boolean columns on `mgnifam` (`has_pfam`, `has_funfam`, `has_model_pfam`, `has_structure`) to speed up site filter queries.
+
 ## [v2.2.0] - 2026-05-12
 
 ### Changed

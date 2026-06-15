@@ -19,6 +19,10 @@ class Mgnifam(models.Model):
     signal_percent = models.FloatField()
     membrane_beta_percent = models.FloatField()
     periplasm_percent = models.FloatField()
+    has_pfam = models.BooleanField(default=False)
+    has_funfam = models.BooleanField(default=False)
+    has_model_pfam = models.BooleanField(default=False)
+    has_structure = models.BooleanField(default=False)
     rep_sequence = models.TextField()
     consensus = models.TextField()
 
@@ -50,6 +54,10 @@ class Mgnifam(models.Model):
             models.Index(fields=['signal_percent'], name='idx_mgnifam_signal'),
             models.Index(fields=['membrane_beta_percent'], name='idx_mgnifam_membrane_beta'),
             models.Index(fields=['periplasm_percent'], name='idx_mgnifam_periplasm'),
+            models.Index(fields=['has_pfam'], name='idx_mgnifam_has_pfam'),
+            models.Index(fields=['has_funfam'], name='idx_mgnifam_has_funfam'),
+            models.Index(fields=['has_model_pfam'], name='idx_mgnifam_has_model_pfam'),
+            models.Index(fields=['has_structure'], name='idx_mgnifam_has_structure'),
         ]
 
 
