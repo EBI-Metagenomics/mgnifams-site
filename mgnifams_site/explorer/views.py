@@ -1,3 +1,4 @@
+import csv
 import json
 import logging
 import re
@@ -5,7 +6,7 @@ import re
 import requests
 from django.core.cache import cache
 from django.db.models import Exists, OuterRef, Q
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse, StreamingHttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
@@ -343,6 +344,23 @@ _LIST_FIELDS = [
     'periplasm_percent',
 ]
 
+_CSV_HEADERS = [
+    'ID',
+    'Full size',
+    'Representative length',
+    'pLDDT',
+    'pTM',
+    'Helix%',
+    'Strand%',
+    'Coil%',
+    'Inside%',
+    'Membrane-alpha%',
+    'Outside%',
+    'Signal%',
+    'Membrane-beta%',
+    'Periplasm%',
+]
+
 _ANNOTATION_FILTER_MAP = {
     'has_pfam': 'has_pfam',
     'has_funfam': 'has_funfam',
@@ -380,6 +398,61 @@ _FILTER_MAP = {
 }
 
 
+class _CsvEcho:
+    def write(self, value):
+        return value
+
+
+def _serialize_mgnifam_row(mgnifam):
+    return {
+        'mgnifam_id': format_family_name(mgnifam.id),
+        'full_size': mgnifam.full_size,
+        'rep_length': mgnifam.rep_length,
+        'plddt': mgnifam.plddt,
+        'ptm': mgnifam.ptm,
+        'helix_percent': mgnifam.helix_percent,
+        'strand_percent': mgnifam.strand_percent,
+        'coil_percent': mgnifam.coil_percent,
+        'inside_percent': mgnifam.inside_percent,
+        'membrane_alpha_percent': mgnifam.membrane_alpha_percent,
+        'outside_percent': mgnifam.outside_percent,
+        'signal_percent': mgnifam.signal_percent,
+        'membrane_beta_percent': mgnifam.membrane_beta_percent,
+        'periplasm_percent': mgnifam.periplasm_percent,
+    }
+
+
+def _mgnifams_csv_response(rows):
+    writer = csv.writer(_CsvEcho())
+
+    def stream_rows():
+        yield writer.writerow(_CSV_HEADERS)
+        for mgnifam in rows.iterator(chunk_size=1000):
+            row = _serialize_mgnifam_row(mgnifam)
+            yield writer.writerow(
+                [
+                    row['mgnifam_id'],
+                    row['full_size'],
+                    row['rep_length'],
+                    row['plddt'],
+                    row['ptm'],
+                    row['helix_percent'],
+                    row['strand_percent'],
+                    row['coil_percent'],
+                    row['inside_percent'],
+                    row['membrane_alpha_percent'],
+                    row['outside_percent'],
+                    row['signal_percent'],
+                    row['membrane_beta_percent'],
+                    row['periplasm_percent'],
+                ]
+            )
+
+    response = StreamingHttpResponse(stream_rows(), content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="mgnifams.csv"'
+    return response
+
+
 def mgnifams_list(request):
     return render(
         request,
@@ -408,8 +481,6 @@ def mgnifams_data(request):
         sort_field = '-' + sort_field
 
     qs = Mgnifam.objects.only(*_LIST_FIELDS)
-
-    records_total = cache.get_or_set('mgnifam_total_count', Mgnifam.objects.count, timeout=None)
 
     # Ignore malformed numeric filters instead of failing the whole DataTables request.
     active_filters = {}
@@ -465,31 +536,18 @@ def mgnifams_data(request):
         )
         active_annotation_filters = True
 
-    has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
-    records_filtered = qs.count() if has_filters else records_total
-
     ordered_rows = qs.order_by(sort_field)
     # length=-1 is the local "export all matching rows" convention used by the CSV button.
     rows = ordered_rows[start:] if length == -1 else ordered_rows[start : start + length]
-    data = [
-        {
-            'mgnifam_id': format_family_name(m.id),
-            'full_size': m.full_size,
-            'rep_length': m.rep_length,
-            'plddt': m.plddt,
-            'ptm': m.ptm,
-            'helix_percent': m.helix_percent,
-            'strand_percent': m.strand_percent,
-            'coil_percent': m.coil_percent,
-            'inside_percent': m.inside_percent,
-            'membrane_alpha_percent': m.membrane_alpha_percent,
-            'outside_percent': m.outside_percent,
-            'signal_percent': m.signal_percent,
-            'membrane_beta_percent': m.membrane_beta_percent,
-            'periplasm_percent': m.periplasm_percent,
-        }
-        for m in rows
-    ]
+
+    if request.GET.get('export') == 'csv':
+        return _mgnifams_csv_response(rows)
+
+    records_total = cache.get_or_set('mgnifam_total_count', Mgnifam.objects.count, timeout=None)
+    has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
+    records_filtered = qs.count() if has_filters else records_total
+
+    data = [_serialize_mgnifam_row(m) for m in rows]
 
     return JsonResponse(
         {

@@ -380,6 +380,16 @@ class MgnifamsDataViewTests(TestCase):
         self.assertEqual(len(rows), 2)
         self.assertEqual([row['mgnifam_id'] for row in rows], ['MGYF0000000001', 'MGYF0000000002'])
 
+    def test_csv_export_streams_all_filtered_rows(self):
+        r = self._get(export='csv', length=-1, full_size_min=150, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
+        content = b''.join(r.streaming_content).decode()
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r['Content-Type'], 'text/csv')
+        self.assertIn('attachment; filename="mgnifams.csv"', r['Content-Disposition'])
+        self.assertIn('ID,Full size,Representative length,pLDDT,pTM', content)
+        self.assertIn('MGYF0000000002,200,160', content)
+        self.assertNotIn('MGYF0000000001,100,80', content)
+
     def test_sort_desc(self):
         r = self._get(**{'order[0][column]': 0, 'order[0][dir]': 'desc'})
         rows = r.json()['data']

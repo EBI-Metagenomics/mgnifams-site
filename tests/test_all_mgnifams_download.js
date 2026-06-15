@@ -17,14 +17,31 @@ const allMgnifamsPath = path.join(
 const source = fs.readFileSync(allMgnifamsPath, 'utf8');
 const escapeMatch = source.match(/const escapeCsvValue = \(value\) => \{[\s\S]*?\n\};/);
 const buildMatch = source.match(/const buildMgnifamsCsv = \(rows\) => \{[\s\S]*?\n\};/);
+const currentPageMatch = source.match(/const currentPageHasAllFilteredRows = \(pageInfo, rowCount\) => \{[\s\S]*?\n\};/);
+const queryStringMatch = source.match(/const buildQueryString = \(params\) => \{[\s\S]*?\n\};/);
+const pageBlockingMatch = source.match(/const setPageBlocking = \(overlay, isBlocking\) => \{[\s\S]*?\n\};/);
 
 assert(escapeMatch, 'escapeCsvValue function not found');
 assert(buildMatch, 'buildMgnifamsCsv function not found');
+assert(currentPageMatch, 'currentPageHasAllFilteredRows function not found');
+assert(queryStringMatch, 'buildQueryString function not found');
+assert(pageBlockingMatch, 'setPageBlocking function not found');
 
-const context = {};
+const context = { URLSearchParams };
 vm.createContext(context);
 vm.runInContext(
-  `${escapeMatch[0]}\n${buildMatch[0]}\nthis.escapeCsvValue = escapeCsvValue;this.buildMgnifamsCsv = buildMgnifamsCsv;`,
+  [
+    escapeMatch[0],
+    buildMatch[0],
+    currentPageMatch[0],
+    queryStringMatch[0],
+    pageBlockingMatch[0],
+    'this.escapeCsvValue = escapeCsvValue;',
+    'this.buildMgnifamsCsv = buildMgnifamsCsv;',
+    'this.currentPageHasAllFilteredRows = currentPageHasAllFilteredRows;',
+    'this.buildQueryString = buildQueryString;',
+    'this.setPageBlocking = setPageBlocking;',
+  ].join('\n'),
   context
 );
 
@@ -32,6 +49,34 @@ assert.strictEqual(context.escapeCsvValue('plain'), 'plain');
 assert.strictEqual(context.escapeCsvValue('contains,comma'), '"contains,comma"');
 assert.strictEqual(context.escapeCsvValue('contains "quote"'), '"contains ""quote"""');
 assert.strictEqual(context.escapeCsvValue(null), '');
+assert.strictEqual(context.currentPageHasAllFilteredRows({ recordsDisplay: 3 }, 3), true);
+assert.strictEqual(context.currentPageHasAllFilteredRows({ recordsDisplay: 51 }, 50), false);
+assert.strictEqual(
+  context.buildQueryString({
+    draw: 1,
+    order: [{ column: 0, dir: 'asc' }],
+    search: { value: 'MGYF0000000001' },
+    full_size_min: '',
+  }),
+  'draw=1&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&search%5Bvalue%5D=MGYF0000000001&full_size_min='
+);
+
+const overlay = {
+  attributes: {},
+  classList: {
+    classes: new Set(),
+    add(name) { this.classes.add(name); },
+    remove(name) { this.classes.delete(name); },
+    contains(name) { return this.classes.has(name); },
+  },
+  setAttribute(name, value) { this.attributes[name] = value; },
+};
+context.setPageBlocking(overlay, true);
+assert.strictEqual(overlay.classList.contains('active'), true);
+assert.strictEqual(overlay.attributes['aria-hidden'], 'false');
+context.setPageBlocking(overlay, false);
+assert.strictEqual(overlay.classList.contains('active'), false);
+assert.strictEqual(overlay.attributes['aria-hidden'], 'true');
 
 const csv = context.buildMgnifamsCsv([
   {
