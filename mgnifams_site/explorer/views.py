@@ -468,7 +468,8 @@ def mgnifams_data(request):
     has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
 
-    rows = qs.order_by(sort_field)[start : start + length]
+    ordered_rows = qs.order_by(sort_field)
+    rows = ordered_rows[start:] if length == -1 else ordered_rows[start : start + length]
     data = [
         {
             'mgnifam_id': format_family_name(m.id),

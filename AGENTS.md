@@ -108,4 +108,5 @@ Important environment variables:
 
 ## Commit And PR Notes
 
-Recent commits use short, lowercase, imperative or descriptive summaries. Keep the first line concise and mention the user-facing change or infrastructure area. Pull requests should include a short description, linked issue or ticket when relevant, test evidence, and screenshots for template or static asset changes.
+Add a one-liner in `CHANGELOG.md` for every implemented task.
+**NEVER** execute `git commit` commands; let the user handle those.

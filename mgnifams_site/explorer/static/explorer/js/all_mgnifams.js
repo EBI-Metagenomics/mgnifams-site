@@ -36,6 +36,43 @@ const FILTER_LABELS = {
   periplasm_max:       'Periplasm% ≤',
 };
 
+const escapeCsvValue = (value) => {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  const text = String(value);
+  if (/[",\n\r]/.test(text)) {
+    return `"${text.replace(/"/g, '""')}"`;
+  }
+  return text;
+};
+
+const buildMgnifamsCsv = (rows) => {
+  const headers = [
+    'ID', 'Full size', 'Representative length', 'pLDDT', 'pTM', 'Helix%', 'Strand%', 'Coil%', 'Inside%',
+    'Membrane-alpha%', 'Outside%', 'Signal%', 'Membrane-beta%', 'Periplasm%',
+  ];
+  const fields = [
+    'mgnifam_id', 'full_size', 'rep_length', 'plddt', 'ptm', 'helix_percent', 'strand_percent', 'coil_percent',
+    'inside_percent', 'membrane_alpha_percent', 'outside_percent', 'signal_percent', 'membrane_beta_percent',
+    'periplasm_percent',
+  ];
+  const lines = rows.map((row) => fields.map((field) => escapeCsvValue(row[field])).join(','));
+  return [headers.join(','), ...lines].join('\n');
+};
+
+const downloadTextFile = (filename, text) => {
+  const blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
 const loadMGnifamsTable = () => {
   const tableEl = document.getElementById('mgnifams-table');
   const dataUrl = tableEl.dataset.url;
@@ -43,6 +80,7 @@ const loadMGnifamsTable = () => {
   const overlay = document.getElementById('loading-overlay');
   const infoBox = document.getElementById('filter-info-box');
   const applyBtn = document.getElementById('apply-filters-btn');
+  const downloadBtn = document.getElementById('download-mgnifams-btn');
 
   const filterInputIds = [
     'full_size_min', 'full_size_max',
@@ -127,6 +165,25 @@ const loadMGnifamsTable = () => {
   applyBtn.addEventListener('click', () => {
     updateInfoBox();
     mgnifamsTable.draw();
+  });
+
+  downloadBtn.addEventListener('click', () => {
+    const params = {
+      ...mgnifamsTable.ajax.params(),
+      start: 0,
+      length: -1,
+      draw: 1,
+    };
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Preparing CSV';
+    $.ajax({ url: dataUrl, data: params, dataType: 'json' })
+      .done((response) => {
+        downloadTextFile('mgnifams.csv', buildMgnifamsCsv(response.data || []));
+      })
+      .always(() => {
+        downloadBtn.disabled = false;
+        downloadBtn.textContent = 'Download CSV';
+      });
   });
 };
 

@@ -387,6 +387,12 @@ class MgnifamsDataViewTests(TestCase):
         r = self._get(start=1, length=1, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
         self.assertEqual(r.json()['data'][0]['mgnifam_id'], 'MGYF0000000002')
 
+    def test_length_minus_one_returns_all_filtered_rows(self):
+        r = self._get(length=-1, full_size_min=100, **{'order[0][column]': 0, 'order[0][dir]': 'asc'})
+        rows = r.json()['data']
+        self.assertEqual(len(rows), 2)
+        self.assertEqual([row['mgnifam_id'] for row in rows], ['MGYF0000000001', 'MGYF0000000002'])
+
     def test_sort_desc(self):
         r = self._get(**{'order[0][column]': 0, 'order[0][dir]': 'desc'})
         rows = r.json()['data']
