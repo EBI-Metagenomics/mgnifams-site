@@ -6,9 +6,15 @@
 {% block extra_head %}
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"
+        integrity="sha384-rfvKADMCRZpVdF4/h4VOowFi3EyKPCoFj7EisSOtOTwJzIA44wSTfQzSLbNPKW6F"
+        crossorigin="anonymous"
+        type="text/javascript"></script>
     <link rel="stylesheet" type="text/css"
         href="https://www.ebi.ac.uk/pdbe/pdb-component-library/css/pdbe-molstar-3.1.0.css">
 {% endblock extra_head %}
@@ -644,13 +650,34 @@ periplasm:  {{ periplasm_percent }}%
 
 <script src="{% static 'explorer/js/details.js' %}"></script>
 {% comment %} Biomes distribution {% endcomment %}
-<script src='https://cdn.plot.ly/plotly-2.29.1.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
+<script
+    src="https://cdn.plot.ly/plotly-2.29.1.min.js"
+    integrity="sha384-2Awn9xf60yat/9WEC0yqxTXZqM0JxXnaCOtaiZe7Ni/pRgbf6LqjX77nxupwylby"
+    crossorigin="anonymous"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"
+    integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn"
+    crossorigin="anonymous"></script>
 {% comment %} PDB viewer {% endcomment %}
-<script src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js" charset="utf-8"></script>
-<script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js" charset="utf-8"></script>
-<script type="text/javascript" src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js"
+    integrity="sha384-Ui1pvNxCzO7LqnfgsWJ2ndsgpJPrWVTg7DCIag+do29np24E7Jyy6A09M3JUuLQf"
+    crossorigin="anonymous"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/webcomponents-lite.js"
+    integrity="sha384-+L9OWVdt2MHBCthcPwwWL7Mwh88UeV1yGt2lnlwgJGYoVAGrzSl43KsWSSw6SrFx"
+    crossorigin="anonymous"
+    charset="utf-8"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js"
+    integrity="sha384-9xv3zrPk77d3kJlkvUOo0E89VfA76pOuZypIFK4KVkuNkXj3wt9myCXrI2oLPAMR"
+    crossorigin="anonymous"
+    charset="utf-8"></script>
+<script
+    src="https://www.ebi.ac.uk/pdbe/pdb-component-library/js/pdbe-molstar-component-3.1.0.js"
+    integrity="sha384-p4s+65ANqHUPKW/sSgts42BL6zY/eKJ0zduYZueQUDClj0NAethFl9k9LTfrmp2+"
+    crossorigin="anonymous"
+    type="text/javascript"></script>
 {% comment %} MSA Viewer {% endcomment %}
 <link rel="stylesheet" href="{% static "explorer/msa/msa.min.css" %}">
 <script src="{% static "explorer/msa/msa.min.js" %}"></script>
@@ -659,6 +686,9 @@ periplasm:  {{ periplasm_percent }}%
 <script src="{% static "explorer/hmm/hmm_logo_min.js" %}"></script>
 
 {% comment %} Feature viewer (s4pred) - Must be inserted after HMM Viewer, else there is a hmm_logo function bug{% endcomment %}
-<script src="https://cdn.jsdelivr.net/gh/calipho-sib/feature-viewer@v1.1.0/dist/feature-viewer.bundle.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/gh/calipho-sib/feature-viewer@v1.1.0/dist/feature-viewer.bundle.js"
+    integrity="sha384-OKrRI5An5YCEjKfBrG9BZmrqs36/oUTCN1eyhTEIcAq3g6n39D32dXh3+R87P5G0"
+    crossorigin="anonymous"></script>
 
 {% endblock %}
