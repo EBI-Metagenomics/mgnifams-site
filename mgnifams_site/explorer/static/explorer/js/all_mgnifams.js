@@ -172,6 +172,7 @@ const loadMGnifamsTable = () => {
     const params = {
       ...mgnifamsTable.ajax.params(),
       start: 0,
+      // Django treats length=-1 as the local extension for all rows; DataTables itself pages normally.
       length: -1,
       draw: 1,
     };

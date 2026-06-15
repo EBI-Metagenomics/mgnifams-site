@@ -233,6 +233,7 @@ const renderArchitecture = (jsonData) => {
             domainSpan.style.backgroundColor = domain.color;
             domainSpan.style.color = domain.font_color;
 
+            // Highlight the query MGnifam inside each architecture so it is visible among Pfam domains.
             if (domain.name.includes("MGnifam")) {
                 domainLink.style.fontWeight    = 'bold';
                 domainSpan.style.paddingLeft   = '15px';

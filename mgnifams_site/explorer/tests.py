@@ -25,6 +25,7 @@ SKYLIGN_LOGO_PATCH = 'explorer.views.fetch_skylign_logo_json'
 
 
 def make_mgnifam(**kwargs):
+    # Defaults satisfy all non-null model fields so individual tests override only their relevant facts.
     defaults = dict(
         id=1,
         full_size=100,

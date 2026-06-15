@@ -158,6 +158,7 @@ def _get_hmm_logo_json(mgyf_id, hmm_blob):
         uuid = response_data['uuid'].lower()
         fetched = fetch_skylign_logo_json(uuid)
         if fetched is not None:
+            # Cache only complete logo JSON; transient Skylign failures should be retried later.
             cache.set(cache_key, fetched, SKYLIGN_CACHE_TIMEOUT)
             return fetched
     return 'null'
@@ -248,6 +249,7 @@ def _get_structural_annotations(mgyf_id):
 
 def details(request, pk):
     mgyf_id = translate_mgyf_to_int_id(pk)
+    # Bulky auxiliary blobs are downloaded through serve_blob_as_file, so avoid loading them here.
     mgnifam = get_object_or_404(Mgnifam.objects.defer('biome_blob', 'domain_blob', 's4pred_blob'), id=mgyf_id)
 
     region = mgnifam.rep_region
@@ -467,6 +469,7 @@ def mgnifams_data(request):
     records_filtered = qs.count() if has_filters else records_total
 
     ordered_rows = qs.order_by(sort_field)
+    # length=-1 is the local "export all matching rows" convention used by the CSV button.
     rows = ordered_rows[start:] if length == -1 else ordered_rows[start : start + length]
     data = [
         {
