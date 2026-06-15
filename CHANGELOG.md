@@ -6,6 +6,7 @@
 
 ### Changed
 
+- Replaced the four correlated `NOT EXISTS` subqueries in `mgnifams_data` with new, pre-computed indexed boolean columns on `mgnifam` (`has_pfam`, `has_funfam`, `has_model_pfam`, `has_structure`) to speed up site filter queries.
 - Migrated dependency management from `requirements.txt`/pip to uv with `pyproject.toml` and `uv.lock` as the source of truth.
 - Replaced the pre-commit runner with `prek` while keeping `.pre-commit-config.yaml` for hook compatibility.
 - Updated GitHub Actions CI to install dependencies with `uv sync --frozen` and run hooks with `uv run prek`.
