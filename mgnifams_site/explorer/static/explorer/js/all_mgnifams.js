@@ -61,8 +61,50 @@ const buildMgnifamsCsv = (rows) => {
   return [headers.join(','), ...lines].join('\n');
 };
 
+const currentPageHasAllFilteredRows = (pageInfo, rowCount) => {
+  return pageInfo.recordsDisplay === rowCount;
+};
+
+const buildQueryString = (params) => {
+  const searchParams = new URLSearchParams();
+
+  function appendValue(key, value) {
+    if (value === undefined || value === null) {
+      return;
+    }
+    if (Array.isArray(value)) {
+      for (let i = 0; i < value.length; i++) {
+        appendValue(`${key}[${i}]`, value[i]);
+      }
+      return;
+    }
+    if (typeof value === 'object') {
+      for (const nestedKey of Object.keys(value)) {
+        appendValue(`${key}[${nestedKey}]`, value[nestedKey]);
+      }
+      return;
+    }
+    searchParams.append(key, value);
+  }
+
+  for (const key of Object.keys(params)) {
+    appendValue(key, params[key]);
+  }
+  return searchParams.toString();
+};
+
+const setPageBlocking = (overlay, isBlocking) => {
+  // Share one overlay path for table loads and CSV work so users cannot trigger competing requests.
+  overlay.classList[isBlocking ? 'add' : 'remove']('active');
+  overlay.setAttribute('aria-hidden', isBlocking ? 'false' : 'true');
+};
+
 const downloadTextFile = (filename, text) => {
   const blob = new Blob([text], { type: 'text/csv;charset=utf-8;' });
+  downloadBlobFile(filename, blob);
+};
+
+const downloadBlobFile = (filename, blob) => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -154,12 +196,10 @@ const loadMGnifamsTable = () => {
 
   mgnifamsTable
     .on('preXhr.dt', () => {
-      overlay.classList.add('active');
-      overlay.setAttribute('aria-hidden', 'false');
+      setPageBlocking(overlay, true);
     })
     .on('xhr.dt', () => {
-      overlay.classList.remove('active');
-      overlay.setAttribute('aria-hidden', 'true');
+      setPageBlocking(overlay, false);
     });
 
   applyBtn.addEventListener('click', () => {
@@ -167,25 +207,44 @@ const loadMGnifamsTable = () => {
     mgnifamsTable.draw();
   });
 
-  downloadBtn.addEventListener('click', () => {
-    // Reuse the last DataTables request so exported CSV rows match the visible filters, search, and sort.
+  downloadBtn.addEventListener('click', async () => {
+    setPageBlocking(overlay, true);
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = 'Preparing CSV';
+
+    // With server-side DataTables, the browser only owns one page unless the filtered result fits there.
+    const currentRows = mgnifamsTable.rows({ page: 'current' }).data().toArray();
+    if (currentPageHasAllFilteredRows(mgnifamsTable.page.info(), currentRows.length)) {
+      downloadTextFile('mgnifams.csv', buildMgnifamsCsv(currentRows));
+      setPageBlocking(overlay, false);
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = 'Download CSV';
+      return;
+    }
+
+    // Larger exports go back to Django as streamed CSV while preserving the visible filters, search, and sort.
     const params = {
       ...mgnifamsTable.ajax.params(),
       start: 0,
-      // Django treats length=-1 as the local extension for all rows; DataTables itself pages normally.
+      // length=-1 is our backend export convention; normal DataTables pagination remains unchanged.
       length: -1,
       draw: 1,
+      export: 'csv',
     };
-    downloadBtn.disabled = true;
-    downloadBtn.textContent = 'Preparing CSV';
-    $.ajax({ url: dataUrl, data: params, dataType: 'json' })
-      .done((response) => {
-        downloadTextFile('mgnifams.csv', buildMgnifamsCsv(response.data || []));
-      })
-      .always(() => {
-        downloadBtn.disabled = false;
-        downloadBtn.textContent = 'Download CSV';
-      });
+    try {
+      const response = await fetch(`${dataUrl}?${buildQueryString(params)}`, { headers: { Accept: 'text/csv' } });
+      if (!response.ok) {
+        throw new Error(`CSV export failed with HTTP ${response.status}`);
+      }
+      downloadBlobFile('mgnifams.csv', await response.blob());
+    } catch (error) {
+      console.error('MGnifams CSV download failed:', error);
+      window.alert('Could not download the MGnifams CSV. Please retry or narrow the filters.');
+    } finally {
+      setPageBlocking(overlay, false);
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = 'Download CSV';
+    }
   });
 };
 
