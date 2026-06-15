@@ -27,15 +27,16 @@ const loadBiomeData = () => {
 const loadStructureScoreColor = () => {
     const plddt = parseFloat(document.querySelector('.plddtColor').textContent.trim());
 
+    // Match AlphaFold's published pLDDT confidence bands so the page uses familiar structure colors.
     const getPlddtColors = (plddt) => {
         if (plddt >= 90) {
-            return { backgroundColor: 'rgb(0, 83, 214)', color: 'white' }; // Very high confidence (blue)
+            return { backgroundColor: 'rgb(0, 83, 214)', color: 'white' };
         } else if (plddt >= 70) {
-            return { backgroundColor: 'rgb(101, 203, 243)', color: 'black' }; // High confidence (cyan)
+            return { backgroundColor: 'rgb(101, 203, 243)', color: 'black' };
         } else if (plddt >= 50) {
-            return { backgroundColor: 'rgb(255, 219, 19)', color: 'black' }; // Low confidence (yellow)
+            return { backgroundColor: 'rgb(255, 219, 19)', color: 'black' };
         } else {
-            return { backgroundColor: 'rgb(255, 125, 69)', color: 'black' }; // Very low confidence (orange)
+            return { backgroundColor: 'rgb(255, 125, 69)', color: 'black' };
         }
     };
 
@@ -56,9 +57,9 @@ const renderFeatures = (jsonData, container_id) => {
         {
             showAxis: true,
             showSequence: true,
-            brushActive: true, //zoom
+            brushActive: true,
             toolbar: true,
-            zoomMax:50 //define the maximum range of the zoom
+            zoomMax:50
         });
 
     jsonData.features.forEach(feature => {
@@ -116,10 +117,10 @@ const loadMSAData = () => {
             labelCheckbox: false
         },
         colorscheme: {
-            scheme: "clustal2", // name of your color scheme
-            colorBackground: true, // otherwise only the text will be colored
-            showLowerCase: true, // used to hide and show lowercase chars in the overviewbox
-            opacity: 0.6 //opacity for the residues
+            scheme: "clustal2",
+            colorBackground: true,
+            showLowerCase: true,
+            opacity: 0.6
         }
     };
     let m = new msa.msa(opts);
@@ -134,7 +135,7 @@ const extract_hmm_column = (p_text) => {
 };
 
 const translate_to_msa_pos = (sequence, hmm_position) => {
-    // strips only leading/trailing RF dots
+    // RF dots at the ends are padding; internal dots still occupy MSA columns and must be counted.
     let trimmed_sequence = sequence.replace(/^\.+|\.+$/g, '');
     let x_counter = 0;
     let msa_pos;
@@ -148,13 +149,12 @@ const translate_to_msa_pos = (sequence, hmm_position) => {
 };
 
 const link_hmm_to_msa = () => {
-    // need a dummy init p in the col_info div to tie the event
+    // The HMM logo plugin reports clicked columns by mutating #col_info, so observe that bridge element.
     const hiddenParagraph = document.createElement('p');
     hiddenParagraph.textContent = 'Hidden paragraph content';
     hiddenParagraph.style.display = 'none';
     const divElement = document.getElementById('col_info');
     divElement.appendChild(hiddenParagraph);
-    // create the observer
     const observer = new MutationObserver(function(mutationsList, observer) {
         for(const mutation of mutationsList) {
             if (mutation.type === 'childList') {
@@ -173,7 +173,6 @@ const link_hmm_to_msa = () => {
             }
         }
     });
-    // Configure and start observing for changes in child nodes
     const config = { childList: true, subtree: true };
     observer.observe(divElement, config);
 };
@@ -184,15 +183,13 @@ const loadHMMData = () => {
         let logoDiv = document.getElementById('logo');
         logoDiv.setAttribute('data-logo', JSON.stringify(hmmLogoJson));
         $('#logo').hmm_logo({height_toggle: true, column_info: "#col_info"});
-        // switch to maximum observed scale
+        // The observed scale shows the most informative logo height for sparse HMM columns.
         let radioInput = document.querySelector('input[name="scale"][value="obs"]');
         radioInput.click();
-        // hide Coordinates fieldset options
+        // Coordinate controls expose plugin internals that do not map cleanly to the MSA viewer.
         let logoSettingsDiv = document.querySelector('.logo_settings');
         let fieldsets = logoSettingsDiv.querySelectorAll('fieldset');
         fieldsets[2].style.display = 'none';
-
-        // link event to msa
         link_hmm_to_msa();
     } else {
         console.warn("No HMM logo JSON available (timed out or error)");
@@ -218,7 +215,6 @@ const renderArchitecture = (jsonData) => {
     const max_shown_length = 30;
     const architecturesContainer = document.getElementById('architecturesContainer');
     
-    // Loop through each architecture container
     jsonData.architecture_containers.slice(0, 15).forEach(container => {
         const containerDiv = document.createElement('div');
         containerDiv.classList.add('architecture-div');
@@ -226,8 +222,6 @@ const renderArchitecture = (jsonData) => {
         architectureTextPara.textContent = `${container.architecture_text}`;
         architectureTextPara.classList.add('descr-span');
         containerDiv.appendChild(architectureTextPara);
-
-        // Loop through each domain in the container
         container.domains.forEach(domain => {
             const domainSpan = document.createElement('span');
             const domainLink = document.createElement('a');
@@ -278,33 +272,28 @@ const loadDomainData = () => {
 
 const loadDatatables = () => {
     if ($('#funfams-table:contains("No FunFam hits found")').length === 0) {
-        $('#funfams-table').DataTable({ order: [[2, 'desc']] }); // Score
+        $('#funfams-table').DataTable({ order: [[2, 'desc']] });
     }
     if ($('#pfams-table:contains("No Pfam hits found")').length === 0) {
-        $('#pfams-table').DataTable({ order: [[3, 'desc']] }); // Score
+        $('#pfams-table').DataTable({ order: [[3, 'desc']] });
     }
     if ($('#pfams_model-table:contains("No MGnifam model Pfam hits found")').length === 0) {
-        $('#pfams_model-table').DataTable({ order: [[3, 'desc']] }); // Probability
+        $('#pfams_model-table').DataTable({ order: [[3, 'desc']] });
     }
     if ($('#structural-annotations-table:contains("No structural matches found")').length === 0) {
-        $('#structural-annotations-table').DataTable({ order: [[0, 'asc']] }); // Rank
+        $('#structural-annotations-table').DataTable({ order: [[0, 'asc']] });
     }
 };
 
 const downloadProteins = (mgyf, family_members) => {
-    // Create file content
     const fileContent = family_members.join("\n");
     const blob = new Blob([fileContent], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-
-    // Create a temporary link element
     const a = document.createElement('a');
     a.href = url;
     a.download = mgyf + '_mgyps.txt';
     document.body.appendChild(a);
     a.click();
-
-    // Cleanup
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 };
@@ -319,9 +308,7 @@ const loadProteinSequenceContainer = () => {
     proteinSequenceContainer.innerHTML = '';
 
     /**
-     * Load the sequence in the protein sequence viewer
-     * @param {*} proteinSequence 
-     * @param {*} proteinSequenceContainer 
+     * Render one span per residue so hover and region highlighting can target individual positions.
      */
     const displaySequence = (proteinSequence, proteinSequenceContainer) => {
         for (let i = 0; i < proteinSequence.length; i++) {
@@ -332,8 +319,7 @@ const loadProteinSequenceContainer = () => {
     };
 
     /**
-     * Get the start and end from the query string
-     * @returns { start and end}
+     * Read optional one-based residue coordinates from MGnify Proteins deep links.
      */
     const getStartAndEnd = () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -343,10 +329,7 @@ const loadProteinSequenceContainer = () => {
     };
 
     /**
-     * Highlight a region of the protein
-     * @param {*} proteinSequenceContainer the DOM element container 
-     * @param {*} start start position 
-     * @param {*} end end postition
+     * Highlight inclusive, one-based residue coordinates in the zero-indexed span list.
      */
     const highlightRegion = (proteinSequenceContainer, start, end) => {
         for (let i = start; i <= end; i++) {
@@ -355,10 +338,6 @@ const loadProteinSequenceContainer = () => {
         }
     };
 
-    /**
-     * Event handlers
-     *
-     * */
     const updatePositionMessage = (position) => {
         positionMessage.textContent = `Amino acid position: ${position}`;
     };
@@ -371,7 +350,7 @@ const loadProteinSequenceContainer = () => {
         const position = Array.from(
             proteinSequenceContainer.querySelectorAll('span')
         ).indexOf(event.target);
-        updatePositionMessage(position + 1); // Add 1 to convert from 0-indexed position to 1-indexed
+        updatePositionMessage(position + 1);
         const targetElement = event.target;
         targetElement.style.backgroundColor = '#ffc4c4';
         }
@@ -392,9 +371,6 @@ const loadProteinSequenceContainer = () => {
         }
     });
 
-    /**
-     * Render time!
-     */
     displaySequence(proteinSequence, proteinSequenceContainer);
 
     const { start, end } = getStartAndEnd();

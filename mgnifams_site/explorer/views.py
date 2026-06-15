@@ -87,11 +87,8 @@ def translate_mgyf_to_int_id(mgyf):
 
 
 def format_protein_name(raw_name):
-    """
-    Formats the protein name by appending zeros in front to make it 12 characters,
-    and then adds 'MGYP' as a prefix.
-    """
-    formatted_name = raw_name.zfill(12)  # Append zeros to make it 12 characters
+    """Return the MGnify Proteins accession for the numeric representative ID."""
+    formatted_name = raw_name.zfill(12)
     return 'MGYP' + formatted_name
 
 
@@ -99,7 +96,7 @@ SKYLIGN_CACHE_TIMEOUT = 7 * 24 * 3600  # 1 week — DB is static so results neve
 
 
 def call_skylign_api(blob_data):
-    url = 'https://skylign.org'  # "https://pavlopoulos-lab.org/skylign/"
+    url = 'https://skylign.org'
     headers = {'Accept': 'application/json'}
     files = {'file': ('filename', blob_data)}
     data = {'processing': 'hmm'}
@@ -117,7 +114,7 @@ def call_skylign_api(blob_data):
 
 
 def fetch_skylign_logo_json(uuid):
-    url = f'https://skylign.org/logo/{uuid}'  # f'https://pavlopoulos-lab.org/skylign/logo/{uuid}'
+    url = f'https://skylign.org/logo/{uuid}'
     headers = {'Accept': 'application/json'}
     try:
         response = requests.get(url, headers=headers, timeout=5)
@@ -138,11 +135,11 @@ def decode_blob(blob, fallback=''):
 
 def generate_structure_link_and_db(part):
     if part.startswith('AF'):
-        # Split with '-' and keep the second part for AlphaFold
+        # Fold identifiers from Foldseek include the database prefix; only the accession is linkable.
         af_id = part.split('-')[1]
         return f'<a href="https://alphafold.ebi.ac.uk/entry/{af_id}">{af_id}</a>', 'AlphaFold'
     elif '.cif.gz' in part:
-        # Split with '.' and keep the first part for RCSB PDB
+        # PDB hits arrive as archive filenames, but PDBe expects the bare four-character ID.
         pdb_id = part.split('.')[0]
         return f'<a href="https://www.ebi.ac.uk/pdbe/entry/pdb/{pdb_id}">{pdb_id}</a>', 'PDB'
     else:
@@ -190,7 +187,8 @@ def _get_funfams_data(mgyf_id):
     for f in MgnifamFunfams.objects.filter(mgnifam=mgyf_id):
         try:
             superfamily, ff_part = f.funfam.split('-FF-')
-            funfam_number = str(int(ff_part))  # e.g., '000002' → 2
+            # CATH URLs use non-padded FunFam numbers even though stored IDs are zero-padded.
+            funfam_number = str(int(ff_part))
             funfam_url = f'http://cathdb.info/version/4_3_0/superfamily/{superfamily}/funfam/{funfam_number}'
         except ValueError:
             funfam_url = '#'
@@ -322,7 +320,7 @@ def serve_blob_as_file(request, pk, column_name):
         raise Http404(f'No data for column: {column_name}')
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = 'attachment;'
-    response['Cache-Control'] = 'public, max-age=86400'  # 24 h — DB is static
+    response['Cache-Control'] = 'public, max-age=86400'  # 24 h; release blob data is immutable.
     return response
 
 
@@ -411,7 +409,7 @@ def mgnifams_data(request):
 
     records_total = cache.get_or_set('mgnifam_total_count', Mgnifam.objects.count, timeout=None)
 
-    # Apply range filters
+    # Ignore malformed numeric filters instead of failing the whole DataTables request.
     active_filters = {}
     for param, lookup in _FILTER_MAP.items():
         val = request.GET.get(param, '').strip()
@@ -423,7 +421,7 @@ def mgnifams_data(request):
     if active_filters:
         qs = qs.filter(**active_filters)
 
-    # Global search by family ID
+    # The global DataTables search is intentionally restricted to MGnifam family IDs.
     if search_value:
         try:
             if search_value.upper().startswith('MGYF'):
@@ -434,7 +432,7 @@ def mgnifams_data(request):
         except (ValueError, Http404):
             qs = qs.none()
 
-    # Apply annotation presence filters (yes/no/any)
+    # Presence filters are backed by indexed booleans rather than per-request EXISTS queries.
     active_annotation_filters = False
     for param, field in _ANNOTATION_FILTER_MAP.items():
         val = request.GET.get(param, '').strip()
@@ -445,7 +443,7 @@ def mgnifams_data(request):
             qs = qs.filter(**{field: False})
             active_annotation_filters = True
 
-    # Apply annotation text search across Pfam/FunFam tables
+    # Annotation text search crosses side tables and is skipped for short terms to avoid broad scans.
     annotation_term = request.GET.get('annotation_term', '').strip()
     if len(annotation_term) >= 4:
         qs = qs.filter(

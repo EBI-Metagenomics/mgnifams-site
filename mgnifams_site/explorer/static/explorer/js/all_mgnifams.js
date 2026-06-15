@@ -168,6 +168,7 @@ const loadMGnifamsTable = () => {
   });
 
   downloadBtn.addEventListener('click', () => {
+    // Reuse the last DataTables request so exported CSV rows match the visible filters, search, and sort.
     const params = {
       ...mgnifamsTable.ajax.params(),
       start: 0,

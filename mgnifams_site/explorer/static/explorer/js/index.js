@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('id').value = form.dataset.firstId;
     });
 
-    // Annotation search
+    // Annotation searches use the same server-side endpoint as the full MGnifams table.
     const section = document.getElementById('annotation-search-section');
     const dataUrl = section.dataset.url;
     const detailsPrefix = section.dataset.detailsPrefix;
