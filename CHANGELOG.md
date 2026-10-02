@@ -2,6 +2,18 @@
 
 ## [v2.4.0dev] - unreleased
 
+### Security
+
+- Audit updates for `django` (6.0.8), `sqlparse` (0.6.0), and `urllib3` (2.8.0) to resolve Dependabot and `uv audit` alerts.
+
+### `Dependencies`
+
+| Tool     | Previous version | New version |
+| -------- | ---------------- | ----------- |
+| django   | 6.0.6            | 6.0.8       |
+| sqlparse | 0.5.5            | 0.6.0       |
+| urllib3  | 2.7.0            | 2.8.0       |
+
 ## [v2.3.0] - 2026-06-15
 
 ### Added
