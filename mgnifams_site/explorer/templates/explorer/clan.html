@@ -1,0 +1,138 @@
+<!-- explorer/templates/explorer/clan.html -->
+
+{% extends "explorer/base.html" %}
+
+{% block content %}
+{% load custom_filters %}
+
+<section class="vf-content | vf-stack vf-stack--400">
+    <h2>Clan {{ clan_id }}{% if mgnifams_release %} (release {{ mgnifams_release.release }}){% endif %}</h2>
+    <p>
+        {{ members|length }} families
+        {% if representative %}
+            · representative <a href="{% url 'details' representative|format_mgnifam_name %}">{{ representative|format_mgnifam_name }}</a>
+            <span class="tooltip">
+                <i class="fas fa-question-circle tooltip-icon"></i>
+                <span class="tooltiptext">
+                    The clan member with the largest sum of residue Jaccard over its pairs at ≥ {{ link_jaccard }} with
+                    other members; ties go to the earlier family ID in text order.
+                </span>
+            </span>
+        {% endif %}
+        · {{ duplicate_pairs }} almost-duplicate pair{{ duplicate_pairs|pluralize }}
+        <span class="tooltip">
+            <i class="fas fa-question-circle tooltip-icon"></i>
+            <span class="tooltiptext">
+                Pairs of families covering nearly the same residues of the same proteins (residue Jaccard ≥ {{ duplicate_jaccard }}).
+            </span>
+        </span>
+    </p>
+    <p>
+        Families joined by a chain of family pairs that share at least half of the residues they cover
+        (residue Jaccard ≥ {{ link_jaccard }}). Two members can overlap little, or not at all, when other
+        members join them. Clan IDs are per release.
+    </p>
+
+    <h3>Families ({{ members|length }})</h3>
+    <table class="vf-table | vf-u-width__100">
+        <thead class="vf-table__header">
+            <tr class="vf-table__row">
+                <th class="vf-table__heading" scope="col">Family</th>
+                <th class="vf-table__heading" scope="col">Size</th>
+                <th class="vf-table__heading" scope="col">Rep. length</th>
+                <th class="vf-table__heading" scope="col">Status</th>
+                <th class="vf-table__heading" scope="col">Pfam</th>
+                <th class="vf-table__heading" scope="col">FunFam</th>
+                <th class="vf-table__heading" scope="col">Structure</th>
+            </tr>
+        </thead>
+        <tbody id="family-rows" class="vf-table__body">
+            {% for member in members %}
+                <tr class="vf-table__row">
+                    <td class="vf-table__cell">
+                        <a href="{% url 'details' member.family_id|format_mgnifam_name %}">{{ member.family_id|format_mgnifam_name }}</a>
+                        {% if member.is_representative %}<span title="Clan representative">★</span>{% endif %}
+                    </td>
+                    <td class="vf-table__cell">{{ member.full_size|floatformat:"g" }}</td>
+                    <td class="vf-table__cell">{{ member.rep_length }}</td>
+                    <td class="vf-table__cell">
+                        {% if member.status == "not_updated" %}not updated{% else %}{{ member.status|default:"—" }}{% endif %}
+                    </td>
+                    <td class="vf-table__cell">{{ member.has_pfam|yesno:"✓,·" }}</td>
+                    <td class="vf-table__cell">{{ member.has_funfam|yesno:"✓,·" }}</td>
+                    <td class="vf-table__cell">{{ member.has_structure|yesno:"✓,·" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 id="pairs">Pairs in the clan ({{ pairs.total|floatformat:"g" }} stored of {{ possible_pairs|floatformat:"g" }})</h3>
+    <p>
+        Family pairs are stored when they share at least a tenth of the residues they cover (residue Jaccard ≥ 0.1)
+        or half of the smaller family's residues (residue containment ≥ 0.5). Pairs at residue Jaccard ≥ {{ link_jaccard }}
+        are the clan links; ⚠ marks an almost duplicate (≥ {{ duplicate_jaccard }}).
+    </p>
+    <table class="vf-table | vf-u-width__100">
+        <thead class="vf-table__header">
+            <tr class="vf-table__row">
+                <th class="vf-table__heading" scope="col">Family A</th>
+                <th class="vf-table__heading" scope="col">Family B</th>
+                {% include "explorer/clan_pair_headings.html" %}
+                <th class="vf-table__heading" scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="pair-rows" class="vf-table__body">
+            {% for pair in pairs.rows %}
+                <tr class="vf-table__row">
+                    <td class="vf-table__cell"><a href="{% url 'details' pair.family_1|format_mgnifam_name %}">{{ pair.family_1|format_mgnifam_name }}</a></td>
+                    <td class="vf-table__cell"><a href="{% url 'details' pair.family_2|format_mgnifam_name %}">{{ pair.family_2|format_mgnifam_name }}</a></td>
+                    {% include "explorer/clan_pair_cells.html" %}
+                    <td class="vf-table__cell">
+                        {% if pair.residue_jaccard is not None and pair.residue_jaccard >= duplicate_jaccard %}⚠ almost duplicate · {% endif %}
+                        {% if pair.residue_jaccard is not None and pair.residue_jaccard >= link_jaccard %}clan link{% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if pairs.pages > 1 %}
+        <p>
+            {% if pairs.page > 1 %}<a href="?pairs_page={{ pairs.page|add:-1 }}&amp;outside_page={{ outside.page }}#pairs">‹ Previous</a>{% endif %}
+            Page {{ pairs.page }} of {{ pairs.pages }}
+            {% if pairs.page < pairs.pages %}<a href="?pairs_page={{ pairs.page|add:1 }}&amp;outside_page={{ outside.page }}#pairs">Next ›</a>{% endif %}
+        </p>
+    {% endif %}
+
+    <h3 id="outside">Overlapping families outside the clan ({{ outside.total|floatformat:"g" }})</h3>
+    <p>Each family with a stored pair to a member, shown with its best pair (highest residue Jaccard).</p>
+    <table class="vf-table | vf-u-width__100">
+        <thead class="vf-table__header">
+            <tr class="vf-table__row">
+                <th class="vf-table__heading" scope="col">Family</th>
+                <th class="vf-table__heading" scope="col">Its clan</th>
+                <th class="vf-table__heading" scope="col">Best pair with</th>
+                {% include "explorer/clan_pair_headings.html" %}
+            </tr>
+        </thead>
+        <tbody id="outside-rows" class="vf-table__body">
+            {% for pair in outside.rows %}
+                <tr class="vf-table__row">
+                    <td class="vf-table__cell"><a href="{% url 'details' pair.family_id|format_mgnifam_name %}">{{ pair.family_id|format_mgnifam_name }}</a></td>
+                    <td class="vf-table__cell">
+                        {% if pair.clan_id %}<a href="{% url 'clan' pair.clan_id %}">{{ pair.clan_id }}</a>{% else %}none{% endif %}
+                    </td>
+                    <td class="vf-table__cell"><a href="{% url 'details' pair.member_id|format_mgnifam_name %}">{{ pair.member_id|format_mgnifam_name }}</a></td>
+                    {% include "explorer/clan_pair_cells.html" %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if outside.pages > 1 %}
+        <p>
+            {% if outside.page > 1 %}<a href="?pairs_page={{ pairs.page }}&amp;outside_page={{ outside.page|add:-1 }}#outside">‹ Previous</a>{% endif %}
+            Page {{ outside.page }} of {{ outside.pages }}
+            {% if outside.page < outside.pages %}<a href="?pairs_page={{ pairs.page }}&amp;outside_page={{ outside.page|add:1 }}#outside">Next ›</a>{% endif %}
+        </p>
+    {% endif %}
+</section>
+{% endblock content %}

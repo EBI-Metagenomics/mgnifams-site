@@ -1,5 +1,12 @@
 # Changelog
 
+## [v2.6.0dev] - unreleased
+
+### Added
+
+- The family overview shows the family's clan (or "none") with its size and whether the family is the clan representative, its almost duplicates (families at residue Jaccard ≥ 0.95; more than 3 link to the clan page instead), and its closest family with their residue Jaccard.
+- Each clan has its own page (`/clan/<clan ID>/`, linked from the family overview): every member with its size, representative length, release status and annotations; the stored family pairs inside the clan, with the clan links (residue Jaccard ≥ 0.5) and almost duplicates marked; and every overlapping family outside the clan with its best pair. Every family and clan ID on the page links to its page; both pair tables show 50 rows a page.
+
 ## [v2.5.0] - 2026-11-18
 
 ### Added
