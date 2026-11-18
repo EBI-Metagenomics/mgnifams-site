@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import sys
+import tempfile
 from pathlib import Path
+from urllib.parse import quote
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 
 # Quick-start development settings - unsuitable for production
@@ -64,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'explorer.context_processors.release',
             ],
         },
     },
@@ -75,12 +81,20 @@ WSGI_APPLICATION = 'mgnifams_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+DB_PATH = BASE_DIR / 'dbs' / 'mgnifams.sqlite3'
+DB_READONLY = os.getenv('DJANGO_DB_READONLY', 'True').lower() in ('1', 'true', 'yes')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'dbs' / 'mgnifams.sqlite3',
+        'NAME': DB_PATH,
     }
 }
+if DB_READONLY and not TESTING:
+    # The served file is never written and sits on an NFS mount without locking: open it read-only and
+    # immutable. Set DJANGO_DB_READONLY=False to run migrate on a local file.
+    DATABASES['default']['NAME'] = f'file:{quote(str(DB_PATH))}?mode=ro&immutable=1'
+    DATABASES['default']['OPTIONS'] = {'uri': True}
 
 
 # Internationalization
@@ -121,7 +135,12 @@ STORAGES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.getenv('DJANGO_CACHE_DIR', '/tmp/mgnifams_cache'),
+        # Tests get their own folder so they never write the served cache.
+        'LOCATION': (
+            tempfile.mkdtemp(prefix='mgnifams_test_cache_')
+            if TESTING
+            else os.getenv('DJANGO_CACHE_DIR', '/tmp/mgnifams_cache')
+        ),
     }
 }
 

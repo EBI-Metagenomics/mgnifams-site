@@ -36,7 +36,7 @@ uv run prek run --all-files --show-diff-on-failure
 Run Django commands from `mgnifams_site/`:
 
 ```bash
-DJANGO_SECRET_KEY=local-secret uv run python manage.py migrate
+DJANGO_SECRET_KEY=local-secret DJANGO_DB_READONLY=False uv run python manage.py migrate
 DJANGO_SECRET_KEY=local-secret uv run python manage.py collectstatic --noinput
 DJANGO_SECRET_KEY=local-secret DJANGO_DEBUG=True uv run python manage.py runserver 8000
 DJANGO_SECRET_KEY=test-secret-key uv run python manage.py test
@@ -76,6 +76,9 @@ uv lock --check
 
 - The project has one Django app, `explorer`.
 - SQLite data lives under `mgnifams_site/dbs/`; the production database is mounted externally.
+- Supported DB: schema version 3 or later from the mgnifams pipeline (`PRAGMA user_version` >= 3: `release_history`, `release_info`, the clan tables and the family provenance columns). Older files are not supported. For local work, use a family subset of such a DB as `mgnifams_site/dbs/mgnifams.sqlite3`.
+- The DB is opened read-only with `immutable=1` (the served file is never written). `DJANGO_DB_READONLY=False` turns this off, e.g. to `migrate` a local file. Tests use their own DB and a temporary cache folder.
+- Nothing read from the DB is cached across requests unless keyed by the data itself (the Skylign logo by the HMM text), so a swapped DB file needs no cache clear. Blob URLs carry `?v=<release>`.
 - MGnifam IDs are stored as integers and displayed as formatted strings such as `MGYF00000001`.
 - External integrations include Skylign, AlphaFold EBI, PDBe, and CATH DB.
 - Frontend code is plain Django templates plus vanilla JavaScript, using EBI Visual Framework assets.

@@ -81,6 +81,62 @@
                             {{ full_size }}
                         </td>
                     </tr>
+                    {% if status %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        {% if status == "not_updated" %}
+                                            Full MSA and representative from {{ members_release }}; annotations recomputed in {{ current_release_id }}
+                                        {% else %}
+                                            Full MSA and representative rebuilt in {{ members_release }} from MGnify Proteins {{ members_proteins_release }}
+                                        {% endif %}
+                                    </span>
+                                </span>
+                                Release status
+                            </td>
+                            <td class="vf-table__cell">
+                                {% if status == "not_updated" %}
+                                    <span class="vf-badge vf-badge--secondary">Not updated in {{ current_release_id }}</span>
+                                    {% if not_updated_reason %}<div>{{ not_updated_reason }}</div>{% endif %}
+                                {% elif status == "updated" %}
+                                    <span class="vf-badge vf-badge--primary">Updated in {{ current_release_id }}</span>
+                                {% else %}
+                                    <span class="vf-badge vf-badge--primary">New in {{ members_release }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        The MGnifams release that built the family HMM, and the MGnify Proteins release it was built from.
+                                    </span>
+                                </span>
+                                Model (HMM)
+                            </td>
+                            <td class="vf-table__cell">
+                                release {{ model_release }} · MGnify Proteins {{ model_proteins_release }}
+                            </td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        The MGnifams release that last recruited the family members (full MSA) and chose the
+                                        representative, and the MGnify Proteins release they were searched in.
+                                    </span>
+                                </span>
+                                Full MSA and representative
+                            </td>
+                            <td class="vf-table__cell">
+                                release {{ members_release }} · MGnify Proteins {{ members_proteins_release }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr class="vf-table__row">
                         <td class="vf-table__cell">
                             <span class="tooltip">
@@ -227,12 +283,12 @@
                         </li>
                     </ul>
                 </p>
-                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}.cif" class="vf-button vf-button--secondary vf-button--sm">Download CIF file</a>
+                <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}.cif" class="vf-button vf-button--secondary vf-button--sm">Download CIF file</a>
             </div>
             <div class="vf-grid__col--span-3">
                 <div id="pdb_viewer">
                     <pdbe-molstar
-                        custom-data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}"
+                        custom-data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='cif_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}"
                         custom-data-format="cif"
                         alphafold-view="true"
                         bg-color-r="255"
@@ -289,7 +345,7 @@
                     </span>
                 </span>
             </h3>
-            <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}"></div>
+            <div id="feature-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}"></div>
             <div id="featuresContainer"></div>
             <div>
 <pre style="font-family: monospace;">
@@ -309,7 +365,7 @@ coils:      {{ coil_percent }}%
                 {% endif %}
             </p>
         </div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='s4pred_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}_features.json" class="vf-button vf-button--secondary vf-button--sm">Download features JSON file</a>
         </div>
     </article>
 
@@ -326,7 +382,7 @@ coils:      {{ coil_percent }}%
                     </span>
                 </span>
             </h3>
-            <div id="tm-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}"></div>
+            <div id="tm-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}"></div>
             <div id="tm_featuresContainer"></div>
             <div>
 <pre style="font-family: monospace;">
@@ -345,7 +401,7 @@ periplasm:  {{ periplasm_percent }}%
                 {% endif %}
             </p>
         </div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_tm.json" class="vf-button vf-button--secondary vf-button--sm">Download transmembrane JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='tm_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}_tm.json" class="vf-button vf-button--secondary vf-button--sm">Download transmembrane JSON file</a>
         </div>
     </article>
     {% endif %}
@@ -364,9 +420,9 @@ periplasm:  {{ periplasm_percent }}%
                     </span>
                 </span>
             </h3>
-            <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}"></div>
+            <div id="msa-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}"></div>
             <div id="msa-div"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_seed_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download seed MSA file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='seed_msa_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}_seed_msa.fas" class="vf-button vf-button--secondary vf-button--sm">Download seed MSA file</a>
         </div>
     </article>
 
@@ -391,7 +447,7 @@ periplasm:  {{ periplasm_percent }}%
             </div>
             <div id="logo" class="logo" data-rf="{{ rf }}" data-hmm-logo-json="{{ hmm_logo_json }}"></div>
             <div id="col_info" class="col_info"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}.hmm" class="vf-button vf-button--secondary vf-button--sm">Download HMM file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='hmm_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}.hmm" class="vf-button vf-button--secondary vf-button--sm">Download HMM file</a>
         </div>
     </article>
 
@@ -406,9 +462,9 @@ periplasm:  {{ periplasm_percent }}%
                     </span>
                 </span>
             </h3>
-            <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}"></div>
+            <div id="biomes-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}"></div>
             <div id="sunburst-div"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='biome_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}_biomes.csv" class="vf-button vf-button--secondary vf-button--sm">Download biomes CSV file</a>
         </div>
     </article>
 
@@ -421,9 +477,9 @@ periplasm:  {{ periplasm_percent }}%
                     The numbers on the left indicate how many MGnify sequences share each domain architecture.
                 </p>
             </div>
-            <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}"></div>
+            <div id="domain-data" data-url="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}"></div>
             <div id="architecturesContainer"></div>
-            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}" download="{{ mgyf_id|format_mgnifam_name }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
+            <a href="{% url 'serve_blob_as_file' pk=mgyf_id column_name='domain_blob' %}{% if mgnifams_release %}?v={{ mgnifams_release.release }}{% endif %}" download="{{ mgyf_id|format_mgnifam_name }}_domains.json" class="vf-button vf-button--secondary vf-button--sm">Download domains JSON file</a>
         </div>
     </article>
 
@@ -432,9 +488,8 @@ periplasm:  {{ periplasm_percent }}%
             <h3 class="vf-card__heading">Functional annotation through Funfam matches</h3>
             <div>
                 <p>
-                    The family representative sequence was searched against the FunFam database
-                    (<a href="https://download.cathdb.info/cath/releases/all-releases/v4_3_0/sequence-data/funfam-hmm3-v4_3_0.lib.gz"
-                    target="_blank">ver. 4.3.0</a>) with hmmer/hmmsearch.
+                    The family representative sequence was searched against the FunFam database{% if labels.funfams.text %}
+                    (<a href="{{ labels.funfams.url }}" target="_blank">{{ labels.funfams.text }}</a>){% endif %} with hmmer/hmmsearch.
                 </p>
             </div>
             {% if funfams_data %}
@@ -483,9 +538,8 @@ periplasm:  {{ periplasm_percent }}%
             <h3 class="vf-card__heading">Functional annotation through Pfam matches</h3>
             <div>
                 <p>
-                    The family representative sequence was searched against the Pfam database
-                    (<a href="https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.0/Pfam-A.seed.gz"
-                    target="_blank">ver. 38.0</a>) with hmmer/hmmsearch.
+                    The family representative sequence was searched against the Pfam database{% if labels.pfam.text %}
+                    (<a href="{{ labels.pfam.url }}" target="_blank">{{ labels.pfam.text }}</a>){% endif %} with hmmer/hmmsearch.
                 </p>
             </div>
             {% if pfams_data %}
@@ -536,9 +590,8 @@ periplasm:  {{ periplasm_percent }}%
             <h3 class="vf-card__heading">Profile-profile Pfam matches</h3>
             <div>
                 <p>
-                    This MGnifam HMM profile was searched against the HH-suite profile Pfam database 
-                    (<a href="https://wwwuser.gwdguser.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/pfamA_35.0.tar.gz"
-                    target="_blank">ver. 35.0</a>) with HHsearch.
+                    This MGnifam HMM profile was searched against the HH-suite profile Pfam database{% if labels.pfam_profile_profile.text %}
+                    (<a href="{{ labels.pfam_profile_profile.url }}" target="_blank">{{ labels.pfam_profile_profile.text }}</a>){% endif %} with HHsearch.
                     
                 </p>
             </div>
@@ -586,7 +639,8 @@ periplasm:  {{ periplasm_percent }}%
                 <p>
                     This MGnifam 3D structure was searched against the Alphafold/UniProt and PDB databases with
                     <a href="https://github.com/steineggerlab/foldseek"
-                    target="_blank">foldseek</a>.
+                    target="_blank">foldseek</a>.{% if labels.foldseek.text %}
+                    Versions: {{ labels.foldseek.text }}.{% endif %}
                     
                 </p>
             </div>
