@@ -1187,3 +1187,24 @@ class ServingAcrossSwapTests(TestCase):
 
     def test_tests_use_own_cache_dir(self):
         self.assertFalse(str(settings.CACHES['default']['LOCATION']).startswith('/tmp/mgnifams_cache'))
+
+
+class ResponseCachingTests(TestCase):
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_pages_are_not_kept_by_shared_caches(self, _mock_api, _mock_logo):
+        # A front cache kept a page rendered while Skylign failed, so every visitor got no logo.
+        make_mgnifam()
+        for url in (reverse('index'), reverse('details', args=['MGYF0000000001']), reverse('mgnifams_data')):
+            with self.subTest(url=url):
+                self.assertEqual(self.client.get(url)['Cache-Control'], 'no-cache')
+
+    def test_blob_keeps_its_own_cache_control(self):
+        make_mgnifam()
+        response = self.client.get(reverse('serve_blob_as_file', args=[1, 'hmm_blob']))
+        self.assertEqual(response['Cache-Control'], 'public, max-age=86400')
+
+    @patch('explorer.views.requests.post')
+    def test_skylign_upload_waits_long_enough(self, mock_post):
+        call_skylign_api('HMM')
+        self.assertGreaterEqual(mock_post.call_args.kwargs['timeout'], 20)
