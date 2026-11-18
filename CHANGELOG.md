@@ -2,6 +2,25 @@
 
 ## [v2.5.0dev] - unreleased
 
+### Added
+
+- The header shows the MGnifams release the site serves and its date (e.g. "MGnifams release 1.1 (2026-11-02)").
+- The family overview shows the release status of the family (updated or not updated in the current release, with the reason when not updated) and which MGnifams and MGnify Proteins releases built its model and its full alignment.
+
+### Changed
+
+- **Breaking:** the site needs a DB built by the mgnifams pipeline with schema version 3 or later (`release_history`, `release_info`, clan tables and family provenance columns). Older DB files are not supported. Local `migrate` runs need `DJANGO_DB_READONLY=False`.
+- Pfam, profile-profile Pfam and FunFam version labels and links on the family page come from the DB instead of fixed text, and Foldseek lists its search version and target databases. On release 1.1 this shows Pfam-A 38.2 (was 38.0), and the Pfam link points at the searched `Pfam-A.hmm.gz` instead of the seed file.
+- The home page describes the sequences the families were built from and, for an update release, how many families had their full alignments rebuilt and from which MGnify Proteins release.
+- The statistics page shows the release 1.1 figures: family size, representative length and mean pLDDT; family size and representative length in linear bins; and pTM.
+- The DB is opened read-only and immutable.
+
+### Fixed
+
+- Domain architecture rows with many or long domains spilled past the page width and wrapped under the count column. Domains now wrap after the count, never split across lines, and every domain shows its full name on hover.
+- After a DB swap the table total, Skylign logos and downloaded files could come from the previous DB until caches expired. Values are now read per request, logos are keyed by the HMM itself, and file links carry the release.
+- Running the tests wrote into the served cache folder; tests now use a temporary one.
+
 ## [v2.4.0] - 2026-11-18
 
 ### Security
