@@ -18,6 +18,7 @@ from explorer.models import (
     ReleaseHistory,
     ReleaseInfo,
 )
+from explorer.releases import current_release
 from explorer.views import (
     call_skylign_api,
     decode_blob,
@@ -911,3 +912,40 @@ class ReleaseModelTests(TestCase):
 
     def test_mgnifam_provenance_defaults_null(self):
         self.assertIsNone(make_mgnifam().status)
+
+
+def make_release(release='1.1', date='2026-11-02', info=None, **kwargs):
+    defaults = dict(type='update', mgnify_proteins_release='2026_07')
+    defaults.update(kwargs)
+    row = ReleaseHistory.objects.create(release=release, date=date, **defaults)
+    for key, value in (info or {}).items():
+        ReleaseInfo.objects.create(release=row, key=key, value=value)
+    return row
+
+
+class CurrentReleaseTests(TestCase):
+    def test_current_release_empty_db(self):
+        self.assertIsNone(current_release())
+
+    def test_current_release_picks_latest_version(self):
+        make_release('1.9', info={'databases.pfam': 'Pfam-A 38.0'})
+        make_release('1.10', date='2027-01-01', info={'databases.pfam': 'Pfam-A 38.2'})
+        release = current_release()
+        self.assertEqual(release['release'], '1.10')
+        self.assertEqual(release['date'], '2027-01-01')
+        self.assertEqual(release['info'], {'databases.pfam': 'Pfam-A 38.2'})
+
+    def test_current_release_not_cached_across_requests(self):
+        make_release('1.1')
+        self.assertContains(self.client.get(reverse('index')), 'MGnifams release 1.1 (2026-11-02)')
+        make_release('1.2', date='2027-05-01')
+        self.assertContains(self.client.get(reverse('index')), 'MGnifams release 1.2 (2027-05-01)')
+
+    def test_header_shows_release(self):
+        make_release('1.1')
+        self.assertContains(self.client.get(reverse('index')), 'MGnifams release 1.1 (2026-11-02)')
+
+    def test_header_without_release(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'MGnifams release')

@@ -51,6 +51,9 @@
             <p class="vf-hero__text">
                 A metagenomics-derived protein families resource
             </p>
+            {% if mgnifams_release %}
+                <p class="vf-hero__text">MGnifams release {{ mgnifams_release.release }} ({{ mgnifams_release.date }})</p>
+            {% endif %}
         </div>
     </section>
     <nav class="vf-navigation vf-navigation--main | vf-cluster">
