@@ -1285,3 +1285,148 @@ class FamilyClanSummaryTests(TestCase):
         make_edge(23379, 18705, 0.2)
         with self.assertNumQueries(4):
             family_clan_summary(18705)
+
+
+def table_rows(response, tbody_id):
+    """The <tr> elements of one table body, as HTML strings."""
+    body = re.search(rf'<tbody id="{tbody_id}"[^>]*>(.*?)</tbody>', response.content.decode(), re.S)
+    return re.findall(r'<tr\b.*?</tr>', body.group(1), re.S) if body else []
+
+
+class ClanPageTests(TestCase):
+    MEMBERS = [18705, 35055, 9225, 28614, 23379]
+
+    def setUp(self):
+        for family_id in [*self.MEMBERS, 13799, 2549]:
+            make_mgnifam(id=family_id)
+        make_clan('1.1_clan_558', self.MEMBERS, representative=28614)
+        make_clan('1.1_clan_9', [2549], representative=2549)
+        make_edge(18705, 35055, 0.639)
+        make_edge(35055, 9225, 0.580)
+        make_edge(9225, 28614, 0.550)
+        make_edge(28614, 23379, 0.695)
+        make_edge(18705, 28614, 0.168)
+        make_edge(13799, 18705, 0.468)
+        make_edge(13799, 9225, 0.3)
+        make_edge(2549, 35055, 0.381)
+
+    def get(self, clan_id='1.1_clan_558', query=''):
+        return self.client.get(reverse('clan', args=[clan_id]) + query)
+
+    def test_unknown_clan_404(self):
+        self.assertEqual(self.client.get('/clan/1.1_clan_x/').status_code, 404)
+
+    def test_header(self):
+        response = self.get()
+        self.assertContains(response, '1.1_clan_558')
+        self.assertContains(response, '5 families')
+        self.assertContains(response, 'href="/details/MGYF0000028614/"')
+        self.assertContains(response, '5 stored of 10')
+        self.assertContains(response, '0 almost-duplicate pairs')
+
+    def test_every_member_linked(self):
+        rows = table_rows(self.get(), 'family-rows')
+        self.assertEqual(len(rows), 5)
+        for member in self.MEMBERS:
+            self.assertTrue(any(f'href="/details/MGYF{member:010d}/"' in row for row in rows), member)
+        self.assertIn('★', rows[0])
+        self.assertIn('MGYF0000028614', rows[0])
+        self.assertNotIn('★', ''.join(rows[1:]))
+
+    def test_pairs_sorted_and_marked(self):
+        rows = table_rows(self.get(), 'pair-rows')
+        self.assertEqual(
+            [re.search(r'0\.\d{3}', row).group() for row in rows], ['0.695', '0.639', '0.580', '0.550', '0.168']
+        )
+        self.assertEqual(['clan link' in row for row in rows], [True, True, True, True, False])
+        self.assertIn('href="/details/MGYF0000023379/"', rows[0])
+        self.assertIn('href="/details/MGYF0000028614/"', rows[0])
+
+    def test_outside_one_row_per_family(self):
+        rows = table_rows(self.get(), 'outside-rows')
+        self.assertEqual(len(rows), 2)
+        self.assertIn('MGYF0000013799', rows[0])
+        self.assertIn('href="/details/MGYF0000018705/"', rows[0])
+        self.assertIn('0.468', rows[0])
+        self.assertIn('none', rows[0])
+        self.assertIn('href="/clan/1.1_clan_9/"', rows[1])
+
+    def test_almost_duplicate_marked(self):
+        MgnifamClanEdge.objects.filter(family_1=18705, family_2=28614).update(residue_jaccard=0.96)
+        response = self.get()
+        self.assertContains(response, '1 almost-duplicate pair')
+        row = table_rows(response, 'pair-rows')[0]
+        self.assertIn('0.960', row)
+        self.assertIn('⚠', row)
+
+    def make_big_clan(self, outside=0):
+        members = list(range(1, 13))
+        for family_id in [*members, *range(100, 100 + outside)]:
+            make_mgnifam(id=family_id)
+        make_clan('1.1_clan_7', members, representative=1)
+        for i, a in enumerate(members):
+            for b in members[i + 1 :]:
+                make_edge(a, b, 0.5 + a / 100)
+        for family_id in range(100, 100 + outside):
+            make_edge(1, family_id, 0.2)
+
+    def test_paging(self):
+        self.make_big_clan()
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7'), 'pair-rows')), 50)
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7', '?pairs_page=2'), 'pair-rows')), 16)
+        for value, size in [('abc', 50), ('0', 50), ('99999', 16)]:
+            response = self.get('1.1_clan_7', f'?pairs_page={value}')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(table_rows(response, 'pair-rows')), size, value)
+
+    def test_outside_paging(self):
+        self.make_big_clan(outside=60)
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7'), 'outside-rows')), 50)
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7', '?outside_page=2'), 'outside-rows')), 10)
+        for value, size in [('abc', 50), ('0', 50), ('99999', 10)]:
+            response = self.get('1.1_clan_7', f'?outside_page={value}')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(table_rows(response, 'outside-rows')), size, value)
+        response = self.get('1.1_clan_7', '?pairs_page=2&outside_page=2')
+        self.assertContains(response, '?pairs_page=1&amp;outside_page=2')
+        self.assertContains(response, '?pairs_page=2&amp;outside_page=1')
+
+    def test_outside_tie_order(self):
+        for family_id in [1, 2, 10, 50, 90]:
+            make_mgnifam(id=family_id)
+        make_clan('1.1_clan_3', [1, 2], representative=1)
+        make_edge(1, 2, 0.7)
+        make_edge(90, 1, 0.6)
+        make_edge(10, 2, 0.6)
+        make_edge(50, 2, 0.6)
+        make_edge(50, 1, 0.6)
+        rows = table_rows(self.get('1.1_clan_3'), 'outside-rows')
+        self.assertEqual(
+            [re.search(r'MGYF\d{10}', row).group() for row in rows][:3],
+            ['MGYF0000000010', 'MGYF0000000050', 'MGYF0000000090'],
+        )
+        self.assertEqual(list(dict.fromkeys(re.findall(r'MGYF\d{10}', rows[1]))), ['MGYF0000000050', 'MGYF0000000001'])
+
+    def test_null_jaccard_last(self):
+        make_edge(23379, 35055, None)
+        rows = table_rows(self.get(), 'pair-rows')
+        self.assertEqual(len(rows), 6)
+        self.assertIn('—', rows[-1])
+        self.assertNotIn('clan link', rows[-1])
+
+    def test_query_count(self):
+        make_release()
+        with self.assertNumQueries(8):
+            self.assertEqual(self.get().status_code, 200)
+
+    def test_members_query_reads_no_blob(self):
+        from django.db import connection
+        from django.test.utils import CaptureQueriesContext
+
+        from explorer.clans import clan_members
+
+        with CaptureQueriesContext(connection) as queries:
+            self.assertEqual(len(clan_members('1.1_clan_558')), 5)
+        sql = queries.captured_queries[0]['sql']
+        for column in ['hmm_blob', 'cif_blob', 'seed_msa_blob', 'rep_sequence', 'consensus']:
+            self.assertNotIn(column, sql)
