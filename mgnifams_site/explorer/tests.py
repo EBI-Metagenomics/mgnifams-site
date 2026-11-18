@@ -18,7 +18,7 @@ from explorer.models import (
     ReleaseHistory,
     ReleaseInfo,
 )
-from explorer.releases import current_release
+from explorer.releases import current_release, version_labels
 from explorer.views import (
     call_skylign_api,
     decode_blob,
@@ -949,3 +949,90 @@ class CurrentReleaseTests(TestCase):
         response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, 'MGnifams release')
+
+
+RELEASE_1_1_INFO = {
+    'databases.pfam': 'Pfam-A 38.2',
+    'databases.pfam_profile_profile': 'Pfam 35.0',
+    'databases.funfams': 'FunFams v4.3.0',
+    'databases.foldseek.search_version': '10.941cd33',
+    'databases.foldseek.pdb.database': 'pdb100',
+    'databases.foldseek.pdb.pdb_date': '2025-01-01',
+    'databases.foldseek.alphafold_db.database': 'afdb50',
+    'databases.foldseek.alphafold_db.version': 'v6 2025_03',
+    'mgnify_proteins.models.release': '2024_04',
+    'mgnify_proteins.members.release': '2026_07',
+    'family_counts.updated': '34419',
+}
+
+
+class VersionLabelTests(TestCase):
+    def test_version_labels_from_release_info(self):
+        labels = version_labels(RELEASE_1_1_INFO)
+        self.assertEqual(
+            labels['pfam'],
+            {'text': 'ver. 38.2', 'url': 'https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.2/Pfam-A.hmm.gz'},
+        )
+        self.assertEqual(
+            labels['pfam_profile_profile'],
+            {
+                'text': 'ver. 35.0',
+                'url': 'https://wwwuser.gwdguser.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/pfamA_35.0.tar.gz',
+            },
+        )
+        self.assertEqual(
+            labels['funfams'],
+            {
+                'text': 'ver. 4.3.0',
+                'url': 'https://download.cathdb.info/cath/releases/all-releases/v4_3_0/sequence-data/funfam-hmm3-v4_3_0.lib.gz',
+            },
+        )
+        self.assertEqual(
+            labels['foldseek'],
+            {
+                'text': 'Foldseek 10.941cd33; PDB (pdb100, 2025-01-01) and AlphaFold DB (afdb50, v6 2025_03)',
+                'url': None,
+            },
+        )
+
+    def test_labels_without_release_info(self):
+        empty = {'text': '', 'url': None}
+        self.assertEqual(
+            version_labels({}), {'pfam': empty, 'pfam_profile_profile': empty, 'funfams': empty, 'foldseek': empty}
+        )
+
+    def test_foldseek_label_drops_missing_parts(self):
+        info = dict(RELEASE_1_1_INFO)
+        del info['databases.foldseek.search_version']
+        self.assertTrue(version_labels(info)['foldseek']['text'].startswith('PDB (pdb100, 2025-01-01)'))
+        info['databases.foldseek.alphafold_db.version'] = ''
+        self.assertNotIn('AlphaFold DB', version_labels(info)['foldseek']['text'])
+
+    def test_unparsable_version_gives_no_label(self):
+        self.assertEqual(version_labels({'databases.pfam': 'Pfam-A'})['pfam'], {'text': '', 'url': None})
+
+
+class DetailsVersionLabelTests(TestCase):
+    def setUp(self):
+        make_mgnifam()
+        self.url = reverse('details', args=['MGYF0000000001'])
+        cache.clear()
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_details_shows_pfam_38_2(self, _mock_api, _mock_logo):
+        make_release('1.1', info=RELEASE_1_1_INFO)
+        response = self.client.get(self.url)
+        self.assertContains(response, 'ver. 38.2')
+        self.assertContains(response, 'Pfam38.2/Pfam-A.hmm.gz')
+        self.assertContains(response, 'ver. 4.3.0')
+        self.assertContains(response, 'ver. 35.0')
+        self.assertContains(response, 'Foldseek 10.941cd33; PDB (pdb100, 2025-01-01)')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_details_without_release_info(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'ver. ')
+        self.assertNotContains(response, 'Pfam-A.seed.gz')

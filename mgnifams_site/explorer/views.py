@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+from explorer.releases import current_release, version_labels
 from explorer.utils import format_family_name
 
 logger = logging.getLogger(__name__)
@@ -298,6 +299,7 @@ def details(request, pk):
             'funfams_data': _get_funfams_data(mgyf_id),
             'pfams_model_data': _get_model_pfams_data(mgyf_id),
             'structural_annotations': _get_structural_annotations(mgyf_id),
+            'labels': version_labels((current_release(request) or {}).get('info', {})),
         },
     )
 

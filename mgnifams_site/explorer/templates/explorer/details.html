@@ -432,9 +432,8 @@ periplasm:  {{ periplasm_percent }}%
             <h3 class="vf-card__heading">Functional annotation through Funfam matches</h3>
             <div>
                 <p>
-                    The family representative sequence was searched against the FunFam database
-                    (<a href="https://download.cathdb.info/cath/releases/all-releases/v4_3_0/sequence-data/funfam-hmm3-v4_3_0.lib.gz"
-                    target="_blank">ver. 4.3.0</a>) with hmmer/hmmsearch.
+                    The family representative sequence was searched against the FunFam database{% if labels.funfams.text %}
+                    (<a href="{{ labels.funfams.url }}" target="_blank">{{ labels.funfams.text }}</a>){% endif %} with hmmer/hmmsearch.
                 </p>
             </div>
             {% if funfams_data %}
@@ -483,9 +482,8 @@ periplasm:  {{ periplasm_percent }}%
             <h3 class="vf-card__heading">Functional annotation through Pfam matches</h3>
             <div>
                 <p>
-                    The family representative sequence was searched against the Pfam database
-                    (<a href="https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.0/Pfam-A.seed.gz"
-                    target="_blank">ver. 38.0</a>) with hmmer/hmmsearch.
+                    The family representative sequence was searched against the Pfam database{% if labels.pfam.text %}
+                    (<a href="{{ labels.pfam.url }}" target="_blank">{{ labels.pfam.text }}</a>){% endif %} with hmmer/hmmsearch.
                 </p>
             </div>
             {% if pfams_data %}
@@ -536,9 +534,8 @@ periplasm:  {{ periplasm_percent }}%
             <h3 class="vf-card__heading">Profile-profile Pfam matches</h3>
             <div>
                 <p>
-                    This MGnifam HMM profile was searched against the HH-suite profile Pfam database 
-                    (<a href="https://wwwuser.gwdguser.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/pfamA_35.0.tar.gz"
-                    target="_blank">ver. 35.0</a>) with HHsearch.
+                    This MGnifam HMM profile was searched against the HH-suite profile Pfam database{% if labels.pfam_profile_profile.text %}
+                    (<a href="{{ labels.pfam_profile_profile.url }}" target="_blank">{{ labels.pfam_profile_profile.text }}</a>){% endif %} with HHsearch.
                     
                 </p>
             </div>
@@ -586,7 +583,8 @@ periplasm:  {{ periplasm_percent }}%
                 <p>
                     This MGnifam 3D structure was searched against the Alphafold/UniProt and PDB databases with
                     <a href="https://github.com/steineggerlab/foldseek"
-                    target="_blank">foldseek</a>.
+                    target="_blank">foldseek</a>.{% if labels.foldseek.text %}
+                    Versions: {{ labels.foldseek.text }}.{% endif %}
                     
                 </p>
             </div>
