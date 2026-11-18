@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import logging
 import re
@@ -11,6 +12,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+from explorer.releases import current_release, version_labels
 from explorer.utils import format_family_name
 
 logger = logging.getLogger(__name__)
@@ -20,6 +22,12 @@ def index(request):
     num_mgnifams = Mgnifam.objects.count()
     first_mgnifam = Mgnifam.objects.only('id').first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
+    release = current_release(request)
+    info = release['info'] if release else {}
+    try:
+        n_updated = f'{int(info["family_counts.updated"]):,}'
+    except (KeyError, TypeError, ValueError):
+        n_updated = None
 
     return render(
         request,
@@ -27,38 +35,79 @@ def index(request):
         {
             'num_mgnifams': num_mgnifams,
             'first_id': first_id,
+            'models_proteins_release': info.get('mgnify_proteins.models.release'),
+            'members_proteins_release': info.get('mgnify_proteins.members.release'),
+            'n_updated': n_updated,
             'mgnifams_data_url': reverse('mgnifams_data'),
             'details_url_prefix': reverse('details', args=['MGYF0000000001']).replace('MGYF0000000001/', ''),
         },
     )
 
 
+_MATCH_SPLIT = 'split by whether any Pfam, FunFam, PDB or AlphaFoldDB match was found.'
+
 STATISTICS_PLOT_SECTIONS = [
     {
-        'heading': 'Family length distribution',
+        'heading': 'Family size, representative length and model confidence',
         'plots': [
             {
-                'title': 'Short family lengths',
-                'filename': 'explorer/statistics/family_length_short.png',
+                'title': 'Family size, representative length and mean pLDDT',
+                'filename': 'explorer/statistics/family_metadata_1.1.png',
                 'alt': (
-                    'Stacked bar chart showing MGnifam family length distribution for HMM consensus '
-                    'lengths 1 to 700, split into annotated and unannotated families.'
+                    'Three stacked bar charts of release 1.1 families: family size in log bins, representative '
+                    'length in bins of 100 amino acids and mean pLDDT in bins of 5, each split into families '
+                    'with and without a Pfam, FunFam, PDB or AlphaFoldDB match.'
                 ),
-                'caption': 'Family length distribution for short HMM consensus lengths, binned by 25 amino acids.',
+                'caption': (
+                    'Release 1.1 families by family size (domain regions in the full alignment), representative '
+                    "length and mean pLDDT of the representative's ESMFold model, " + _MATCH_SPLIT
+                ),
             }
         ],
     },
     {
-        'heading': 'Family size distribution',
+        'heading': 'Family size and representative length, linear bins',
         'plots': [
             {
-                'title': 'Medium family sizes',
-                'filename': 'explorer/statistics/family_size_medium.png',
+                'title': 'Family size',
+                'filename': 'explorer/statistics/family_size_linear_1.1.png',
                 'alt': (
-                    'Stacked bar chart showing MGnifam family size distribution for families with '
-                    '21 to 100000 sequences, split into annotated and unannotated families.'
+                    'Three stacked bar charts of release 1.1 families by family size in linear bins of 50, '
+                    '2,500 and 200,000 domain regions, split into families with and without a match.'
                 ),
-                'caption': 'Family size distribution for medium-sized families, binned by 10000 sequences.',
+                'caption': (
+                    'Release 1.1 families by family size (domain regions in the full alignment) in linear bins: '
+                    '6 to 999 by 50, 1,000 to 49,999 by 2,500, and 50,000 upwards by 200,000; ' + _MATCH_SPLIT
+                ),
+            },
+            {
+                'title': 'Representative length',
+                'filename': 'explorer/statistics/representative_length_linear_1.1.png',
+                'alt': (
+                    'Three stacked bar charts of release 1.1 families by representative length in bins of 20, '
+                    '25 and 100 amino acids, split into families with and without a match.'
+                ),
+                'caption': (
+                    'Release 1.1 families by representative length in linear bins: up to 300 amino acids by 20, '
+                    '301 to 600 by 25, and 601 to 2,000 by 100; ' + _MATCH_SPLIT
+                ),
+            },
+        ],
+    },
+    {
+        'heading': 'Predicted TM-score',
+        'plots': [
+            {
+                'title': 'pTM of the representative structure',
+                'filename': 'explorer/statistics/ptm_1.1.png',
+                'alt': (
+                    "Stacked bar chart of release 1.1 families by pTM of the representative's ESMFold model "
+                    'in bins of 0.05, split into families with and without a match.'
+                ),
+                'caption': (
+                    "Release 1.1 families by predicted TM-score (pTM) of the representative's ESMFold model, "
+                    'in bins of 0.05; ' + _MATCH_SPLIT
+                ),
             }
         ],
     },
@@ -147,10 +196,11 @@ def generate_structure_link_and_db(part):
         return part, ''
 
 
-def _get_hmm_logo_json(mgyf_id, hmm_blob):
+def _get_hmm_logo_json(hmm_blob):
     if not hmm_blob:
         return 'null'
-    cache_key = f'skylign_logo_json_{mgyf_id}'
+    # Keyed by the HMM text itself, so a changed HMM (new DB file) never gets an old logo.
+    cache_key = f'skylign_logo_json_{hashlib.sha256(hmm_blob.encode()).hexdigest()[:16]}'
     cached = cache.get(cache_key)
     if cached is not None:
         return cached
@@ -262,6 +312,7 @@ def details(request, pk):
     seed_msa_blob = decode_blob(mgnifam.seed_msa_blob)
     rf = decode_blob(mgnifam.rf_blob)
     hmm_blob = decode_blob(mgnifam.hmm_blob)
+    release = current_release(request)
 
     return render(
         request,
@@ -292,12 +343,21 @@ def details(request, pk):
             'seed_msa_blob': seed_msa_blob,
             'rf': rf,
             'hmm_blob': hmm_blob,
-            'hmm_logo_json': _get_hmm_logo_json(mgyf_id, hmm_blob),
+            'hmm_logo_json': _get_hmm_logo_json(hmm_blob),
             'tm_blob': mgnifam.tm_blob is not None,
             'pfams_data': _get_pfams_data(mgyf_id),
             'funfams_data': _get_funfams_data(mgyf_id),
             'pfams_model_data': _get_model_pfams_data(mgyf_id),
             'structural_annotations': _get_structural_annotations(mgyf_id),
+            'labels': version_labels(release['info'] if release else {}),
+            # The status badge names the current release, so it needs one.
+            'status': mgnifam.status if release else None,
+            'current_release_id': release['release'] if release else None,
+            'not_updated_reason': mgnifam.not_updated_reason,
+            'model_release': mgnifam.model_release,
+            'model_proteins_release': mgnifam.model_proteins_release,
+            'members_release': mgnifam.members_release,
+            'members_proteins_release': mgnifam.members_proteins_release,
         },
     )
 
@@ -323,7 +383,13 @@ def serve_blob_as_file(request, pk, column_name):
         raise Http404(f'No data for column: {column_name}')
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = 'attachment;'
-    response['Cache-Control'] = 'public, max-age=86400'  # 24 h; release blob data is immutable.
+    release = current_release(request)
+    requested = request.GET.get('v')
+    if requested is None or (release and requested == release['release']):
+        response['Cache-Control'] = 'public, max-age=86400'  # 24 h; release blob data is immutable.
+    else:
+        # A page from another release (opened before a DB swap or rollback): never cache under its URL.
+        response['Cache-Control'] = 'no-store'
     return response
 
 
@@ -543,7 +609,7 @@ def mgnifams_data(request):
     if request.GET.get('export') == 'csv':
         return _mgnifams_csv_response(rows)
 
-    records_total = cache.get_or_set('mgnifam_total_count', Mgnifam.objects.count, timeout=None)
+    records_total = Mgnifam.objects.count()
     has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
 

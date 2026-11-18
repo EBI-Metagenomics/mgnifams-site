@@ -16,4 +16,5 @@ ENV DJANGO_SETTINGS_MODULE=mgnifams_site.settings
 ENV PYTHONUNBUFFERED=0
 
 RUN .venv/bin/python manage.py collectstatic --noinput
-CMD .venv/bin/gunicorn mgnifams_site.wsgi:application --bind 0.0.0.0:8000 --workers 3
+# CSV exports stream for longer than gunicorn's default 30 s worker timeout, which cut them off silently.
+CMD .venv/bin/gunicorn mgnifams_site.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 300

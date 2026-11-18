@@ -2,6 +2,7 @@ import re
 from unittest.mock import MagicMock, patch
 
 import requests.exceptions
+from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.core.cache import cache
 from django.http import Http404
@@ -9,7 +10,16 @@ from django.templatetags.static import static
 from django.test import TestCase
 from django.urls import reverse
 
-from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+from explorer.models import (
+    Mgnifam,
+    MgnifamFolds,
+    MgnifamFunfams,
+    MgnifamModelPfams,
+    MgnifamPfams,
+    ReleaseHistory,
+    ReleaseInfo,
+)
+from explorer.releases import current_release, version_labels
 from explorer.views import (
     call_skylign_api,
     decode_blob,
@@ -121,6 +131,15 @@ class IndexViewTests(TestCase):
         assert_external_scripts_have_sri(self, response, DATATABLES_SCRIPT_URLS)
 
 
+STATISTICS_FILES = [
+    'explorer/statistics/family_metadata_1.1.png',
+    'explorer/statistics/family_size_linear_1.1.png',
+    'explorer/statistics/representative_length_linear_1.1.png',
+    'explorer/statistics/ptm_1.1.png',
+]
+OLD_STATISTICS_FILES = ['explorer/statistics/family_length_short.png', 'explorer/statistics/family_size_medium.png']
+
+
 class StatisticsViewTests(TestCase):
     def test_statistics_url_returns_200(self):
         response = self.client.get(reverse('statistics'))
@@ -131,18 +150,26 @@ class StatisticsViewTests(TestCase):
         self.assertIn('plot_sections', response.context)
         self.assertEqual(
             [section['heading'] for section in response.context['plot_sections']],
-            ['Family length distribution', 'Family size distribution'],
+            [
+                'Family size, representative length and model confidence',
+                'Family size and representative length, linear bins',
+                'Predicted TM-score',
+            ],
         )
 
     def test_statistics_page_renders_supplied_plot_paths(self):
         response = self.client.get(reverse('statistics'))
-        self.assertContains(response, static('explorer/statistics/family_length_short.png'))
-        self.assertContains(response, static('explorer/statistics/family_size_medium.png'))
-        self.assertContains(response, 'Open image', count=2)
+        for filename in STATISTICS_FILES:
+            self.assertContains(response, static(filename))
+        for filename in OLD_STATISTICS_FILES:
+            self.assertNotContains(response, static(filename))
+        self.assertContains(response, 'Open image', count=4)
 
     def test_statistics_static_assets_exist(self):
-        self.assertIsNotNone(finders.find('explorer/statistics/family_length_short.png'))
-        self.assertIsNotNone(finders.find('explorer/statistics/family_size_medium.png'))
+        for filename in STATISTICS_FILES:
+            self.assertIsNotNone(finders.find(filename))
+        for filename in OLD_STATISTICS_FILES:
+            self.assertIsNone(finders.find(filename))
 
     def test_main_navigation_links_to_statistics(self):
         response = self.client.get(reverse('index'))
@@ -890,3 +917,273 @@ class MgnifamsDataEdgeCaseTests(TestCase):
         r = self._get(**{'search[value]': 'MGYF000000XXXX'})
         data = r.json()
         self.assertEqual(data['recordsFiltered'], 0)
+
+
+class ReleaseModelTests(TestCase):
+    def test_release_info_composite_key(self):
+        ReleaseHistory.objects.create(
+            release='1.1', date='2026-11-02', type='update', mgnify_proteins_release='2026_07'
+        )
+        ReleaseInfo.objects.create(release_id='1.1', key='databases.pfam', value='Pfam-A 38.2')
+        ReleaseInfo.objects.create(release_id='1.1', key='databases.funfams', value='FunFams v4.3.0')
+        self.assertEqual(ReleaseInfo.objects.filter(release='1.1').count(), 2)
+
+    def test_mgnifam_provenance_defaults_null(self):
+        self.assertIsNone(make_mgnifam().status)
+
+
+def make_release(release='1.1', date='2026-11-02', info=None, **kwargs):
+    defaults = dict(type='update', mgnify_proteins_release='2026_07')
+    defaults.update(kwargs)
+    row = ReleaseHistory.objects.create(release=release, date=date, **defaults)
+    for key, value in (info or {}).items():
+        ReleaseInfo.objects.create(release=row, key=key, value=value)
+    return row
+
+
+class CurrentReleaseTests(TestCase):
+    def test_current_release_empty_db(self):
+        self.assertIsNone(current_release())
+
+    def test_current_release_picks_latest_version(self):
+        make_release('1.9', info={'databases.pfam': 'Pfam-A 38.0'})
+        make_release('1.10', date='2027-01-01', info={'databases.pfam': 'Pfam-A 38.2'})
+        release = current_release()
+        self.assertEqual(release['release'], '1.10')
+        self.assertEqual(release['date'], '2027-01-01')
+        self.assertEqual(release['info'], {'databases.pfam': 'Pfam-A 38.2'})
+
+    def test_current_release_not_cached_across_requests(self):
+        make_release('1.1')
+        self.assertContains(self.client.get(reverse('index')), 'MGnifams release 1.1 (2026-11-02)')
+        make_release('1.2', date='2027-05-01')
+        self.assertContains(self.client.get(reverse('index')), 'MGnifams release 1.2 (2027-05-01)')
+
+    def test_header_shows_release(self):
+        make_release('1.1')
+        self.assertContains(self.client.get(reverse('index')), 'MGnifams release 1.1 (2026-11-02)')
+
+    def test_header_without_release(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'MGnifams release')
+
+
+RELEASE_1_1_INFO = {
+    'databases.pfam': 'Pfam-A 38.2',
+    'databases.pfam_profile_profile': 'Pfam 35.0',
+    'databases.funfams': 'FunFams v4.3.0',
+    'databases.foldseek.search_version': '10.941cd33',
+    'databases.foldseek.pdb.database': 'pdb100',
+    'databases.foldseek.pdb.pdb_date': '2025-01-01',
+    'databases.foldseek.alphafold_db.database': 'afdb50',
+    'databases.foldseek.alphafold_db.version': 'v6 2025_03',
+    'mgnify_proteins.models.release': '2024_04',
+    'mgnify_proteins.members.release': '2026_07',
+    'family_counts.updated': '34419',
+}
+
+
+class VersionLabelTests(TestCase):
+    def test_version_labels_from_release_info(self):
+        labels = version_labels(RELEASE_1_1_INFO)
+        self.assertEqual(
+            labels['pfam'],
+            {'text': 'ver. 38.2', 'url': 'https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam38.2/Pfam-A.hmm.gz'},
+        )
+        self.assertEqual(
+            labels['pfam_profile_profile'],
+            {
+                'text': 'ver. 35.0',
+                'url': 'https://wwwuser.gwdguser.de/~compbiol/data/hhsuite/databases/hhsuite_dbs/pfamA_35.0.tar.gz',
+            },
+        )
+        self.assertEqual(
+            labels['funfams'],
+            {
+                'text': 'ver. 4.3.0',
+                'url': 'https://download.cathdb.info/cath/releases/all-releases/v4_3_0/sequence-data/funfam-hmm3-v4_3_0.lib.gz',
+            },
+        )
+        self.assertEqual(
+            labels['foldseek'],
+            {
+                'text': 'Foldseek 10.941cd33; PDB (pdb100, 2025-01-01) and AlphaFold DB (afdb50, v6 2025_03)',
+                'url': None,
+            },
+        )
+
+    def test_labels_without_release_info(self):
+        empty = {'text': '', 'url': None}
+        self.assertEqual(
+            version_labels({}), {'pfam': empty, 'pfam_profile_profile': empty, 'funfams': empty, 'foldseek': empty}
+        )
+
+    def test_foldseek_label_drops_missing_parts(self):
+        info = dict(RELEASE_1_1_INFO)
+        del info['databases.foldseek.search_version']
+        self.assertTrue(version_labels(info)['foldseek']['text'].startswith('PDB (pdb100, 2025-01-01)'))
+        info['databases.foldseek.alphafold_db.version'] = ''
+        self.assertNotIn('AlphaFold DB', version_labels(info)['foldseek']['text'])
+
+    def test_unparsable_version_gives_no_label(self):
+        self.assertEqual(version_labels({'databases.pfam': 'Pfam-A'})['pfam'], {'text': '', 'url': None})
+
+
+class DetailsVersionLabelTests(TestCase):
+    def setUp(self):
+        make_mgnifam()
+        self.url = reverse('details', args=['MGYF0000000001'])
+        cache.clear()
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_details_shows_pfam_38_2(self, _mock_api, _mock_logo):
+        make_release('1.1', info=RELEASE_1_1_INFO)
+        response = self.client.get(self.url)
+        self.assertContains(response, 'ver. 38.2')
+        self.assertContains(response, 'Pfam38.2/Pfam-A.hmm.gz')
+        self.assertContains(response, 'ver. 4.3.0')
+        self.assertContains(response, 'ver. 35.0')
+        self.assertContains(response, 'Foldseek 10.941cd33; PDB (pdb100, 2025-01-01)')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_details_without_release_info(self, _mock_api, _mock_logo):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'ver. ')
+        self.assertNotContains(response, 'Pfam-A.seed.gz')
+
+
+class DetailsProvenanceTests(TestCase):
+    def setUp(self):
+        make_release('1.0', date='2024-11-01', type='initial', mgnify_proteins_release='2024_04')
+        make_release('1.1', info=RELEASE_1_1_INFO)
+        self.url = reverse('details', args=['MGYF0000000001'])
+        cache.clear()
+
+    def _family(self, **kwargs):
+        defaults = dict(
+            first_release='1.0',
+            model_release='1.0',
+            model_proteins_release='2024_04',
+        )
+        defaults.update(kwargs)
+        return make_mgnifam(**defaults)
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_updated_family(self, _mock_api, _mock_logo):
+        self._family(status='updated', members_release='1.1', members_proteins_release='2026_07')
+        response = self.client.get(self.url)
+        self.assertContains(response, 'Release status')
+        self.assertContains(response, 'Updated in 1.1')
+        self.assertContains(response, 'Full MSA and representative rebuilt in 1.1 from MGnify Proteins 2026_07')
+        self.assertContains(response, 'release 1.1 · MGnify Proteins 2026_07')
+        self.assertContains(response, 'release 1.0 · MGnify Proteins 2024_04')
+        self.assertNotContains(response, 'Not updated in')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_not_updated_family(self, _mock_api, _mock_logo):
+        self._family(
+            status='not_updated',
+            not_updated_reason='family representative length too small',
+            members_release='1.0',
+            members_proteins_release='2024_04',
+        )
+        response = self.client.get(self.url)
+        self.assertContains(response, 'Not updated in 1.1')
+        self.assertContains(response, 'family representative length too small')
+        self.assertContains(response, 'Full MSA and representative from 1.0; annotations recomputed in 1.1')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_new_family(self, _mock_api, _mock_logo):
+        self._family(status='new', members_release='1.1', members_proteins_release='2026_07')
+        self.assertContains(self.client.get(self.url), 'New in 1.1')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_hides_status_when_null(self, _mock_api, _mock_logo):
+        make_mgnifam()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'Release status')
+        self.assertNotContains(response, 'Model (HMM)')
+
+
+class IndexReleaseTextTests(TestCase):
+    def test_index_text_on_1_1(self):
+        make_release('1.1', info=RELEASE_1_1_INFO)
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, '717,738,164')
+        self.assertContains(response, '2024_04')
+        self.assertContains(response, '34,419')
+        self.assertContains(response, '2026_07')
+        self.assertContains(response, 'rebuilt')
+
+    def test_index_text_without_release(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '717,738,164')
+        self.assertNotContains(response, 'rebuilt')
+
+
+class ServingAcrossSwapTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def _data(self):
+        return self.client.get(
+            reverse('mgnifams_data'),
+            {'draw': 1, 'start': 0, 'length': 50, 'order[0][column]': 0, 'order[0][dir]': 'asc', 'search[value]': ''},
+        ).json()
+
+    def test_total_is_family_count(self):
+        make_release('1.1', n_families=None)
+        for pk in (1, 2, 3):
+            make_mgnifam(id=pk)
+        self.assertEqual(self._data()['recordsTotal'], 3)
+        make_mgnifam(id=4)
+        self.assertEqual(self._data()['recordsTotal'], 4)
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_blob_urls_carry_release(self, _mock_api, _mock_logo):
+        make_release('1.1')
+        make_mgnifam()
+        content = self.client.get(reverse('details', args=['MGYF0000000001'])).content.decode()
+        prefix = reverse('serve_blob_as_file', args=[1, 'hmm_blob']).rsplit('hmm_blob', 1)[0]
+        urls = re.findall(rf'"({re.escape(prefix)}[^"]*)"', content)
+        self.assertEqual(len(urls), 13)
+        for url in urls:
+            with self.subTest(url=url):
+                self.assertTrue(url.endswith('?v=1.1'))
+
+        blob_url = reverse('serve_blob_as_file', args=[1, 'hmm_blob'])
+        plain = self.client.get(blob_url)
+        current = self.client.get(blob_url, {'v': '1.1'})
+        stale = self.client.get(blob_url, {'v': '1.0'})
+        self.assertEqual(plain.content, BLOB)
+        self.assertEqual(current.content, BLOB)
+        self.assertEqual(stale.content, BLOB)
+        self.assertEqual(plain['Cache-Control'], 'public, max-age=86400')
+        self.assertEqual(current['Cache-Control'], 'public, max-age=86400')
+        self.assertEqual(stale['Cache-Control'], 'no-store')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value='{"logo": 1}')
+    @patch(SKYLIGN_PATCH, return_value={'uuid': 'ABCD-1234'})
+    def test_skylign_key_follows_hmm(self, mock_api, _mock_logo):
+        url = reverse('details', args=['MGYF0000000001'])
+        make_mgnifam(hmm_blob=b'HMMER3/f first')
+        self.client.get(url)
+        Mgnifam.objects.filter(id=1).update(hmm_blob=b'HMMER3/f second')
+        self.client.get(url)
+        self.assertEqual(mock_api.call_count, 2)
+        self.client.get(url)
+        self.assertEqual(mock_api.call_count, 2)
+
+    def test_tests_use_own_cache_dir(self):
+        self.assertFalse(str(settings.CACHES['default']['LOCATION']).startswith('/tmp/mgnifams_cache'))
