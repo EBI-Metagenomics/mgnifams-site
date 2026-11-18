@@ -10,8 +10,11 @@ from django.templatetags.static import static
 from django.test import TestCase
 from django.urls import reverse
 
+from explorer.clans import family_clan_summary
 from explorer.models import (
     Mgnifam,
+    MgnifamClan,
+    MgnifamClanEdge,
     MgnifamFolds,
     MgnifamFunfams,
     MgnifamModelPfams,
@@ -941,6 +944,22 @@ def make_release(release='1.1', date='2026-11-02', info=None, **kwargs):
     return row
 
 
+def make_clan(clan_id, members, representative):
+    for member in members:
+        MgnifamClan.objects.create(mgnifam_id=member, clan_id=clan_id, is_representative=member == representative)
+
+
+def make_edge(a, b, residue_jaccard, residue_containment=0.6, shared_proteins=10, protein_jaccard=0.5):
+    return MgnifamClanEdge.objects.create(
+        family_1_id=min(a, b),
+        family_2_id=max(a, b),
+        residue_jaccard=residue_jaccard,
+        residue_containment=residue_containment,
+        shared_proteins=shared_proteins,
+        protein_jaccard=protein_jaccard,
+    )
+
+
 class CurrentReleaseTests(TestCase):
     def test_current_release_empty_db(self):
         self.assertIsNone(current_release())
@@ -1208,3 +1227,61 @@ class ResponseCachingTests(TestCase):
     def test_skylign_upload_waits_long_enough(self, mock_post):
         call_skylign_api('HMM')
         self.assertGreaterEqual(mock_post.call_args.kwargs['timeout'], 20)
+
+
+class FamilyClanSummaryTests(TestCase):
+    def families(self, *ids):
+        for family_id in ids:
+            make_mgnifam(id=family_id)
+
+    def test_family_in_no_clan(self):
+        self.families(1)
+        summary = family_clan_summary(1)
+        self.assertIsNone(summary['clan_id'])
+        self.assertEqual(summary['clan_size'], 0)
+        self.assertFalse(summary['is_representative'])
+        self.assertEqual(summary['duplicates'], [])
+        self.assertIsNone(summary['closest'])
+
+    def test_clan_and_representative(self):
+        self.families(18705, 35055, 23379)
+        make_clan('1.1_clan_558', [18705, 35055, 23379], representative=35055)
+        summary = family_clan_summary(35055)
+        self.assertEqual(summary['clan_id'], '1.1_clan_558')
+        self.assertEqual(summary['clan_size'], 3)
+        self.assertIs(summary['is_representative'], True)
+        self.assertIs(family_clan_summary(18705)['is_representative'], False)
+
+    def test_duplicates_threshold(self):
+        self.families(1, 2, 3, 4)
+        make_edge(1, 2, 0.95)
+        make_edge(1, 3, 0.9499)
+        make_edge(4, 1, 0.97)
+        self.assertEqual(family_clan_summary(1)['duplicates'], [4, 2])
+
+    def test_closest_inside_or_outside_clan(self):
+        self.families(20804, 28802, 1107)
+        make_edge(20804, 28802, 0.497784)
+        make_edge(1107, 20804, 0.433877)
+        self.assertEqual(family_clan_summary(20804)['closest'], {'family_id': 28802, 'residue_jaccard': 0.497784})
+
+    def test_closest_tie_goes_to_lower_id(self):
+        self.families(5, 7, 9)
+        make_edge(5, 9, 0.6)
+        make_edge(5, 7, 0.6)
+        self.assertEqual(family_clan_summary(5)['closest']['family_id'], 7)
+
+    def test_null_jaccard_ignored(self):
+        self.families(1, 2)
+        make_edge(1, 2, None)
+        summary = family_clan_summary(1)
+        self.assertIsNone(summary['closest'])
+        self.assertEqual(summary['duplicates'], [])
+
+    def test_query_count(self):
+        self.families(18705, 35055, 23379)
+        make_clan('1.1_clan_558', [18705, 35055, 23379], representative=35055)
+        make_edge(18705, 35055, 0.639)
+        make_edge(23379, 18705, 0.2)
+        with self.assertNumQueries(4):
+            family_clan_summary(18705)
