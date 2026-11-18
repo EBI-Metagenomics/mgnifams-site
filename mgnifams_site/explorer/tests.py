@@ -1036,3 +1036,61 @@ class DetailsVersionLabelTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, 'ver. ')
         self.assertNotContains(response, 'Pfam-A.seed.gz')
+
+
+class DetailsProvenanceTests(TestCase):
+    def setUp(self):
+        make_release('1.0', date='2024-11-01', type='initial', mgnify_proteins_release='2024_04')
+        make_release('1.1', info=RELEASE_1_1_INFO)
+        self.url = reverse('details', args=['MGYF0000000001'])
+        cache.clear()
+
+    def _family(self, **kwargs):
+        defaults = dict(
+            first_release='1.0',
+            model_release='1.0',
+            model_proteins_release='2024_04',
+        )
+        defaults.update(kwargs)
+        return make_mgnifam(**defaults)
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_updated_family(self, _mock_api, _mock_logo):
+        self._family(status='updated', members_release='1.1', members_proteins_release='2026_07')
+        response = self.client.get(self.url)
+        self.assertContains(response, 'Release status')
+        self.assertContains(response, 'Updated in 1.1')
+        self.assertContains(response, 'Full MSA and representative rebuilt in 1.1 from MGnify Proteins 2026_07')
+        self.assertContains(response, 'release 1.1 · MGnify Proteins 2026_07')
+        self.assertContains(response, 'release 1.0 · MGnify Proteins 2024_04')
+        self.assertNotContains(response, 'Not updated in')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_not_updated_family(self, _mock_api, _mock_logo):
+        self._family(
+            status='not_updated',
+            not_updated_reason='family representative length too small',
+            members_release='1.0',
+            members_proteins_release='2024_04',
+        )
+        response = self.client.get(self.url)
+        self.assertContains(response, 'Not updated in 1.1')
+        self.assertContains(response, 'family representative length too small')
+        self.assertContains(response, 'Full MSA and representative from 1.0; annotations recomputed in 1.1')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_new_family(self, _mock_api, _mock_logo):
+        self._family(status='new', members_release='1.1', members_proteins_release='2026_07')
+        self.assertContains(self.client.get(self.url), 'New in 1.1')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_overview_hides_status_when_null(self, _mock_api, _mock_logo):
+        make_mgnifam()
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, 'Release status')
+        self.assertNotContains(response, 'Model (HMM)')

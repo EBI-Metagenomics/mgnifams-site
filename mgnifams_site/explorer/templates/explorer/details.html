@@ -81,6 +81,62 @@
                             {{ full_size }}
                         </td>
                     </tr>
+                    {% if status %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        {% if status == "not_updated" %}
+                                            Full MSA and representative from {{ members_release }}; annotations recomputed in {{ current_release_id }}
+                                        {% else %}
+                                            Full MSA and representative rebuilt in {{ members_release }} from MGnify Proteins {{ members_proteins_release }}
+                                        {% endif %}
+                                    </span>
+                                </span>
+                                Release status
+                            </td>
+                            <td class="vf-table__cell">
+                                {% if status == "not_updated" %}
+                                    <span class="vf-badge vf-badge--secondary">Not updated in {{ current_release_id }}</span>
+                                    {% if not_updated_reason %}<div>{{ not_updated_reason }}</div>{% endif %}
+                                {% elif status == "updated" %}
+                                    <span class="vf-badge vf-badge--primary">Updated in {{ current_release_id }}</span>
+                                {% else %}
+                                    <span class="vf-badge vf-badge--primary">New in {{ members_release }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        The MGnifams release that built the family HMM, and the MGnify Proteins release it was built from.
+                                    </span>
+                                </span>
+                                Model (HMM)
+                            </td>
+                            <td class="vf-table__cell">
+                                release {{ model_release }} · MGnify Proteins {{ model_proteins_release }}
+                            </td>
+                        </tr>
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        The MGnifams release that last recruited the family members (full MSA) and chose the
+                                        representative, and the MGnify Proteins release they were searched in.
+                                    </span>
+                                </span>
+                                Full MSA and representative
+                            </td>
+                            <td class="vf-table__cell">
+                                release {{ members_release }} · MGnify Proteins {{ members_proteins_release }}
+                            </td>
+                        </tr>
+                    {% endif %}
                     <tr class="vf-table__row">
                         <td class="vf-table__cell">
                             <span class="tooltip">

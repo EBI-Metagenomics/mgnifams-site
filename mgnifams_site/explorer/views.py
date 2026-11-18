@@ -263,6 +263,7 @@ def details(request, pk):
     seed_msa_blob = decode_blob(mgnifam.seed_msa_blob)
     rf = decode_blob(mgnifam.rf_blob)
     hmm_blob = decode_blob(mgnifam.hmm_blob)
+    release = current_release(request)
 
     return render(
         request,
@@ -299,7 +300,15 @@ def details(request, pk):
             'funfams_data': _get_funfams_data(mgyf_id),
             'pfams_model_data': _get_model_pfams_data(mgyf_id),
             'structural_annotations': _get_structural_annotations(mgyf_id),
-            'labels': version_labels((current_release(request) or {}).get('info', {})),
+            'labels': version_labels(release['info'] if release else {}),
+            # The status badge names the current release, so it needs one.
+            'status': mgnifam.status if release else None,
+            'current_release_id': release['release'] if release else None,
+            'not_updated_reason': mgnifam.not_updated_reason,
+            'model_release': mgnifam.model_release,
+            'model_proteins_release': mgnifam.model_proteins_release,
+            'members_release': mgnifam.members_release,
+            'members_proteins_release': mgnifam.members_proteins_release,
         },
     )
 
