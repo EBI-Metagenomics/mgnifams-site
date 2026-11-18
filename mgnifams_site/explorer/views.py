@@ -143,6 +143,8 @@ def format_protein_name(raw_name):
 
 
 SKYLIGN_CACHE_TIMEOUT = 7 * 24 * 3600  # 1 week — DB is static so results never change
+# Skylign takes 1-4 s per step from the cluster and sometimes more; both steps stay under the ingress's 60 s.
+SKYLIGN_TIMEOUT = 20
 
 
 def call_skylign_api(blob_data):
@@ -152,7 +154,7 @@ def call_skylign_api(blob_data):
     data = {'processing': 'hmm'}
 
     try:
-        response = requests.post(url, headers=headers, files=files, data=data, timeout=5)
+        response = requests.post(url, headers=headers, files=files, data=data, timeout=SKYLIGN_TIMEOUT)
         response.raise_for_status()
         return response.json()
     except requests.exceptions.Timeout:
@@ -167,7 +169,7 @@ def fetch_skylign_logo_json(uuid):
     url = f'https://skylign.org/logo/{uuid}'
     headers = {'Accept': 'application/json'}
     try:
-        response = requests.get(url, headers=headers, timeout=5)
+        response = requests.get(url, headers=headers, timeout=SKYLIGN_TIMEOUT)
         if response.status_code == 200:
             return json.dumps(response.json())
     except requests.exceptions.RequestException as e:

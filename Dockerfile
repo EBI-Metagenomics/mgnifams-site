@@ -17,4 +17,4 @@ ENV PYTHONUNBUFFERED=0
 
 RUN .venv/bin/python manage.py collectstatic --noinput
 # CSV exports stream for longer than gunicorn's default 30 s worker timeout, which cut them off silently.
-CMD .venv/bin/gunicorn mgnifams_site.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 300
+CMD .venv/bin/gunicorn mgnifams_site.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 300 --no-control-socket

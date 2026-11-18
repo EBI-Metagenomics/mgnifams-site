@@ -20,6 +20,7 @@
 - Domain architecture rows with many or long domains spilled past the page width and wrapped under the count column. Domains now wrap after the count, never split across lines, and every domain shows its full name on hover.
 - After a DB swap the table total, Skylign logos and downloaded files could come from the previous DB until caches expired. Values are now read per request, logos are keyed by the HMM itself, and file links carry the release.
 - Running the tests wrote into the served cache folder; tests now use a temporary one.
+- The HMM logo was often missing (console: "No HMM logo JSON available"): the logo service took longer than the site waited (5 s), and a front cache then kept the logo-less page for every visitor. The site now waits up to 20 s per step, and pages are revalidated on every visit.
 - CSV exports of large selections stopped after 30 s with a partial file and no error (e.g. 5,641 of 6,421 rows for families of 100,000 or more sequences). The server now allows requests up to 300 s.
 
 ## [v2.4.0] - 2026-11-18

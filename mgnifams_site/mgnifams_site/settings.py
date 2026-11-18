@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'explorer.middleware.no_cache_by_default',
 ]
 
 ROOT_URLCONF = 'mgnifams_site.urls'
