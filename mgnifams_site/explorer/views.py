@@ -21,6 +21,12 @@ def index(request):
     num_mgnifams = Mgnifam.objects.count()
     first_mgnifam = Mgnifam.objects.only('id').first()
     first_id = format_family_name(str(first_mgnifam.id)) if first_mgnifam else None
+    release = current_release(request)
+    info = release['info'] if release else {}
+    try:
+        n_updated = f'{int(info["family_counts.updated"]):,}'
+    except (KeyError, TypeError, ValueError):
+        n_updated = None
 
     return render(
         request,
@@ -28,38 +34,79 @@ def index(request):
         {
             'num_mgnifams': num_mgnifams,
             'first_id': first_id,
+            'models_proteins_release': info.get('mgnify_proteins.models.release'),
+            'members_proteins_release': info.get('mgnify_proteins.members.release'),
+            'n_updated': n_updated,
             'mgnifams_data_url': reverse('mgnifams_data'),
             'details_url_prefix': reverse('details', args=['MGYF0000000001']).replace('MGYF0000000001/', ''),
         },
     )
 
 
+_MATCH_SPLIT = 'split by whether any Pfam, FunFam, PDB or AlphaFoldDB match was found.'
+
 STATISTICS_PLOT_SECTIONS = [
     {
-        'heading': 'Family length distribution',
+        'heading': 'Family size, representative length and model confidence',
         'plots': [
             {
-                'title': 'Short family lengths',
-                'filename': 'explorer/statistics/family_length_short.png',
+                'title': 'Family size, representative length and mean pLDDT',
+                'filename': 'explorer/statistics/family_metadata_1.1.png',
                 'alt': (
-                    'Stacked bar chart showing MGnifam family length distribution for HMM consensus '
-                    'lengths 1 to 700, split into annotated and unannotated families.'
+                    'Three stacked bar charts of release 1.1 families: family size in log bins, representative '
+                    'length in bins of 100 amino acids and mean pLDDT in bins of 5, each split into families '
+                    'with and without a Pfam, FunFam, PDB or AlphaFoldDB match.'
                 ),
-                'caption': 'Family length distribution for short HMM consensus lengths, binned by 25 amino acids.',
+                'caption': (
+                    'Release 1.1 families by family size (domain regions in the full alignment), representative '
+                    "length and mean pLDDT of the representative's ESMFold model, " + _MATCH_SPLIT
+                ),
             }
         ],
     },
     {
-        'heading': 'Family size distribution',
+        'heading': 'Family size and representative length, linear bins',
         'plots': [
             {
-                'title': 'Medium family sizes',
-                'filename': 'explorer/statistics/family_size_medium.png',
+                'title': 'Family size',
+                'filename': 'explorer/statistics/family_size_linear_1.1.png',
                 'alt': (
-                    'Stacked bar chart showing MGnifam family size distribution for families with '
-                    '21 to 100000 sequences, split into annotated and unannotated families.'
+                    'Three stacked bar charts of release 1.1 families by family size in linear bins of 50, '
+                    '2,500 and 200,000 domain regions, split into families with and without a match.'
                 ),
-                'caption': 'Family size distribution for medium-sized families, binned by 10000 sequences.',
+                'caption': (
+                    'Release 1.1 families by family size (domain regions in the full alignment) in linear bins: '
+                    '6 to 999 by 50, 1,000 to 49,999 by 2,500, and 50,000 upwards by 200,000; ' + _MATCH_SPLIT
+                ),
+            },
+            {
+                'title': 'Representative length',
+                'filename': 'explorer/statistics/representative_length_linear_1.1.png',
+                'alt': (
+                    'Three stacked bar charts of release 1.1 families by representative length in bins of 20, '
+                    '25 and 100 amino acids, split into families with and without a match.'
+                ),
+                'caption': (
+                    'Release 1.1 families by representative length in linear bins: up to 300 amino acids by 20, '
+                    '301 to 600 by 25, and 601 to 2,000 by 100; ' + _MATCH_SPLIT
+                ),
+            },
+        ],
+    },
+    {
+        'heading': 'Predicted TM-score',
+        'plots': [
+            {
+                'title': 'pTM of the representative structure',
+                'filename': 'explorer/statistics/ptm_1.1.png',
+                'alt': (
+                    "Stacked bar chart of release 1.1 families by pTM of the representative's ESMFold model "
+                    'in bins of 0.05, split into families with and without a match.'
+                ),
+                'caption': (
+                    "Release 1.1 families by predicted TM-score (pTM) of the representative's ESMFold model, "
+                    'in bins of 0.05; ' + _MATCH_SPLIT
+                ),
             }
         ],
     },

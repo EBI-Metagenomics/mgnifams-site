@@ -130,6 +130,15 @@ class IndexViewTests(TestCase):
         assert_external_scripts_have_sri(self, response, DATATABLES_SCRIPT_URLS)
 
 
+STATISTICS_FILES = [
+    'explorer/statistics/family_metadata_1.1.png',
+    'explorer/statistics/family_size_linear_1.1.png',
+    'explorer/statistics/representative_length_linear_1.1.png',
+    'explorer/statistics/ptm_1.1.png',
+]
+OLD_STATISTICS_FILES = ['explorer/statistics/family_length_short.png', 'explorer/statistics/family_size_medium.png']
+
+
 class StatisticsViewTests(TestCase):
     def test_statistics_url_returns_200(self):
         response = self.client.get(reverse('statistics'))
@@ -140,18 +149,26 @@ class StatisticsViewTests(TestCase):
         self.assertIn('plot_sections', response.context)
         self.assertEqual(
             [section['heading'] for section in response.context['plot_sections']],
-            ['Family length distribution', 'Family size distribution'],
+            [
+                'Family size, representative length and model confidence',
+                'Family size and representative length, linear bins',
+                'Predicted TM-score',
+            ],
         )
 
     def test_statistics_page_renders_supplied_plot_paths(self):
         response = self.client.get(reverse('statistics'))
-        self.assertContains(response, static('explorer/statistics/family_length_short.png'))
-        self.assertContains(response, static('explorer/statistics/family_size_medium.png'))
-        self.assertContains(response, 'Open image', count=2)
+        for filename in STATISTICS_FILES:
+            self.assertContains(response, static(filename))
+        for filename in OLD_STATISTICS_FILES:
+            self.assertNotContains(response, static(filename))
+        self.assertContains(response, 'Open image', count=4)
 
     def test_statistics_static_assets_exist(self):
-        self.assertIsNotNone(finders.find('explorer/statistics/family_length_short.png'))
-        self.assertIsNotNone(finders.find('explorer/statistics/family_size_medium.png'))
+        for filename in STATISTICS_FILES:
+            self.assertIsNotNone(finders.find(filename))
+        for filename in OLD_STATISTICS_FILES:
+            self.assertIsNone(finders.find(filename))
 
     def test_main_navigation_links_to_statistics(self):
         response = self.client.get(reverse('index'))
@@ -1094,3 +1111,20 @@ class DetailsProvenanceTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotContains(response, 'Release status')
         self.assertNotContains(response, 'Model (HMM)')
+
+
+class IndexReleaseTextTests(TestCase):
+    def test_index_text_on_1_1(self):
+        make_release('1.1', info=RELEASE_1_1_INFO)
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, '717,738,164')
+        self.assertContains(response, '2024_04')
+        self.assertContains(response, '34,419')
+        self.assertContains(response, '2026_07')
+        self.assertContains(response, 'rebuilt')
+
+    def test_index_text_without_release(self):
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '717,738,164')
+        self.assertNotContains(response, 'rebuilt')
