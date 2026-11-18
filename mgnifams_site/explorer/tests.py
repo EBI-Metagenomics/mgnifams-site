@@ -2,6 +2,7 @@ import re
 from unittest.mock import MagicMock, patch
 
 import requests.exceptions
+from django.conf import settings
 from django.contrib.staticfiles import finders
 from django.core.cache import cache
 from django.http import Http404
@@ -1128,3 +1129,61 @@ class IndexReleaseTextTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '717,738,164')
         self.assertNotContains(response, 'rebuilt')
+
+
+class ServingAcrossSwapTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def _data(self):
+        return self.client.get(
+            reverse('mgnifams_data'),
+            {'draw': 1, 'start': 0, 'length': 50, 'order[0][column]': 0, 'order[0][dir]': 'asc', 'search[value]': ''},
+        ).json()
+
+    def test_total_is_family_count(self):
+        make_release('1.1', n_families=None)
+        for pk in (1, 2, 3):
+            make_mgnifam(id=pk)
+        self.assertEqual(self._data()['recordsTotal'], 3)
+        make_mgnifam(id=4)
+        self.assertEqual(self._data()['recordsTotal'], 4)
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value=None)
+    @patch(SKYLIGN_PATCH, return_value=None)
+    def test_blob_urls_carry_release(self, _mock_api, _mock_logo):
+        make_release('1.1')
+        make_mgnifam()
+        content = self.client.get(reverse('details', args=['MGYF0000000001'])).content.decode()
+        prefix = reverse('serve_blob_as_file', args=[1, 'hmm_blob']).rsplit('hmm_blob', 1)[0]
+        urls = re.findall(rf'"({re.escape(prefix)}[^"]*)"', content)
+        self.assertEqual(len(urls), 13)
+        for url in urls:
+            with self.subTest(url=url):
+                self.assertTrue(url.endswith('?v=1.1'))
+
+        blob_url = reverse('serve_blob_as_file', args=[1, 'hmm_blob'])
+        plain = self.client.get(blob_url)
+        current = self.client.get(blob_url, {'v': '1.1'})
+        stale = self.client.get(blob_url, {'v': '1.0'})
+        self.assertEqual(plain.content, BLOB)
+        self.assertEqual(current.content, BLOB)
+        self.assertEqual(stale.content, BLOB)
+        self.assertEqual(plain['Cache-Control'], 'public, max-age=86400')
+        self.assertEqual(current['Cache-Control'], 'public, max-age=86400')
+        self.assertEqual(stale['Cache-Control'], 'no-store')
+
+    @patch(SKYLIGN_LOGO_PATCH, return_value='{"logo": 1}')
+    @patch(SKYLIGN_PATCH, return_value={'uuid': 'ABCD-1234'})
+    def test_skylign_key_follows_hmm(self, mock_api, _mock_logo):
+        url = reverse('details', args=['MGYF0000000001'])
+        make_mgnifam(hmm_blob=b'HMMER3/f first')
+        self.client.get(url)
+        Mgnifam.objects.filter(id=1).update(hmm_blob=b'HMMER3/f second')
+        self.client.get(url)
+        self.assertEqual(mock_api.call_count, 2)
+        self.client.get(url)
+        self.assertEqual(mock_api.call_count, 2)
+
+    def test_tests_use_own_cache_dir(self):
+        self.assertFalse(str(settings.CACHES['default']['LOCATION']).startswith('/tmp/mgnifams_cache'))

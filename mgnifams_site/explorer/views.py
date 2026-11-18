@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 import logging
 import re
@@ -195,10 +196,11 @@ def generate_structure_link_and_db(part):
         return part, ''
 
 
-def _get_hmm_logo_json(mgyf_id, hmm_blob):
+def _get_hmm_logo_json(hmm_blob):
     if not hmm_blob:
         return 'null'
-    cache_key = f'skylign_logo_json_{mgyf_id}'
+    # Keyed by the HMM text itself, so a changed HMM (new DB file) never gets an old logo.
+    cache_key = f'skylign_logo_json_{hashlib.sha256(hmm_blob.encode()).hexdigest()[:16]}'
     cached = cache.get(cache_key)
     if cached is not None:
         return cached
@@ -341,7 +343,7 @@ def details(request, pk):
             'seed_msa_blob': seed_msa_blob,
             'rf': rf,
             'hmm_blob': hmm_blob,
-            'hmm_logo_json': _get_hmm_logo_json(mgyf_id, hmm_blob),
+            'hmm_logo_json': _get_hmm_logo_json(hmm_blob),
             'tm_blob': mgnifam.tm_blob is not None,
             'pfams_data': _get_pfams_data(mgyf_id),
             'funfams_data': _get_funfams_data(mgyf_id),
@@ -381,7 +383,13 @@ def serve_blob_as_file(request, pk, column_name):
         raise Http404(f'No data for column: {column_name}')
     response = HttpResponse(blob_data, content_type='application/octet-stream')
     response['Content-Disposition'] = 'attachment;'
-    response['Cache-Control'] = 'public, max-age=86400'  # 24 h; release blob data is immutable.
+    release = current_release(request)
+    requested = request.GET.get('v')
+    if requested is None or (release and requested == release['release']):
+        response['Cache-Control'] = 'public, max-age=86400'  # 24 h; release blob data is immutable.
+    else:
+        # A page from another release (opened before a DB swap or rollback): never cache under its URL.
+        response['Cache-Control'] = 'no-store'
     return response
 
 
@@ -601,7 +609,7 @@ def mgnifams_data(request):
     if request.GET.get('export') == 'csv':
         return _mgnifams_csv_response(rows)
 
-    records_total = cache.get_or_set('mgnifam_total_count', Mgnifam.objects.count, timeout=None)
+    records_total = Mgnifam.objects.count()
     has_filters = bool(active_filters) or bool(search_value) or active_annotation_filters
     records_filtered = qs.count() if has_filters else records_total
 
