@@ -35,6 +35,15 @@ class Mgnifam(models.Model):
     s4pred_blob = models.BinaryField(null=True, default=None)
     tm_blob = models.BinaryField(null=True, default=None)
 
+    # Provenance from the release's families.tsv.gz; NULL in DBs built before it was loaded.
+    status = models.TextField(null=True, default=None)
+    not_updated_reason = models.TextField(null=True, default=None)
+    first_release = models.TextField(null=True, default=None)
+    model_release = models.TextField(null=True, default=None)
+    model_proteins_release = models.TextField(null=True, default=None)
+    members_release = models.TextField(null=True, default=None)
+    members_proteins_release = models.TextField(null=True, default=None)
+
     def __str__(self):
         return f'Mgnifam ID: {self.id}'
 
@@ -139,3 +148,54 @@ class MgnifamModelPfams(models.Model):
 
     class Meta:
         db_table = 'mgnifam_model_pfams'
+
+
+class ReleaseHistory(models.Model):
+    release = models.TextField(primary_key=True)
+    date = models.TextField()
+    type = models.TextField()
+    mgnify_proteins_release = models.TextField()
+    pipeline_version = models.TextField(null=True)
+    n_families = models.IntegerField(null=True)
+    n_updated = models.IntegerField(null=True)
+    n_not_updated = models.IntegerField(null=True)
+
+    class Meta:
+        db_table = 'release_history'
+
+
+class ReleaseInfo(models.Model):
+    # The release's FTP release_manifest.json flattened to dotted keys.
+    pk = models.CompositePrimaryKey('release', 'key')
+    release = models.ForeignKey(
+        ReleaseHistory, on_delete=models.DO_NOTHING, db_column='release', to_field='release', related_name='info'
+    )
+    key = models.TextField()
+    value = models.TextField(null=True)
+
+    class Meta:
+        db_table = 'release_info'
+
+
+class MgnifamClan(models.Model):
+    mgnifam = models.OneToOneField(
+        Mgnifam, on_delete=models.DO_NOTHING, primary_key=True, db_column='mgnifam_id', related_name='clan'
+    )
+    clan_id = models.TextField()
+    is_representative = models.BooleanField()
+
+    class Meta:
+        db_table = 'mgnifam_clans'
+
+
+class MgnifamClanEdge(models.Model):
+    pk = models.CompositePrimaryKey('family_1', 'family_2')
+    family_1 = models.ForeignKey(Mgnifam, on_delete=models.DO_NOTHING, db_column='family_1', related_name='edges_as_1')
+    family_2 = models.ForeignKey(Mgnifam, on_delete=models.DO_NOTHING, db_column='family_2', related_name='edges_as_2')
+    shared_proteins = models.IntegerField(null=True)
+    protein_jaccard = models.FloatField(null=True)
+    residue_jaccard = models.FloatField(null=True)
+    residue_containment = models.FloatField(null=True)
+
+    class Meta:
+        db_table = 'mgnifam_clan_edges'

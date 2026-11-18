@@ -9,7 +9,15 @@ from django.templatetags.static import static
 from django.test import TestCase
 from django.urls import reverse
 
-from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
+from explorer.models import (
+    Mgnifam,
+    MgnifamFolds,
+    MgnifamFunfams,
+    MgnifamModelPfams,
+    MgnifamPfams,
+    ReleaseHistory,
+    ReleaseInfo,
+)
 from explorer.views import (
     call_skylign_api,
     decode_blob,
@@ -890,3 +898,16 @@ class MgnifamsDataEdgeCaseTests(TestCase):
         r = self._get(**{'search[value]': 'MGYF000000XXXX'})
         data = r.json()
         self.assertEqual(data['recordsFiltered'], 0)
+
+
+class ReleaseModelTests(TestCase):
+    def test_release_info_composite_key(self):
+        ReleaseHistory.objects.create(
+            release='1.1', date='2026-11-02', type='update', mgnify_proteins_release='2026_07'
+        )
+        ReleaseInfo.objects.create(release_id='1.1', key='databases.pfam', value='Pfam-A 38.2')
+        ReleaseInfo.objects.create(release_id='1.1', key='databases.funfams', value='FunFams v4.3.0')
+        self.assertEqual(ReleaseInfo.objects.filter(release='1.1').count(), 2)
+
+    def test_mgnifam_provenance_defaults_null(self):
+        self.assertIsNone(make_mgnifam().status)
