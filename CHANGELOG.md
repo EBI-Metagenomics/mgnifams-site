@@ -6,6 +6,7 @@
 
 - Audit updates for `django` (6.0.8), `sqlparse` (0.6.0), and `urllib3` (2.8.0) to resolve Dependabot and `uv audit` alerts.
 - `certifi` (2026.10.23) to resolve the critical Dependabot alert on the emSign root CAs.
+- `DEBUG` now defaults to `False`; local runs set `DJANGO_DEBUG=True`. The k8s `proxy-config` ConfigMap sets `DJANGO_DEBUG=False` (production served Django debug pages).
 
 ### `Dependencies`
 

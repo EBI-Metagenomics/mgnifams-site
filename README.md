@@ -10,7 +10,7 @@ uv sync
 cd mgnifams_site
 uv run python manage.py migrate
 DJANGO_SECRET_KEY=any-local-secret uv run python manage.py collectstatic --noinput
-DJANGO_SECRET_KEY=any-local-secret uv run python manage.py runserver 8000
+DJANGO_SECRET_KEY=any-local-secret DJANGO_DEBUG=True uv run python manage.py runserver 8000
 ```
 
 ## Testing and checks
