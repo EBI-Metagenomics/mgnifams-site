@@ -361,6 +361,7 @@ def details(request, pk):
             'model_proteins_release': mgnifam.model_proteins_release,
             'members_release': mgnifam.members_release,
             'members_proteins_release': mgnifam.members_proteins_release,
+            'clan': clans.family_clan_summary(mgyf_id),
         },
     )
 
