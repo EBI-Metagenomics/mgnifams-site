@@ -1,5 +1,7 @@
 # Changelog
 
+## [v2.6.0dev] - unreleased
+
 ## [v2.5.0] - 2026-11-18
 
 ### Added
