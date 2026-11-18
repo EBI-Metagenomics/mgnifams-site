@@ -117,15 +117,28 @@ nightingale-manager {
 }
 
 .architecture-div {
+    display: grid;
+    grid-template-columns: 60px minmax(0, 1fr);
+    align-items: start;
     margin-bottom: 5px;
     line-height: 30px;
 }
 .descr-span {
-    display: inline-block;
-    width: 60px;
     font-weight: bold;
 }
+.architecture-domains {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+}
 .domain-span {
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 20px;
     border: 1px solid black;
     border-radius: 25px;
     margin-left: 2px;

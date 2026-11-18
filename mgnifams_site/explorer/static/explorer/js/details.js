@@ -196,14 +196,12 @@ const loadHMMData = () => {
     }
 };
 
-const showTooltip = (event, text, max_shown_length) => {
-    if (text.length > max_shown_length) {
-        const domain_tooltip = document.getElementById('domain_tooltip');
-        domain_tooltip.textContent = text;
-        domain_tooltip.style.display = 'block';
-        domain_tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
-        domain_tooltip.style.top = event.pageY  + 'px';
-    }
+const showTooltip = (event, text) => {
+    const domain_tooltip = document.getElementById('domain_tooltip');
+    domain_tooltip.textContent = text;
+    domain_tooltip.style.display = 'block';
+    domain_tooltip.style.left = event.pageX - window.innerWidth/5 + 'px';
+    domain_tooltip.style.top = event.pageY  + 'px';
 };
 
 const hideTooltip = () => {
@@ -222,11 +220,17 @@ const renderArchitecture = (jsonData) => {
         architectureTextPara.textContent = `${container.architecture_text}`;
         architectureTextPara.classList.add('descr-span');
         containerDiv.appendChild(architectureTextPara);
+        // Pills wrap inside their own column, so wrapped rows start after the count.
+        const domainsDiv = document.createElement('div');
+        domainsDiv.classList.add('architecture-domains');
+        containerDiv.appendChild(domainsDiv);
         container.domains.forEach(domain => {
             const domainSpan = document.createElement('span');
             const domainLink = document.createElement('a');
             domainLink.textContent = domain.name.length > max_shown_length ? domain.name.substring(0, (max_shown_length - 3)) + "..." : domain.name;
             domainLink.href = domain.link;
+            domainLink.setAttribute('aria-label', domain.name);
+            domainLink.title = domain.name;
             domainLink.setAttribute('target', '_blank');
             domainLink.classList.add('domain-link');
             domainSpan.classList.add('domain-span');
@@ -244,10 +248,10 @@ const renderArchitecture = (jsonData) => {
 
             domainSpan.appendChild(domainLink);
             domainSpan.addEventListener('mouseover', function(event) {
-                showTooltip(event, domain.name, max_shown_length);
+                showTooltip(event, domain.name);
             });
             domainSpan.addEventListener('mouseout', hideTooltip);
-            containerDiv.appendChild(domainSpan);
+            domainsDiv.appendChild(domainSpan);
         });
 
         architecturesContainer.appendChild(containerDiv);
