@@ -142,6 +142,66 @@
                             <span class="tooltip">
                                 <i class="fas fa-question-circle tooltip-icon"></i>
                                 <span class="tooltiptext">
+                                    {% if clan.clan_id %}
+                                        Families joined by a chain of family pairs that share at least half of the residues they cover (residue Jaccard ≥ 0.5). Clan IDs are per release.
+                                        {% if clan.is_representative %}The clan representative is the member with the largest sum of residue Jaccard over its pairs at ≥ 0.5 with other members; ties go to the earlier family ID in text order.{% endif %}
+                                    {% else %}
+                                        This family is in no clan of this release. Clans join families through chains of family pairs that share at least half of their covered residues (residue Jaccard ≥ 0.5).
+                                    {% endif %}
+                                </span>
+                            </span>
+                            Clan
+                        </td>
+                        <td class="vf-table__cell">
+                            {% if clan.clan_id %}
+                                <a href="{% url 'clan' clan.clan_id %}">{{ clan.clan_id }}</a> · {{ clan.clan_size }} families{% if clan.is_representative %} · clan representative{% endif %}
+                            {% else %}
+                                none
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if clan.duplicates %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        Another family covering nearly the same residues of the same proteins (residue Jaccard ≥ 0.95).
+                                    </span>
+                                </span>
+                                Almost duplicate
+                            </td>
+                            <td class="vf-table__cell">
+                                {% if clan.clan_id and clan.duplicates|length > 3 %}
+                                    <a href="{% url 'clan' clan.clan_id %}">⚠ {{ clan.duplicates|length }} families → clan page</a>
+                                {% else %}
+                                    ⚠ {% for other in clan.duplicates %}<a href="{% url 'details' other|format_mgnifam_name %}">{{ other|format_mgnifam_name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% if clan.closest %}
+                        <tr class="vf-table__row">
+                            <td class="vf-table__cell">
+                                <span class="tooltip">
+                                    <i class="fas fa-question-circle tooltip-icon"></i>
+                                    <span class="tooltiptext">
+                                        Of the family pairs compared for clans (residue Jaccard ≥ 0.1 or residue containment ≥ 0.5), the one with the highest residue Jaccard (shared residues out of all residues either family covers), in its clan or not.
+                                    </span>
+                                </span>
+                                Closest family
+                            </td>
+                            <td class="vf-table__cell">
+                                <a href="{% url 'details' clan.closest.family_id|format_mgnifam_name %}">{{ clan.closest.family_id|format_mgnifam_name }}</a>
+                                (residue Jaccard {{ clan.closest.residue_jaccard|floatformat:3 }})
+                            </td>
+                        </tr>
+                    {% endif %}
+                    <tr class="vf-table__row">
+                        <td class="vf-table__cell">
+                            <span class="tooltip">
+                                <i class="fas fa-question-circle tooltip-icon"></i>
+                                <span class="tooltiptext">
                                     Predicted Local Distance Difference Test (pLDDT) score from ESMFold,
                                     ranging from 0 to 100. Higher values indicate greater confidence in
                                     the predicted structure.

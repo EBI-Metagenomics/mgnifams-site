@@ -11,6 +11,7 @@ from django.http import Http404, HttpResponse, JsonResponse, StreamingHttpRespon
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from explorer import clans
 from explorer.models import Mgnifam, MgnifamFolds, MgnifamFunfams, MgnifamModelPfams, MgnifamPfams
 from explorer.releases import current_release, version_labels
 from explorer.utils import format_family_name
@@ -360,6 +361,30 @@ def details(request, pk):
             'model_proteins_release': mgnifam.model_proteins_release,
             'members_release': mgnifam.members_release,
             'members_proteins_release': mgnifam.members_proteins_release,
+            'clan': clans.family_clan_summary(mgyf_id),
+        },
+    )
+
+
+def clan(request, clan_id):
+    members = clans.clan_members(clan_id)
+    if not members:
+        raise Http404('No such clan')
+    member_ids = [member['family_id'] for member in members]
+    size = len(member_ids)
+    return render(
+        request,
+        'explorer/clan.html',
+        {
+            'clan_id': clan_id,
+            'members': members,
+            'representative': members[0]['family_id'] if members[0]['is_representative'] else None,
+            'possible_pairs': size * (size - 1) // 2,
+            'duplicate_pairs': clans.clan_duplicate_pairs(member_ids),
+            'pairs': clans.clan_pairs(member_ids, request.GET.get('pairs_page')),
+            'outside': clans.outside_families(member_ids, request.GET.get('outside_page')),
+            'link_jaccard': clans.CLAN_LINK_JACCARD,
+            'duplicate_jaccard': clans.ALMOST_DUPLICATE_JACCARD,
         },
     )
 

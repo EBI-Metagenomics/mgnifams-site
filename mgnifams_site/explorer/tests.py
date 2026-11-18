@@ -10,8 +10,11 @@ from django.templatetags.static import static
 from django.test import TestCase
 from django.urls import reverse
 
+from explorer.clans import family_clan_summary
 from explorer.models import (
     Mgnifam,
+    MgnifamClan,
+    MgnifamClanEdge,
     MgnifamFolds,
     MgnifamFunfams,
     MgnifamModelPfams,
@@ -941,6 +944,22 @@ def make_release(release='1.1', date='2026-11-02', info=None, **kwargs):
     return row
 
 
+def make_clan(clan_id, members, representative):
+    for member in members:
+        MgnifamClan.objects.create(mgnifam_id=member, clan_id=clan_id, is_representative=member == representative)
+
+
+def make_edge(a, b, residue_jaccard, residue_containment=0.6, shared_proteins=10, protein_jaccard=0.5):
+    return MgnifamClanEdge.objects.create(
+        family_1_id=min(a, b),
+        family_2_id=max(a, b),
+        residue_jaccard=residue_jaccard,
+        residue_containment=residue_containment,
+        shared_proteins=shared_proteins,
+        protein_jaccard=protein_jaccard,
+    )
+
+
 class CurrentReleaseTests(TestCase):
     def test_current_release_empty_db(self):
         self.assertIsNone(current_release())
@@ -1208,3 +1227,303 @@ class ResponseCachingTests(TestCase):
     def test_skylign_upload_waits_long_enough(self, mock_post):
         call_skylign_api('HMM')
         self.assertGreaterEqual(mock_post.call_args.kwargs['timeout'], 20)
+
+
+class FamilyClanSummaryTests(TestCase):
+    def families(self, *ids):
+        for family_id in ids:
+            make_mgnifam(id=family_id)
+
+    def test_family_in_no_clan(self):
+        self.families(1)
+        summary = family_clan_summary(1)
+        self.assertIsNone(summary['clan_id'])
+        self.assertEqual(summary['clan_size'], 0)
+        self.assertFalse(summary['is_representative'])
+        self.assertEqual(summary['duplicates'], [])
+        self.assertIsNone(summary['closest'])
+
+    def test_clan_and_representative(self):
+        self.families(18705, 35055, 23379)
+        make_clan('1.1_clan_558', [18705, 35055, 23379], representative=35055)
+        summary = family_clan_summary(35055)
+        self.assertEqual(summary['clan_id'], '1.1_clan_558')
+        self.assertEqual(summary['clan_size'], 3)
+        self.assertIs(summary['is_representative'], True)
+        self.assertIs(family_clan_summary(18705)['is_representative'], False)
+
+    def test_duplicates_threshold(self):
+        self.families(1, 2, 3, 4)
+        make_edge(1, 2, 0.95)
+        make_edge(1, 3, 0.9499)
+        make_edge(4, 1, 0.97)
+        self.assertEqual(family_clan_summary(1)['duplicates'], [4, 2])
+
+    def test_closest_inside_or_outside_clan(self):
+        self.families(20804, 28802, 1107)
+        make_edge(20804, 28802, 0.497784)
+        make_edge(1107, 20804, 0.433877)
+        self.assertEqual(family_clan_summary(20804)['closest'], {'family_id': 28802, 'residue_jaccard': 0.497784})
+
+    def test_closest_tie_goes_to_lower_id(self):
+        self.families(5, 7, 9)
+        make_edge(5, 9, 0.6)
+        make_edge(5, 7, 0.6)
+        self.assertEqual(family_clan_summary(5)['closest']['family_id'], 7)
+
+    def test_null_jaccard_ignored(self):
+        self.families(1, 2)
+        make_edge(1, 2, None)
+        summary = family_clan_summary(1)
+        self.assertIsNone(summary['closest'])
+        self.assertEqual(summary['duplicates'], [])
+
+    def test_query_count(self):
+        self.families(18705, 35055, 23379)
+        make_clan('1.1_clan_558', [18705, 35055, 23379], representative=35055)
+        make_edge(18705, 35055, 0.639)
+        make_edge(23379, 18705, 0.2)
+        with self.assertNumQueries(4):
+            family_clan_summary(18705)
+
+
+def table_rows(response, tbody_id):
+    """The <tr> elements of one table body, as HTML strings."""
+    body = re.search(rf'<tbody id="{tbody_id}"[^>]*>(.*?)</tbody>', response.content.decode(), re.S)
+    return re.findall(r'<tr\b.*?</tr>', body.group(1), re.S) if body else []
+
+
+class ClanPageTests(TestCase):
+    MEMBERS = [18705, 35055, 9225, 28614, 23379]
+
+    def setUp(self):
+        for family_id in [*self.MEMBERS, 13799, 2549]:
+            make_mgnifam(id=family_id)
+        make_clan('1.1_clan_558', self.MEMBERS, representative=28614)
+        make_clan('1.1_clan_9', [2549], representative=2549)
+        make_edge(18705, 35055, 0.639)
+        make_edge(35055, 9225, 0.580)
+        make_edge(9225, 28614, 0.550)
+        make_edge(28614, 23379, 0.695)
+        make_edge(18705, 28614, 0.168)
+        make_edge(13799, 18705, 0.468)
+        make_edge(13799, 9225, 0.3)
+        make_edge(2549, 35055, 0.381)
+
+    def get(self, clan_id='1.1_clan_558', query=''):
+        return self.client.get(reverse('clan', args=[clan_id]) + query)
+
+    def test_unknown_clan_404(self):
+        self.assertEqual(self.client.get('/clan/1.1_clan_x/').status_code, 404)
+
+    def test_header(self):
+        response = self.get()
+        self.assertContains(response, '1.1_clan_558')
+        self.assertContains(response, '5 families')
+        self.assertContains(response, 'href="/details/MGYF0000028614/"')
+        self.assertContains(response, '5 stored of 10')
+        self.assertContains(response, '0 almost-duplicate pairs')
+
+    def test_every_member_linked(self):
+        rows = table_rows(self.get(), 'family-rows')
+        self.assertEqual(len(rows), 5)
+        for member in self.MEMBERS:
+            self.assertTrue(any(f'href="/details/MGYF{member:010d}/"' in row for row in rows), member)
+        self.assertIn('★', rows[0])
+        self.assertIn('MGYF0000028614', rows[0])
+        self.assertNotIn('★', ''.join(rows[1:]))
+
+    def test_pairs_sorted_and_marked(self):
+        rows = table_rows(self.get(), 'pair-rows')
+        self.assertEqual(
+            [re.search(r'0\.\d{3}', row).group() for row in rows], ['0.695', '0.639', '0.580', '0.550', '0.168']
+        )
+        self.assertEqual(['clan link' in row for row in rows], [True, True, True, True, False])
+        self.assertIn('href="/details/MGYF0000023379/"', rows[0])
+        self.assertIn('href="/details/MGYF0000028614/"', rows[0])
+
+    def test_outside_one_row_per_family(self):
+        rows = table_rows(self.get(), 'outside-rows')
+        self.assertEqual(len(rows), 2)
+        self.assertIn('MGYF0000013799', rows[0])
+        self.assertIn('href="/details/MGYF0000018705/"', rows[0])
+        self.assertIn('0.468', rows[0])
+        self.assertIn('none', rows[0])
+        self.assertIn('href="/clan/1.1_clan_9/"', rows[1])
+
+    def test_almost_duplicate_marked(self):
+        MgnifamClanEdge.objects.filter(family_1=18705, family_2=28614).update(residue_jaccard=0.96)
+        response = self.get()
+        self.assertContains(response, '1 almost-duplicate pair')
+        row = table_rows(response, 'pair-rows')[0]
+        self.assertIn('0.960', row)
+        self.assertIn('⚠', row)
+
+    def make_big_clan(self, outside=0):
+        members = list(range(1, 13))
+        for family_id in [*members, *range(100, 100 + outside)]:
+            make_mgnifam(id=family_id)
+        make_clan('1.1_clan_7', members, representative=1)
+        for i, a in enumerate(members):
+            for b in members[i + 1 :]:
+                make_edge(a, b, 0.5 + a / 100)
+        for family_id in range(100, 100 + outside):
+            make_edge(1, family_id, 0.2)
+
+    def test_paging(self):
+        self.make_big_clan()
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7'), 'pair-rows')), 50)
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7', '?pairs_page=2'), 'pair-rows')), 16)
+        for value, size in [('abc', 50), ('0', 50), ('99999', 16)]:
+            response = self.get('1.1_clan_7', f'?pairs_page={value}')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(table_rows(response, 'pair-rows')), size, value)
+
+    def test_outside_paging(self):
+        self.make_big_clan(outside=60)
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7'), 'outside-rows')), 50)
+        self.assertEqual(len(table_rows(self.get('1.1_clan_7', '?outside_page=2'), 'outside-rows')), 10)
+        for value, size in [('abc', 50), ('0', 50), ('99999', 10)]:
+            response = self.get('1.1_clan_7', f'?outside_page={value}')
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(table_rows(response, 'outside-rows')), size, value)
+        response = self.get('1.1_clan_7', '?pairs_page=2&outside_page=2')
+        self.assertContains(response, '?pairs_page=1&amp;outside_page=2')
+        self.assertContains(response, '?pairs_page=2&amp;outside_page=1')
+
+    def test_outside_tie_order(self):
+        for family_id in [1, 2, 10, 50, 90]:
+            make_mgnifam(id=family_id)
+        make_clan('1.1_clan_3', [1, 2], representative=1)
+        make_edge(1, 2, 0.7)
+        make_edge(90, 1, 0.6)
+        make_edge(10, 2, 0.6)
+        make_edge(50, 2, 0.6)
+        make_edge(50, 1, 0.6)
+        rows = table_rows(self.get('1.1_clan_3'), 'outside-rows')
+        self.assertEqual(
+            [re.search(r'MGYF\d{10}', row).group() for row in rows][:3],
+            ['MGYF0000000010', 'MGYF0000000050', 'MGYF0000000090'],
+        )
+        self.assertEqual(list(dict.fromkeys(re.findall(r'MGYF\d{10}', rows[1]))), ['MGYF0000000050', 'MGYF0000000001'])
+
+    def test_null_jaccard_last(self):
+        make_edge(23379, 35055, None)
+        rows = table_rows(self.get(), 'pair-rows')
+        self.assertEqual(len(rows), 6)
+        self.assertIn('—', rows[-1])
+        self.assertNotIn('clan link', rows[-1])
+
+    def test_query_count(self):
+        make_release()
+        with self.assertNumQueries(8):
+            self.assertEqual(self.get().status_code, 200)
+
+    def test_members_query_reads_no_blob(self):
+        from django.db import connection
+        from django.test.utils import CaptureQueriesContext
+
+        from explorer.clans import clan_members
+
+        with CaptureQueriesContext(connection) as queries:
+            self.assertEqual(len(clan_members('1.1_clan_558')), 5)
+        sql = queries.captured_queries[0]['sql']
+        for column in ['hmm_blob', 'cif_blob', 'seed_msa_blob', 'rep_sequence', 'consensus']:
+            self.assertNotIn(column, sql)
+
+
+class DetailsClanRowsTests(TestCase):
+    NO_CLAN_TIP = (
+        'This family is in no clan of this release. Clans join families through chains of family pairs that share '
+        'at least half of their covered residues (residue Jaccard ≥ 0.5).'
+    )
+
+    def setUp(self):
+        for target in (SKYLIGN_PATCH, SKYLIGN_LOGO_PATCH):
+            patcher = patch(target, return_value=None)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        cache.clear()
+
+    def page(self, family_id, *others):
+        for other in others:
+            make_mgnifam(id=other)
+        make_mgnifam(id=family_id)
+        response = self.client.get(reverse('details', args=[f'MGYF{family_id:010d}']))
+        self.assertEqual(response.status_code, 200)
+        return response
+
+    def test_no_clan_row(self):
+        response = self.page(20804, 28802)
+        self.assertContains(response, self.NO_CLAN_TIP)
+        self.assertRegex(response.content.decode(), r'Clan\s*</td>\s*<td class="vf-table__cell">\s*none')
+
+    def test_closest_tooltip(self):
+        make_edge(20804, 28802, 0.497784)
+        response = self.page(20804, 28802)
+        self.assertContains(response, 'residue Jaccard ≥ 0.1 or residue containment ≥ 0.5')
+
+    def test_clan_row_links_clan_page(self):
+        make_clan('1.1_clan_558', [18705, 35055, 23379], representative=35055)
+        response = self.page(18705, 35055, 23379)
+        self.assertContains(response, 'href="/clan/1.1_clan_558/"')
+        self.assertContains(response, '3 families')
+
+    def test_representative_marker(self):
+        make_clan('1.1_clan_558', [18705, 35055], representative=35055)
+        self.assertContains(self.page(35055, 18705), '· clan representative')
+        self.assertNotContains(self.client.get(reverse('details', args=['MGYF0000018705'])), '· clan representative')
+
+    def test_almost_duplicate_listed(self):
+        make_clan('1.1_clan_9', [10002, 17493], representative=10002)
+        make_edge(10002, 17493, 0.97)
+        response = self.page(10002, 17493)
+        self.assertContains(response, 'Almost duplicate')
+        self.assertContains(response, 'href="/details/MGYF0000017493/"')
+
+    def test_more_than_three_duplicates(self):
+        make_clan('1.1_clan_5', [1, 2, 3, 4, 5], representative=1)
+        for other, jaccard in [(2, 0.99), (3, 0.98), (4, 0.97), (5, 0.96)]:
+            make_edge(1, other, jaccard)
+        response = self.page(1, 2, 3, 4, 5)
+        self.assertContains(response, '⚠ 4 families')
+        self.assertContains(response, 'href="/clan/1.1_clan_5/"', count=2)
+        for other in (3, 4, 5):  # 2 is also the closest family
+            self.assertNotContains(response, f'href="/details/MGYF{other:010d}/"')
+
+    def test_no_duplicate_hides_row(self):
+        make_edge(1, 2, 0.6)
+        self.assertNotContains(self.page(1, 2), 'Almost duplicate')
+
+    def test_closest_family_row(self):
+        make_edge(20804, 28802, 0.497784)
+        make_edge(1107, 20804, 0.433877)
+        response = self.page(20804, 28802, 1107)
+        self.assertContains(response, 'Closest family')
+        self.assertContains(response, 'href="/details/MGYF0000028802/"')
+        self.assertContains(response, '0.498')
+        self.assertNotContains(response, 'href="/details/MGYF0000001107/"')
+
+    def test_no_pair_hides_closest(self):
+        self.assertNotContains(self.page(1), 'Closest family')
+
+    def test_duplicate_without_clan(self):
+        make_edge(1, 2, 0.97)
+        response = self.page(1, 2)
+        self.assertContains(response, 'href="/details/MGYF0000000002/"')
+        self.assertNotContains(response, 'href="/clan/')
+
+    def test_many_duplicates_without_clan(self):
+        for other in (2, 3, 4, 5):
+            make_edge(1, other, 0.97)
+        response = self.page(1, 2, 3, 4, 5)
+        for other in (2, 3, 4, 5):
+            self.assertContains(response, f'href="/details/MGYF{other:010d}/"')
+        self.assertNotContains(response, '4 families')
+        self.assertNotContains(response, 'href="/clan/')
+
+    def test_empty_clan_tables(self):
+        response = self.page(1)
+        self.assertContains(response, self.NO_CLAN_TIP)
+        self.assertNotContains(response, 'Almost duplicate')
+        self.assertNotContains(response, 'Closest family')

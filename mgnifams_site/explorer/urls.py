@@ -9,5 +9,6 @@ urlpatterns = [
     path('mgnifams_list/', views.mgnifams_list, name='mgnifams_list'),
     path('mgnifams_data/', views.mgnifams_data, name='mgnifams_data'),
     path('details/<str:pk>/', views.details, name='details'),
+    path('clan/<str:clan_id>/', views.clan, name='clan'),
     path('serve_blob/<int:pk>/<str:column_name>/', views.serve_blob_as_file, name='serve_blob_as_file'),
 ]
