@@ -29,6 +29,7 @@ from explorer.views import (
     fetch_skylign_logo_json,
     format_family_name,
     generate_structure_link_and_db,
+    stored_bool,
     translate_mgyf_to_int_id,
 )
 
@@ -235,6 +236,19 @@ class DetailsViewTests(TestCase):
     def test_converged_true_in_context(self, _mock_api, _mock_logo):
         response = self.client.get(self.url)
         self.assertTrue(response.context['converged'])
+
+    def test_stored_bool_reads_the_served_db_text(self):
+        # The served DB holds converged as the text 'True' / 'False' (the test DB's 'bool' column never returns text)
+        for stored, shown in (
+            ('False', False),
+            ('True', True),
+            (0, False),
+            (1, True),
+            (False, False),
+            (True, True),
+            (None, False),
+        ):
+            self.assertIs(stored_bool(stored), shown, stored)
 
     @patch(SKYLIGN_LOGO_PATCH, return_value=None)
     @patch(SKYLIGN_PATCH, return_value=None)
