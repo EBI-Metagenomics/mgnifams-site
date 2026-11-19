@@ -1,5 +1,11 @@
 # Changelog
 
+## [v2.6.1] - 2026-11-19
+
+### Fixed
+
+- The family overview showed every family as converged: the DB stores `converged` as the text `True` / `False`, and the text `False` was read as true. Only converged families show it now.
+
 ## [v2.6.0] - 2026-11-18
 
 ### Added

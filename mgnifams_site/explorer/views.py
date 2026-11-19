@@ -129,6 +129,12 @@ def about(request):
     return render(request, 'explorer/about.html')
 
 
+def stored_bool(value):
+    """A BOOLEAN column of the served DB: releases 1.0 and 1.1 store the text 'True' / 'False', which Django returns
+    as is for a column declared BOOLEAN (its SQLite converter is registered for 'bool' only), and 'False' is truthy."""
+    return value in (True, 1, 'True')
+
+
 def translate_mgyf_to_int_id(mgyf):
     id = re.sub(r'^MGYF0*', '', mgyf)
     try:
@@ -341,7 +347,7 @@ def details(request, pk):
             'membrane_beta_percent': mgnifam.membrane_beta_percent,
             'periplasm_percent': mgnifam.periplasm_percent,
             'membrane_total': mgnifam.membrane_alpha_percent + mgnifam.membrane_beta_percent,
-            'converged': mgnifam.converged,
+            'converged': stored_bool(mgnifam.converged),
             'cif_blob': cif_blob,
             'seed_msa_blob': seed_msa_blob,
             'rf': rf,
