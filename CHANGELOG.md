@@ -1,6 +1,6 @@
 # Changelog
 
-## [v2.7.0dev] - unreleased
+## [v2.6.1] - 2026-11-19
 
 ### Fixed
 
